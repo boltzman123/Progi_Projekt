@@ -1,0 +1,28 @@
+1. sastanak
+    -Datum: 14. listopada 2022
+    -Prisustvovali: svi članovi
+    -Trajanje sastanka: 1h
+    -Teme sastanka: 
+        -raspodjela uloga (podjela poslova na frontend, backend i razvoj dokumentacije)
+        -rasprava o zadanoj temi
+        -sakupljanje pitanja za prvi sastanak sa asistenticom
+
+2. sastanak
+    -Datum: 20. listopada 2022
+    -Prisustvovali: svi članovi 
+    -Trajanje sastanka: 30 min sa asistenticom, demosom i voditeljem iz CROZ-a
+                        20 min sa asistenticom
+    -Teme sastanka: 
+        -osnovni podaci o izvođenju projekta 
+        -postavljanje pitanja vezanih za implementaciju projekta asistentici 
+         tijekom prvih pola sata sastanka i sljedećih 20 min
+
+3. sastanak
+    -Datum: 20. listopada 2022
+    -Prisustvovali: svi članovi 
+    -Trajanje sastanka: 1h
+    -Teme sastanka: 
+        -detaljna analiza zadatka
+        -planiranje raspodjele poslova tijekom sljedećeg tjedna 
+         vezanih za inicijalizaciju backenda, frontenda i dokumentacije
+        -dogovor o korištenju Jire za bolje praćenje raspodjele poslova
