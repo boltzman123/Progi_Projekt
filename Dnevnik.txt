@@ -26,3 +26,13 @@
         -planiranje raspodjele poslova tijekom sljedećeg tjedna 
          vezanih za inicijalizaciju backenda, frontenda i dokumentacije
         -dogovor o korištenju Jire za bolje praćenje raspodjele poslova
+
+4. sastanak
+    -Datum: 23. listopada 2022
+    -Prisustvovali: svi članovi
+    -Trajanje sastanka: 1h
+    -Teme sastanka:
+        -pregled predložene skice klijentske aplikacije (frontend)
+        -pregled predložene sheme za bazu podataka (backend)
+        -pregled obrazaca uporabe i UC dijagrama (dokumentacija)
+        -zaključak: male promjene sheme baze i slanje na pregled asistentici
