@@ -35,4 +35,12 @@
         -pregled predložene skice klijentske aplikacije (frontend)
         -pregled predložene sheme za bazu podataka (backend)
         -pregled obrazaca uporabe i UC dijagrama (dokumentacija)
-        -zaključak: male promjene sheme baze i slanje na pregled asistentici
+        
+5. sastanak
+    -Datum: 24. listopada 2022
+    -Prisustvovali: D.Kiramarios, K.Tomičić, S.Barac
+    -Trajanje sastanka: 1h
+    -Teme sastanka:
+        -detaljna analiza prijedloga dizajna za klijentsku aplikaciju
+        -male promjene dizajna za klijentsku aplikaciju
+        -podjela posla na klijentskoj aplikaciji među prisutnima
