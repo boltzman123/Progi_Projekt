@@ -8,9 +8,11 @@
 			
 			\begin{packed_enum}
 				
-				\item Dionik 1
-				\item Dionik 2				
-				\item ...
+				\item Vlasnik (naručitelj)
+				\item Administrator
+				\item Korisnici			
+				\item Donatori
+				\item Razvojni tim
 				
 			\end{packed_enum}
 			
@@ -18,28 +20,80 @@
 			
 			
 			\begin{packed_enum}
-				\item  \underbar{Aktor 1 (inicijator) može:}
+				\item  \underbar{Neregistrirani korisnik (inicijator) može:}
 				
 				\begin{packed_enum}
 					
-					\item funkcionalnost 1
-					\item funkcionalnost 2
-					\begin{packed_enum}
-						
-						\item  podfunkcionalnost 1 
-						\item  podfunkcionalnost 2
+					\item stvoriti novi korisnicki račun za koji su mu potrebni ime, prezime, lokacija, mail adresa i lozinka
+					
+				\end{packed_enum}
+
+				\item  \underbar{Neprijavljeni korisnik (inicijator) može:}
 				
-					\end{packed_enum}
-					\item  funkcionalnost 3
+				\begin{packed_enum}
+					
+					\item prijaviti se u sustav koristeći mail adresu i lozinku
 					
 				\end{packed_enum}
 			
-				\item  \underbar{Aktor 2 (sudionik) može:}
+				\item  \underbar{Prijavljeni korisnik (inicijator) može:}
 				
 				\begin{packed_enum}
 					
-					\item funkcionalnost 1
-					\item funkcionalnost 2
+					\item pregledavati sve aktivne donacije
+					\item pregledavati preporučene donacije
+					\item pregledavati detalje donacija
+					\item filtrirati sve aktivne ili preporučene donacije po kategorijama i potkategorijama
+					\item pregledavati osobne podatke
+					\item mijenjati osobne podatke
+					\item mijenjati ili dodavati podatke o svojoj djeci i njihovim praćenim kategorijama
+					\item izbrisati račun
+					\item javiti se donatoru za dogovor preuzimanja (ova funkcionalnost odvija se van aplikacije)		
+					
+				\end{packed_enum}
+
+				\item  \underbar{Donator (inicijator) može:}
+				
+				\begin{packed_enum}
+					
+					\item pregledavati sve aktivne donacije
+					\item pregledavati preporučene donacije
+					\item pregledavati detalje donacija
+					\item filtrirati sve aktivne ili preporučene donacije po kategorijama i potkategorijama
+					\item pregledavati osobne podatke
+					\item mijenjati osobne podatke
+					\item mijenjati ili dodavati podatke o svojoj djeci i njihovim praćenim kategorijama
+					\item izbrisati račun
+					\item javiti se donatoru za dogovor preuzimanja (ova funkcionalnost odvija se van aplikacije)
+					\item prihvatiti ili odbiti ponovno doniranje primljene donacije
+					\item kreirati oglase za donacije
+					\item uređivati svoje oglase za donacije 
+					\item zatvarati svoje oglase za donacije
+					
+				\end{packed_enum}
+
+				\item  \underbar{Administrator (inicijator) može:}
+				
+				\begin{packed_enum}
+					
+					\item dodijeliti korisnicima ovlast za kreiranje donacija
+					\item oduzeti korisnicima ovlast za kreiranje donacija
+					\item pregledavati oglase stvorene od strane donatora
+					\item prihvatiti i objaviti novostvorene oglase
+					\item poslati novostvorene oglase na doradu
+					\item odbiti novostvorene oglase
+					\item kreirati nove kategorije
+					\item kreirati nove potkategorije
+					
+				\end{packed_enum}
+
+				\item  \underbar{Baza podataka (sudionik):}
+				
+				\begin{packed_enum}
+					
+					\item pohranjuje podatke o računima korisnika
+					\item pohranjuje podatke o djeci korisnika
+					\item pohranjuje sve podatke o donacijama
 					
 				\end{packed_enum}
 			\end{packed_enum}
@@ -368,6 +422,14 @@
 				\eject
 	
 		\section{Ostali zahtjevi}
-		
-			%\textbf{\textit{dio 1. revizije}}\\
+			\begin{packed_item}
+				\item Sustav treba podržavati istovremenu aktivnost više korisnika
+				\item Aplikacija treba biti responzivna tj. prilagođena uređajima svih rezolucija (tableti, mobiteli) 
+				\item Aplikacija treba biti jednostavna za korištenje i imati intuitivno sučelje
+				\item Aplikacija treba biti implementirana u arhitekturi klijent-poslužitelj
+				\item Poslužiteljska strana aplikacije mora biti implementirana koristeći jezik Javu i radni okvir Spring Boot
+				\item Podaci trebaju biti spremani u bazu podataka koristeći Java Persistance API (JPA)
+				\item Funkcionalnosti poslužiteljske strane aplikacije trebaju biti izložene kroz REST Web servise
+				\item Klijentska strana aplikacije mora biti implementirana koristeći tehnologije Angular ili React
+			\end{packed_item}
 		 
