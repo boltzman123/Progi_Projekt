@@ -46,8 +46,12 @@
 					\item filtrirati sve aktivne ili preporučene donacije po kategorijama i potkategorijama
 					\item pregledavati osobne podatke
 					\item mijenjati osobne podatke
-					\item mijenjati ili dodavati podatke o svojoj djeci i njihovim praćenim kategorijama
 					\item izbrisati račun
+					\item pregledavati podatke o svojoj djeci i njihovim praćenim kategorijama
+					\eject
+					\item mijenjati podatke o svojoj djeci i njihovim praćenim kategorijama
+					\item dodavati podatke o svojoj djeci i njihovim praćenim kategorijama
+					\item brisati podatke o svojoj djeci
 					\item javiti se donatoru za dogovor preuzimanja (ova funkcionalnost odvija se van aplikacije)		
 					
 				\end{packed_enum}
@@ -62,8 +66,11 @@
 					\item filtrirati sve aktivne ili preporučene donacije po kategorijama i potkategorijama
 					\item pregledavati osobne podatke
 					\item mijenjati osobne podatke
-					\item mijenjati ili dodavati podatke o svojoj djeci i njihovim praćenim kategorijama
 					\item izbrisati račun
+					\item pregledavati podatke o svojoj djeci i njihovim praćenim kategorijama
+					\item mijenjati podatke o svojoj djeci i njihovim praćenim kategorijama
+					\item dodavati podatke o svojoj djeci i njihovim praćenim kategorijama
+					\item brisati podatke o svojoj djeci
 					\item javiti se donatoru za dogovor preuzimanja (ova funkcionalnost odvija se van aplikacije)
 					\item prihvatiti ili odbiti ponovno doniranje primljene donacije
 					\item kreirati oglase za donacije
@@ -86,6 +93,8 @@
 					\item kreirati nove potkategorije
 					
 				\end{packed_enum}
+
+				\eject
 
 				\item  \underbar{Baza podataka (sudionik):}
 				
@@ -111,27 +120,33 @@
 					\noindent \underbar{\textbf{UC1 - Registracija}}
 					\begin{packed_item}
 	
-						\item \textbf{Glavni sudionik: }Javni korisnik
-						\item  \textbf{Cilj:} Stvaranje računa za pristup stranici
+						\item \textbf{Glavni sudionik: }Korisnik
+						\item  \textbf{Cilj:} Stvaranje računa
 						\item  \textbf{Sudionici:} Baza podataka
-						\item  \textbf{Preduvjet:} -
+						\item  \textbf{Preduvjet:} Korisnik je na početnoj stranici odabrao opciju za registraciju
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
-							\item Korisnik unosi potrebne korisničke podatke
-							\item Korisnik na upisanu mail adresu dobiva potvrdu o uspješnoj registraciji
+							\item Sustav prikazuje polja za unos korisniku
+							\item Korisnik unosi potrebne podatke
+							\item Sustav validira unesene podatke
+							\item Korisnik potvrđuje unos podataka
+							\item Sustav korisniku na mail adresu šalje potvrdu o uspješnoj registraciji
 						\end{packed_enum}
 						
 						\item  \textbf{Opis mogućih odstupanja:}
 
 						\item[] \begin{packed_item}
-						%\item[] 
-							\item[2.a] Unos već zauzete ili krive email adrese, unos podataka u neispravnom formatu
+							\item[2.a] Korisnik odustaje od unosa u polja - kraj scenarija
+							\item[3.a] Korisnik je unio podatake u neispravnom formatu
 							\item[] \begin{packed_enum}
-								
-								\item Korisnik dobiva obavijest o pogrešci i ponovno se nalazi na stranici za registraciju
-								\item Korisnik ispravlja neispravne podatke i završava unos ili odustaje od registracije
-								
+								\item Sustav upozorava korisnika o neispravnom formatu podataka
+								\item Scenarij nastavlja korakom 2 
+							\end{packed_enum}	
+							\item[5.a] Sustav utvrđuje da već postoji korisnik sa istom mail adresom
+							\item[] \begin{packed_enum}
+								\item Sustav upozorava korisnika o zauzetoj mail adresi
+								\item Scenarij nastavlja korakom 2 
 							\end{packed_enum}					
 						\end{packed_item}
 					\end{packed_item}
@@ -139,271 +154,430 @@
 					\noindent \underbar{\textbf{UC2 - Prijava u sustav}}
 					\begin{packed_item}
 	
-						\item \textbf{Glavni sudionik: }Registrirani korisnik
-						\item  \textbf{Cilj:} Pristup početnoj stranici kao prijavljeni korisnik
+						\item \textbf{Glavni sudionik: }Korisnik
+						\item  \textbf{Cilj:} Pristup početnoj stranici
 						\item  \textbf{Sudionici:} Baza podataka
-						\item  \textbf{Preduvjet:} -
+						\item  \textbf{Preduvjet:} Korisnik ima već stvoreni račun i odabrao je opciju za prijavu
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
-							\item Korisnik unosi email adresu i lozinku
-							\item Korisnik pri uspješnom unosu podataka biva preusmjeren na početnu stranicu
+							\item Sustav prikazuje polja za unos korisniku
+							\item Korisnik unosi potrebne podatke
+							\item Sustav validira unesene podatke
+							\item Korisnik potvrđuje unos podataka
+							\item Sustav korisnika preusmjeri na početnu stranicu
 						\end{packed_enum}
-						
+						\eject
 						\item  \textbf{Opis mogućih odstupanja:}
 
 						\item[] \begin{packed_item}
-						%\item[] 
-							\item[1.a] Unos neispravne email adrese ili zaporke
+							\item[2.a] Korisnik odustaje od unosa u polja - kraj scenarija
+							\item[3.a] Korisnik je unio podatake u neispravnom formatu
 							\item[] \begin{packed_enum}
-								
-								\item Korisnik dobiva obavijest o unosu neispravnih podataka
-								\item Korisnik ispravlja neispravne podatke i završava unos ili odustaje od prijave
-								
+								\item Sustav upozorava korisnika o neispravnom formatu podataka
+								\item Scenarij nastavlja korakom 2 
+							\end{packed_enum}	
+							\item[5.a] Sustav utvrđuje da unešeni podaci nisu ispravni
+							\item[] \begin{packed_enum}
+								\item Sustav upozorava korisnika o pogrešnom unosu podataka
+								\item Scenarij nastavlja korakom 2 
 							\end{packed_enum}					
 						\end{packed_item}
 					\end{packed_item}
 
-					\eject
-
-					\noindent \underbar{\textbf{UC3 - Pregled osobnih podataka}}
+					\noindent \underbar{\textbf{UC3 - Odjava iz sustava}}
 					\begin{packed_item}
 	
-						\item \textbf{Glavni sudionik: }Prijavljeni korisnik
-						\item  \textbf{Cilj:} Pregled podataka o korisniku
+						\item \textbf{Glavni sudionik: }Korisnik
+						\item  \textbf{Cilj:} Odjava korisnika
 						\item  \textbf{Sudionici:} Baza podataka
-						\item  \textbf{Preduvjet:} Korisnik se uspješno prijavio u sustav
+						\item  \textbf{Preduvjet:} Korisnik se uspješno prijavio u sustav i odabrao je opciju za odjavu
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
-							\item Korisnik odabire opciju za prikaz osobnih podataka
-							\item Korisnik na stranici vidi prikaz svojih osobnih podataka
+							\item Sustav pita korisnika želi li se sigurno odjaviti
+							\item Korisnik potvrđuje da se želi odjaviti
+							\item Sustav odjavljuje korisnika
 						\end{packed_enum}
-
 						\item  \textbf{Opis mogućih odstupanja:}
 
 						\item[] \begin{packed_item}
-						%\item[] 
-							\item[2.a] Baza ne uspije poslati podatke o korisniku
+							\item[2.a] Korisnik odustaje od odjave - kraj scenarija
+							\item[3.a] Sustav ne uspije odjaviti korisnika
+							\item[] \begin{packed_enum}
+								\item Sustav upozorava korisnika o neuspješnoj odjavi 
+								\item Scenarij ponovno započinje ili korisnik odustaje od odjave
+							\end{packed_enum}						
+						\end{packed_item}
+					\end{packed_item}
+
+					\noindent \underbar{\textbf{UC4 - Pregled osobnih podataka}}
+					\begin{packed_item}
+	
+						\item \textbf{Glavni sudionik: }Korisnik
+						\item  \textbf{Cilj:} Pregled osobnih podataka unešenih u sustav
+						\item  \textbf{Sudionici:} Baza podataka
+						\item  \textbf{Preduvjet:} Korisnik se uspješno prijavio u sustav i odabrao je opciju za prikaz osobnih podataka
+						\item  \textbf{Opis osnovnog tijeka:}
+						
+						\item[] \begin{packed_enum}
+							\item Sustav korisniku prikazuje njegove osobne podatke 
+							\item Korisnik pregledava svoje osobne podatke
+						\end{packed_enum}
+						\eject
+						\item  \textbf{Opis mogućih odstupanja:}
+
+						\item[] \begin{packed_item}
+							\item[1.a] Baza ne uspije poslati podatke o korisniku
 							\item[] \begin{packed_enum}
 								
 								\item Korisnik dobiva obavijest o neuspješnom dohvatu podataka
-								\item Korisnik osvježava stranicu ili odustaje od pregleda osobnih podataka
+								\item Korisnik osvježava stranicu ili odustaje od pregleda osobnih podataka - kraj scenarija
 							
 							\end{packed_enum}	
-						\end{packed_item}
-						
+						\end{packed_item}	
 					\end{packed_item}
 
-					\noindent \underbar{\textbf{UC4 - Uređivanje osobnih podataka}}
+					\noindent \underbar{\textbf{UC5 - Uređivanje osobnih podataka}}
 					\begin{packed_item}
 	
-						\item \textbf{Glavni sudionik: }Prijavljeni korisnik
-						\item  \textbf{Cilj:} Promjena osobnih podataka korisnika
+						\item \textbf{Glavni sudionik: }Korisnik
+						\item  \textbf{Cilj:} Promjena osobnih podataka unešenih u sustav
 						\item  \textbf{Sudionici:} Baza podataka
-						\item  \textbf{Preduvjet:} Korisnik se uspješno prijavio u sustav
+						\item  \textbf{Preduvjet:} Korisnik se uspješno prijavio u sustav i odabrao je opciju za uređivanje osobnih podataka
 						\item  \textbf{Opis osnovnog tijeka:}
-						
+					
 						\item[] \begin{packed_enum}
-							\item Korisnik odabire opciju za uređivanje osobnih podataka
-							\item Korisnik na stranici mijenja unesene osobne podatke
+							\item Sustav korisniku prikazuje njegove osobne podatke 
+							\item Korisnik mijenja osobne podatke
+							\item Sustav validira unesene podatke
 							\item Korisnik potvrđuje promjene
-							\item Ažuriranje baze podataka pri potvrđenoj promjeni
+							\item Sustav ažurira podatke u bazi i preusmjerava korisnika na početnu stranicu
 						\end{packed_enum}
 
 						\item  \textbf{Opis mogućih odstupanja:}
 
 						\item[] \begin{packed_item}
-						%\item[] 
-							\item[2.a] Korisnik promijeni osobne podatke, ali ne potvrdi promjene
+							\item[2.a] Korisnik odustaje od unosa promjena - kraj scenarija
+							\item[3.a] Korisnik je unio podatake u neispravnom formatu
 							\item[] \begin{packed_enum}
-								
-								\item Korisnik dobiva obavijest o nepotvrđenom unosu podataka prije \newline odlaska sa stranice
-								\item Korisnik potvrđuje podatke ili odustaje od promjene podataka
-							
+								\item Sustav upozorava korisnika o neispravnom formatu podataka
+								\item Scenarij nastavlja korakom 2 
 							\end{packed_enum}	
-							\item[4.a] Baza se ne uspije ažurirati
+							\item[5.a] Sustav ne uspije ažurirati podatke u bazi
 							\item[] \begin{packed_enum}
-							
-								\item Korisnik dobiva obavijest o neuspješnom ažuriranju baze podataka
-								\item Korisnik ponovno potvrđuje podatke ili odustaje od promjene \newline podataka
-							\end{packed_enum}
+								\item Sustav upozorava korisnika o neuspješnoj pohrani podataka
+								\item Scenarij nastavlja korakom 4
+							\end{packed_enum}					
 						\end{packed_item}
-						
-					\end{packed_item}
-
-					\eject
-
-					\noindent \underbar{\textbf{UC5 - Uređivanje podataka o djeci}}
+					\end{packed_item}	
+					
+					\noindent \underbar{\textbf{UC6 - Brisanje korisničkog računa}}
 					\begin{packed_item}
 	
-						\item \textbf{Glavni sudionik: }Prijavljeni korisnik
-						\item  \textbf{Cilj:} Promjena podataka o djeci korisnika
+						\item \textbf{Glavni sudionik: }Korisnik
+						\item  \textbf{Cilj:} Brisanje računa
 						\item  \textbf{Sudionici:} Baza podataka
-						\item  \textbf{Preduvjet:} Korisnik se uspješno prijavio u sustav
+						\item  \textbf{Preduvjet:} Korisnik se uspješno prijavio u sustav i odabrao je opciju za brisanje računa
+						\eject
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
-							\item Korisnik odabire opciju za uređivanje podataka o djeci
-							\item Korisnik na stranici mijenja ili dodaje podatke o djeci
-							\item Korisnik potvrđuje promjene
-							\item Ažuriranje baze podataka pri potvrđenoj promjeni
+							\item Sustav pita korisnika želi li sigurno obrisati svoj račun
+							\item Korisnik potvrđuje da želi obrisati račun
+							\item Sustav briše korisnikov račun
 						\end{packed_enum}
 
 						\item  \textbf{Opis mogućih odstupanja:}
 
 						\item[] \begin{packed_item}
-						%\item[] 
-							\item[2.a] Korisnik promijeni podatke o djeci, ali ne potvrdi promjene
+							\item[2.a] Korisnik odustaje od brisanja računa - kraj scenarija
+							\item[3.a] Sustav ne uspije pobrisati korisnikov račun
 							\item[] \begin{packed_enum}
-								
-								\item Korisnik dobiva obavijest o nepotvrđenom unosu podataka prije \newline odlaska sa stranice
-								\item Korisnik potvrđuje podatke ili odustaje od promjene podataka
-							
-							\end{packed_enum}	
-							\item[4.a] Baza se ne uspije ažurirati
-							\item[] \begin{packed_enum}
-							
-								\item Korisnik dobiva obavijest o neuspješnom ažuriranju baze podataka
-								\item Korisnik ponovno potvrđuje podatke ili odustaje od promjene \newline podataka
-							\end{packed_enum}
+								\item Sustav upozorava korisnika o neuspješnom brisanju
+								\item Scenarij ponovno započinje ili korisnik odustaje od brisanja računa
+							\end{packed_enum}					
 						\end{packed_item}
-						
-					\end{packed_item}
+					\end{packed_item}	
 
-					\noindent \underbar{\textbf{UC6 - Pregled oglasa}}
+					\noindent \underbar{\textbf{UC7 - Pregled podataka o djeci}}
 					\begin{packed_item}
 	
-						\item \textbf{Glavni sudionik: }Prijavljeni korisnik
+						\item \textbf{Glavni sudionik: }Korisnik
+						\item  \textbf{Cilj:} Pregled podataka o djetetu korisnika
+						\item  \textbf{Sudionici:} Baza podataka
+						\item  \textbf{Preduvjet:} Korisnik se uspješno prijavio u sustav i odabrao je opciju za prikaz podataka o jednom od svoje djece
+						\item  \textbf{Opis osnovnog tijeka:}
+						
+						\item[] \begin{packed_enum}
+							\item Sustav korisniku prikazuje podatke o odabranome djetetu
+							\item Korisnik pregledava podatke o djetetu
+						\end{packed_enum}
+						\item  \textbf{Opis mogućih odstupanja:}
+
+						\item[] \begin{packed_item}
+							\item[1.a] Baza ne uspije poslati podatke o djetetu
+							\item[] \begin{packed_enum}
+								
+								\item Korisnik dobiva obavijest o neuspješnom dohvatu podataka
+								\item Korisnik osvježava stranicu ili odustaje od pregleda podataka o odabranome djetetu - kraj scenarija
+							
+							\end{packed_enum}	
+						\end{packed_item}	
+					\end{packed_item}
+
+					\noindent \underbar{\textbf{UC8 - Uređivanje podataka o djeci}}
+					\begin{packed_item}
+	
+						\item \textbf{Glavni sudionik: }Korisnik
+						\item  \textbf{Cilj:} Promjena podataka o djetetu korisnika
+						\item  \textbf{Sudionici:} Baza podataka
+						\item  \textbf{Preduvjet:} Korisnik se uspješno prijavio u sustav i odabrao je opciju za uređivanje podataka o jednom od svoje djece
+						\eject
+						\item  \textbf{Opis osnovnog tijeka:}
+						
+						\item[] \begin{packed_enum}
+							\item Sustav korisniku prikazuje podatke o odabranome djetetu
+							\item Korisnik mijenja podatke o djetetu
+							\item Sustav validira unesene podatke
+							\item Korisnik potvrđuje promjene
+							\item Sustav ažurira podatke u bazi i preusmjerava korisnika na početnu stranicu
+						\end{packed_enum}
+
+						\item  \textbf{Opis mogućih odstupanja:}
+
+						\item[] \begin{packed_item}
+							\item[2.a] Korisnik odustaje od unosa promjena - kraj scenarija
+							\item[3.a] Korisnik je unio podatake u neispravnom formatu
+							\item[] \begin{packed_enum}
+								\item Sustav upozorava korisnika o neispravnom formatu podataka
+								\item Scenarij nastavlja korakom 2 
+							\end{packed_enum}	
+							\item[5.a] Sustav ne uspije ažurirati podatke u bazi
+							\item[] \begin{packed_enum}
+								\item Sustav upozorava korisnika o neuspješnoj pohrani podataka
+								\item Scenarij nastavlja korakom 4
+							\end{packed_enum}					
+						\end{packed_item}
+					\end{packed_item}
+					
+					\noindent \underbar{\textbf{UC9 - Dodavanje podataka o djeci}}
+					\begin{packed_item}
+	
+						\item \textbf{Glavni sudionik: }Korisnik
+						\item  \textbf{Cilj:} Dodavanje podataka o djetetu korisnika
+						\item  \textbf{Sudionici:} Baza podataka
+						\item  \textbf{Preduvjet:} Korisnik se uspješno prijavio u sustav i odabrao je opciju za dodavanje podataka o jednom od svoje djece
+						\item  \textbf{Opis osnovnog tijeka:}
+						
+						\item[] \begin{packed_enum}
+							\item Sustav prikazuje polja za unos korisniku
+							\item Korisnik unosi potrebne podatke
+							\item Sustav validira unesene podatke
+							\item Korisnik potvrđuje unos podataka
+							\item Sustav korisnika preusmjeri na početnu stranicu
+						\end{packed_enum}
+
+						\item  \textbf{Opis mogućih odstupanja:}
+
+						\item[] \begin{packed_item}
+							\item[2.a] Korisnik odustaje od unosa u polja - kraj scenarija
+							\item[3.a] Korisnik je unio podatake u neispravnom formatu
+							\item[] \begin{packed_enum}
+								\item Sustav upozorava korisnika o neispravnom formatu podataka
+								\item Scenarij nastavlja korakom 2 
+							\end{packed_enum}	
+							\item[5.a] Sustav utvrđuje da unešeni podaci nisu ispravni
+							\item[] \begin{packed_enum}
+								\item Sustav upozorava korisnika o pogrešnom unosu podataka
+								\item Scenarij nastavlja korakom 2 
+							\end{packed_enum}					
+						\end{packed_item}
+					\end{packed_item}	
+
+					\noindent \underbar{\textbf{UC10 - Brisanje podataka o djeci}}
+					\begin{packed_item}
+	
+						\item \textbf{Glavni sudionik: }Korisnik
+						\item  \textbf{Cilj:} Brisanje podataka o djetetu korisnika
+						\item  \textbf{Sudionici:} Baza podataka
+						\item  \textbf{Preduvjet:} Korisnik se uspješno prijavio u sustav i odabrao je opciju za brisanje podataka o jednom od svoje djece
+						\item  \textbf{Opis osnovnog tijeka:}
+						
+						\item[] \begin{packed_enum}
+							\item Sustav pita korisnika želi li sigurno obrisati podatke o odabranome djetetu
+							\item Korisnik potvrđuje da želi obrisati podatke o odabranome djetetu
+							\item Sustav briše podatke o odabranome djetetu
+						\end{packed_enum}
+
+						\item  \textbf{Opis mogućih odstupanja:}
+
+						\item[] \begin{packed_item}
+							\item[2.a] Korisnik odustaje od brisanja podataka o odabranome djetetu - kraj scenarija
+							\item[3.a] Sustav ne uspije obrisati podatke o odabranome djetetu
+							\item[] \begin{packed_enum}
+								\item Sustav upozorava korisnika o neuspješnom brisanju
+								\item Scenarij ponovno započinje ili korisnik odustaje od brisanja podataka
+							\end{packed_enum}					
+						\end{packed_item}
+					\end{packed_item}	
+
+					\noindent \underbar{\textbf{UC11 - Pregled aktivnih oglasa}}
+					\begin{packed_item}
+	
+						\item \textbf{Glavni sudionik: }Korisnik
 						\item  \textbf{Cilj:} Pregled svih aktivnih oglasa
 						\item  \textbf{Sudionici:} Baza podataka
-						\item  \textbf{Preduvjet:} Korisnik se uspješno prijavio u sustav
+						\item  \textbf{Preduvjet:} Korisnik se uspješno prijavio u sustav i otišao na početnu stranicu
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
-							\item Korisnik odabire opciju za odlazak na početnu stranicu
-							\item Na početnoj stranici su korisniku prikazani svi aktivni oglasi
+							\item Sustav korisniku prikazuje aktivne oglase
+							\item Korisnik pregledava oglase
 						\end{packed_enum}
-
 						\item  \textbf{Opis mogućih odstupanja:}
 
 						\item[] \begin{packed_item}
-						%\item[] 
-							\item[2.a] Baza ne uspije poslati podatke o aktivnim oglasima
+							\item[1.a] Baza ne uspije poslati podatke o aktivnim oglasima
 							\item[] \begin{packed_enum}
 								
 								\item Korisnik dobiva obavijest o neuspješnom dohvatu podataka
-								\item Korisnik osvježava stranicu ili odustaje od pregleda aktivnih oglasa
+								\item Korisnik osvježava stranicu ili odustaje od pregleda aktivnih oglasa - kraj scenarija
 							
 							\end{packed_enum}	
-						\end{packed_item}
-						
-					\end{packed_item}
-
-					\eject
-					\noindent \underbar{\textbf{UC7 - Filtriranje oglasa}}
-					\begin{packed_item}
-	
-						\item \textbf{Glavni sudionik: }Prijavljeni korisnik
-						\item  \textbf{Cilj:} Pregled oglasa iz određene kategorije/potkategorije
-						\item  \textbf{Sudionici:} Baza podataka
-						\item  \textbf{Preduvjet:} Korisnik se uspješno prijavio u sustav
-						\item  \textbf{Opis osnovnog tijeka:}
-						
-						\item[] \begin{packed_enum}
-							\item Korisnik odabire opciju za filtriranje oglasa po određenoj kategoriji ili potkategoriji
-							\item Na početnoj stranici se korisniku prikažu oglasi koji zadovoljavaju zadane opcije filtriranja
-						\end{packed_enum}
-
-						\item  \textbf{Opis mogućih odstupanja:}
-
-						\item[] \begin{packed_item}
-						%\item[] 
-							\item[2.a] Baza ne uspije poslati podatke o odgovarajućim oglasima
+							\item[1.b] Ne postoji nijedan aktivan oglas
 							\item[] \begin{packed_enum}
 								
-								\item Korisnik dobiva obavijest o neuspješnom dohvatu podataka
-								\item Korisnik ponovno odabire opciju za filtriranje oglasa ili odustaje od filtriranja
+								\item Korisnik dobiva obavijest o nepostojanju aktivnih oglasa
+								\item Korisnik odustaje od pregleda aktivnih oglasa - kraj scenarija
 							
-							\end{packed_enum}	
-
-							\item[2.b] Ne postoje oglasi koji odgovaraju zadanim opcijama filtriranja
-							\item[] \begin{packed_enum}
-								
-								\item Korisnik dobiva obavijest o manjku odgovarajućih oglasa
-								\item Korisnik mijenja opcije filtriranja ili odustaje od filtriranja oglasa
-							
-							\end{packed_enum}	
-
-						\end{packed_item}
-						
+							\end{packed_enum}
+						\end{packed_item}	
 					\end{packed_item}
 
-					\noindent \underbar{\textbf{UC8 - Pregled preporučenih oglasa}}
+					\noindent \underbar{\textbf{UC12 - Pregled preporučenih oglasa}}
 					\begin{packed_item}
 	
-						\item \textbf{Glavni sudionik: }Prijavljeni korisnik
+						\item \textbf{Glavni sudionik: }Korisnik
 						\item  \textbf{Cilj:} Pregled oglasa personaliziranih korisniku
 						\item  \textbf{Sudionici:} Baza podataka
-						\item  \textbf{Preduvjet:} Korisnik se uspješno prijavio u sustav
+						\item  \textbf{Preduvjet:} Korisnik se uspješno prijavio u sustav i odabrao opciju za prikaz preporučenih oglasa
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
-							\item Korisnik odabire opciju za prikaz preporučenih oglasa
-							\item Na stranici se korisniku prikažu preporučeni oglasi
+							\item Sustav korisniku prikazuje preporučene oglase
+							\item Korisnik pregledava oglase
 						\end{packed_enum}
 
 						\item  \textbf{Opis mogućih odstupanja:}
 
 						\item[] \begin{packed_item}
-						%\item[] 
-							\item[2.a] Baza ne uspije poslati podatke o odgovarajućim oglasima
+							\item[1.a] Baza ne uspije poslati podatke o preporučenim oglasima
 							\item[] \begin{packed_enum}
 								
 								\item Korisnik dobiva obavijest o neuspješnom dohvatu podataka
-								\item Korisnik ponovno odabire opciju za prikaz preporučenih oglasa ili odustaje od pregleda preporučenih oglasa
+								\item Korisnik osvježava stranicu ili odustaje od pregleda preporučenih oglasa - kraj scenarija
 							
 							\end{packed_enum}	
-							\item[2.b] Ne postoje oglasi koji odgovaraju korisnikovim željama
+							\item[1.b] Ne postoje oglasi koji odgovaraju korisnikovim željama
 							\item[] \begin{packed_enum}
 								
 								\item Korisnik dobiva obavijest o manjku odgovarajućih oglasa
-								\item Korisnik odustaje od pregleda preporučenih oglasa
+								\item Korisnik odustaje od pregleda preporučenih oglasa - kraj scenarija
 							
 							\end{packed_enum}	
-						\end{packed_item}
-						
+						\end{packed_item}	
 					\end{packed_item}
 
-					\noindent \underbar{\textbf{UC9 - Poticanje donacija}}
+					\noindent \underbar{\textbf{UC13 - Filtriranje oglasa}}
 					\begin{packed_item}
 	
-						\item \textbf{Glavni sudionik: }Prijavljeni korisnik
-						\item  \textbf{Cilj:} Podsjećanje korisnika o mogućnosti doniranja primljenog predmeta
+						\item \textbf{Glavni sudionik: }Korisnik
+						\item  \textbf{Cilj:} Pregled oglasa iz određene kategorije/potkategorije
 						\item  \textbf{Sudionici:} Baza podataka
-						\item  \textbf{Preduvjet:} Korisnik se uspješno prijavio u sustav, korisnik ima primljene donacije
+						\item  \textbf{Preduvjet:} Korisnik se uspješno prijavio u sustav i odabrao opciju za filtriranje aktivnih ili preporučenih oglasa po određenom parametru
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
-							\item Korisnik dobiva obavijest o mogućnosti doniranja primljenog predmeta
+							\item Sustav korisniku prikazuje oglase koji odgovaraju odabranim kategorijama i/ili potkategorijama
+							\item Korisnik pregledava oglase
+						\end{packed_enum}
+						\eject
+						\item  \textbf{Opis mogućih odstupanja:}
+
+						\item[] \begin{packed_item}
+							\item[1.a] Baza ne uspije poslati podatke o odgovarajućim oglasima
+							\item[] \begin{packed_enum}
+								
+								\item Korisnik dobiva obavijest o neuspješnom dohvatu podataka
+								\item Korisnik ponovno odabire opciju za filtriranje oglasa ili odustaje od filtriranja - kraj scenarija
+							
+							\end{packed_enum}	
+
+							\item[1.b] Ne postoje oglasi koji odgovaraju zadanim opcijama filtriranja
+							\item[] \begin{packed_enum}
+								
+								\item Korisnik dobiva obavijest o manjku odgovarajućih oglasa
+								\item Korisnik mijenja opcije filtriranja ili odustaje od filtriranja oglasa - kraj scenarija
+							
+							\end{packed_enum}	
+						\end{packed_item}
+					\end{packed_item}
+
+					\noindent \underbar{\textbf{UC14 - Pregled detalja o oglasu}}
+					\begin{packed_item}
+	
+						\item \textbf{Glavni sudionik: }Korisnik
+						\item  \textbf{Cilj:} Pregled detalja određene donacije
+						\item  \textbf{Sudionici:} Baza podataka
+						\item  \textbf{Preduvjet:} Korisnik se uspješno prijavio u sustav i odabrao opciju za prikaz detalja o određenoj donaciji
+						\item  \textbf{Opis osnovnog tijeka:}
+						
+						\item[] \begin{packed_enum}
+							\item Sustav korisniku prikazuje detalje o izabranoj donaciji
+							\item Korisnik pregledava detaljne informacije o donaciji
+						\end{packed_enum}
+
+						\item  \textbf{Opis mogućih odstupanja:}
+
+						\item[] \begin{packed_item}
+							\item[1.a] Baza ne uspije poslati podatke o izabranoj donaciji
+							\item[] \begin{packed_enum}
+								
+								\item Korisnik dobiva obavijest o neuspješnom dohvatu podataka
+								\item Korisnik osvježava stranicu ili odustaje od pregleda preporučenih oglasa - kraj scenarija
+							
+							\end{packed_enum}	
+						\end{packed_item}	
+					\end{packed_item}
+
+					\noindent \underbar{\textbf{UC15 - Poticanje donacija}}
+					\begin{packed_item}
+	
+						\item \textbf{Glavni sudionik: }Donator
+						\item  \textbf{Cilj:} Podsjećanje korisnika o mogućnosti doniranja primljenog predmeta
+						\item  \textbf{Sudionici:} Baza podataka
+						\item  \textbf{Preduvjet:} Donator se uspješno prijavio u sustav i ima primljene donacije kojima je isteklo standardno vrijeme korištenja
+						\item  \textbf{Opis osnovnog tijeka:}
+						
+						\item[] \begin{packed_enum}
+							\item Sustav korisniku šalje obavijest o mogućnosti doniranja primljenog predmeta
 							\item Korisnik prihvaća mogućnost doniranja predmeta i biva preusmjeren na kreiranje oglasa
 						\end{packed_enum}
 
 						\item  \textbf{Opis mogućih odstupanja:}
 
 						\item[] \begin{packed_item}
-						%\item[] 
 							\item[2.a] Korisnik odbija mogućnost doniranja predmeta
 							\item[] \begin{packed_enum}
 								
-								\item Obavijest o mogućnosti doniranja se više ne prikazuje
+								\item Obavijest o mogućnosti doniranja se više ne prikazuje - kraj scenarija
 							
 							\end{packed_enum}	
-
 						\end{packed_item}
-						
 					\end{packed_item}
 					
+				\eject
 				\subsubsection{Dijagram obrazaca uporabe}
 					\begin{figure}[H]
 						\includegraphics[width=\textwidth,height=0.7\textheight]{dijagrami/UCD - Djeca za djecu.png}
