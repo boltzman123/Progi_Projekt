@@ -8,42 +8,183 @@
 		\item 	\textit{organizaciju sustava s najviše razine apstrakcije (npr. klijent-poslužitelj, baza podataka, datotečni sustav, grafičko sučelje)}
 		\item 	\textit{organizaciju aplikacije (npr. slojevi frontend i backend, MVC arhitektura) }		
 	\end{itemize}
-
-	
-		
-
-		
-
 				
+		\eject 
+
 		\section{Baza podataka}
 			
-			%\textbf{\textit{dio 1. revizije}}\\
+		Za naš zadatak odabrali smo koristiti relacijsku bazu podataka kako bismo što učinkovitije i realističnije prikazali potreban sustav, 
+		ali isto tako i zato što s relacijskim bazama podataka imamo najviše iskustva, primarno stečenog na kolegiju Baze podataka.
+		Baza podataka sastoji se od nekolicine relacija tj. tablica definiranih imenom relacije i skupom atributa relacije.
+		Među atributima relacije obvezno se nalazi primarni ključ, a ponekad i strani ključevi koji povezuju tu relaciju s ostalima.
+		Bazu koristimo za pohranu, izmjenu i dohvat potrebnih podataka.
+
+		\vspace{5pt}
+
+		Baza podataka naše aplikacije sastoji se od sljedećih relacija:
+		\begin{packed_item}
+			\item User
+			\item Child
+			\item Category
+			\item Subcategory
+			\item isInCategory
+			\item isInSubcategory
+			\item Item
+			\item Donation
+			\item donatedToUser
+		\end{packed_item}
 			
-		\textit{Potrebno je opisati koju vrstu i implementaciju baze podataka ste odabrali, glavne komponente od kojih se sastoji i slično.}
+		%\textit{Potrebno je opisati koju vrstu i implementaciju baze podataka ste odabrali, glavne komponente od kojih se sastoji i slično.}
 		
 			\subsection{Opis tablica}
 			
 
-				\textit{Svaku tablicu je potrebno opisati po zadanom predlošku. Lijevo se nalazi točno ime varijable u bazi podataka, u sredini se nalazi tip podataka, a desno se nalazi opis varijable. Svjetlozelenom bojom označite primarni ključ. Svjetlo plavom označite strani ključ}
-				
+				%\textit{Svaku tablicu je potrebno opisati po zadanom predlošku. Lijevo se nalazi točno ime varijable u bazi podataka, u sredini se nalazi tip podataka, a desno se nalazi opis varijable. Svjetlozelenom bojom označite primarni ključ. Svjetlo plavom označite strani ključ}
+
+				\begin{longtblr}[
+					label=none,
+					entry=none
+					]{
+						width = \textwidth,
+						colspec={|X[10,l]|X[6, l]|X[20, l]|}, 
+						rowhead = 1,
+					}
+					\hline \multicolumn{3}{|c|}{\textbf{User}}	 \\ \hline[3pt]
+					\SetCell{LightGreen}email & VARCHAR	& Email adresa korisnika  	\\ \hline
+					userName	& VARCHAR & Ime korisnika	\\ \hline 
+					userSurname & VARCHAR & Prezime korisnika  \\ \hline 
+					password & VARCHAR	& Lozinka korisnika 		\\ \hline 
+					userLocation & VARCHAR & Lokacija korisnika 	\\ \hline
+					isAccountVerified & BOOLEAN & Oznaka je li korisnik verificiran \\ \hline
+					canDonate & BOOLEAN & Oznaka može li korisnik donirati \\ \hline
+				\end{longtblr}
 				
 				\begin{longtblr}[
 					label=none,
 					entry=none
 					]{
 						width = \textwidth,
-						colspec={|X[6,l]|X[6, l]|X[20, l]|}, 
+						colspec={|X[10,l]|X[6, l]|X[20, l]|}, 
 						rowhead = 1,
 					}
-					\hline \multicolumn{3}{|c|}{\textbf{korisnik - ime tablice}}	 \\ \hline[3pt]
-					\SetCell{LightGreen}IDKorisnik & INT	&  	Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod  	\\ \hline
-					korisnickoIme	& VARCHAR &   	\\ \hline 
-					email & VARCHAR &   \\ \hline 
-					ime & VARCHAR	&  		\\ \hline 
-					\SetCell{LightBlue} primjer	& VARCHAR &   	\\ \hline 
+					\hline \multicolumn{3}{|c|}{\textbf{Child}}	 \\ \hline[3pt]
+					\SetCell{LightGreen}childId & INT	& Generirani id djeteta  	\\ \hline
+					\SetCell{LightGreen} email	& VARCHAR & Email adresa roditelja - također strani ključ	\\ \hline 
+					childName & VARCHAR & Ime djeteta  \\ \hline 
+					childSex & VARCHAR	& Spol djeteta		\\ \hline 
+					childAge & INT & Dob djeteta	\\ \hline
+					predictedBirthDate & DATE & Predviđeni datum rođenja djeteta \\ \hline
 				\end{longtblr}
-				
-				
+
+				\begin{longtblr}[
+					label=none,
+					entry=none
+					]{
+						width = \textwidth,
+						colspec={|X[10,l]|X[6, l]|X[20, l]|}, 
+						rowhead = 1,
+					}
+					\hline \multicolumn{3}{|c|}{\textbf{Category}}	 \\ \hline[3pt]
+					\SetCell{LightGreen} categoryName & VARCHAR	& Ime kategorije  	\\ \hline
+				\end{longtblr}
+
+				\begin{longtblr}[
+					label=none,
+					entry=none
+					]{
+						width = \textwidth,
+						colspec={|X[10,l]|X[6, l]|X[20, l]|}, 
+						rowhead = 1,
+					}
+					\hline \multicolumn{3}{|c|}{\textbf{Subcategory}}	 \\ \hline[3pt]
+					\SetCell{LightGreen} subcategoryName & VARCHAR	& Ime potkategorije 	\\ \hline
+					itemDuration & INT & Predviđeni rok uporabe predmeta iz potkategorije u godinama \\ \hline
+					\SetCell{LightBlue} categoryName & VARCHAR & Ime roditeljske kategorije \\ \hline
+				\end{longtblr}
+
+				\begin{longtblr}[
+					label=none,
+					entry=none
+					]{
+						width = \textwidth,
+						colspec={|X[10,l]|X[6, l]|X[20, l]|}, 
+						rowhead = 1,
+					}
+					\hline \multicolumn{3}{|c|}{\textbf{isInCategory}}	 \\ \hline[3pt]
+					\SetCell{LightGreen} childId & INT	& Generirani id djeteta - također dio prvog stranog ključa	\\ \hline
+					\SetCell{LightGreen} email & VARCHAR & Email adresa roditelja - također dio prvog stranog ključa \\ \hline
+					\SetCell{LightGreen} categoryName & VARCHAR & Ime kategorije označene za dijete - također drugi strani ključ \\ \hline
+				\end{longtblr}
+
+				\begin{longtblr}[
+					label=none,
+					entry=none
+					]{
+						width = \textwidth,
+						colspec={|X[10,l]|X[6, l]|X[20, l]|}, 
+						rowhead = 1,
+					}
+					\hline \multicolumn{3}{|c|}{\textbf{isInSubcategory}}	 \\ \hline[3pt]
+					\SetCell{LightGreen} childId & INT	& Generirani id djeteta - također dio prvog stranog ključa	\\ \hline
+					\SetCell{LightGreen} email & VARCHAR & Email adresa roditelja - također dio prvog stranog ključa \\ \hline
+					\SetCell{LightGreen} subcategoryName & VARCHAR & Ime potkategorije označene za dijete - također drugi strani ključ \\ \hline
+				\end{longtblr}
+
+				\begin{longtblr}[
+					label=none,
+					entry=none
+					]{
+						width = \textwidth,
+						colspec={|X[10,l]|X[6, l]|X[20, l]|}, 
+						rowhead = 1,
+					}
+					\hline \multicolumn{3}{|c|}{\textbf{Item}}	 \\ \hline[3pt]
+					\SetCell{LightGreen}id & INT	& Generirani id predmeta 	\\ \hline
+					productName	& VARCHAR & Ime proizvoda	\\ \hline 
+					itemState & VARCHAR & Stanje predmeta  \\ \hline 
+					productionYear & DATE	& Godina proizvodnje predmeta		\\ \hline 
+					productionBrand & VARCHAR & Marka predmeta	\\ \hline
+					forAge & INT & Predviđena dob za korištenje predmeta \\ \hline
+					forSex & VARCHAR & Predviđen spol za korištenje predmeta \\ \hline
+					\SetCell{LightBlue} categoryName & VARCHAR & Ime kategorije predmeta \\ \hline
+					\SetCell{LightBlue} subcategoryName & VARCHAR & Ime potkategorije predmeta \\ \hline
+				\end{longtblr}
+
+				\eject
+
+				\begin{longtblr}[
+					label=none,
+					entry=none
+					]{
+						width = \textwidth,
+						colspec={|X[10,l]|X[6, l]|X[20, l]|}, 
+						rowhead = 1,
+					}
+					\hline \multicolumn{3}{|c|}{\textbf{Donation}}	 \\ \hline[3pt]
+					\SetCell{LightGreen}idDonation & INT	& Generirani id donacije 	\\ \hline
+					donationName	& VARCHAR & Ime donacije	\\ \hline 
+					dateOfPublication & DATE & Datum objave donacije \\ \hline
+					dateOfClosing & DATE & Datum zatvaranja donacije \\ \hline
+					isValid & BOOLEAN & Oznaka je li donacija prihvaćena od strane administratora \\ \hline
+					isActive & BOOLEAN & Oznaka je li donacija trenutno aktivna \\ \hline
+					pictureUrl & VARCHAR & Url slike donacije \\ \hline
+					handoverLocation & VARCAHR & Lokacija preuzimanja donacije \\ \hline
+					\SetCell{LightBlue} email & VARCHAR & Email adresa donatora \\ \hline
+					\SetCell{LightBlue} id & INT & Generirani id pripadajućeg predmeta \\ \hline
+				\end{longtblr}
+
+				\begin{longtblr}[
+					label=none,
+					entry=none
+					]{
+						width = \textwidth,
+						colspec={|X[10,l]|X[6, l]|X[20, l]|}, 
+						rowhead = 1,
+					}
+					\hline \multicolumn{3}{|c|}{\textbf{donatedToUser}}	 \\ \hline[3pt]
+					\SetCell{LightGreen} email & VARCHAR & Email adresa korisnika koji je prihvatio donaciju - također prvi strani ključ	\\ \hline
+					\SetCell{LightGreen} idDonation & INT & Id prihvaćene donacije - također drugi strani ključ \\ \hline
+				\end{longtblr}
 			
 			\subsection{Dijagram baze podataka}
 				%\textit{ U ovom potpoglavlju potrebno je umetnuti dijagram baze podataka. Primarni i strani ključevi moraju biti označeni, a tablice povezane. Bazu podataka je potrebno normalizirati. Podsjetite se kolegija "Baze podataka".}
