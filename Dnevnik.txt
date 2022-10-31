@@ -44,3 +44,10 @@
         -detaljna analiza prijedloga dizajna za klijentsku aplikaciju
         -male promjene dizajna za klijentsku aplikaciju
         -podjela posla na klijentskoj aplikaciji među prisutnima
+
+6. sastanak 
+    -Datum: 31. listopada 2022
+    -Prisustvovali: D.Kiramarios, K.Tomičić, S.Barac
+    -Trajanje sastanka: 30 min
+    -Teme sastanka:
+        -podjela posla na izradu routinga, izgleda, određenih komponenti i spajanja s backendom
