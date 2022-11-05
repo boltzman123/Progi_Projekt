@@ -5,10 +5,24 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: rgba(255,252,251,255)
+  background-color: rgba(255,252,251,255);
+  height:100%;
+
+
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+#root {
+  height: 100%;
+  overflow: hidden;
+
+
+}
+html {
+  height: 100%;
+
 }

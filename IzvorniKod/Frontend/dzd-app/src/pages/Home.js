@@ -1,17 +1,31 @@
-import React from 'react';
+import React from "react";
+import Image from "../style/images/pic2.png";
+import "../style/pages/Home.css";
+import Footer from "../components/Footer";
+import PrijavaBtn from "../components/PrijavaBtn";
+import RegistracijaBtn from "../components/RegistracijaBtn";
 function Home() {
-    return (
-        <div className='content'>
-            <div className='d1'>
-                <div>Najbolje mjesto za donaciju za Vaše dijete</div>
-                <div>Doniraj danas i ti – djeca za djecu!</div>
-                <div>
-                    <button>b1</button>
-                    <button>b2</button>
-                </div>
+  return (
+    <React.Fragment>
+      <div className="content">
+        <div className="gallery">
+          <div className="d1">
+            <div className="title">
+              Najbolje mjesto za donaciju <br></br>za Vaše dijete
             </div>
-            <div className='d2'></div>
+            <div>Doniraj danas i ti – djeca za djecu!</div>
+            <div className="buttons">
+              <PrijavaBtn></PrijavaBtn>
+              <RegistracijaBtn></RegistracijaBtn>
+            </div>
+          </div>
+          <div className="d2">
+            <img src={Image} ></img>
+          </div>
         </div>
-    )
+        <Footer></Footer>
+      </div>
+    </React.Fragment>
+  );
 }
-export default Home
+export default Home;
