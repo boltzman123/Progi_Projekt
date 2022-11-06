@@ -7,41 +7,68 @@ export const LoginAll = () => {
     const [email, setEmail] = useState('');
     const [pass, setPass] = useState('');
 
-    const handleSubmit = (e) =>{
+    const onSubmit = (e) =>{
         e.preventDefault();
-        console.log(email);
-        console.log(pass);
+
+        const data = {
+            email: email,
+            password: pass
+        };
+
+        console.log(JSON.stringify(data));
+
+        const options = {
+            method: "POST",
+            headers: {
+                "Content-Type":"application/json"
+            },
+            body: JSON.stringify(data)
+        };
+
+        return fetch("/login",options);
     }
+
 
     return (
         <>
-            <form onSubmit={handleSubmit}>
-                {/* <label htmlFor="email">Email</label> */}
-                <input 
-                    value={email} onChange={ (e) => setEmail(e.target.value)}
-                    type="email" 
-                    name="email" 
-                    id="email"
-                    placeholder='upisite.email@gmail.com' 
-                    className="okvir"
-                />
+                <form onSubmit={onSubmit}>
+                    <div>
+                        <label>Upišite email</label>
+                        </div>
+                    <div>
+                        <input 
+                            value={email} onChange={ (e) => setEmail(e.target.value)}
+                            type="email" 
+                            name="email" 
+                            id="email"
+                            placeholder='upisite.email@gmail.com' 
+                            className="okvir"
+                            required={true}
+                        />
+                    </div>
 
-                {/* <label htmlFor="pass">Password</label> */}
-                <input 
-                    value={pass} onChange={ (e) => setPass(e.target.value)}
-                    type="password"
-                    name="pass"
-                    id="pass"
-                    placeholder='Upisite password'
-                    className="okvir"
-                />
-            
-                <div className="buttons">
-                    <button className='gumbic tamniji' type="submit">
-                        Logiraj se
-                    </button>
-                </div>
-            </form>
+                    <div>
+                        <label>Upišite password</label>
+                    </div>
+                    <div>
+                        <input 
+                            value={pass} onChange={ (e) => setPass(e.target.value)}
+                            type="password"
+                            name="pass"
+                            id="pass"
+                            placeholder='Upisite password'
+                            className="okvir"
+                            required={true}
+                        />
+                    </div>
+
+                    <div>
+                        <button className='gumbic tamniji' type="submit">
+                            Logiraj se
+                        </button>
+                    </div>
+
+                </form>
         </>
     );
     }

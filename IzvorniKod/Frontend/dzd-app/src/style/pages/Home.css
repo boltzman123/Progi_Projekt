@@ -1,5 +1,6 @@
 /*laptop*/
 @media only screen and (min-width: 450px) {
+
   @media only screen and (min-width: 1487px) {
     .title {
       font-size: 50px;
@@ -10,6 +11,7 @@
       color: rgb(118, 113, 113);
     }
   }
+
   @media only screen and (max-width: 1486px) {
     .title {
         font-size: 45px;
@@ -24,7 +26,7 @@
   .d1 > div {
     margin-left: 100px;
     padding-bottom: 30px;
-    display: flex;
+    display:flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
@@ -42,7 +44,7 @@
   }
   .buttons {
     display: flex;
-    flex-flow: row nowrap;
+    flex-flow: column nowrap;
   }
    img {
     height:484px ;
@@ -52,7 +54,7 @@
 
 
 /*mobitel*/
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 449px) {
     .title {
         font-size: 35px;
         font-weight: 700;

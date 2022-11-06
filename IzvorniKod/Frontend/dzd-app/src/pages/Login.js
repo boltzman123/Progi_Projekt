@@ -11,17 +11,17 @@ function Login() {
     <React.Fragment>
       <div className="content">
             <div className="gallery">
-                <div className="d2">
-                    <img src={Image} ></img>
-                </div>
                 <div className="d1">
                     <div className="title">
                         Dobrodošli natrag <br />
                     </div>
-                    <div className="test">
+                    <div className="buttons">
                       <LoginAllv2 />
                       <Link to={"/registracija"}> Nemas profil?</Link>
                     </div>
+                </div>
+                <div className="d2">
+                    <img src={Image} ></img>
                 </div>
             </div>
             <Footer />
