@@ -15,8 +15,8 @@ function Home() {
             </div>
             <div>Doniraj danas i ti – djeca za djecu!</div>
             <div className="buttons">
-              <PrijavaBtn></PrijavaBtn>
-              <RegistracijaBtn></RegistracijaBtn>
+              <PrijavaBtn />
+              <RegistracijaBtn />
             </div>
           </div>
           <div className="d2">

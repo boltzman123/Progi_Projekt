@@ -1,13 +1,16 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import "../style/components/PrijavaBtn.css"
+import "../style/style.css"
 
 class PrijavaBtn extends Component {
-  state = {};
   render() {
     return (
       <React.Fragment>
-            <Link to={"/login"}><button id='prijavaBtn'>Prijava</button></Link>
+            <Link to={"/login"}>
+                <button className='gumbic tamniji'>
+                  Prijava
+                </button>
+              </Link>
       </React.Fragment>
     );
   }

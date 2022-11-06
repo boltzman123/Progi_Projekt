@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
-import "../style/components/RegistracijaBtn.css"
+import "../style/style.css"
 
 
 class RegistracijaBtn extends Component {
-    state = {  } 
     render() { 
         return (
-            <Link to={"/registracija"}><button id='registracijaBtn'>Registracija</button></Link>
+            <Link to={"/registracija"}>
+                <button className='gumbic svijetliji'>
+                    Registracija
+                </button>
+            </Link>
         );
     }
 }

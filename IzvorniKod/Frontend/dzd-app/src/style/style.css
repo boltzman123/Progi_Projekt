@@ -1,0 +1,61 @@
+.gumbic {
+    height: 65px;
+    width: 151px;
+    color: white;
+    font-weight: 600;
+    font-size: 23px;
+    border: none;
+    border-radius: 30px;
+    box-shadow: 3px 3px gray;
+    margin-right: 15px;
+    margin-left: 20px;
+    background-color: grey;
+    margin: 20px 20px;
+}
+
+.okvir{    
+    border:1px solid black;
+    border-radius: 30px;
+    box-shadow: 3px 3px gray;
+    height: 65px;
+    width: 25rem;
+    background-color: lightgray;
+    flex-direction: row;
+    justify-content: center;
+    margin: 20px 20px;
+}
+
+.upis{
+    border:none;
+    border-radius: 30px;
+    height: 60px;
+    width: 15rem;
+    background-color: lightgray;
+    color: white;
+    position: relative;
+    margin: 20px 20px;
+}
+
+::placeholder{
+    color:white
+}
+
+.tamniji{
+    background-color: rgba(229, 93, 17, 255);
+}
+
+.svijetliji{
+    background-color: rgba(244,177,131,255);
+}
+
+.gumbic:hover {
+opacity: 0.9;
+}
+  
+@media only screen and (max-width: 449px) {
+.gumbic {
+    height: 45px;
+    width: 40%px;
+}
+}
+  
