@@ -11,6 +11,7 @@
     margin-left: 20px;
     background-color: grey;
     margin: 20px 20px;
+    text-align: center;
 }
 
 .okvir{    
@@ -23,6 +24,7 @@
     flex-direction: row;
     justify-content: center;
     margin: 20px 20px;
+    text-align: center;
 }
 
 .upis{
@@ -34,6 +36,7 @@
     color: white;
     position: relative;
     margin: 20px 20px;
+    text-align: center;
 }
 
 ::placeholder{
@@ -53,9 +56,16 @@ opacity: 0.9;
 }
   
 @media only screen and (max-width: 449px) {
+
 .gumbic {
     height: 45px;
     width: 40%px;
 }
+
+.okvir {
+    height: 45px;
+    width: 40%px;
+}
+
 }
   

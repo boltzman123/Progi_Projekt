@@ -4,6 +4,7 @@ import "../style/pages/Home.css";
 import Footer from "../components/Footer";
 import PrijavaBtn from "../components/PrijavaBtn";
 import RegistracijaBtn from "../components/RegistracijaBtn";
+
 function Home() {
   return (
     <React.Fragment>

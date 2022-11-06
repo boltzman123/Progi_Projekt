@@ -2,10 +2,11 @@ import React from "react";
 import Image from "../style/images/pic2.png";
 import "../style/pages/Home.css";
 import Footer from "../components/Footer";
-import LoginAll from "../components/LoginAll";
-import RegistracijaBtn from "../components/RegistracijaBtn";
+import LoginAllv2 from "../components/LoginAllv2";
+import { Link } from "react-router-dom";
 
 function Login() {
+
   return (
     <React.Fragment>
       <div className="content">
@@ -17,17 +18,16 @@ function Login() {
                     <div className="title">
                         Dobrodošli natrag <br />
                     </div>
-                    <div classname="buttons">
-                        <LoginAll />
-                        <p>Nemas profil?</p>
-                        <RegistracijaBtn />
+                    <div className="test">
+                      <LoginAllv2 />
+                      <Link to={"/registracija"}> Nemas profil?</Link>
                     </div>
-                    
                 </div>
             </div>
-            <Footer></Footer>
+            <Footer />
       </div>
     </React.Fragment>
   );
 }
+
 export default Login;
