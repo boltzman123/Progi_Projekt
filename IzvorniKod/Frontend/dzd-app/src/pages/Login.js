@@ -2,7 +2,7 @@ import React from "react";
 import Image from "../style/images/pic2.png";
 import "../style/pages/Home.css";
 import Footer from "../components/Footer";
-import LoginAllv2 from "../components/LoginAllv2";
+import LoginForm from "../components/LoginForm";
 import { Link } from "react-router-dom";
 
 function Login() {
@@ -16,7 +16,7 @@ function Login() {
                         Dobrodošli natrag <br />
                     </div>
                     <div className="buttons">
-                      <LoginAllv2 />
+                      <LoginForm />
                       <Link to={"/registracija"}> Nemas profil?</Link>
                     </div>
                 </div>
