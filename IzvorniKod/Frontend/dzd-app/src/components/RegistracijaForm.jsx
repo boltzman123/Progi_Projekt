@@ -3,8 +3,8 @@ import axios from "axios";
 
 import "../style/pages/Registracija.css"
 
-//import { FiMail } from "react-icons/fi";
-//import { FiLock } from "react-icons/fi";
+import { FiMail } from "react-icons/fi";
+import { FiLock } from "react-icons/fi";
 import { Link } from "react-router-dom";
 
 const RegistracijaForm = () => {
@@ -66,7 +66,7 @@ const RegistracijaForm = () => {
                         />
                     </div>
                     <div>
-                        {/* <FiMail className="icon"></FiMail> */}
+                        <FiMail className="icon"></FiMail>
                         <input 
                             value={email} type="email" name="email" id="email" 
                             placeholder="peroperic@email.com" className='okvir'
@@ -74,7 +74,7 @@ const RegistracijaForm = () => {
                         />    
                     </div>
                     <div>
-                        {/* <FiLock className="icon"></FiLock> */}
+                        <FiLock className="icon"></FiLock>
                         <input 
                             value={pass} type="password" name="pass" id="pass"  
                             className='okvir'
