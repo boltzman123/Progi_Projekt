@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import "../style/style.css"
 
 
@@ -15,7 +16,7 @@ export const LoginAll = () => {
             password: pass
         };
 
-        console.log(JSON.stringify(data));
+        //console.log(JSON.stringify(data));
 
         const options = {
             method: "POST",
@@ -25,7 +26,9 @@ export const LoginAll = () => {
             body: JSON.stringify(data)
         };
 
-        return fetch("/login",options);
+        axios.get(`/users/${email}`,options)
+        .then(response => response.data)
+        .then(data => console.log(data));
     }
 
 
