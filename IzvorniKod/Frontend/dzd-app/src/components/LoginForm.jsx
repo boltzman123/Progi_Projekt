@@ -24,7 +24,7 @@ export const LoginAll = () => {
             email: email,
             password: pass
           }
-        }).then((response) => console.log(response))
+        }).then((response) => console.log(response.data))
     }
 
 
