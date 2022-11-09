@@ -13,24 +13,18 @@ export const LoginAll = () => {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    const data = {
-      email: email,
-      password: pass,
-    };
-
-        //console.log(JSON.stringify(data));
-
-    const options = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    };
-
-        axios.get(`/users/${email}`,options)
-        .then(response => response.data)
-        .then(data => console.log(data));
+        //ovo raditi za post
+        axios({
+          method: 'post',
+          url: '/api/users/login',
+          headers: {
+            "Content-Type": "application/json; charset=utf-8"
+          },
+          data:{
+            email: email,
+            password: pass
+          }
+        }).then((response) => console.log(response.data))
     }
 
 
