@@ -18,7 +18,7 @@ export const LoginAll = () => {
       password: pass,
     };
 
-    console.log(JSON.stringify(data));
+        //console.log(JSON.stringify(data));
 
     const options = {
       method: "POST",
@@ -28,10 +28,11 @@ export const LoginAll = () => {
       body: JSON.stringify(data),
     };
 
-    return axios
-      .get(`/users/${email}`, options)
-      .then((response) => console.log(response));
-  };
+        axios.get(`/users/${email}`,options)
+        .then(response => response.data)
+        .then(data => console.log(data));
+    }
+
 
   return (
     <>

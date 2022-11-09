@@ -4,6 +4,7 @@ import oop.domain.Child;
 import oop.domain.Users;
 import oop.service.ChildService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +15,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/child")
+@PropertySource(value = "classpath:application.properties")
 public class ChildController {
     @Autowired
     private ChildService service;

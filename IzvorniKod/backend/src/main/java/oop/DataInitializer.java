@@ -35,11 +35,6 @@ public class DataInitializer {
 
         // Category #2, #3
 
-
-
-
-
-
     }
 
     private Category makeCategory(String categoryName){

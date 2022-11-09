@@ -12,4 +12,6 @@ import java.util.Optional;
 public interface ChildRepository extends JpaRepository<Child, Users> {
     @Query("SELECT c FROM Child c where :i = c.childId and :mail = c.user.email")
     Optional<Child> findByUserAndChildId(@Param("mail") String email, @Param("i") Long id);
+
+
 }
