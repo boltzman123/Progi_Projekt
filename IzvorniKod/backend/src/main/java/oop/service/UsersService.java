@@ -11,4 +11,5 @@ public interface UsersService {
     Users createUser(Users user);
     Optional<Users> findByEmail(String email);
     Users updateUser(Users user);
+    Users deleteUser(String email);
 }

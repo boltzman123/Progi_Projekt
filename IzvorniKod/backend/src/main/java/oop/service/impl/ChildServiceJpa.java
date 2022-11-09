@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ChildServiceJpa implements ChildService {
@@ -18,6 +19,11 @@ public class ChildServiceJpa implements ChildService {
     }
 
     @Override
+    public Optional<Child> listChildByUserAndId(String email, Long id) {
+        return repository.findByUserAndChildId(email, id);
+    }
+
+    @Override
     public Child createChild(Child child) {
         return repository.save(child);
     }
@@ -25,5 +31,11 @@ public class ChildServiceJpa implements ChildService {
     @Override
     public Child updateChild(Child child) {
         return repository.save(child);
+    }
+
+    @Override
+    public Child deleteChild(Child child) {
+        repository.delete(child);
+        return child;
     }
 }

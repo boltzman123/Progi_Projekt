@@ -1,5 +1,6 @@
 package oop;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
@@ -16,6 +17,7 @@ public class MnDjecaZaDjecuApplication {
 	}
 
 	public static void main(String[] args) {
+
 		SpringApplication.run(MnDjecaZaDjecuApplication.class, args);
 	}
 

@@ -26,7 +26,7 @@ public class ItemController {
         Item saved = service.createItem(item);
         return ResponseEntity.created(URI.create("/item/" + saved.getId())).body(saved);
     }
-    @PutMapping("")
+    @PutMapping("/{id}")
     public Item updateItem(@PathVariable("id") Long id, @RequestBody Item item){
         if(!item.getId().equals(id)){
             throw new IllegalArgumentException("Item id must be preserved");

@@ -9,29 +9,24 @@ public class Child{
     @Id
     @GeneratedValue
     private Long childId;
-
     private String childName;
     private char childSex;
     private int childAge;
     private Date predictedBirthDate;
 
-    @ManyToOne
-    @JoinColumn(name = "user_email")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_email", referencedColumnName = "email")
     private Users user;
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
     @JoinTable(name = "CHILD_CATEGORY",
-            joinColumns = {
-                    @JoinColumn(name = "user_email", referencedColumnName = "USER_EMAIL"),
-                    @JoinColumn(name = "child_id", referencedColumnName = "childId")
-            }
+            joinColumns = {@JoinColumn(name = "child_id", referencedColumnName = "childId")},
+            inverseJoinColumns = @JoinColumn(name = "category_name", referencedColumnName = "categoryName")
     )
     private Set<Category> category;
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
     @JoinTable(name = "CHILD_SUBCATEGORY",
-            joinColumns = {
-                    @JoinColumn(name = "user_email", referencedColumnName = "USER_EMAIL"),
-                    @JoinColumn(name = "child_id", referencedColumnName = "childId")
-            }
+            joinColumns = {@JoinColumn(name = "child_id", referencedColumnName = "childId")},
+            inverseJoinColumns = @JoinColumn(name = "subcategory", referencedColumnName = "subcategoryName")
     )
     private Set<Subcategory> subcategory;
     @Id
@@ -39,61 +34,44 @@ public class Child{
     public void setUser(Users user){
         this.user = user;
     }
-
+    public void addCategory(Category category){
+        this.category.add(category);
+    }
     public Users getUser() {
         return user;
     }
-
-
     public Long getChildId() {
         return childId;
     }
-
     public String getChildName() {
         return childName;
     }
-
     public void setChildName(String childName) {
         this.childName = childName;
     }
-
     public char getChildSex() {
         return childSex;
     }
-
     public void setChildSex(char childSex) {
         this.childSex = childSex;
     }
-
     public int getChildAge() {
         return childAge;
     }
-
     public void setChildAge(int childAge) {
         this.childAge = childAge;
     }
-
     public Date getPredictedBirthDate() {
         return predictedBirthDate;
     }
-
     public void setPredictedBirthDate(Date predictedBirthDate) {
         this.predictedBirthDate = predictedBirthDate;
     }
-
     public Set<Category> getCategory() {
         return category;
     }
-
-    public void setCategory(Set<Category> category) {
-        this.category = category;
-    }
-
     public Set<Subcategory> getSubcategory() {
         return subcategory;
     }
 
-    public void setSubcategory(Set<Subcategory> subcategory) {
-        this.subcategory = subcategory;
-    }
 }

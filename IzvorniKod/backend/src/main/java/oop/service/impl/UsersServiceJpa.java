@@ -32,8 +32,6 @@ public class UsersServiceJpa implements UsersService {
         return userRepository.save(user);
     }
 
-
-
     @Override
     public Optional<Users> findByEmail(String email) {
         return userRepository.findById(email);
@@ -42,5 +40,11 @@ public class UsersServiceJpa implements UsersService {
     @Override
     public Users updateUser(Users user) {
         return userRepository.save(user);
+    }
+
+    public Users deleteUser(String email){
+        Users users = fetch(email);
+        userRepository.delete(users);
+        return users;
     }
 }

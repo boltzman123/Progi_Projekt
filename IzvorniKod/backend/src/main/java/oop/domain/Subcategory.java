@@ -1,21 +1,31 @@
 package oop.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Subcategory {
     @Id
-    private String subCategoryName;
+    private String subcategoryName;
 
     @ManyToOne
     @JoinColumn(name = "category_name")
     @NotNull
     private Category category;
     private int itemDuration;
+    @JsonIgnore
+    @ManyToMany(mappedBy = "subcategory")
+    private Set<Child> childrenSub = new HashSet<>();
+    public Subcategory(){}
+    public Subcategory(String subCategoryName, Category category, int itemDuration) {
+        this.subcategoryName = subCategoryName;
+        this.category = category;
+        this.itemDuration = itemDuration;
+    }
 
     public Category getCategory() {
         return category;
@@ -33,13 +43,18 @@ public class Subcategory {
         this.itemDuration = itemDuration;
     }
 
-    public String getSubCategoryName() {
-        return subCategoryName;
+    public String getSubcategoryName() {
+        return subcategoryName;
     }
 
-    public void setSubCategoryName(String subCategoryName) {
-        this.subCategoryName = subCategoryName;
+    public void setSubcategoryName(String subcategoryName) {
+        this.subcategoryName = subcategoryName;
     }
 
-
+    public String getSubCategoryNameForPath(){
+        return this.subcategoryName.replaceAll("\\s+","");
+    }
+    public Set<Child> getChildrenSub() {
+        return childrenSub;
+    }
 }

@@ -24,7 +24,7 @@ public class DonationController {
         Donation saved = service.createDonation(donation);
         return ResponseEntity.created(URI.create("/donation/" + saved.getIdDonation())).body(saved);
     }
-    @PutMapping("")
+    @PutMapping("/{id}")
     public Donation updateDonation(@PathVariable("id") Long id, @RequestBody Donation donation){
         if(!donation.getIdDonation().equals(id)){
             throw new IllegalArgumentException("Donation id must be preserved");

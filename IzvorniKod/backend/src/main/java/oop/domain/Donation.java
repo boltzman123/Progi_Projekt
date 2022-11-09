@@ -2,11 +2,13 @@ package oop.domain;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 public class Donation {
     @Id
+    @GeneratedValue
     private Long idDonation;
     private String donationName;
     private Date dateOfPublication;
@@ -22,7 +24,14 @@ public class Donation {
     @JoinColumn(name = "item_id")
     private Item item;
     @ManyToMany
-    private Set<Users> donatedToUser;
+    @JoinTable(name = "DONATED_TO_USER",
+            joinColumns = {
+
+                    @JoinColumn(name = "donation_id", referencedColumnName = "idDonation")
+            },
+            inverseJoinColumns = @JoinColumn(name = "user_email", referencedColumnName = "email")
+    )
+    private Set<Users> donatedToUser = new HashSet<>();
 
     public Item getItem() {
         return item;

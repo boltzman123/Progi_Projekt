@@ -1,12 +1,14 @@
 package oop.service;
 
 import oop.domain.Child;
-import oop.domain.Item;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ChildService {
     List<Child> listAll();
+    Optional<Child> listChildByUserAndId(String email, Long id);
     Child createChild(Child child);
     Child updateChild(Child child);
+    Child deleteChild(Child child);
 }

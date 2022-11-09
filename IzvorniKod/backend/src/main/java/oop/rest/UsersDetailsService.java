@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.springframework.security.core.authority.AuthorityUtils.commaSeparatedStringToAuthorityList;
 
@@ -24,8 +25,7 @@ public class UsersDetailsService implements UserDetailsService {
     private UsersService service;
 
     @Override
-    public UserDetails loadUserByUsername(String email) {
-        System.out.println(email);
+    public UserDetails loadUserByUsername(String email){
         return new User(email, adminPasswordHash, authorities(email));
     }
 

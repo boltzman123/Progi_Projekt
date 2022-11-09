@@ -4,6 +4,7 @@ import oop.domain.Subcategory;
 import oop.service.SubcategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -20,15 +21,17 @@ public class SubcategoryController {
         return service.listAll();
     }
     @PostMapping("")
-    public ResponseEntity<Subcategory> createSubcategory(@RequestBody Subcategory Subcategory){
-        Subcategory saved = service.createSubcategory(Subcategory);
-        return ResponseEntity.created(URI.create("/subcategory/" + saved.getSubCategoryName())).body(saved);
+    @Secured("ROLE_ADMIN")
+    public ResponseEntity<Subcategory> createSubcategory(@RequestBody Subcategory subcategory){
+        Subcategory saved = service.createSubcategory(subcategory);
+        return ResponseEntity.created(URI.create("/subcategory/" + saved.getSubCategoryNameForPath())).body(saved);
     }
-    @PutMapping("")
-    public Subcategory updateSubcategory(@PathVariable("SubcategoryName") String SubcategoryName, @RequestBody Subcategory Subcategory){
-        if(!Subcategory.getSubCategoryName().equals(SubcategoryName)){
+    @PutMapping("/{subcategoryName}")
+    @Secured("ROLE_ADMIN")
+    public Subcategory updateSubcategory(@PathVariable("subcategoryName") String subcategoryName, @RequestBody Subcategory subcategory){
+        if(!subcategory.getSubcategoryName().equals(subcategoryName)){
             throw new IllegalArgumentException("Subcategory name must be preserved");
         }
-        return service.updateSubcategory(Subcategory);
+        return service.updateSubcategory(subcategory);
     }
 }

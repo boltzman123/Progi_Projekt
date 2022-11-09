@@ -4,6 +4,7 @@ import oop.domain.Category;
 import oop.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -20,15 +21,17 @@ public class CategoryController {
         return service.listAll();
     }
     @PostMapping("")
-    public ResponseEntity<Category> createCategory(@RequestBody Category Category){
-        Category saved = service.createCategory(Category);
+    @Secured("ROLE_ADMIN")
+    public ResponseEntity<Category> createCategory(@RequestBody Category category){
+        Category saved = service.createCategory(category);
         return ResponseEntity.created(URI.create("/category/" + saved.getCategoryName())).body(saved);
     }
-    @PutMapping("")
-    public Category updateCategory(@PathVariable("categoryName") String categoryName, @RequestBody Category Category){
-        if(!Category.getCategoryName().equals(categoryName)){
+    @PutMapping("/{categoryName}")
+    @Secured("ROLE_ADMIN")
+    public Category updateCategory(@PathVariable("categoryName") String categoryName, @RequestBody Category category){
+        if(!category.getCategoryName().equals(categoryName)){
             throw new IllegalArgumentException("Category name must be preserved");
         }
-        return service.updateCategory(Category);
+        return service.updateCategory(category);
     }
 }

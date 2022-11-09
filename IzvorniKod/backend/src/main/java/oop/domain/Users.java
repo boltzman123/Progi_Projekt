@@ -1,7 +1,10 @@
 package oop.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -15,16 +18,26 @@ public class Users {
     @NotNull
     private String password;
     private String userLocation;
-    private boolean isAccountVerified = false;
-    private boolean canDonate = false;
+    private boolean canDonate;
+    @JsonIgnore
+    @ManyToMany(mappedBy = "donatedToUser")
+    private Set<Donation> donations;
 
-    public boolean isIsAccountVerified() {
-        return isAccountVerified;
+    public Set<Donation> getDonations() {
+        return donations;
+    }
+    /*private boolean accountVerified;
+    private String token;
+    @OneToMany(mappedBy = "user")
+    private Set<SecureToken> tokens;*/
+
+    /*public boolean isAccountVerified() {
+        return accountVerified;
     }
 
-    public void setIsAccountVerified(boolean isAccountVerified) {
-        this.isAccountVerified = isAccountVerified;
-    }
+    public void setAccountVerified(boolean accountVerified) {
+        this.accountVerified = accountVerified;
+    }*/
 
     public void setCanDonate(boolean canDonate) {
         this.canDonate = canDonate;
