@@ -27,15 +27,20 @@ public class UsersController {
         return userService.listAll();
     }
 
-    @GetMapping("/{email}")
-    public Users getUser(@PathVariable("email") String email){
-        return userService.fetch(email);
+    @GetMapping("/{email}/{password}")
+    public Users getUser(@PathVariable("email") String email, @PathVariable("password") String password){
+        Users user =userService.fetch(email);
+        if(user.getPassword().equals(password)){
+            return user;
+        } else{
+            throw new UsernameNotFoundException("Email or password is wrong");
+        }
     }
-    @GetMapping("/login")
-    public Users getUser(@RequestBody LoginForm loginForm){
+    @PostMapping("/login")
+    public ResponseEntity<Users> getUser(@RequestBody LoginForm loginForm){
         Users user = userService.fetch(loginForm.getEmail());
         if(user.getPassword().equals(loginForm.getPassword())){
-            return user;
+            return ResponseEntity.created(URI.create("/users/" + user.getEmail())).body(user);
         } else{
             throw new UsernameNotFoundException("Email or password is wrong");
         }
