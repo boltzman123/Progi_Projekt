@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
-import "../style/style.css"
+import "../style/components/Buttons.css"
 
 class RegistracijaBtn extends Component {
     render() { 

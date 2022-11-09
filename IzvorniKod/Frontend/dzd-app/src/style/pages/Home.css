@@ -22,14 +22,18 @@
         color: rgb(118, 113, 113);
       }
     }
+    .d1 {
+      margin-left: 50px;
+    }
+    .d2 {
+      margin-right: 100px;
+    }
 
   .d1 > div {
-    margin-left: 100px;
+    margin-left: 150px;
     padding-bottom: 30px;
     display:flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+    flex-direction: row;
     
   }
   .content {
@@ -79,18 +83,17 @@
     height: 100%;
 }
 
- .d2 {
-    z-index: -1;
- }
-
 .d1 {
     margin-top: 10%;
     z-index: 1;
 }
+.buttons{
+  display: flex;
+  flex-wrap: nowrap;
+}
 
  img {
-    width:50% ;
-    z-index: -2;
+    width:100% ;
  }
 
 }

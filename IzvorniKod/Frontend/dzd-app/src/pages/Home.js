@@ -21,7 +21,7 @@ function Home() {
             </div>
           </div>
           <div className="d2">
-            <img src={Image} ></img>
+            <img src={Image} alt="slika" ></img>
           </div>
         </div>
         <Footer></Footer>
