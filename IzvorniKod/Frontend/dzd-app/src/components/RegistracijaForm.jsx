@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
-import "../style/style.css"
+import axios from "axios";
+
 import "../style/pages/Registracija.css"
+
+import { FiMail } from "react-icons/fi";
+import { FiLock } from "react-icons/fi";
+import { Link } from "react-router-dom";
 
 const RegistracijaForm = () => {
     const [ime, setIme] = useState('');
@@ -30,7 +35,9 @@ const RegistracijaForm = () => {
             body: JSON.stringify(data)
         };
 
-        return fetch("/registracija", options);
+        axios.get(`/users/${email}`,options)
+        .then(response => response.data)
+        .then(data => console.log(data));
     }
 
     return ( 
@@ -38,9 +45,6 @@ const RegistracijaForm = () => {
             <form onSubmit={ onSubmit }>
                 <div className="registerform">
                     <div>
-                        <div>
-                            <label>Ime</label>
-                        </div>
                         <input 
                             value={ime} type="text" name="ime" id="ime" 
                             placeholder="Pero" className='okvir'
@@ -48,9 +52,6 @@ const RegistracijaForm = () => {
                         />
                     </div>
                     <div>
-                        <div>
-                            <label>Prezime</label>
-                        </div>
                         <input 
                             value={prezime} type="text" name="prezime" id="prezime" 
                             placeholder="Perić" className='okvir'
@@ -58,9 +59,6 @@ const RegistracijaForm = () => {
                         />
                     </div>
                     <div>
-                        <div>
-                            <label>Mjesto i grad</label>
-                        </div>
                         <input 
                             value={mjesto} type="text" name="mjesto" id="mjesto" 
                             placeholder="Ulica Perića, Perkovci" className='okvir'
@@ -68,9 +66,7 @@ const RegistracijaForm = () => {
                         />
                     </div>
                     <div>
-                        <div>
-                            <label>Email</label>
-                        </div>
+                        <FiMail className="icon"></FiMail>
                         <input 
                             value={email} type="email" name="email" id="email" 
                             placeholder="peroperic@email.com" className='okvir'
@@ -78,9 +74,7 @@ const RegistracijaForm = () => {
                         />    
                     </div>
                     <div>
-                        <div>
-                            <label>Password</label>
-                        </div>
+                        <FiLock className="icon"></FiLock>
                         <input 
                             value={pass} type="password" name="pass" id="pass"  
                             className='okvir'
@@ -88,6 +82,9 @@ const RegistracijaForm = () => {
                         />    
                     </div>
                     <button type='submit' className='gumbic tamniji'>Registriraj se</button>
+                    <Link to={"/login"}>
+                        <button className="gumbic upitnik">Već imaš profil?</button>{" "}
+                    </Link>
                 </div>
             </form>
         </React.Fragment>
