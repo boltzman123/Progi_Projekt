@@ -3,6 +3,7 @@ package oop.rest;
 import oop.domain.Item;
 import oop.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/item")
+@PropertySource(value = "classpath:application.properties")
 public class ItemController {
     @Autowired
     private ItemService service;

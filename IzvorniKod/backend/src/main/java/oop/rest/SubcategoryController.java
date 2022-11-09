@@ -3,6 +3,7 @@ package oop.rest;
 import oop.domain.Subcategory;
 import oop.service.SubcategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/subcategory")
+@PropertySource(value = "classpath:application.properties")
 public class SubcategoryController {
     @Autowired
     private SubcategoryService service;
