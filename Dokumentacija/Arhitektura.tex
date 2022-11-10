@@ -215,13 +215,64 @@
 			
 			
 		\section{Dijagram razreda}
-		
-			%\textit{Potrebno je priložiti dijagram razreda s pripadajućim opisom. Zbog preglednosti je moguće dijagram razlomiti na više njih, ali moraju biti grupirani prema sličnim razinama apstrakcije i srodnim funkcionalnostima.}\\
 			
 			%\textbf{\textit{dio 1. revizije}}\\
 			
 			%\textit{Prilikom prve predaje projekta, potrebno je priložiti potpuno razrađen dijagram razreda vezan uz \textbf{generičku funkcionalnost} sustava. Ostale funkcionalnosti trebaju biti idejno razrađene u dijagramu sa sljedećim komponentama: nazivi razreda, nazivi metoda i vrste pristupa metodama (npr. javni, zaštićeni), nazivi atributa razreda, veze i odnosi između razreda.}\\
 			
+			Na slikama 4.3 do 4.6 prikazani su razredi koji pripadaju backend dijelu našeg sustava.\\[5pt]
+
+			Slika 4.3 prikazuje razrede koji predstavljaju modele - preslikane relacije baze podataka. Razred User predstavlja registriranog korisnika sustava. Razred Child predstavlja dijete registriranog korisnika sustava. Razred Donation predstavlja jednu donaciju zabilježenu u sustavu. 
+			Razred Item predstavlja jedan predmet vezan za neke od donacija. Razred Category predstavlja podatke o jednoj od kategorija u koje mogu biti svrstani predmeti. Razred Subcategory predstavlja podatke o jednoj od potkategorija u koje mogu biti svrstani predmeti.\\[10pt]
+
+			\begin{figure}[H]
+				\includegraphics[width=\textwidth,height=0.35\textheight]{dijagrami/Modeli.png}
+				\centering
+				\caption{Dijagram razreda - dio Models}
+				\label{fig:Models}
+			\end{figure}
+			\eject
+			Slika 4.4 prikazuje odnos komponenti na primjeru razreda Category. Razred CategoryController prihvaća i odgovara na HTTP zahtjeve poslane od korisnika tj. konkretnije frontenda. Kako bi na njih ispravno odgovorio, uspostavlja komunikaciju s razredom CategoryServiceJpa.
+			Razred CategoryServiceJpa uspostavlja komunikaciju s razredom CategoryService koji obavlja potrebne izračune i provođenje poslovne logike. Isto tako, razred CategoryServiceJpa uspostavlja komunikaciju i s razredom CategoryRepository koji služi kao sučelje za pohranu i dohvat podataka iz baze.
+			Kako bi prikaz bio što sažetiji, odnos komponenti prikazan je samo na jednom razredu. U stvarnoj implementaciji, ovakav odnos komponenti tj. razreda postoji za svaki razred iz dijela Models.\\[10pt]
+
+			\begin{figure}[H]
+				\includegraphics[width=\textwidth,height=0.35\textheight]{dijagrami/OdnosKomponenti.png}
+				\centering
+				\caption{Dijagram razreda - odnos komponenti}
+				\label{fig:OdnosKomponenti}
+			\end{figure}
+
+			\eject
+
+			Slika 4.5 prikazuje razrede izvedene iz razreda RestController. Svaki od razreda izvedenih iz RestController služi za prihvaćanje i odgovor na HTTP zahtjeve poslane od strane korisnika tj. konkretnije frontenda.\\[10pt]
+			%Razred UsersController služi za slanje odgovora na zahtjeve vezane uz podatke o korisnicima.
+			%Razred UsersDetailsService služi za slanje odgovora na zahtjeve vezane uz detaljne podatke o korisnicima.
+			%Razred RolesController služi za slanje odgovora na zahtjev vezan uz podatke o ulogama korisnika.
+			%Razred ChildController služi za slanje odgovora na zahtjeve vezane uz podatke o djeci.
+			%Razred ItemController služi za slanje odgovora na zahtjeve vezane uz podatke o predmetima iz donacija.
+			%Razred DonationController služi za slanje odgovora na zahtjeve vezane uz podatke o donacijama.
+			%Razred CategoryController služi za slanje odgovora na zahtjeve vezane uz podatke o kategorijama.
+			%Razred SubcategoryController služi za slanje odgovora na zahtjeve vezane uz podatke o potkategorijama.\\[10pt]
+
+			\begin{figure}[H]
+				\includegraphics[width=\textwidth,height=0.4\textheight]{dijagrami/Controlleri.png}
+				\centering
+				\caption{Dijagram razreda - dio Controllers}
+				\label{fig:Controllers}
+			\end{figure}
+
+			\eject
+
+			Slika 4.6 prikazuje razrede izvedene iz razreda JpaRepository. Svaki od prikazanih razreda služi kao sučelje za pohranu i dohvat podataka iz baze podataka za svoju pripadajuću relaciju.\\[10pt]
+
+			\begin{figure}[H]
+				\includegraphics[width=\textwidth,height=0.4\textheight]{dijagrami/Repozitoriji.png}
+				\centering
+				\caption{Dijagram razreda - dio Repositories}
+				\label{fig:Repositories}
+			\end{figure}
+
 			%\textbf{\textit{dio 2. revizije}}\\			
 			
 			%\textit{Prilikom druge predaje projekta dijagram razreda i opisi moraju odgovarati stvarnom stanju implementacije}
