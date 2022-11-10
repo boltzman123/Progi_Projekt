@@ -11,8 +11,10 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
+import javax.swing.text.html.Option;
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
@@ -49,8 +51,14 @@ public class UsersController {
     @PostMapping("")
     //@Secured("ROLE_ADMIN")
     public ResponseEntity<Users> createUser(@RequestBody Users user){
-        Users saved = userService.createUser(user);
-        return ResponseEntity.created(URI.create("/users/" + saved.getEmail())).body(saved);
+        Optional<Users> user1 = userService.findByEmail(user.getEmail());
+        if(user1.isPresent()){
+            throw new UsernameNotFoundException("User is already in database");
+        } else{
+            Users saved = userService.createUser(user);
+            return ResponseEntity.created(URI.create("/users/" + saved.getEmail())).body(saved);
+        }
+
     }
 
     @PutMapping("/{email}")
