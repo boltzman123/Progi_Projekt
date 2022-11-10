@@ -1,14 +1,17 @@
 import React, { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import "../style/components/LoginForm.css";
 import "../style/components/Buttons.css";
 import axios from "axios";
 import { FiMail } from "react-icons/fi";
 import { FiLock } from "react-icons/fi";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 
 export const LoginAll = () => {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
+
+  const navigate=useNavigate();
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -24,7 +27,11 @@ export const LoginAll = () => {
             email: email,
             password: pass
           }
-        }).then((response) => console.log(response.data))
+        }).then((response) => {
+          console.log(response.data);
+          navigate('/base');
+        })
+        .catch(console.log("Upisao si krivi username ili passwrod"));
     }
 
 
