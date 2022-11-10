@@ -18,27 +18,20 @@ const RegistracijaForm = () => {
     const onSubmit = (e) =>{
         e.preventDefault();
 
-        const data = {
-            ime: ime,
-            prezime: prezime,
-            mjesto: mjesto,
-            email: email,
-            password: pass
-        };
-
-        console.log(JSON.stringify(data));
-
-        const options = {
-            method: "POST",
+        axios({
+            method: 'post',
+            url: '/api/users/',
             headers: {
-                "Content-Type":"application/json"
-            },
-            body: JSON.stringify(data)
-        };
-
-        axios.get(`/users/${email}`,options)
-        .then(response => response.data)
-        .then(data => console.log(data));
+            "Content-Type": "application/json; charset=utf-8"
+          },
+            data:{
+                userName: ime,
+                userSurname: prezime,
+                userLocation: mjesto,
+                email: email,
+                password: pass
+          }
+        }).then((response) => console.log(response.data))
     }
 
     return ( 
