@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import axios from "axios";
 
-import "../style/pages/Registracija.css"
+import "../style/components/RegistracijaForm.css";
+import "../style/components/Buttons.css";
 
 import { FiMail } from "react-icons/fi";
 import { FiLock } from "react-icons/fi";
@@ -43,47 +44,47 @@ const RegistracijaForm = () => {
     return ( 
         <React.Fragment>
             <form onSubmit={ onSubmit }>
-                <div className="registerform">
-                    <div>
-                        <input 
-                            value={ime} type="text" name="ime" id="ime" 
-                            placeholder="Pero" className='okvir'
-                            onChange={ (e) => setIme(e.target.value)}
-                        />
-                    </div>
-                    <div>
-                        <input 
-                            value={prezime} type="text" name="prezime" id="prezime" 
-                            placeholder="Perić" className='okvir'
-                            onChange={ (e) => setPrezime(e.target.value)}
-                        />
-                    </div>
-                    <div>
-                        <input 
-                            value={mjesto} type="text" name="mjesto" id="mjesto" 
-                            placeholder="Ulica Perića, Perkovci" className='okvir'
-                            onChange={ (e) => setMjesto(e.target.value)}
-                        />
-                    </div>
-                    <div>
-                        <FiMail className="icon"></FiMail>
-                        <input 
-                            value={email} type="email" name="email" id="email" 
-                            placeholder="peroperic@email.com" className='okvir'
-                            onChange={ (e) => setEmail(e.target.value)}
-                        />    
-                    </div>
-                    <div>
-                        <FiLock className="icon"></FiLock>
-                        <input 
-                            value={pass} type="password" name="pass" id="pass"  
-                            className='okvir'
-                            onChange={ (e) => setPass(e.target.value)}
-                        />    
-                    </div>
-                    <button type='submit' className='gumbic tamniji'>Registriraj se</button>
+                <div className='frameReg'>
+                    <input 
+                        value={ime} type="text" name="ime" id="ime" 
+                        placeholder="Pero" className='inputFrameReg'
+                        onChange={ (e) => setIme(e.target.value)}
+                    />
+                </div>
+                <div className='frameReg'>
+                    <input 
+                        value={prezime} type="text" name="prezime" id="prezime" 
+                        placeholder="Perić" className='inputFrameReg'
+                        onChange={ (e) => setPrezime(e.target.value)}
+                    />
+                </div>
+                <div className='frameReg'>
+                    <input 
+                        value={mjesto} type="text" name="mjesto" id="mjesto" 
+                        placeholder="Ulica Perića, Perkovci" className='inputFrameReg'
+                        onChange={ (e) => setMjesto(e.target.value)}
+                    />
+                </div>
+                <div className='frameReg'>
+                    <FiMail className="icon"></FiMail>
+                    <input 
+                        value={email} type="email" name="email" id="email" 
+                        placeholder="peroperic@email.com" className='inputFrameReg'
+                        onChange={ (e) => setEmail(e.target.value)}
+                    />    
+                </div>
+                <div className='frameReg'>
+                    <FiLock className="icon"></FiLock>
+                    <input 
+                        value={pass} type="password" name="pass" id="pass"  
+                        className='inputFrameReg'
+                        onChange={ (e) => setPass(e.target.value)}
+                    />    
+                </div>
+                <div className='frameReg buttonFrameReg'>
+                    <button type='submit' className='gumbic tamniji buttonreg'>Registriraj se</button>
                     <Link to={"/login"}>
-                        <button className="gumbic upitnik">Već imaš profil?</button>{" "}
+                        <button className="gumbic upitnik buttonreg">Već imaš profil?</button>{" "}
                     </Link>
                 </div>
             </form>
