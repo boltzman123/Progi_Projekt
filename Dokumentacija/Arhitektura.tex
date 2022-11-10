@@ -2,15 +2,41 @@
 		
 		%\textbf{\textit{dio 1. revizije}}\\
 
-		\textit{ Potrebno je opisati stil arhitekture te identificirati: podsustave, preslikavanje na radnu platformu, spremišta podataka, mrežne protokole, globalni upravljački tok i sklopovsko-programske zahtjeve. Po točkama razraditi i popratiti odgovarajućim skicama:}
-	\begin{itemize}
-		\item 	\textit{izbor arhitekture temeljem principa oblikovanja pokazanih na predavanjima (objasniti zašto ste baš odabrali takvu arhitekturu)}
-		\item 	\textit{organizaciju sustava s najviše razine apstrakcije (npr. klijent-poslužitelj, baza podataka, datotečni sustav, grafičko sučelje)}
-		\item 	\textit{organizaciju aplikacije (npr. slojevi frontend i backend, MVC arhitektura) }		
-	\end{itemize}
+		%\textit{ Potrebno je opisati stil arhitekture te identificirati: podsustave, preslikavanje na radnu platformu, spremišta podataka, mrežne protokole, globalni upravljački tok i sklopovsko-programske zahtjeve. Po točkama razraditi i popratiti odgovarajućim skicama:}
+	%\begin{itemize}
+		%\item 	\textit{izbor arhitekture temeljem principa oblikovanja pokazanih na predavanjima (objasniti zašto ste baš odabrali takvu arhitekturu)}
+		%\item 	\textit{organizaciju sustava s najviše razine apstrakcije (npr. klijent-poslužitelj, baza podataka, datotečni sustav, grafičko sučelje)}
+		%\item 	\textit{organizaciju aplikacije (npr. slojevi frontend i backend, MVC arhitektura) }		
+	%\end{itemize}
 				
-		\eject 
+		Arhitektura naše aplikacije na najvišoj razni apstrakcije može se podijeliti na nekoliko zasebnih podsustava:
+		\begin{itemize}
+			\item Web poslužitelj (Frontend)
+			\item Web aplikacija (Backend)
+			\item Baza podataka
+		\end{itemize}
 
+		\begin{figure}[H]
+			\includegraphics[width=\textwidth,height=0.4\textheight]{slike/Arhitektura.png}
+			\centering
+			\caption{Arhitektura sustava}
+			\label{fig:Arhitektura}
+		\end{figure}
+
+		Općenito govoreći, web poslužitelj tj. frontend zadužen je za prikaz stranice korisniku i omogućavanje rada s istom. S druge strane, web aplikacija zadužena je za primjenu poslovne logike i interakciju s bazom. U ovom pogledu, web aplikacija služi kao spona između korisničkog sučelja i baze podataka koja pritom obavlja sve akcije neprikladne za izvođenje na klijentovom računalu.\\[2pt]
+
+		Korisnik koristeći web preglednik pristupa našoj aplikaciji slanjem HTTP zahtjeva web poslužitelju. Web poslužitelj u odgovoru šalje sve potrebne podatke za prikaz korisničkog sučelja - naše stranice.
+		Kada korisniku treba poslužiti neki sadržaj koji nije pohranjen kod web poslužitelja (npr. aktivne donacije, podatci o korisniku i oglasima), poslužitelj web aplikaciji šalje HTTP zahtjev - npr. GET zahtjev s ciljem dohvata podataka o djeci korisnika.
+		Komunikacija između web poslužitelja i web aplikacije odvija se po REST načelima.\\[2pt]
+
+		Web aplikacija potrebna je za primjenu poslovne logike, dohvat i izmjenu podataka te odgovaranje na zahtjeve pristigle od strane web poslužitelja.
+		Baza podataka služi za pohranu svih potrebnih podataka (npr. podataka o registriranim korisnicima, oglasima i predmetima). Pri radu naše aplikacije, s bazom podataka komunicira isključivo web aplikacija tj. backend - ako web poslužitelju trebaju određeni podaci, poslat će zahtjev web aplikaciji te u idealnom slučaju u odgovoru od web aplikacije dobiti tražene podatke.\\[2pt]
+
+		Web poslužitelj tj. frontend izrađen je koristeći programski jezik Javascript zajedno s "markup" jezikom HTML, CSS-om i radnim okvirom React.
+		Web aplikacija tj. backend izrađen je koristeći programski jezik Java zajedno s radnim okvirom Java Spring Boot. Za komunikaciju s bazom korišten je JPA - Java Persistence API.
+		Shema baze podataka izrađena je koristeći alat ERDplus, a sama baza podataka izrađena je koristeći sustav za upravljanje bazama PostgreSQL.
+
+		\eject
 		\section{Baza podataka}
 			
 		Za naš zadatak odabrali smo koristiti relacijsku bazu podataka kako bismo što učinkovitije i realističnije prikazali potreban sustav, 
