@@ -19,7 +19,7 @@
 		Među atributima relacije obvezno se nalazi primarni ključ, a ponekad i strani ključevi koji povezuju tu relaciju s ostalima.
 		Bazu koristimo za pohranu, izmjenu i dohvat potrebnih podataka.
 
-		\vspace{5pt}
+		\vspace{15pt}
 
 		Baza podataka naše aplikacije sastoji se od sljedećih relacija:
 		\begin{packed_item}
@@ -35,12 +35,14 @@
 		\end{packed_item}
 			
 		%\textit{Potrebno je opisati koju vrstu i implementaciju baze podataka ste odabrali, glavne komponente od kojih se sastoji i slično.}
-		
+			\eject
 			\subsection{Opis tablica}
 			
-
+				\textit{Primarni ključevi relacija označeni su zelenom bojom, a strani ključevi plavom bojom. }
 				%\textit{Svaku tablicu je potrebno opisati po zadanom predlošku. Lijevo se nalazi točno ime varijable u bazi podataka, u sredini se nalazi tip podataka, a desno se nalazi opis varijable. Svjetlozelenom bojom označite primarni ključ. Svjetlo plavom označite strani ključ}
-
+				\newline
+				\newline
+				Relacija \textbf{User} služi za pohranu podataka o registriranome korisniku aplikacije. Sadrži atribute: email, userName, userSurname, password, userLocation, isAccountVerified i canDonate. Relacija je povezana s relacijom Child, relacijom Donation i relacijom donatedToUser.
 				\begin{longtblr}[
 					label=none,
 					entry=none
@@ -58,7 +60,8 @@
 					isAccountVerified & BOOLEAN & Oznaka je li korisnik verificiran \\ \hline
 					canDonate & BOOLEAN & Oznaka može li korisnik donirati \\ \hline
 				\end{longtblr}
-				
+				\eject
+				Relacija \textbf{Child} služi za pohranu podataka o djetetu registriranog korisnika aplikacije. Sadrži atribute: email, childId, childName, childSex, childAge i predictedBirthDate. Relacija je povezana s relacijom User, relacijom isInCategory i relacijom isInSubcategory.
 				\begin{longtblr}[
 					label=none,
 					entry=none
@@ -76,6 +79,7 @@
 					predictedBirthDate & DATE & Predviđeni datum rođenja djeteta \\ \hline
 				\end{longtblr}
 
+				Relacija \textbf{Category} služi za pohranu podataka o određenoj kategoriji. Sadrži atribut: categoryName. Relacija je povezana s relacijom isInCategory, relacijom Subcategory i relacijom Item.
 				\begin{longtblr}[
 					label=none,
 					entry=none
@@ -88,6 +92,7 @@
 					\SetCell{LightGreen} categoryName & VARCHAR	& Ime kategorije  	\\ \hline
 				\end{longtblr}
 
+				Relacija \textbf{Subcategory} služi za pohranu podataka o određenoj potkategoriji. Sadrži atribute: subcategoryName, itemDuration i categoryName. Relacija je povezana s relacijom isInSubcategory, relacijom Category i relacijom Item.
 				\begin{longtblr}[
 					label=none,
 					entry=none
@@ -102,6 +107,7 @@
 					\SetCell{LightBlue} categoryName & VARCHAR & Ime roditeljske kategorije \\ \hline
 				\end{longtblr}
 
+				Relacija \textbf{isInCategory} nastala je iz veze N:N između relacija Child i Category i služi za povezivanje istih. Sadrži atribute: childId, email i categoryName. Relacija je povezana s relacijom Child i relacijom Category.
 				\begin{longtblr}[
 					label=none,
 					entry=none
@@ -116,6 +122,7 @@
 					\SetCell{LightGreen} categoryName & VARCHAR & Ime kategorije označene za dijete - također drugi strani ključ \\ \hline
 				\end{longtblr}
 
+				Relacija \textbf{isInSubcategory} nastala je iz veze N:N između relacija Child i Subcategory i služi za povezivanje istih. Sadrži atribute: childId, email i subcategoryName. Relacija je povezana s relacijom Child i relacijom Subcategory.
 				\begin{longtblr}[
 					label=none,
 					entry=none
@@ -129,7 +136,8 @@
 					\SetCell{LightGreen} email & VARCHAR & Email adresa roditelja - također dio prvog stranog ključa \\ \hline
 					\SetCell{LightGreen} subcategoryName & VARCHAR & Ime potkategorije označene za dijete - također drugi strani ključ \\ \hline
 				\end{longtblr}
-
+				\eject
+				Relacija \textbf{Item} služi za pohranu podataka o predmetu za donaciju. Sadrži atribute: id, productName, itemState, productionYear, productionBrand, forAge, forSex, categoryName i subcategoryName. Relacija je povezana s relacijom Category, relacijom Subcategory i relacijom Donation.
 				\begin{longtblr}[
 					label=none,
 					entry=none
@@ -151,7 +159,8 @@
 				\end{longtblr}
 
 				\eject
-
+				
+				Relacija \textbf{Donation} služi za pohranu podataka o donaciji. Sadrži atribute: idDonation, donationName, dateOfPublication, dateOfClosing, isValid, isActive, pictureUrl, handoverLocation, email i id. Relacija je povezana s relacijom Item, relacijom User i relacijom donatedToUser.
 				\begin{longtblr}[
 					label=none,
 					entry=none
@@ -173,6 +182,7 @@
 					\SetCell{LightBlue} id & INT & Generirani id pripadajućeg predmeta \\ \hline
 				\end{longtblr}
 
+				Relacija \textbf{donatedToUser} nastala je iz veze N:N između relacija User i Donation i služi za povezivanje istih. Sadrži atribute: email i idDonation. Relacija je povezana s relacijom User i relacijom Donation.
 				\begin{longtblr}[
 					label=none,
 					entry=none
@@ -198,7 +208,7 @@
 				\begin{figure}[H]
 					\includegraphics[width=\textwidth,height=0.7\textheight]{dijagrami/RelDijagram.png}
 					\centering
-					\caption{ER dijagram - aplikacija Djeca za djecu}
+					\caption{Relacijski dijagram - aplikacija Djeca za djecu}
 					\label{fig:RelDijagram}
 				\end{figure}
 			\eject
@@ -206,39 +216,39 @@
 			
 		\section{Dijagram razreda}
 		
-			\textit{Potrebno je priložiti dijagram razreda s pripadajućim opisom. Zbog preglednosti je moguće dijagram razlomiti na više njih, ali moraju biti grupirani prema sličnim razinama apstrakcije i srodnim funkcionalnostima.}\\
+			%\textit{Potrebno je priložiti dijagram razreda s pripadajućim opisom. Zbog preglednosti je moguće dijagram razlomiti na više njih, ali moraju biti grupirani prema sličnim razinama apstrakcije i srodnim funkcionalnostima.}\\
 			
 			%\textbf{\textit{dio 1. revizije}}\\
 			
-			\textit{Prilikom prve predaje projekta, potrebno je priložiti potpuno razrađen dijagram razreda vezan uz \textbf{generičku funkcionalnost} sustava. Ostale funkcionalnosti trebaju biti idejno razrađene u dijagramu sa sljedećim komponentama: nazivi razreda, nazivi metoda i vrste pristupa metodama (npr. javni, zaštićeni), nazivi atributa razreda, veze i odnosi između razreda.}\\
+			%\textit{Prilikom prve predaje projekta, potrebno je priložiti potpuno razrađen dijagram razreda vezan uz \textbf{generičku funkcionalnost} sustava. Ostale funkcionalnosti trebaju biti idejno razrađene u dijagramu sa sljedećim komponentama: nazivi razreda, nazivi metoda i vrste pristupa metodama (npr. javni, zaštićeni), nazivi atributa razreda, veze i odnosi između razreda.}\\
 			
 			%\textbf{\textit{dio 2. revizije}}\\			
 			
-			\textit{Prilikom druge predaje projekta dijagram razreda i opisi moraju odgovarati stvarnom stanju implementacije}
+			%\textit{Prilikom druge predaje projekta dijagram razreda i opisi moraju odgovarati stvarnom stanju implementacije}
 			
 			
 			
 			\eject
 		
-		\section{Dijagram stanja}
+		%\section{Dijagram stanja}
 			
 			
 			%\textbf{\textit{dio 2. revizije}}\\
 			
-			\textit{Potrebno je priložiti dijagram stanja i opisati ga. Dovoljan je jedan dijagram stanja koji prikazuje \textbf{značajan dio funkcionalnosti} sustava. Na primjer, stanja korisničkog sučelja i tijek korištenja neke ključne funkcionalnosti jesu značajan dio sustava, a registracija i prijava nisu. }
+			%\textit{Potrebno je priložiti dijagram stanja i opisati ga. Dovoljan je jedan dijagram stanja koji prikazuje \textbf{značajan dio funkcionalnosti} sustava. Na primjer, stanja korisničkog sučelja i tijek korištenja neke ključne funkcionalnosti jesu značajan dio sustava, a registracija i prijava nisu. }
 			
 			
-			\eject 
+			%\eject 
 		
-		\section{Dijagram aktivnosti}
+		%\section{Dijagram aktivnosti}
 			
 			%\textbf{\textit{dio 2. revizije}}\\
 			
-			 \textit{Potrebno je priložiti dijagram aktivnosti s pripadajućim opisom. Dijagram aktivnosti treba prikazivati značajan dio sustava.}
+			 %\textit{Potrebno je priložiti dijagram aktivnosti s pripadajućim opisom. Dijagram aktivnosti treba prikazivati značajan dio sustava.}
 			
-			\eject
-		\section{Dijagram komponenti}
+			%\eject
+		%\section{Dijagram komponenti}
 		
 			%\textbf{\textit{dio 2. revizije}}\\
 		
-			 \textit{Potrebno je priložiti dijagram komponenti s pripadajućim opisom. Dijagram komponenti treba prikazivati strukturu cijele aplikacije.}
+			% \textit{Potrebno je priložiti dijagram komponenti s pripadajućim opisom. Dijagram komponenti treba prikazivati strukturu cijele aplikacije.}

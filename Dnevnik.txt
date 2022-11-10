@@ -51,3 +51,42 @@
     -Trajanje sastanka: 30 min
     -Teme sastanka:
         -podjela posla na izradu routinga, izgleda, određenih komponenti i spajanja s backendom
+
+7. sastanak
+    -Datum: 3. studenoga 2022
+    -Prisustvovali: svi članovi
+    -Trajanje sastanka: 30 min
+    -Teme sastanka:
+        -pregled napravljene dokumentacije s asistenticom
+        -savjeti oko potrebnih promjena dokumentacije
+        -razgovor o implementaciji konkretnih stvari na frontendu i backendu
+
+8. sastanak
+    -Datum: 5. studenoga 2022
+    -Prisustvovali: K.Kijac, D.Jambrović
+    -Trajanje sastanka: 30 min
+    -Teme sastanka:
+        -pregled prve verzije dokumentacije
+        -podjela posla oko finalnih promjena prve verzije dokumentacije
+
+9. sastanak
+    -Datum: 8. studenoga 2022
+    -Prisustvovali: D.Kiramarios, K.Orešković, S.Barac, D.Kovačević
+    -Trajanje sastanka: 3h
+    -Teme sastanka:
+        -spajanje frontenda i backenda (integracija API poziva)
+
+10. sastanak
+    -Datum: 9. studenoga 2022
+    -Prisustvovali: D.Kiramarios, K.Tomičić, S.Barac
+    -Trajanje sastanka: 30 min
+    -Teme sastanka: 
+        -daljnji planovi oko podjele posla na frontendu
+        -priprema za deploy prve inačice
+
+11. sastanak
+    -Datum: 10. studenoga 2022
+    -Prisustvovali: K.Orešković, D.Jambrović
+    -Trajanje sastanka: 30 min
+    -Teme sastanka:
+        -pregled i diskusija dijagrama razreda
