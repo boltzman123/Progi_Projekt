@@ -7,16 +7,14 @@ import RegistracijaForm from "../components/RegistracijaForm";
 function Registracija(){
     return (
         <React.Fragment>
-            <div className="content">
-                <div className="gallery">
-                    <div className="d1">
-                        <div className="title">Postani dio<br/>donatorske zajednice</div>
-                        <div className="buttons">
-                            <RegistracijaForm/>
-                        </div>
+            <div className="register contentRegister">
+                <div className="galleryRegister">
+                    <div className="d1Register">
+                        <img src={MainImage} className="imgRegister"></img>
                     </div>
-                    <div className="d2">
-                        <img src={MainImage} className="img"></img>
+                    <div className="d2Register">
+                        <div className="titleRegister">Postani dio<br/>donatorske zajednice</div>
+                        <RegistracijaForm/>
                     </div>
                 </div>
                 <Footer></Footer>

@@ -3,7 +3,6 @@ import { BrowserRouter, Routes, Route, useState } from "react-router-dom";
 import Home from "./pages/Home"
 import Login from "./pages/Login"
 import Registracija from './pages/Registracija';
-// import Registracija from "./pages/Registracija"
 
 function App() {
 
