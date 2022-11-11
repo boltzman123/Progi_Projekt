@@ -6,6 +6,7 @@ import oop.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
@@ -42,15 +44,21 @@ public class UsersController {
         if(user.getPassword().equals(loginForm.getPassword())){
             return ResponseEntity.created(URI.create("/users/" + user.getEmail())).body(user);
         } else{
-            throw new UsernameNotFoundException("Email or password is wrong");
+            return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
         }
     }
 
     @PostMapping("")
     //@Secured("ROLE_ADMIN")
     public ResponseEntity<Users> createUser(@RequestBody Users user){
-        Users saved = userService.createUser(user);
-        return ResponseEntity.created(URI.create("/users/" + saved.getEmail())).body(saved);
+        Optional<Users> user1 = userService.findByEmail(user.getEmail());
+        if(user1.isPresent()){
+            throw new IllegalArgumentException("User already exists");
+        } else{
+            Users saved = userService.createUser(user);
+            return ResponseEntity.created(URI.create("/users/" + saved.getEmail())).body(saved);
+        }
+
     }
 
     @PutMapping("/{email}")
