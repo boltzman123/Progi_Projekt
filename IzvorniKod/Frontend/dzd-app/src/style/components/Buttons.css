@@ -33,7 +33,7 @@ opacity: 0.8;
 /*mobitel*/
 @media only screen and (max-width: 449px) {
     .svijetliji {
-        width:50%;
+        width:80%;
     }
     .upitnik {
         width: 80%;
