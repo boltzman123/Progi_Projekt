@@ -14,7 +14,7 @@ const { API_BASE_URL } = process.env;
 app.use(
     "/api",
     createProxyMiddleware({
-        target: API_BASE_URL,
+        target: "http://localhost:8080/",
         changeOrigin: true
     })
 );
