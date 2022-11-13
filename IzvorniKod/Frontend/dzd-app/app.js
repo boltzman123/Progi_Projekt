@@ -14,8 +14,9 @@ const { API_BASE_URL } = process.env;
 app.use(
     "/api",
     createProxyMiddleware({
-        target: API_BASE_URL,
-        changeOrigin: true,
+        //OVO NEBI TREBALO BITI ZAKOMENTIRANO; ALI TESTIRAM
+        // target: API_BASE_URL,
+        changeOrigin: true
     })
 );
 
