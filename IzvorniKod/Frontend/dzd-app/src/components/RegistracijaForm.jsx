@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from "axios";
+import { useNavigate } from 'react-router-dom';
 
 import "../style/components/RegistracijaForm.css";
 import "../style/components/Buttons.css";
@@ -14,6 +15,8 @@ const RegistracijaForm = () => {
     const [mjesto, setMjesto] = useState('');
     const [email, setEmail] = useState('');
     const [pass, setPass] = useState('');
+
+    const navigate=useNavigate();
 
     const onSubmit = (e) =>{
         e.preventDefault();
