@@ -123,7 +123,7 @@
 							\item Korisnik unosi potrebne podatke
 							\item Sustav validira unesene podatke
 							\item Korisnik potvrđuje unos podataka
-							\item Sustav na mail adresu korisnika šalje potvrdu o uspješnoj registraciji
+							\item Sustav ažurira podatke u bazi i na mail adresu korisnika šalje potvrdu o uspješnoj registraciji
 						\end{packed_enum}
 						
 						\item  \textbf{Opis mogućih odstupanja:}
@@ -135,12 +135,22 @@
 							\item[] \begin{packed_enum}
 								\item Sustav upozorava korisika o neispravnom formatu podataka - scenarij nastavlja korakom 3 
 							\end{packed_enum}	
-							\item[6.a] Sustav utvrđuje da već postoji korisnik sa istom mail adresom
+							\item[6.a] Sustav utvrđuje da unešeni podaci nisu ispravni
+							\item[] \begin{packed_enum}
+								\item Sustav upozorava korisnika o pogrešnom unosu podataka - scenarij nastavlja korakom 3 
+							\end{packed_enum}
+							\item[6.b] Sustav utvrđuje da već postoji korisnik sa istom mail adresom
 							\item[] \begin{packed_enum}
 								\item Sustav upozorava korisnika o zauzetoj mail adresi - scenarij nastavlja korakom 3 
+							\end{packed_enum}
+							\item[6.c] Sustav ne uspije ažurirati podatke u bazi
+							\item[] \begin{packed_enum}
+								\item Sustav upozorava korisnika o neuspješnoj pohrani podataka - scenarij nastavlja korakom 3
 							\end{packed_enum}					
 						\end{packed_item}
 					\end{packed_item}
+
+					\eject
 
 					\noindent \underbar{\textbf{UC2 - Prijava u sustav}}
 					\begin{packed_item}
@@ -149,8 +159,6 @@
 						\item  \textbf{Cilj:} Pristup početnoj stranici
 						\item  \textbf{Sudionici:} Baza podataka
 						\item  \textbf{Preduvjet:} -
-						
-						\eject
 
 						\item  \textbf{Opis osnovnog tijeka:}
 						
@@ -160,7 +168,7 @@
 							\item Korisnik unosi potrebne podatke
 							\item Sustav validira unesene podatke
 							\item Korisnik potvrđuje unos podataka
-							\item Sustav korisnika preusmjeri na početnu stranicu
+							\item Sustav provjerava podatke u bazi i preusmjerava korisnika na početnu stranicu
 						\end{packed_enum}
 
 						\item  \textbf{Opis mogućih odstupanja:}
@@ -175,6 +183,10 @@
 							\item[6.a] Sustav utvrđuje da unešeni podaci nisu ispravni
 							\item[] \begin{packed_enum}
 								\item Sustav upozorava korisnika o pogrešnom unosu podataka - scenarij nastavlja korakom 3 
+							\end{packed_enum}
+							\item[6.b] Sustav ne uspije ažurirati podatke u bazi
+							\item[] \begin{packed_enum}
+								\item Sustav upozorava korisnika o neuspješnoj provjeri podataka - scenarij nastavlja korakom 3
 							\end{packed_enum}					
 						\end{packed_item}
 					\end{packed_item}
@@ -195,6 +207,8 @@
 							\item Sustav odjavljuje korisnika
 						\end{packed_enum}
 
+						\eject
+
 						\item  \textbf{Opis mogućih odstupanja:}
 
 						\item[] \begin{packed_item}
@@ -211,8 +225,6 @@
 							\end{packed_enum}						
 						\end{packed_item}
 					\end{packed_item}
-
-					\eject
 
 					\noindent \underbar{\textbf{UC4 - Pregled osobnih podataka}}
 					\begin{packed_item}
@@ -273,9 +285,13 @@
 							\item[] \begin{packed_enum}
 								\item Sustav upozorava korisnika o neispravnom formatu podataka - scenarij nastavlja korakom 3 
 							\end{packed_enum}	
-							\item[6.a] Sustav ne uspije ažurirati podatke u bazi
+							\item[6.a] Sustav utvrđuje da unešeni podaci nisu ispravni
 							\item[] \begin{packed_enum}
-								\item Sustav upozorava korisnika o neuspješnoj pohrani podataka - scenarij nastavlja korakom 5
+								\item Sustav upozorava korisnika o pogrešnom unosu podataka - scenarij nastavlja korakom 3 
+							\end{packed_enum}
+							\item[6.b] Sustav ne uspije ažurirati podatke u bazi
+							\item[] \begin{packed_enum}
+								\item Sustav upozorava korisnika o neuspješnoj pohrani podataka - scenarij nastavlja korakom 3
 							\end{packed_enum}					
 						\end{packed_item}
 					\end{packed_item}	
@@ -319,7 +335,7 @@
 						\item \textbf{Glavni sudionik: }Korisnik
 						\item  \textbf{Cilj:} Pregled podataka o djetetu korisnika
 						\item  \textbf{Sudionici:} Baza podataka
-						\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav
+						\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav i u sustavu postoje podaci o barem jednom korisnikovom djetetu
 						\eject
 						\item  \textbf{Opis osnovnog tijeka:}
 						
@@ -350,7 +366,7 @@
 						\item \textbf{Glavni sudionik: }Korisnik
 						\item  \textbf{Cilj:} Promjena podataka o djetetu korisnika
 						\item  \textbf{Sudionici:} Baza podataka
-						\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav
+						\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav i u sustavu postoje podaci o barem jednom korisnikovom djetetu
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
@@ -362,6 +378,8 @@
 							\item Sustav ažurira podatke u bazi i preusmjerava korisnika na početnu stranicu
 						\end{packed_enum}
 
+						\eject
+
 						\item  \textbf{Opis mogućih odstupanja:}
 
 						\item[] \begin{packed_item}
@@ -371,14 +389,16 @@
 							\item[] \begin{packed_enum}
 								\item Sustav upozorava korisnika o neispravnom formatu podataka - scenarij nastavlja korakom 3 
 							\end{packed_enum}	
-							\item[6.a] Sustav ne uspije ažurirati podatke u bazi
+							\item[6.a] Sustav utvrđuje da unešeni podaci nisu ispravni
 							\item[] \begin{packed_enum}
-								\item Sustav upozorava korisnika o neuspješnoj pohrani podataka - scenarij nastavlja korakom 5
+								\item Sustav upozorava korisnika o pogrešnom unosu podataka - scenarij nastavlja korakom 3 
+							\end{packed_enum}
+							\item[6.b] Sustav ne uspije ažurirati podatke u bazi
+							\item[] \begin{packed_enum}
+								\item Sustav upozorava korisnika o neuspješnoj pohrani podataka - scenarij nastavlja korakom 3
 							\end{packed_enum}					
 						\end{packed_item}
 					\end{packed_item}
-					
-					\eject
 
 					\noindent \underbar{\textbf{UC9 - Dodavanje podataka o djeci}}
 					\begin{packed_item}
@@ -395,8 +415,10 @@
 							\item Korisnik unosi potrebne podatke
 							\item Sustav validira unesene podatke
 							\item Korisnik potvrđuje unos podataka
-							\item Sustav korisnika preusmjeri na početnu stranicu
+							\item Sustav ažurira podatke u bazi i preusmjerava korisnika na početnu stranicu
 						\end{packed_enum}
+
+						\eject
 
 						\item  \textbf{Opis mogućih odstupanja:}
 
@@ -410,6 +432,10 @@
 							\item[6.a] Sustav utvrđuje da unešeni podaci nisu ispravni
 							\item[] \begin{packed_enum}
 								\item Sustav upozorava korisnika o pogrešnom unosu podataka - scenarij nastavlja korakom 3 
+							\end{packed_enum}
+							\item[6.b] Sustav ne uspije ažurirati podatke u bazi
+							\item[] \begin{packed_enum}
+								\item Sustav upozorava korisnika o neuspješnoj pohrani podataka - scenarij nastavlja korakom 3
 							\end{packed_enum}					
 						\end{packed_item}
 					\end{packed_item}	
@@ -420,7 +446,8 @@
 						\item \textbf{Glavni sudionik: }Korisnik
 						\item  \textbf{Cilj:} Brisanje podataka o djetetu korisnika
 						\item  \textbf{Sudionici:} Baza podataka
-						\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav
+						\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav i u sustavu postoje podaci o barem jednom korisnikovom djetetu
+
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
@@ -429,8 +456,6 @@
 							\item Korisnik potvrđuje da želi obrisati podatke o odabranome djetetu
 							\item Sustav briše podatke o odabranome djetetu
 						\end{packed_enum}
-
-						\eject
 
 						\item  \textbf{Opis mogućih odstupanja:}
 
@@ -448,6 +473,8 @@
 							\end{packed_enum}					
 						\end{packed_item}
 					\end{packed_item}	
+
+					\eject
 
 					\noindent \underbar{\textbf{UC11 - Pregled aktivnih oglasa}}
 					\begin{packed_item}
@@ -496,7 +523,6 @@
 						\item  \textbf{Sudionici:} Baza podataka
 						\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav
 						
-						\eject
 						
 						\item  \textbf{Opis osnovnog tijeka:}
 						
@@ -505,6 +531,8 @@
 							\item Sustav prikazuje preporučene oglase
 							\item Korisnik pregledava oglase
 						\end{packed_enum}
+
+						\eject
 
 						\item  \textbf{Opis mogućih odstupanja:}
 
@@ -541,7 +569,7 @@
 							\item Sustav prikazuje oglase koji odgovaraju odabranim kategorijama i/ili potkategorijama
 							\item Korisnik pregledava oglase
 						\end{packed_enum}
-
+						
 						\item  \textbf{Opis mogućih odstupanja:}
 
 						\item[] \begin{packed_item}
@@ -568,13 +596,15 @@
 						\end{packed_item}
 					\end{packed_item}
 
+					\eject
+
 					\noindent \underbar{\textbf{UC14 - Pregled detalja o oglasu}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Korisnik ili administrator
 						\item  \textbf{Cilj:} Pregled detalja određene donacije
 						\item  \textbf{Sudionici:} Baza podataka
-						\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav
+						\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav i u sustavu postoje podaci o barem jednom oglasu
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
@@ -608,6 +638,7 @@
 						\item  \textbf{Cilj:} Podsjećanje donatora o mogućnosti doniranja primljenog predmeta
 						\item  \textbf{Sudionici:} Baza podataka
 						\item  \textbf{Preduvjet:} Donator je prijavljen u sustav i ima primljene donacije kojima je isteklo standardno vrijeme korištenja
+
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
@@ -644,7 +675,7 @@
 							\item Donator unosi potrebne podatke
 							\item Sustav validira unesene podatke
 							\item Donator potvrđuje unos podataka
-							\item Sustav donatora preusmjeri na početnu stranicu
+							\item Sustav ažurira podatke u bazi i preusmjerava donatora na početnu stranicu
 						\end{packed_enum}
 
 						\item  \textbf{Opis mogućih odstupanja:}
@@ -659,21 +690,30 @@
 							\item[6.a] Sustav utvrđuje da unešeni podaci nisu ispravni
 							\item[] \begin{packed_enum}
 								\item Sustav upozorava donatora o pogrešnom unosu podataka - scenarij nastavlja korakom 3
-							\end{packed_enum}					
+							\end{packed_enum}	
+							\item[6.b] Sustav ne uspije ažurirati podatke u bazi
+							\item[] \begin{packed_enum}
+								\item Sustav upozorava donatora o neuspješnoj pohrani podataka - scenarij nastavlja korakom 3
+							\end{packed_enum}				
 						\end{packed_item}
-					\end{packed_item}
-					
+					\end{packed_item}				
+
 					\noindent \underbar{\textbf{UC17 - Uređivanje oglasa}}
 					\begin{packed_item}
 	
 						\item \textbf{Glavni sudionik: }Donator
 						\item  \textbf{Cilj:} Izmjena podataka o donaciji
 						\item  \textbf{Sudionici:} Baza podataka
-						\item  \textbf{Preduvjet:} Donator je prijavljen u sustav
+						\item  \textbf{Preduvjet:} Donator je prijavljen u sustav i u sustavu postoje podaci o barem jednom oglasu koji korisnik treba doraditi
+						
+						\eject
+						
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
-							\item Donator je odabrao opciju za uređivanje oglasa
+							\item Donator odabire oglas koji želi uređivati
+							\item Sustav prikazuje oglas
+							\item Donator odabere opciju za uređivanje oglasa
 							\item Sustav prikazuje podatke o donaciji
 							\item Donator mijenja podatke o donaciji
 							\item Sustav validira unesene podatke
@@ -681,18 +721,30 @@
 							\item Sustav ažurira podatke u bazi i preusmjerava donatora na početnu stranicu
 						\end{packed_enum}
 
-						\eject
-
 						\item  \textbf{Opis mogućih odstupanja:}
 
 						\item[] \begin{packed_item}
 							\item[1.a] Donator ne odabire navedenu akciju - kraj scenarija
-							\item[3.a] Donator odustaje od unosa promjena - kraj scenarija
-							\item[4.a] Donator je unio podatake u neispravnom formatu
+							\item[2.a] Baza ne uspije poslati podatke o izabranom oglasu
 							\item[] \begin{packed_enum}
-								\item Sustav upozorava donatora o neispravnom formatu podataka - scenarij nastavlja korakom 3
+								
+								\item Donator dobiva obavijest o neuspješnom dohvatu podataka
+								\item
+									\begin{packed_enum}
+										\item Donator osvježava stranicu - scenarij nastavlja korakom 2
+										\item Donator odustaje od uređivanja oglasa - kraj scenarija
+									\end{packed_enum}
+							\end{packed_enum}
+							\item[5.a] Donator odustaje od unosa promjena - kraj scenarija
+							\item[6.a] Donator je unio podatake u neispravnom formatu
+							\item[] \begin{packed_enum}
+								\item Sustav upozorava donatora o neispravnom formatu podataka - scenarij nastavlja korakom 5
 							\end{packed_enum}	
-							\item[6.a] Sustav ne uspije ažurirati podatke u bazi
+							\item[8.a] Sustav utvrđuje da unešeni podaci nisu ispravni
+							\item[] \begin{packed_enum}
+								\item Sustav upozorava donatora o pogrešnom unosu podataka - scenarij nastavlja korakom 5
+							\end{packed_enum}
+							\item[8.b] Sustav ne uspije ažurirati podatke u bazi
 							\item[] \begin{packed_enum}
 								\item Sustav upozorava donatora o neuspješnoj pohrani podataka - scenarij nastavlja korakom 5 
 							\end{packed_enum}					
@@ -705,11 +757,16 @@
 						\item \textbf{Glavni sudionik: }Donator
 						\item  \textbf{Cilj:} Zatvaranje trenutno aktivnog oglasa
 						\item  \textbf{Sudionici:} Baza podataka
-						\item  \textbf{Preduvjet:} Donator je prijavljen u sustav
+						\item  \textbf{Preduvjet:} Donator je prijavljen u sustav i u sustavu postoje podaci o barem jednom aktivnom oglasu korisnika
+						
+						\eject
+
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
-							\item Donator je odabrao opciju za zatvaranje jednog od svojih aktivnih oglasa
+							\item Donator odabire oglas koji želi zatvoriti
+							\item Sustav prikazuje oglas
+							\item Donator odabere opciju za zatvaranje oglasa
 							\item Sustav pita donatora želi li sigurno zatvoriti odabrani oglas
 							\item Donator potvrđuje da želi zatvoriti oglas
 							\item Sustav ažurira podatke u bazi i preusmjerava donatora na početnu stranicu
@@ -719,10 +776,25 @@
 
 						\item[] \begin{packed_item}
 							\item[1.a] Donator ne odabire navedenu akciju - kraj scenarija
+							\item[2.a] Baza ne uspije poslati podatke o izabranom oglasu
+							\item[] \begin{packed_enum}
+								
+								\item Donator dobiva obavijest o neuspješnom dohvatu podataka
+								\item
+									\begin{packed_enum}
+										\item Donator osvježava stranicu - scenarij nastavlja korakom 2
+										\item Donator odustaje od zatvaranja oglasa - kraj scenarija
+									\end{packed_enum}
+							\end{packed_enum}
 							\item[3.a] Donator odustaje od zatvaranja odabranog oglasa
 							\item[4.a] Sustav ne uspije ažurirati podatke u bazi
 							\item[] \begin{packed_enum}
-								\item Sustav upozorava donatora o neuspješnoj pohrani podataka - scenarij nastavlja korakom 3
+								\item Sustav upozorava donatora o neuspješnoj pohrani podataka
+								\item
+									\begin{packed_enum}
+										\item Scenarij ponovno započinje
+										\item Donator odustaje od zatvaranja oglasa - kraj scenarija
+									\end{packed_enum}	
 							\end{packed_enum}					
 						\end{packed_item}
 					\end{packed_item}	
@@ -733,9 +805,7 @@
 						\item \textbf{Glavni sudionik: }Administrator
 						\item  \textbf{Cilj:} Dodjela dozvole za doniranje odabranome korisniku
 						\item  \textbf{Sudionici:} Baza podataka
-						\item  \textbf{Preduvjet:} Administrator je prijavljen u sustav
-						
-						\eject
+						\item  \textbf{Preduvjet:} Administrator je prijavljen u sustav i postoji barem jedan korisnik kojemu se može dodijeliti dozvola
 						
 						\item  \textbf{Opis osnovnog tijeka:}
 						
@@ -746,6 +816,8 @@
 							\item Sustav ažurira podatke u bazi i preusmjerava administratora na početnu stranicu
 						\end{packed_enum}
 
+						\eject
+						
 						\item  \textbf{Opis mogućih odstupanja:}
 
 						\item[] \begin{packed_item}
@@ -769,7 +841,8 @@
 						\item \textbf{Glavni sudionik: }Administrator
 						\item  \textbf{Cilj:} Uklanjanje dozvole za doniranje odabranome korisniku
 						\item  \textbf{Sudionici:} Baza podataka
-						\item  \textbf{Preduvjet:} Administrator je prijavljen u sustav
+						\item  \textbf{Preduvjet:} Administrator je prijavljen u sustav i postoji barem jedan korisnik kojemu se može ukloniti dozvola
+						
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
@@ -778,8 +851,6 @@
 							\item Administrator potvrđuje da želi ukloniti dozvolu
 							\item Sustav ažurira podatke u bazi i preusmjerava administratora na početnu stranicu
 						\end{packed_enum}
-
-						\eject
 
 						\item  \textbf{Opis mogućih odstupanja:}
 
@@ -798,6 +869,8 @@
 						\end{packed_item}
 					\end{packed_item}
 
+					\eject
+
 					\noindent \underbar{\textbf{UC21 - Pregled neobjavljenih oglasa}}
 					\begin{packed_item}
 	
@@ -812,6 +885,7 @@
 							\item Sustav prikazuje neobjavljene oglase
 							\item Administrator pregledava oglase
 						\end{packed_enum}
+
 						\item  \textbf{Opis mogućih odstupanja:}
 
 						\item[] \begin{packed_item}
@@ -844,7 +918,6 @@
 						\item  \textbf{Cilj:} Odobravanje i objava donacije
 						\item  \textbf{Sudionici:} Baza podataka
 						\item  \textbf{Preduvjet:} Administrator je prijavljen u sustav i barem jedan oglas čeka odobrenje
-						\eject
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
@@ -912,7 +985,7 @@
 								\item
 									\begin{packed_enum}
 										\item Administrator osvježava stranicu - scenarij nastavlja korakom 2
-										\item Administrator odustaje od odobravanja oglasa - kraj scenarija
+										\item Administrator odustaje od slanja oglasa na doradu - kraj scenarija
 									\end{packed_enum}	
 							\end{packed_enum}
 							\item[5.a]  Administrator odustaje od slanja navedenog oglasa na doradu
@@ -946,6 +1019,8 @@
 							\item Sustav ažurira podatke u bazi i preusmjerava administratora na početnu stranicu
 						\end{packed_enum}
 
+						\eject
+
 						\item  \textbf{Opis mogućih odstupanja:}
 
 						\item[] \begin{packed_item}
@@ -956,7 +1031,7 @@
 								\item
 									\begin{packed_enum}
 										\item Administrator osvježava stranicu - scenarij nastavlja korakom 2
-										\item Administrator odustaje od odobravanja oglasa - kraj scenarija
+										\item Administrator odustaje od odbijanja oglasa - kraj scenarija
 									\end{packed_enum}	
 							\end{packed_enum}
 							\item[5.a] Administrator odustaje od odbijanja navedenog oglasa
@@ -1001,9 +1076,15 @@
 							\item[6.a] Sustav utvrđuje da unešeni podaci nisu ispravni
 							\item[] \begin{packed_enum}
 								\item Sustav upozorava administratora o pogrešnom unosu podataka - scenarij nastavlja korakom 3
-							\end{packed_enum}					
+							\end{packed_enum}
+							\item[6.b] Sustav ne uspije ažurirati podatke u bazi
+							\item[] \begin{packed_enum}
+								\item Sustav upozorava administratora o neuspješnoj pohrani podataka - scenarij nastavlja korakom 3
+							\end{packed_enum}						
 						\end{packed_item}
 					\end{packed_item}
+
+					\eject
 
 					\noindent \underbar{\textbf{UC26 - Dodavanje potkategorija}}
 					\begin{packed_item}
@@ -1012,6 +1093,7 @@
 						\item  \textbf{Cilj:} Dodavanje nove potkategorije u sustav
 						\item  \textbf{Sudionici:} Baza podataka
 						\item  \textbf{Preduvjet:} Administrator je prijavljen u sustav
+						
 						\item  \textbf{Opis osnovnog tijeka:}
 						
 						\item[] \begin{packed_enum}
@@ -1021,9 +1103,7 @@
 							\item Sustav validira unesene podatke
 							\item Administrator potvrđuje unos podataka
 							\item Sustav administratora preusmjeri na početnu stranicu
-						\end{packed_enum}
-						
-						\eject
+						\end{packed_enum}			
 						
 						\item  \textbf{Opis mogućih odstupanja:}
 
@@ -1037,7 +1117,11 @@
 							\item[6.a] Sustav utvrđuje da unešeni podaci nisu ispravni
 							\item[] \begin{packed_enum}
 								\item Sustav upozorava administratora o pogrešnom unosu podataka - scenarij nastavlja korakom 3
-							\end{packed_enum}					
+							\end{packed_enum}	
+							\item[6.b] Sustav ne uspije ažurirati podatke u bazi
+							\item[] \begin{packed_enum}
+								\item Sustav upozorava administratora o neuspješnoj pohrani podataka - scenarij nastavlja korakom 3
+							\end{packed_enum}				
 						\end{packed_item}
 					\end{packed_item}
 
@@ -1055,6 +1139,9 @@
 							\item Sustav prikazuje sve korisnike
 							\item Administrator pregledava korisnike
 						\end{packed_enum}
+						
+						\eject
+
 						\item  \textbf{Opis mogućih odstupanja:}
 
 						\item[] \begin{packed_item}
@@ -1075,6 +1162,46 @@
 								
 								\item Administrator dobiva obavijest o nepostojanju korisnika
 								\item Administrator odustaje od pregleda korisnika - kraj scenarija
+							
+							\end{packed_enum}
+						\end{packed_item}	
+					\end{packed_item}
+
+					\noindent \underbar{\textbf{UC28 - Pregled vlastitih oglasa}}
+					\begin{packed_item}
+	
+						\item \textbf{Glavni sudionik: }Donator
+						\item  \textbf{Cilj:} Pregled vlastitih oglasa
+						\item  \textbf{Sudionici:} Baza podataka
+						\item  \textbf{Preduvjet:} Donator je prijavljen u sustav
+						\item  \textbf{Opis osnovnog tijeka:}
+						
+						\item[] \begin{packed_enum}
+							\item Donator je odabrao opciju za prikaz svojih oglasa
+							\item Sustav prikazuje sve donatorove oglase
+							\item Donator pregledava oglase
+						\end{packed_enum}
+
+						\item  \textbf{Opis mogućih odstupanja:}
+
+						\item[] \begin{packed_item}
+							\item[1.a] Donator ne odabire navedenu akciju - kraj scenarija
+							\item[2.a] Baza ne uspije poslati podatke o oglasima
+							\item[] \begin{packed_enum}
+								
+								\item Donator dobiva obavijest o neuspješnom dohvatu podataka o oglasima
+								\item
+									\begin{packed_enum}
+										\item Donator osvježava stranicu - scenarij nastavlja korakom 2
+										\item Donator odustaje od pregleda korisnika - kraj scenarija
+									\end{packed_enum}
+							
+							\end{packed_enum}	
+							\item[2.b] Ne postoji nijedan donatorov oglas
+							\item[] \begin{packed_enum}
+								
+								\item Donator dobiva obavijest o nepostojanju vlastitih oglasa
+								\item Donator odustaje od pregleda vlastitih oglasa - kraj scenarija
 							
 							\end{packed_enum}
 						\end{packed_item}	
