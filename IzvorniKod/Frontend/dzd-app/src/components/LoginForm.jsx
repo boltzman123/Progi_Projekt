@@ -31,7 +31,7 @@ export const LoginAll = () => {
           console.log(response.data);
           navigate('/base');
         })
-        .catch(console.log("Upisao si krivi username ili passwrod"));
+        .catch(err => console.log("Upisao si krivi username ili password /n" + err));
     }
 
 

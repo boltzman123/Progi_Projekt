@@ -31,7 +31,11 @@ const RegistracijaForm = () => {
                 email: email,
                 password: pass
           }
-        }).then((response) => console.log(response.data))
+        }).then((response) => {
+            console.log(response.data);
+            navigate('/base');
+          })
+          .catch(err => console.log(err));
     }
 
     return ( 
