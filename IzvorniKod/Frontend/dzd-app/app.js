@@ -14,7 +14,7 @@ const { API_BASE_URL } = process.env;
 app.use(
     "/api",
     createProxyMiddleware({
-        target: "http://localhost:8080/",
+        target: "https://backend-service-9ebb.onrender.com",
         changeOrigin: true
     })
 );
