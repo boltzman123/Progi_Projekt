@@ -46,8 +46,13 @@ const RegistracijaForm = () => {
             <form onSubmit={ onSubmit }>
                 <div className='frameReg'>
                     <input 
-                        value={ime} type="text" name="ime" id="ime" 
-                        placeholder="Pero" className='inputFrameReg'
+                        value={ime}
+                        type="text"
+                        name="ime" id="ime" 
+                        placeholder="Pero"
+                        className='inputFrameReg'
+                        minLength={3}
+                        required={true}
                         onChange={ (e) => setIme(e.target.value)}
                     />
                 </div>
@@ -55,6 +60,7 @@ const RegistracijaForm = () => {
                     <input 
                         value={prezime} type="text" name="prezime" id="prezime" 
                         placeholder="Perić" className='inputFrameReg'
+                        minLength={3} required={true}
                         onChange={ (e) => setPrezime(e.target.value)}
                     />
                 </div>
@@ -62,6 +68,7 @@ const RegistracijaForm = () => {
                     <input 
                         value={mjesto} type="text" name="mjesto" id="mjesto" 
                         placeholder="Ulica Perića, Perkovci" className='inputFrameReg'
+                        minLength={4} required={true}
                         onChange={ (e) => setMjesto(e.target.value)}
                     />
                 </div>
@@ -70,6 +77,7 @@ const RegistracijaForm = () => {
                     <input 
                         value={email} type="email" name="email" id="email" 
                         placeholder="peroperic@email.com" className='inputFrameReg'
+                        minLength={3} required={true}
                         onChange={ (e) => setEmail(e.target.value)}
                     />    
                 </div>
@@ -78,6 +86,7 @@ const RegistracijaForm = () => {
                     <input 
                         value={pass} type="password" name="pass" id="pass"  
                         className='inputFrameReg'
+                        minLength={3} required={true}
                         onChange={ (e) => setPass(e.target.value)}
                     />    
                 </div>
