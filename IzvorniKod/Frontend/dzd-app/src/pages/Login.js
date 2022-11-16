@@ -4,6 +4,8 @@ import Footer from "../components/Footer";
 import LoginForm from "../components/LoginForm";
 import "../style/pages/Login.css"
 import { Link } from "react-router-dom";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Login() {
   return (
@@ -22,6 +24,18 @@ function Login() {
         </div>
         <Footer />
       </div>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </React.Fragment>
   );
 }
