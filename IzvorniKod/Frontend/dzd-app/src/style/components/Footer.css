@@ -1,0 +1,23 @@
+@media only screen and (min-width: 450px) {
+  .footer {
+    width: 100%;
+    text-align: center;
+    background-color: rgba(244, 177, 131, 255);
+    color: white;
+    font-size: 30px;
+    font-weight: 400;
+    padding: 12px;
+  }
+}
+
+@media only screen and (max-width: 449px) {
+  .footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(244, 177, 131, 255);
+    color: white;
+    font-weight: 500;
+    font-size: 1.3em;
+  }
+}

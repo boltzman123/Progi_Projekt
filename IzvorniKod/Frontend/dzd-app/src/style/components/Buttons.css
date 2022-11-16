@@ -1,0 +1,41 @@
+.gumbic {
+    height: 65px;
+    width: 151px;
+    color: white;
+    font-weight: 600;
+    font-size: 23px;
+    border: none;
+    border-radius: 30px;
+    box-shadow: 3px 3px gray;
+    margin-right: 15px;
+    margin-left: 20px;
+    background-color: grey;
+    margin: 20px 20px;
+    text-align: center;
+    align-items: center;
+    
+}
+.tamniji{
+    background-color: rgba(229, 93, 17, 255);
+}
+
+.svijetliji{
+    background-color: rgba(244,177,131,255);
+    width: 161px;
+}
+
+.gumbic:hover {
+opacity: 0.8;
+}
+.upitnik {
+    width: 200px;
+}
+/*mobitel*/
+@media only screen and (max-width: 449px) {
+    .svijetliji {
+        width:80%;
+    }
+    .upitnik {
+        width: 80%;
+    }
+}
