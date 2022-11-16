@@ -6,6 +6,7 @@ import axios from "axios";
 import { FiMail } from "react-icons/fi";
 import { FiLock } from "react-icons/fi";
 import { Link, Navigate } from "react-router-dom";
+import {ToastContainer, toast} from 'react-toastify';
 
 export const LoginAll = () => {
   const [email, setEmail] = useState("");
@@ -31,7 +32,10 @@ export const LoginAll = () => {
           console.log(response.data);
           navigate('/base');
         })
-        .catch(err => console.log("Upisao si krivi username ili password /n" + err));
+        .catch(err => {
+          console.log("Krivi username ili password!");  
+          toast("Krivi username ili password!");
+        });
     }
 
 
