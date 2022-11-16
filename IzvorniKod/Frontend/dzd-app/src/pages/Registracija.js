@@ -3,6 +3,8 @@ import MainImage from "../style/images/registracija_img.png";
 import "../style/pages/Registracija.css";
 import Footer from "../components/Footer";
 import RegistracijaForm from "../components/RegistracijaForm";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Registracija(){
     return (
@@ -19,6 +21,18 @@ function Registracija(){
                 </div>
                 <Footer></Footer>
             </div>
+            <ToastContainer
+                position="top-center"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+            />
         </React.Fragment>
     );
 }

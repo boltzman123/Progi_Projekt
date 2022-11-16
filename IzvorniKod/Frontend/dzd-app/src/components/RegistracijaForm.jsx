@@ -8,6 +8,7 @@ import "../style/components/Buttons.css";
 import { FiMail } from "react-icons/fi";
 import { FiLock } from "react-icons/fi";
 import { Link } from "react-router-dom";
+import { toast } from 'react-toastify';
 
 const RegistracijaForm = () => {
     const [ime, setIme] = useState('');
@@ -38,7 +39,10 @@ const RegistracijaForm = () => {
             console.log(response.data);
             navigate('/base');
           })
-          .catch(err => console.log(err));
+          .catch(err => {
+            console.log(err)
+            toast.error("Već postoji korisnik sa tom email adresom")
+        });
     }
 
     return ( 
