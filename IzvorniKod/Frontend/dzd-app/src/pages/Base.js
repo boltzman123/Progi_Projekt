@@ -3,7 +3,7 @@ import "../style/pages/Home.css";
 import Footer from "../components/Footer";
 import Image from "../style/images/pic2.png";
 
-function Home() {
+function Base() {
   return (
     <React.Fragment>
       <div className="content">
@@ -22,4 +22,4 @@ function Home() {
     </React.Fragment>
   );
 }
-export default Home;
+export default Base;
