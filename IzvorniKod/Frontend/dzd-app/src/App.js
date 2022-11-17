@@ -4,6 +4,7 @@ import Home from "./pages/Home"
 import Login from "./pages/Login"
 import Registracija from './pages/Registracija'
 import Base from './pages/Base'
+import ProtectedRoute from './components/Protected'
 
 function App() {
 
@@ -13,7 +14,7 @@ function App() {
         <Route path={"/"} element={<Home />} />
         <Route path={"login"} element={<Login />} />
         <Route path={"registracija"} element={<Registracija/>} />
-        <Route path={"base"} element={<Base />} />
+        <Route path={"base"} element={<ProtectedRoute> <Base /> </ProtectedRoute>} />
     </Routes>
   </BrowserRouter>
   );
