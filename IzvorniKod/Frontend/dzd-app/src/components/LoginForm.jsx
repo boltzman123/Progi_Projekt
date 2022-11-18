@@ -30,6 +30,7 @@ export const LoginAll = () => {
           }
         }).then((response) => {
           console.log(response.data);
+          window.localStorage.setItem('user', JSON.stringify("korisnik"));
           navigate('/base');
         })
         .catch(err => {
