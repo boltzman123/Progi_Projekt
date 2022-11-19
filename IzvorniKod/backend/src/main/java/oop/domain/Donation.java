@@ -108,4 +108,5 @@ public class Donation {
     public void setHandoverLocation(String handoverLocation) {
         this.handoverLocation = handoverLocation;
     }
+
 }

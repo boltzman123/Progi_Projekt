@@ -21,6 +21,7 @@ public class Subcategory {
     @ManyToMany(mappedBy = "subcategory")
     private Set<Child> childrenSub = new HashSet<>();
     public Subcategory(){}
+
     public Subcategory(String subCategoryName, Category category, int itemDuration) {
         this.subcategoryName = subCategoryName;
         this.category = category;
@@ -56,5 +57,8 @@ public class Subcategory {
     }
     public Set<Child> getChildrenSub() {
         return childrenSub;
+    }
+    public void setChildrenSub(Set<Child> childrenSub) {
+        this.childrenSub = childrenSub;
     }
 }

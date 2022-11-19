@@ -2,13 +2,13 @@ package oop.rest;
 
 import oop.domain.Users;
 import oop.rest.classes.LoginForm;
+import oop.service.EmailSenderService;
 import oop.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,6 +22,13 @@ import java.util.Optional;
 public class UsersController {
     @Autowired
     private UsersService userService;
+
+    @Autowired
+    private EmailSenderService senderService;
+
+
+    @Autowired
+    ApplicationEventPublisher eventPublisher;
 
     @GetMapping("")
     //@Secured("ROLE_ADMIN")
@@ -55,10 +62,16 @@ public class UsersController {
         if(user1.isPresent()){
             throw new IllegalArgumentException("User already exists");
         } else{
+            System.out.println(user.getEmail()+" "+ user.getUserSurname());
             Users saved = userService.createUser(user);
-            return ResponseEntity.created(URI.create("/users/" + saved.getEmail())).body(saved);
-        }
+            String email = user.getEmail();
+            String subject = "Successful registration!";
+            senderService.sendEmail(email,
+                    subject, user.generateRegistrationMessage());
 
+            return ResponseEntity.created(URI.create("/users/" + saved.getEmail())).body(saved);
+
+        }
     }
 
     @PutMapping("/{email}")

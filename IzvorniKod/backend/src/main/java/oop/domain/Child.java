@@ -74,4 +74,11 @@ public class Child{
         return subcategory;
     }
 
+    public void setCategory(Set<Category> category) {
+        this.category = category;
+    }
+
+    public void setSubcategory(Set<Subcategory> subcategory) {
+        this.subcategory = subcategory;
+    }
 }

@@ -26,18 +26,12 @@ public class Users {
     public Set<Donation> getDonations() {
         return donations;
     }
-    /*private boolean accountVerified;
-    private String token;
-    @OneToMany(mappedBy = "user")
-    private Set<SecureToken> tokens;*/
 
-    /*public boolean isAccountVerified() {
-        return accountVerified;
+
+    public void setDonations(Set<Donation> donations) {
+        this.donations = donations;
     }
 
-    public void setAccountVerified(boolean accountVerified) {
-        this.accountVerified = accountVerified;
-    }*/
 
     public void setCanDonate(boolean canDonate) {
         this.canDonate = canDonate;
@@ -85,5 +79,15 @@ public class Users {
 
     public void setUserLocation(String userLocation) {
         this.userLocation = userLocation;
+    }
+
+    public String generateRegistrationMessage(){
+        String hello = "Dear "+this.getUserName()+",\n";
+        String hello2 = "Thank you for registering for our donation app Djeca Za Djecu\nYour registration is now confirmed\n";
+        String hello3 = "Here is the link to our application:\n";
+        String link = "https://djeca-za-djecu-frontend-service.onrender.com";
+        String hello4 ="\nEnjoy donating!";
+        String message = hello+hello2+hello3+link+hello4;
+        return message;
     }
 }
