@@ -6,6 +6,7 @@ import Login from "./pages/Login"
 import Registracija from './pages/Registracija'
 import Base from './pages/Base'
 import ProtectedRoute from './components/Protected'
+import User from './pages/User'
 
 function App() {
 
@@ -31,6 +32,7 @@ function App() {
             <Route path={"login"} element={ <Login /> } />
             <Route path={"registracija"} element={<Registracija/> } />
             <Route path={"base"} element={<ProtectedRoute> <Base /> </ProtectedRoute>} />
+            <Route path={"user"} element={<ProtectedRoute> <User /> </ProtectedRoute>} />
         </Routes>
   </BrowserRouter>
   );
