@@ -37,7 +37,7 @@ const RegistracijaForm = () => {
           }
         }).then((response) => {
             console.log(response.data);
-            navigate('/base');
+            navigate('/login');
           })
           .catch(err => {
             console.log(err)
