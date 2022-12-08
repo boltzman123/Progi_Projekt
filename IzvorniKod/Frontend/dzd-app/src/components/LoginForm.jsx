@@ -30,7 +30,8 @@ export const LoginAll = () => {
           }
         }).then((response) => {
           console.log(response.data);
-          window.localStorage.setItem('user', JSON.stringify("korisnik"));
+          var user=response.data;
+          window.localStorage.setItem('user', JSON.stringify(user));
           navigate('/base');
         })
         .catch(err => {

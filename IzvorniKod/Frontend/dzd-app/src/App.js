@@ -1,5 +1,6 @@
 import './App.css'
-import { BrowserRouter, Routes, Route, useState } from "react-router-dom"
+import { BrowserRouter, Routes, Route } from "react-router-dom"
+import { useEffect, useState } from "react"
 import Home from "./pages/Home"
 import Login from "./pages/Login"
 import Registracija from './pages/Registracija'
@@ -8,14 +9,29 @@ import ProtectedRoute from './components/Protected'
 
 function App() {
 
+  //da se localStorage brise svakih sat vremena
+    useEffect(() => {
+      var hours = 1;
+      var now = new Date().getTime();
+      var setupTime = localStorage.getItem('setupTime');
+      if (setupTime == null) {
+        localStorage.setItem('setupTime', now)
+      } else {
+        if(now-setupTime > hours*60*60*1000) {
+            localStorage.clear()
+            localStorage.setItem('setupTime', now);
+        }
+      }
+    }, [])
+  
   return (
     <BrowserRouter>
-    <Routes>
-        <Route path={"/"} element={<Home />} />
-        <Route path={"login"} element={<Login />} />
-        <Route path={"registracija"} element={<Registracija/>} />
-        <Route path={"base"} element={<ProtectedRoute> <Base /> </ProtectedRoute>} />
-    </Routes>
+        <Routes>
+            <Route path={"/"} element={<Home />} />
+            <Route path={"login"} element={ <Login /> } />
+            <Route path={"registracija"} element={<Registracija/> } />
+            <Route path={"base"} element={<ProtectedRoute> <Base /> </ProtectedRoute>} />
+        </Routes>
   </BrowserRouter>
   );
 }

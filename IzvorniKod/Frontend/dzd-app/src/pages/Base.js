@@ -4,6 +4,12 @@ import Footer from "../components/Footer";
 import Image from "../style/images/pic2.png";
 
 function Base() {
+
+  const Logout = (t)=>{
+    console.log("Brisem usera iz localStoragea")
+    localStorage.removeItem("user")
+  }
+
   return (
     <React.Fragment>
       <div className="content">
@@ -12,6 +18,10 @@ function Base() {
             <div className="title">
               Dobrodošli na osnovnu stranicu<br />
             </div>
+            {/* sad je tu trenutno gumb, ali bude kasnije u headeru */}
+            <button onClick={() => Logout()}> 
+              Logout
+            </button>
           </div>
           <div className="d2">
             <img src={Image} alt="slika" ></img>
