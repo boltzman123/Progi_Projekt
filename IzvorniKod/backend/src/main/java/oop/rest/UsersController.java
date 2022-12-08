@@ -1,5 +1,6 @@
 package oop.rest;
 
+import liquibase.pro.packaged.R;
 import oop.domain.Users;
 import oop.rest.classes.LoginForm;
 import oop.service.EmailSenderService;
@@ -9,7 +10,9 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -22,39 +25,44 @@ import java.util.Optional;
 public class UsersController {
     @Autowired
     private UsersService userService;
-
     @Autowired
     private EmailSenderService senderService;
-
 
     @Autowired
     ApplicationEventPublisher eventPublisher;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+    // Dohvati sve usere
     @GetMapping("")
-    //@Secured("ROLE_ADMIN")
+    @Secured("ROLE_ADMIN")
     public List<Users> listUsers(){
         return userService.listAll();
     }
 
+    // Dohvati usera po emailu i passwordu
     @GetMapping("/{email}/{password}")
     public Users getUser(@PathVariable("email") String email, @PathVariable("password") String password){
         Users user =userService.fetch(email);
-        if(user.getPassword().equals(password)){
+        if(passwordEncoder.matches(password, user.getPassword())){
             return user;
         } else{
             throw new UsernameNotFoundException("Email or password is wrong");
         }
     }
+
+
+    // Login te vraća inforamcije o useru
     @PostMapping("/login")
     public ResponseEntity<Users> getUser(@RequestBody LoginForm loginForm){
         Users user = userService.fetch(loginForm.getEmail());
-        if(user.getPassword().equals(loginForm.getPassword())){
+        if(passwordEncoder.matches(loginForm.getPassword(), user.getPassword())){
             return ResponseEntity.created(URI.create("/users/" + user.getEmail())).body(user);
         } else{
             return new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
         }
     }
-
+    // Registracija, slanje potvrde na mail, vraća objekt novostvorenog usera
     @PostMapping("")
     //@Secured("ROLE_ADMIN")
     public ResponseEntity<Users> createUser(@RequestBody Users user){
@@ -62,7 +70,7 @@ public class UsersController {
         if(user1.isPresent()){
             throw new IllegalArgumentException("User already exists");
         } else{
-            System.out.println(user.getEmail()+" "+ user.getUserSurname());
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
             Users saved = userService.createUser(user);
             String email = user.getEmail();
             String subject = "Successful registration!";
@@ -70,21 +78,24 @@ public class UsersController {
                     subject, user.generateRegistrationMessage());
 
             return ResponseEntity.created(URI.create("/users/" + saved.getEmail())).body(saved);
-
         }
     }
-
+    // Update usera
     @PutMapping("/{email}")
     public Users updateUser(@PathVariable("email") String email, @RequestBody Users user) {
         if (!user.getEmail().equals(email))
             throw new IllegalArgumentException("User email must be preserved");
         return userService.updateUser(user);
     }
-
+    // Obrisi usera po id-u ili objektu
     @DeleteMapping("/{email}")
     //@Secured("ROLE_ADMIN")
     public Users deleteUser(@PathVariable("email") String email) {
         return userService.deleteUser(email);
     }
 
+    @DeleteMapping
+    public Users delete(@RequestBody Users user){
+        return userService.delete(user);
+    }
 }

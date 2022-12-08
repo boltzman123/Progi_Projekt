@@ -5,6 +5,8 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+import javax.mail.SendFailedException;
+
 @Service
 public class EmailSenderService {
     @Autowired
@@ -16,6 +18,12 @@ public class EmailSenderService {
         message.setTo(toEmail);
         message.setText(body);
         message.setSubject(subject);
-        mailSender.send(message);
+        try{
+            mailSender.send(message);
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+
+
     }
 }

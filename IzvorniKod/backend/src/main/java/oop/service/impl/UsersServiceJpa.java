@@ -48,5 +48,9 @@ public class UsersServiceJpa implements UsersService {
         return users;
     }
 
-
+    @Override
+    public Users delete(Users user) {
+        userRepository.delete(user);
+        return user;
+    }
 }

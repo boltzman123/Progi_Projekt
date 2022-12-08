@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
+
+    <changeSet id="20221018-000-1" author="david (generated)">
+        <insert tableName="category">
+            <column name="category_name" value="Kolica"/>
+        </insert>
+    </changeSet>
+    <changeSet id="20221018-000-2" author="david (generated)">
+        <insert tableName="subcategory">
+            <column name="subcategory_name" value="Kolica 3 u 1"/>
+            <column name="category_name" value="Kolica"/>
+            <column name="item_duration" value="18"/>
+            <column name="use_date_expires" value="2"/>
+            <column name="season" value="SUMMER"/>
+        </insert>
+    </changeSet>
+    <changeSet id="20221018-000-3" author="david (generated)">
+        <insert tableName="subcategory">
+            <column name="subcategory_name" value="Manja kolica"/>
+            <column name="category_name" value="Kolica"/>
+            <column name="item_duration" value="20"/>
+            <column name="use_date_expires" value="1.5"/>
+            <column name="season" value="SPRING"/>
+        </insert>
+    </changeSet>
+    <changeSet id="20221018-000-4" author="david (generated)">
+        <insert tableName="subcategory">
+            <column name="subcategory_name" value="Velika kolica"/>
+            <column name="category_name" value="Kolica"/>
+            <column name="item_duration" value="15"/>
+            <column name="use_date_expires" value="0.5"/>
+            <column name="season" value="AUTUMN"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

@@ -20,8 +20,16 @@ public class Users {
     private String userLocation;
     private boolean canDonate;
     @JsonIgnore
-    @ManyToMany(mappedBy = "donatedToUser")
+    @OneToMany(mappedBy = "donatedToUser")
     private Set<Donation> donations;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Donation> donation;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Child> children;
 
     public Set<Donation> getDonations() {
         return donations;
