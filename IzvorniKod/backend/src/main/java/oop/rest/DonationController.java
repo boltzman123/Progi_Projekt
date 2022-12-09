@@ -4,6 +4,7 @@ import net.bytebuddy.description.method.ParameterList;
 import oop.domain.*;
 import oop.service.ChildService;
 import oop.service.DonationService;
+import oop.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +26,8 @@ public class DonationController {
     private DonationService service;
 
     @Autowired
+    private ItemService itemService;
+    @Autowired
     private ChildService childService;
 
     // Izlistaj sve donacije
@@ -34,7 +37,7 @@ public class DonationController {
     }
 
     // Izlistaj sve donacije pojedinog usera
-    @PostMapping("/user/{email}")
+    @GetMapping("/user/{email}")
     public List<Donation> listDonationsByUser(@PathVariable String email){
         return service.listByUser(email);
     }
@@ -143,7 +146,21 @@ public class DonationController {
 
 
     // Kreiraj donaciju
+
+    // Donacija s itemom
     @PostMapping("")
+    public ResponseEntity<Donation> createDonationWithItem(@RequestBody Donation donation){
+        if(donation.getDateOfClosing()==null){
+            donation.setActive(true);
+        }
+        donation.setItem(itemService.createItem(donation.getItem()));
+
+        Donation saved = service.createDonation(donation);
+        return ResponseEntity.created(URI.create("/donation/" + saved.getIdDonation())).body(saved);
+    }
+
+    // Donacija s već kreiranim itemom
+    @PostMapping("/createDonation")
     public ResponseEntity<Donation> createDonation(@RequestBody Donation donation){
         if(donation.getDateOfClosing()==null){
             donation.setActive(true);
