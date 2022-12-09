@@ -37,7 +37,7 @@ public class DonationController {
     }
 
     // Izlistaj sve donacije pojedinog usera
-    @GetMapping("/user/{email}")
+    @GetMapping("/users/{email}")
     public List<Donation> listDonationsByUser(@PathVariable String email){
         return service.listByUser(email);
     }
