@@ -13,10 +13,22 @@ const ItemForm = () => {
   const [productionBrand, setProductionBrand] = useState("");
   const [categoryName, setCategoryName] = useState("");
   const [subcategoryName, setSubcategoryName] = useState("");
+  const [productName, setProductName] = useState("");
 
   return (
     <React.Fragment>
       <form>
+        <div className="frame">
+          <input
+            value={productName}
+            onChange={(e) => setforAge(e.target.value)}
+            type="text"
+            name="productName"
+            id="productName"
+            placeholder="Naziv predmeta"
+            className="inputFrame"
+            required={true}></input>
+        </div>
         <div className="frame">
           <input
             value={forAge}
@@ -48,18 +60,6 @@ const ItemForm = () => {
             name="productionYear"
             id="productionYear"
             placeholder="Godina proizvodnje"
-            className="inputFrame"
-            required={true}></input>
-        </div>
-
-        <div className="frame">
-          <input
-            value={forSex}
-            onChange={(e) => setforAge(e.target.value)}
-            type="number"
-            name="forSex"
-            id="forSex"
-            placeholder="Predviđeni spol"
             className="inputFrame"
             required={true}></input>
         </div>
