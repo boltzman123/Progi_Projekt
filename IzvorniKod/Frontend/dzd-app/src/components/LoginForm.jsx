@@ -49,7 +49,6 @@ export const LoginAll = () => {
           <input
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            type="email"
             name="email"
             id="email"
             placeholder="Email"

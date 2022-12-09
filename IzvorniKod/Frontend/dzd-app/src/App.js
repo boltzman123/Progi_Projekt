@@ -7,6 +7,7 @@ import Registracija from './pages/Registracija'
 import Base from './pages/Base'
 import ProtectedRoute from './components/Protected'
 import Donation from './pages/Donation'
+import User from './pages/User'
 
 function App() {
 
@@ -34,6 +35,7 @@ function App() {
             <Route path={"base"} element={<ProtectedRoute> <Base /> </ProtectedRoute>} />
             <Route path={"doniraj"} element={<ProtectedRoute> <Donation /> </ProtectedRoute>} />
             
+            <Route path={"user"} element={<ProtectedRoute> <User /> </ProtectedRoute>} />
         </Routes>
   </BrowserRouter>
   );
