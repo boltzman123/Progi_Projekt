@@ -15,6 +15,7 @@ const User = () => {
           <PUO />
           <Footer />
         </React.Fragment>
+        
     );
 }
  
