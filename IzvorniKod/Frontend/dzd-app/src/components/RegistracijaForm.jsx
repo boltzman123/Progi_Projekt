@@ -30,7 +30,8 @@ const RegistracijaForm = () => {
                 userLocation: mjesto,
                 email: email,
                 password: pass
-          }
+          }, auth: {username:email,
+            password:pass}
         }).then((response) => console.log(response.data))
     }
 

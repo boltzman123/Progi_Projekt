@@ -175,6 +175,11 @@ public class DonationController {
         if(!donation.getIdDonation().equals(id)){
             throw new IllegalArgumentException("Donation id must be preserved");
         }
+        if(donation.getDateOfClosing() != null){
+            donation.setActive(false);
+        } else {
+            donation.setActive(true);
+        }
         return service.updateDonation(donation);
     }
 
