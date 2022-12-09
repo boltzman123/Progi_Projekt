@@ -165,6 +165,7 @@ public class DonationController {
         if(donation.getDateOfClosing()==null){
             donation.setActive(true);
         }
+        donation.setDateOfPublication(new Date());
         Donation saved = service.createDonation(donation);
         return ResponseEntity.created(URI.create("/donation/" + saved.getIdDonation())).body(saved);
     }
