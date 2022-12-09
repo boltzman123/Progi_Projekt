@@ -18,12 +18,7 @@ public class EmailSenderService {
         message.setTo(toEmail);
         message.setText(body);
         message.setSubject(subject);
-        try{
-            mailSender.send(message);
-        } catch (Exception e){
-            System.out.println(e.getMessage());
-        }
-
+        mailSender.send(message);
 
     }
 }

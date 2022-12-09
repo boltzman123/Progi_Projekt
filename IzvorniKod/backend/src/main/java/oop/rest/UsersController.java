@@ -71,12 +71,16 @@ public class UsersController {
             throw new IllegalArgumentException("User already exists");
         } else{
             user.setPassword(passwordEncoder.encode(user.getPassword()));
-            Users saved = userService.createUser(user);
             String email = user.getEmail();
             String subject = "Successful registration!";
-            senderService.sendEmail(email,
-                    subject, user.generateRegistrationMessage());
-
+            try{
+                senderService.sendEmail(email,
+                        subject, user.generateRegistrationMessage());
+                user.setMailSent(true);
+            } catch(Exception e) {
+                user.setMailSent(false);
+            }
+            Users saved = userService.createUser(user);
             return ResponseEntity.created(URI.create("/users/" + saved.getEmail())).body(saved);
         }
     }

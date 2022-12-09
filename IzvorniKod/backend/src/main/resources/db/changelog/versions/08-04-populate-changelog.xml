@@ -37,4 +37,15 @@
             <column name="season" value="AUTUMN"/>
         </insert>
     </changeSet>
+    <changeSet id="20221018-000-5" author="david(generated)">
+        <insert tableName="users">
+            <column name="email" value="kidkid24799@gmail.com"/>
+            <column name="password" value="dikdik123"/>
+            <column name="user_name" value="Kid"/>
+            <column name="user_surname" value="Dik"/>
+            <column name="user_location" value="Zagreb"/>
+            <column name="mail_sent" value="false"/>
+            <column name="can_donate" value="false"/>
+        </insert>
+    </changeSet>
 </databaseChangeLog>

@@ -127,6 +127,9 @@
             <column name="can_donate" type="BOOLEAN">
                 <constraints nullable="false"/>
             </column>
+            <column name="mail_sent" type="boolean">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
     </changeSet>
     <changeSet id="1670535676833-10" author="david (generated)">

@@ -19,6 +19,7 @@ public class Users {
     private String password;
     private String userLocation;
     private boolean canDonate;
+    private boolean mailSent;
     @JsonIgnore
     @OneToMany(mappedBy = "donatedToUser")
     private Set<Donation> donations;
@@ -55,6 +56,14 @@ public class Users {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public boolean isMailSent() {
+        return mailSent;
+    }
+
+    public void setMailSent(boolean mailSent) {
+        this.mailSent = mailSent;
     }
 
     public String getUserName() {
