@@ -13,7 +13,7 @@ function Header() {
         <Container>
           <Nav className={HeaderCSS.header}>
             <NavLink style={({ isActive }) => 
-                      (isActive ? {textDecoration: "underline"} : {textDecoration: 'none'})} to="/aktivneDonacije">
+                      (isActive ? {textDecoration: "underline"} : {textDecoration: 'none'})} to="/base">
               Aktivne donacije
             </NavLink>
             <NavLink style={({ isActive }) => 
@@ -21,7 +21,7 @@ function Header() {
               Doniraj
             </NavLink>
             <NavLink style={({ isActive }) => 
-                      (isActive ? {textDecoration: "underline"} : {textDecoration: 'none'})} to="/base">
+                      (isActive ? {textDecoration: "underline"} : {textDecoration: 'none'})} to="/user">
               Moj profil
             </NavLink>
           </Nav>

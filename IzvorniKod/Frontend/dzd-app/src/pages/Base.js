@@ -14,7 +14,7 @@ function Base() {
   return (
     <React.Fragment>
       <div className={BaseCSS.content}>
-      <Header></Header>
+      <Header />
         <div className="gallery">
           <div className="d1">
             <div className="title">
