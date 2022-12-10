@@ -7,9 +7,9 @@ import MyDropdown from '../components/DropdownCategory';
 function Donation() {
     return (
         <React.Fragment>
-            <Header></Header> 
-            <ImageUploader></ImageUploader>
-            <Item></Item>
+            <Header /> 
+            <ImageUploader />
+            <Item />
         </React.Fragment>
     )
 }

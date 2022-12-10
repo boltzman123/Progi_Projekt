@@ -6,11 +6,6 @@ import BaseCSS from "../style/pages/Base.module.css";
 
 
 function Base() {
-  const Logout = (t) => {
-    console.log("Brisem usera iz localStoragea");
-    localStorage.removeItem("user");
-  };
-
   return (
     <React.Fragment>
       <div className={BaseCSS.content}>
@@ -21,8 +16,6 @@ function Base() {
               Dobrodošli na osnovnu stranicu
               <br />
             </div>
-            {/* sad je tu trenutno gumb, ali bude kasnije u headeru */}
-            <button onClick={() => Logout()}>Logout</button>
           </div>
           <div className="d2">
             <img src={Image} alt="slika"></img>
