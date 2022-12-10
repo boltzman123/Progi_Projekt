@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 
-import "../style/components/RegistracijaForm.css";
+import RegForm from "../style/components/RegistracijaForm.module.css"
 import "../style/components/Buttons.css";
 
 import { FiMail } from "react-icons/fi";
@@ -84,45 +84,45 @@ const User = () => {
         <React.Fragment>
           Pregledaj i/ili uredi svoje podatke
             <form>
-                <div className='frameReg'>
+                <div className={RegForm.frame}>
                     <input 
                         value={ime}
                         type="text"
                         name="ime" id="ime" 
-                        className='inputFrameReg'
+                        className={RegForm.inputFrame}
                         minLength={3}
                         onChange={ (e) => setIme(e.target.value)}
                     />
                 </div>
-                <div className='frameReg'>
+                <div className={RegForm.frame}>
                     <input 
                         value={prezime}  
                         type="text" name="prezime" id="prezime" 
-                        className='inputFrameReg'
+                        className={RegForm.inputFrame}
                         minLength={3} 
                         onChange={ (e) => setPrezime(e.target.value)}
                     />
                 </div>
-                <div className='frameReg'>
+                <div className={RegForm.frame}>
                     <input 
                         value={mjesto}
                         type="text" name="mjesto" id="mjesto" 
-                        className='inputFrameReg'
+                        className={RegForm.inputFrame}
                         minLength={4} 
                         onChange={ (e) => setMjesto(e.target.value)}
                     />
                 </div>
-                <div className='frameReg'>
+                <div className={RegForm.frame}>
                     <FiMail className="icon"></FiMail>
                     <input disabled
                         value={email} 
                         type="email" name="email" id="email" 
                         placeholder={JSON.parse(localStorage.getItem("user")).email}
-                        className='inputFrameReg'
+                        className={RegForm.inputFrame}
                     />    
                 </div>
                 </form>
-                <div className='frameReg buttonFrameReg'>
+                <div className={`${RegForm.frame} ${RegForm.buttonFrame}`}>
                     <button className='gumbic tamniji buttonreg' onClick={() => { if (window.confirm('Provjerite jeste li sve dobro upisali')) onSubmit() } }>Updateaj podatke</button>
                     <button className="gumbic upitnik buttonreg" onClick={() => { if (window.confirm('Sigurno želite obrisati račun?')) obrisiRacun() }}>Obrisi racun</button>{" "}
                     <button className="gumbic upitnik buttonreg" onClick={() => { if (window.confirm('Sigurno se želiš odlogirati?')) logOff() }}>Log out</button>{" "}
