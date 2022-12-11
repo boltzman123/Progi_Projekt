@@ -126,3 +126,12 @@
     -Teme sastanka:
         -povezivanje frontenda i backenda
         -rasprava o potrebnim funkcionalnostima
+
+17. sastanak
+    -Datum: 11. prosinca 2022
+    -Prisustvovali: D.Kiramarios, K.Tomičić, D.Kovačević, D.Jambrović
+    -Trajanje sastanka: 2h
+    -Teme sastanka:
+        -pregled do sad napravljenoga
+        -savjeti oko sljedećih koraka razvoja frontenda
+        -daljnja podjela posla oko rada na frontendu
