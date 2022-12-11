@@ -1,5 +1,8 @@
 package oop.domain;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Set;
@@ -14,16 +17,16 @@ public class Child{
     private int childAge;
     private Date predictedBirthDate;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "user_email", referencedColumnName = "email")
     private Users user;
-    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
+    @ManyToMany()
     @JoinTable(name = "CHILD_CATEGORY",
             joinColumns = {@JoinColumn(name = "child_id", referencedColumnName = "childId")},
             inverseJoinColumns = @JoinColumn(name = "category_name", referencedColumnName = "categoryName")
     )
     private Set<Category> category;
-    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
+    @ManyToMany()
     @JoinTable(name = "CHILD_SUBCATEGORY",
             joinColumns = {@JoinColumn(name = "child_id", referencedColumnName = "childId")},
             inverseJoinColumns = @JoinColumn(name = "subcategory", referencedColumnName = "subcategoryName")
@@ -74,4 +77,11 @@ public class Child{
         return subcategory;
     }
 
+    public void setCategory(Set<Category> category) {
+        this.category = category;
+    }
+
+    public void setSubcategory(Set<Subcategory> subcategory) {
+        this.subcategory = subcategory;
+    }
 }
