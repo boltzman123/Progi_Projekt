@@ -6,6 +6,7 @@ import Login from "./pages/Login"
 import Registracija from './pages/Registracija'
 import Base from './pages/Base'
 import ProtectedRoute from './components/Protected'
+import LoggedIn from './components/LoggedIn'
 import Donation from './pages/Donation'
 import User from './pages/User'
 
@@ -30,11 +31,10 @@ function App() {
     <BrowserRouter>
         <Routes>
             <Route path={"/"} element={<Home />} />
-            <Route path={"login"} element={ <Login /> } />
-            <Route path={"registracija"} element={<Registracija/> } />
+            <Route path={"login"} element={ <LoggedIn> <Login /> </LoggedIn> } />
+            <Route path={"registracija"} element={<LoggedIn> <Registracija/> </LoggedIn> } />
             <Route path={"base"} element={<ProtectedRoute> <Base /> </ProtectedRoute>} />
             <Route path={"doniraj"} element={<ProtectedRoute> <Donation /> </ProtectedRoute>} />
-            
             <Route path={"user"} element={<ProtectedRoute> <User /> </ProtectedRoute>} />
         </Routes>
   </BrowserRouter>

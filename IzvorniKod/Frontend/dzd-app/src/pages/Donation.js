@@ -8,9 +8,9 @@ import Footer from '../components/Footer';
 function Donation() {
     return (
         <React.Fragment>
-            <Header></Header> 
-            <ImageUploader></ImageUploader>
-            <Item></Item>
+            <Header /> 
+            <ImageUploader />
+            <Item />
             <Footer></Footer>
         </React.Fragment>
     )
