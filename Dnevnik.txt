@@ -92,27 +92,34 @@
         -pregled i diskusija dijagrama razreda
 
 12. sastanak
+    -Datum: 10. studenoga 2022
+    -Prisustvovali: D.Kiramarios, K.Kijac
+    -Trajanje sastanka: 1h
+    -Teme sastanka:
+        -provjera sekvencijskih dijagrama
+
+13. sastanak
     -Datum: 5. prosinca 2022
     -Prisustvovali: svi članovi
     -Trajanje sastanka: 1h
     -Teme sastanka:
         -revizija do sad odrađenog posla
 
-13. sastanak
+14. sastanak
     -Datum: 6. prosinca 2022
-    -Prisustvovali: K.Orešković, D.Kovačević
+    -Prisustvovali: D.Kovačević, K.Orešković
     -Trajanje sastanka: 1h
     -Teme sastanka:
         -pregled i diskusija funkcionalnosti administratora
 
-14. sastanak
+15. sastanak
     -Datum: 6. prosinca 2022
     -Prisustvovali: D.Kiramarios, K.Tomičić, S.Barac
     -Trajanje sastanka: 1h
     -Teme sastanka:
         -daljnja podjela posla oko rada na frontendu
 
-15. sastanak
+16. sastanak
     -Datum: 10. prosinca 2022
     -Prisustvovali: D.Kiramarios, K.Tomičić, D.Kovačević
     -Trajanje sastanka: 1.5h
