@@ -1,8 +1,12 @@
 package oop.rest;
 
 import liquibase.pro.packaged.R;
+import oop.domain.Child;
+import oop.domain.Donation;
 import oop.domain.Users;
 import oop.rest.classes.LoginForm;
+import oop.service.ChildService;
+import oop.service.DonationService;
 import oop.service.EmailSenderService;
 import oop.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +29,11 @@ import java.util.Optional;
 public class UsersController {
     @Autowired
     private UsersService userService;
+
+    @Autowired
+    private ChildService childService;
+    @Autowired
+    private DonationService donationService;
     @Autowired
     private EmailSenderService senderService;
 
@@ -95,11 +104,16 @@ public class UsersController {
     @DeleteMapping("/{email}")
     //@Secured("ROLE_ADMIN")
     public Users deleteUser(@PathVariable("email") String email) {
+        List<Child> children = childService.listChildByUser(email);
+        for(Child c: children){
+            childService.deleteChild(c);
+        }
+        List<Donation> donations = donationService.listByUser(email);
+        for(Donation d: donations){
+            donationService.delete(d);
+        }
         return userService.deleteUser(email);
     }
 
-    @DeleteMapping
-    public Users delete(@RequestBody Users user){
-        return userService.delete(user);
-    }
+
 }

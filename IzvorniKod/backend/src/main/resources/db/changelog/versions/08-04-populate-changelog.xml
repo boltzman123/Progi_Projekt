@@ -40,7 +40,7 @@
     <changeSet id="20221018-000-5" author="david(generated)">
         <insert tableName="users">
             <column name="email" value="kidkid24799@gmail.com"/>
-            <column name="password" value="dikdik123"/>
+            <column name="password" value="$2a$10$kCvtMi7cZRd1/97MF87Uie0ehEqc2m8ifYJpXMZ4kPoWkWRBCjKGe"/>
             <column name="user_name" value="Kid"/>
             <column name="user_surname" value="Dik"/>
             <column name="user_location" value="Zagreb"/>
@@ -51,7 +51,7 @@
     <changeSet id="20221018-000-6" author="david(generated)">
         <insert tableName="users">
             <column name="email" value="admin"/>
-            <column name="password" value="pass"/>
+            <column name="password" value="$2a$10$QV82E7WEHLmp8EwINolfaOVM/38dcwi1Bo/ZiMtmtBAbvrvDcmoCi"/>
             <column name="user_name" value="Admin"/>
             <column name="user_surname" value="Admin"/>
             <column name="user_location" value="Zagreb"/>
