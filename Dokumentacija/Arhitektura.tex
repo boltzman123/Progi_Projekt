@@ -9,7 +9,7 @@
 		%\item 	\textit{organizaciju aplikacije (npr. slojevi frontend i backend, MVC arhitektura) }		
 	%\end{itemize}
 				
-		Arhitektura naše aplikacije na najvišoj razni apstrakcije odgovara troslojnoj klijent-poslužitelj arhitekturi sa sljedećim slojevima:
+		Arhitektura naše aplikacije zajedno s vanjskim resursima (bazom) na najvišoj razni apstrakcije odgovara troslojnoj klijent-poslužitelj arhitekturi sa sljedećim slojevima:
 		\begin{itemize}
 			\item Prezentacijski sloj (Frontend)
 			\item Sloj poslovne logike (Backend)
@@ -25,17 +25,21 @@
 
 		\eject
 
-		Općenito govoreći, prezentacijski sloj tj. frontend zadužen je za prikaz stranice korisniku i omogućavanje rada s istom. S druge strane, sloj poslovne logike tj. backend zadužena je za razne izračune i interakciju s bazom. U ovom pogledu, sloj poslovne logike služi kao spona između prezentacijskog sloja i podatkovnog sloja koja pritom obavlja sve akcije neprikladne za izvođenje na klijentovom računalu - u pitanju je "tanki" klijent.\\[2pt]
+		Općenito govoreći, prezentacijski sloj tj. frontend zadužen je za prikaz stranice korisniku i omogućavanje rada s istom. S druge strane, sloj poslovne logike tj. backend zadužena je za razne izračune i interakciju s bazom. U ovom pogledu, sloj poslovne logike služi kao spona između prezentacijskog sloja i podatkovnog sloja koja pritom obavlja sve akcije neprikladne za izvođenje na klijentovom računalu.\\[2pt]
 
-		Korisnik koristeći web preglednik pristupa našoj aplikaciji slanjem HTTP zahtjeva prezentacijskom sloju. Prezentacijski sloj u odgovoru šalje sve potrebne podatke za prikaz korisničkog sučelja - naše stranice.
+		Kada korisnik u web preglednik unese URL naše stranice, web preglednik pristupa našoj aplikaciji slanjem HTTP GET zahtjeva prezentacijskom sloju. Prezentacijski sloj u odgovoru šalje sve potrebne podatke za prikaz korisničkog sučelja - naše stranice.
 		Kada korisniku treba poslužiti neki sadržaj koji nije pohranjen na prezentacijskom sloju (npr. aktivne donacije, podatci o korisniku i oglasima), prezentacijski sloj sloju poslovne logike šalje HTTP zahtjev - npr. GET zahtjev s ciljem dohvata podataka o djeci korisnika.
 		Komunikacija između prezentacijskog sloja i sloja poslovne logike odvija se po REST načelima.\\[2pt]
 
 		Sloj poslovne logike potreban je za kompliciranije izračune, dohvat i izmjenu podataka te odgovaranje na zahtjeve pristigle od strane prezentacijskog sloja.
-		Podatkovni sloj tj. baza podataka služi za pohranu svih potrebnih podataka (npr. podataka o registriranim korisnicima, oglasima i predmetima). Pri radu naše aplikacije, s bazom podataka komunicira isključivo sloj poslovne logike tj. backend - ako prezentacijskom sloju trebaju određeni podaci, poslat će zahtjev sloju poslovne logike te u idealnom slučaju u odgovoru dobiti tražene podatke.\\[2pt]
+		Podatkovni sloj tj. baza podataka služi za pohranu svih potrebnih podataka (npr. podataka o registriranim korisnicima, oglasima i predmetima). Pri radu naše aplikacije, s bazom podataka komunicira isključivo sloj poslovne logike tj. backend - ako prezentacijskom sloju trebaju određeni podaci, poslat će zahtjev sloju poslovne logike te u idealnom slučaju u odgovoru dobiti tražene podatke. Pritom, JPA služi za objektno/relacijsko mapiranje (ORM) zahtjeva backenda u SQL upite pomoću kojih je moguće komunicirati s bazom.\\[2pt]
 
-		Prezentacijski sloj tj. frontend izrađen je koristeći programski jezik Javascript zajedno s "markup" jezikom HTML, CSS-om i radnim okvirom React.
-		Sloj poslovne logike tj. backend izrađen je koristeći programski jezik Java zajedno s radnim okvirom Java Spring Boot. Za komunikaciju s bazom korišten je JPA - Java Persistence API.
+		Dodatno, i prezentacijski sloj i sloj poslovne logike interno imaju vlastitu podjelu - sloj poslovne logike možemo podijeliti na 3 glavne komponente: kontroleri, servisi i repozitoriji (sloj pristupa podacima). Sličnu podjelu moguće je uočiti i na prezentacijskom sloju. Baza podataka vanjski je resurs koji naša aplikacija koristi.
+
+		\eject
+
+		Prezentacijski sloj tj. frontend izrađen je koristeći programski jezik Javascript zajedno s "markup" jezikom HTML, CSS-om i radnim okvirom React. Zbog korištenja radnog okvira React koji omogućava provođenje brojnih izračuna i funkcionalnosti na klijentovom računalu, možemo reći da je u pitanju "debeli" klijent.
+		Sloj poslovne logike tj. backend izrađen je koristeći programski jezik Java zajedno s radnim okvirom Java Spring Boot. Za prevođenje zahtjeva backenda u ispravne SQL upite korišten je JPA - Java Persistence API.
 		Shema baze podataka izrađena je koristeći alat ERDplus, a sama baza podataka izrađena je koristeći sustav za upravljanje bazama PostgreSQL.
 
 		\eject
@@ -261,7 +265,7 @@
 			\end{figure}
 			\eject
 			Slika 4.5 prikazuje odnos komponenti na primjeru razreda Category. Razred CategoryController prihvaća i odgovara na HTTP zahtjeve poslane od korisnika tj. konkretnije frontenda. Kako bi na njih ispravno odgovorio, uspostavlja komunikaciju s razredom CategoryServiceJpa.
-			Razred CategoryServiceJpa uspostavlja komunikaciju s razredom CategoryService koji obavlja potrebne izračune i provođenje poslovne logike. Isto tako, razred CategoryServiceJpa uspostavlja komunikaciju i s razredom CategoryRepository koji služi kao sučelje za pohranu i dohvat podataka iz baze.
+			Razred CategoryServiceJpa implementira sučelje CategoryService kako bi obavljao potrebne izračune i osigurao uspješno provođenje poslovne logike. Uz to, razred CategoryServiceJpa uspostavlja komunikaciju s razredom CategoryRepository koji služi kao sučelje za pohranu i dohvat podataka iz baze.
 			Kako bi prikaz bio što sažetiji, odnos komponenti prikazan je samo na jednom razredu. U stvarnoj implementaciji, ovakav odnos komponenti tj. razreda postoji za svaki razred iz dijela Models.\\[10pt]
 
 			\begin{figure}[H]
