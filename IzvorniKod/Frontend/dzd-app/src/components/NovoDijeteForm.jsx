@@ -1,24 +1,37 @@
 import React, { useState } from 'react';
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
-
-import { TextField, Select, Button, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, Grid, InputLabel, MenuItem} from '@mui/material';
-
 import { toast } from 'react-toastify';
+
+import { Stack } from '@mui/material/Stack';
+import { TextField, Select, Button, FormControl, FormLabel} from '@mui/material';
+import { RadioGroup, FormControlLabel, Radio, Grid, InputLabel, MenuItem, Box, Container } from '@mui/material';
+import { LocalizationProvider, DatePicker } from '@mui/x-date-pickers';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
+
+import NovoDijeteCategoryPicker from './NovoDijeteCategoryPicker.jsx'
 
 const NovoDijeteForm = () => {
     const [ime, setIme] = useState('');
     const [spol, setSpol] = useState('');
-    const [dob, setDob] = useState('');
-    const [expBirthDate, setExpBirthDate] = useState('');
-
+    const [dob, setDob] = useState(0);
+    const [expBirthDate, setExpBirthDate] = useState(null);
     const navigate=useNavigate();
+
+    const ageRange = [...Array(15).keys()];
+
+    let user = JSON.parse(localStorage.getItem('user'))
 
     const onSubmit = (e) =>{
         e.preventDefault();
         console.log(ime)
         console.log(spol)
         console.log(dob)
+        console.log(expBirthDate)
+        console.log(expBirthDate.toJSON())
+        
+        
+
 
         {/* Treba popraviti ove metode, urlove i sve ostalo 
         
@@ -46,28 +59,32 @@ const NovoDijeteForm = () => {
     }
 
     return(
-        <React.Fragment>
             <form onSubmit={ onSubmit }>
-                <Grid container spacing={2}>
-                    <Grid item>
-                        <TextField id="ime" value={ime} label="Ime" variant="outlined" onChange={(e) => setIme(e.target.value)}/>
-                    </Grid>
+                <Container maxWidth='xs'>
+                    <Box>
+             
+                        <TextField
+                            label="Ime" 
+                            id="ime" 
+                            value={ime} 
+                            required
+                            variant="outlined" 
+                            fullWidth
+                            onChange={(e) => setIme(e.target.value)}/>
 
-                    <Grid item>
                         <FormControl fullWidth>
                             <FormLabel id="spol">Spol</FormLabel>
                             <RadioGroup
                                 name="spol-radio-buttons-group"
                                 value={spol}
+                                required
                                 onChange={(e) => setSpol(e.target.value)}
                             >
                                 <FormControlLabel value="z" control={<Radio />} label="Žensko" />
                                 <FormControlLabel value="m" control={<Radio />} label="Muško" />
                             </RadioGroup>
                         </FormControl>
-                    </Grid>
-                    
-                    <Grid item>
+                   
                         <FormControl fullWidth>
                             <InputLabel>Dob</InputLabel>
                             <Select
@@ -75,24 +92,38 @@ const NovoDijeteForm = () => {
                                 id="dob-select"
                                 value={dob}
                                 label="Dob"
-                                onChange={(e) => setDob(e.target.value)}
-                            >
-                                {/* JS loop za 15 MenuItema */}
-                                <MenuItem value={10}>Ten</MenuItem>
-                                <MenuItem value={20}>Twenty</MenuItem>
-                                <MenuItem value={30}>Thirty</MenuItem>
+                                required
+                                MenuProps={{
+                                    PaperProps: { sx: { maxHeight: 175 }}
+                                }}
+                                onChange={(e) => setDob(e.target.value)}>
+                                {ageRange.map((ageSelect) => {
+                                    return <MenuItem key={ageSelect} value={ageSelect}>{ageSelect}</MenuItem>
+                                })}
                             </Select>
                         </FormControl>
-                    </Grid>
+                        
+                        {dob == 0 ?
+                        <LocalizationProvider dateAdapter={AdapterDateFns}>
+                            <DatePicker
+                                label="Očekivan datum rođenja"
+                                value={expBirthDate}
+                                inputFormat="dd/MM/yyyy"
+                                onChange={(newDate) => {setExpBirthDate(newDate);
+                                }}
+                                renderInput={(params) => <TextField {...params} />}
+                            />
+                        </LocalizationProvider>
+                        :<></>
+                        }
+                        
+                        <NovoDijeteCategoryPicker/>
 
+                        <Button type="submit">Dodaj</Button>
 
-
-                    <Grid item>
-                        <Button type="submit">Submit</Button>
-                    </Grid>
-                </Grid>
+                    </Box>
+                </Container>
             </form>
-        </React.Fragment>
     );
 }
 

@@ -13,6 +13,7 @@ import User from './pages/User'
 import Djeca from './pages/Djeca'
 import UsersOverview from './pages/usersOverview'
 
+
 function App() {
 
   //da se localStorage brise svakih sat vremena
@@ -42,7 +43,7 @@ function App() {
             <Route path={"pregledKorisnika"} element={<ProtectedRoute> <UsersOverview /> </ProtectedRoute>} />
             <Route path={"djeca"} element={<ProtectedRoute> <Djeca /> </ProtectedRoute>} />
         </Routes>
-  </BrowserRouter>
+    </BrowserRouter>
   );
 }
 

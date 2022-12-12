@@ -6,12 +6,13 @@ import 'react-toastify/dist/ReactToastify.css';
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import NovoDijeteForm from '../components/NovoDijeteForm';
+import NovoDijeteCategoryPicker from '../components/NovoDijeteCategoryPicker';
 
 function Djeca() {
     return (
         <React.Fragment>
             <Header></Header>
-            <NovoDijeteForm/>
+            <NovoDijeteCategoryPicker/>
             <ToastContainer
                 position="top-center"
                 autoClose={5000}
