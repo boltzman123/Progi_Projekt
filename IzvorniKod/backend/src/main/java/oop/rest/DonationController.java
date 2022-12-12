@@ -99,7 +99,7 @@ public class DonationController {
         //donationsFilteredActive.add(service.getDonationById((long)3));
         // Primljene donacije kojima je isteklo poslovno pravilo
         List<Donation> donatedToMe = service.listAll().stream().filter(d -> {
-            if( d.getDonatedToUser().getEmail().equals(email)){
+            if(d.getDonatedToUser()!=null && d.getDonatedToUser().getEmail().equals(email)){
                 Date dateClosedDonation = d.getDateOfClosing();
                 Float expired =d.getItem().getSubcategory().getUseDateExpires();
                 LocalDate date = LocalDate.now().minusMonths((int)(expired * 12));
@@ -116,7 +116,7 @@ public class DonationController {
 
         // Seasons filter
         List<Donation> seasonDonations = service.listAll().stream().filter(d -> {
-            if(d.getDonatedToUser().getEmail().equals(email)){
+            if(d.getDonatedToUser() != null && d.getDonatedToUser().getEmail().equals(email)){
                 int month = LocalDate.now().getMonthValue();
                 Season season = d.getItem().getSubcategory().getSeason();
 
