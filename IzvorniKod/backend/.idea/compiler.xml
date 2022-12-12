@@ -11,6 +11,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="backend" target="17" />
+      <module name="mn_djeca_za_djecu" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

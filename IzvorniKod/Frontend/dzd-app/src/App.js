@@ -1,6 +1,7 @@
 import './App.css'
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { useEffect, useState } from "react"
+
 import Home from "./pages/Home"
 import Login from "./pages/Login"
 import Registracija from './pages/Registracija'
@@ -9,6 +10,7 @@ import ProtectedRoute from './components/Protected'
 import LoggedIn from './components/LoggedIn'
 import Donation from './pages/Donation'
 import User from './pages/User'
+import Djeca from './pages/Djeca'
 import UsersOverview from './pages/usersOverview'
 
 function App() {
@@ -38,6 +40,7 @@ function App() {
             <Route path={"doniraj"} element={<ProtectedRoute> <Donation /> </ProtectedRoute>} />
             <Route path={"user"} element={<ProtectedRoute> <User /> </ProtectedRoute>} />
             <Route path={"pregledKorisnika"} element={<ProtectedRoute> <UsersOverview /> </ProtectedRoute>} />
+            <Route path={"djeca"} element={<ProtectedRoute> <Djeca /> </ProtectedRoute>} />
         </Routes>
   </BrowserRouter>
   );

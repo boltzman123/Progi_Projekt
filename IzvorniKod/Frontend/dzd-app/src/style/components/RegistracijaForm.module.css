@@ -1,5 +1,5 @@
 
-.inputFrameReg{   
+.inputFrame{   
     display: flex;
     flex-direction: row; 
     border:1px solid rgb(221, 215, 215);
@@ -13,12 +13,12 @@
     text-align: center;
     font-size: larger;
 }
-.frameReg {
+.frame {
     display: flex;
     align-items: center;
     justify-content: flex-end;
 }
-form .formReg {
+form .form {
     margin-top: 30px;
 }
 
@@ -31,18 +31,18 @@ form .formReg {
 }
 /*mobitel*/
 @media only screen and (max-width: 449px) {
-    .inputFrameReg{
+    .inputFrame{
         width: 15rem;  
         height: 40px; 
     }
-    .frameReg {
+    .frame {
         margin-left: 20px;
     }
-    .buttonFrameReg {
+    .buttonFrame {
         margin-right: 20px;
         justify-content: center;
     }
-    .buttonreg{
+    .button{
         font-size: medium;
     }
 }
