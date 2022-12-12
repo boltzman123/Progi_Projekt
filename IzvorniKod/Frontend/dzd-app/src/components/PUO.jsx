@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
+import DjecaBtn from "../components/DjecaBtn"
 
-import RegForm from "../style/components/RegistracijaForm.module.css"
+import PUOCSS from "../style/components/PUO.module.css"
 import "../style/components/Buttons.css";
 
 import { FiMail } from "react-icons/fi";
@@ -87,48 +88,49 @@ const User = () => {
 
     return ( 
         <React.Fragment>
-          Pregledaj i/ili uredi svoje podatke
             <form>
-                <div className={RegForm.frame}>
+              <div>Pregledaj i/ili uredi svoje podatke</div>
+                <div className={PUOCSS.frame}>
                     <input 
                         value={ime}
                         type="text"
                         name="ime" id="ime" 
-                        className={RegForm.inputFrame}
+                        className={PUOCSS.inputFrame}
                         minLength={3}
                         onChange={ (e) => setIme(e.target.value)}
                     />
                 </div>
-                <div className={RegForm.frame}>
+                <div className={PUOCSS.frame}>
                     <input 
                         value={prezime}  
                         type="text" name="prezime" id="prezime" 
-                        className={RegForm.inputFrame}
+                        className={PUOCSS.inputFrame}
                         minLength={3} 
                         onChange={ (e) => setPrezime(e.target.value)}
                     />
                 </div>
-                <div className={RegForm.frame}>
+                <div className={PUOCSS.frame}>
                     <input 
                         value={mjesto}
                         type="text" name="mjesto" id="mjesto" 
-                        className={RegForm.inputFrame}
+                        className={PUOCSS.inputFrame}
                         minLength={4} 
                         onChange={ (e) => setMjesto(e.target.value)}
                     />
                 </div>
-                <div className={RegForm.frame}>
+                <div className={PUOCSS.frame}>
                     <FiMail className="icon"></FiMail>
                     <input disabled
                         value={email} 
                         type="email" name="email" id="email" 
                         placeholder={JSON.parse(localStorage.getItem("user")).email}
-                        className={RegForm.inputFrame}
+                        className={PUOCSS.inputFrame}
                     />    
                 </div>
                 </form>
-                <div className={`${RegForm.frame} ${RegForm.buttonFrame}`}>
+                <div className={`${PUOCSS.frame} ${PUOCSS.buttonFrame}`}>
                     <button className='gumbic tamniji buttonreg' onClick={() => { if (window.confirm('Provjerite jeste li sve dobro upisali')) onSubmit() } }>Updateaj podatke</button>
+                    <DjecaBtn/>
                     <button className="gumbic upitnik buttonreg" onClick={() => { if (window.confirm('Sigurno želite obrisati račun?')) obrisiRacun() }}>Obrisi racun</button>{" "}
                     <button className="gumbic upitnik buttonreg" onClick={() => { if (window.confirm('Sigurno se želiš odlogirati?')) logOff() }}>Log out</button>{" "}
                 </div>

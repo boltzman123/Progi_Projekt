@@ -8,22 +8,17 @@ import { toast } from "react-toastify";
 import { useState, useEffect } from "react";
 
 const UserKard = (props) => {
-  let { userName, userSurname, email, userLocation, canDonate, mailSent, password } =
-    props.user;
-  console.log(props.user)
-  if (canDonate) {
-    canDonate = " Da";
-  } else {
-    canDonate = " Ne";
-  }
-  if (mailSent) {
-    mailSent = " Da";
-  } else {
-    mailSent = " Ne";
-  }
+  const [userName, setUserName] = useState(props.user.userName);
+  const [userSurname, setUserSurname] = useState(props.user.userSurname);
+  const [email, setEmail] = useState(props.user.email);
+  const [userLocation, setLocation] = useState(props.user.userLocation);
+  const [mailSent, setMailSent] = useState(props.user.mailSent);
+  const [password, setPassword] = useState(props.user.password);
+  const [canDonate, setCanDonate] = useState(props.user.canDonate);
+
   const giveUserLicence = () => {
-    canDonate = true
-    console.log("tu sam")
+    setCanDonate(true);
+    console.log(userName, userSurname,  email, userLocation, mailSent, password, canDonate)
     axios({
       method: "put",
       url: `/api/users/${email}`,
@@ -31,12 +26,13 @@ const UserKard = (props) => {
         "Content-Type": "application/json; charset=utf-8",
       },
       data: {
-        userName,
-        userSurname,
-        userLocation,
-        email,
-        canDonate,
-        mailSent
+        email: email,
+        userName: userName,
+        userSurname: userSurname,
+        password: password,
+        userLocation: userLocation,
+        canDonate: "true",
+        mailSent: mailSent,
       },
     })
       .then((response) => {
@@ -47,6 +43,7 @@ const UserKard = (props) => {
       });
   };
   const deleteUserLicence = () => {
+    setCanDonate("false");
     axios({
       method: "put",
       url: `/api/users/${email}`,
@@ -54,13 +51,13 @@ const UserKard = (props) => {
         "Content-Type": "application/json; charset=utf-8",
       },
       data: {
-        userName,
-        userSurname,
-        userLocation,
-        email,
-        password,
-        canDonate: "true",
-        mailSent,
+        email: email,
+        userName: userName,
+        userSurname: userSurname,
+        password: password,
+        userLocation: userLocation,
+        canDonate: "false",
+        mailSent: mailSent,
       },
     })
       .then((response) => {
@@ -81,8 +78,16 @@ const UserKard = (props) => {
         <CardContent sx={{ bgcolor: "#E8E8E8" }}>
           <h3>E-mail: {email}</h3>
           <h3>Lokacija: {userLocation}</h3>
-          <h3>Može donirat:{canDonate} </h3>
-          <h3>Poslan mail: {mailSent}</h3>
+          {canDonate == true ? (
+            <h3>Može donirat: Da</h3>
+          ) : (
+            <h3>Može donirat: Ne</h3>
+          )}
+          {mailSent == "true" ? (
+            <h3>Mail poslan: Da</h3>
+          ) : (
+            <h3>Mail poslan: Ne</h3>
+          )}
         </CardContent>
         <CardActions>
           <Button variant="outlined" color="success" onClick={giveUserLicence}>

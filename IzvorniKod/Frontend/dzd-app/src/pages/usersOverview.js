@@ -9,8 +9,8 @@ const UsersOverview = () => {
     return ( 
         <React.Fragment>
             <Header />
-            <UsersList></UsersList>
-          <Footer />
+            <UsersList />
+            <Footer />
         </React.Fragment>
     );
 }

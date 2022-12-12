@@ -32,6 +32,16 @@ export const LoginAll = () => {
           console.log(response.data);
           var user=response.data;
           window.localStorage.setItem('user', JSON.stringify(user));
+          if (user.email == "admin"){
+            window.localStorage.setItem('isAdmin', "true");
+          }
+
+          var now = new Date().getTime();
+          var setupTime = localStorage.getItem('setupTime');
+
+          if (setupTime == null) {
+            localStorage.setItem('setupTime', now)
+          }
           navigate('/base');
         })
         .catch(err => {

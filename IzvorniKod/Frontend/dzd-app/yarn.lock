@@ -1346,6 +1346,11 @@
     "minimatch" "^3.1.2"
     "strip-json-comments" "^3.1.1"
 
+"@fontsource/roboto@^4.5.8":
+  "integrity" "sha512-CnD7zLItIzt86q4Sj3kZUiLcBk1dSk81qcqgMGaZe7SQ1P8hFNxhMl5AZthK1zrDM5m74VVhaOpuMGIL4gagaA=="
+  "resolved" "https://registry.npmjs.org/@fontsource/roboto/-/roboto-4.5.8.tgz"
+  "version" "4.5.8"
+
 "@humanwhocodes/config-array@^0.11.6":
   "integrity" "sha512-kBbPWzN8oVMLb0hOUYXhmxggL/1cJE6ydvjDIGi9EnAGUyA7cLVKQg+d/Dsm+KZwx2czGHrCmMVLiyg8s5JPKw=="
   "resolved" "https://registry.npmjs.org/@humanwhocodes/config-array/-/config-array-0.11.7.tgz"
@@ -1705,7 +1710,11 @@
   dependencies:
     "@babel/runtime" "^7.20.1"
 
+<<<<<<< HEAD
 "@mui/material@^5.0.0", "@mui/material@^5.10.17", "@mui/material@^5.4.1":
+=======
+"@mui/material@^5.0.0", "@mui/material@^5.10.17":
+>>>>>>> develop
   "integrity" "sha512-Kuqgv1qI5HXnc/Xu426xhCGYBSKzplb+xFNLitbnIb92Qx8jmcpfNpFlDJa2kD2H6qP66rr/m4c/zMUfGX/xBQ=="
   "resolved" "https://registry.npmjs.org/@mui/material/-/material-5.10.17.tgz"
   "version" "5.10.17"

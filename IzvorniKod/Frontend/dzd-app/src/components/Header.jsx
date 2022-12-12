@@ -20,7 +20,7 @@ function Header() {
                     ? { textDecoration: "underline" }
                     : { textDecoration: "none" }
                 }
-                to="/pregledDonacija">
+                to="/base">
                 Pregled donacija
               </NavLink>
               <NavLink
