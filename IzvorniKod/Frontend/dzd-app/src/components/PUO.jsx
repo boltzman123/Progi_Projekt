@@ -16,6 +16,8 @@ const User = () => {
     const [mjesto, setMjesto] = useState('');
     const [email, setEmail] = useState('');
     const [pass, setPass] = useState('');
+    const [donate, setDonate] = useState('');
+    const [sentMail, setSentMail] = useState('');
 
     useEffect(() => {
       setIme(JSON.parse(localStorage.getItem("user")).userName);
@@ -23,8 +25,9 @@ const User = () => {
       setMjesto(JSON.parse(localStorage.getItem("user")).userLocation);
       setEmail(JSON.parse(localStorage.getItem("user")).email);
       setPass(JSON.parse(localStorage.getItem("user")).password);
+      setDonate(JSON.parse(localStorage.getItem("user")).canDonate);
+      setSentMail(JSON.parse(localStorage.getItem("user")).mailSent);
     }, []);
-    
     const navigate=useNavigate();
 
     const logOff= ()=> {
@@ -68,7 +71,9 @@ const User = () => {
                 userSurname: prezime,
                 userLocation: mjesto,
                 email: email,
-                password: pass
+                password: pass,
+                canDonate: donate,
+                mailSent: sentMail
           }
         }).then((response) => {
             localStorage.setItem("user", JSON.stringify(response.data))

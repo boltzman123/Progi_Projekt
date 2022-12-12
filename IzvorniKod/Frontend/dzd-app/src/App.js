@@ -7,9 +7,11 @@ import Login from "./pages/Login"
 import Registracija from './pages/Registracija'
 import Base from './pages/Base'
 import ProtectedRoute from './components/Protected'
+import LoggedIn from './components/LoggedIn'
 import Donation from './pages/Donation'
 import User from './pages/User'
 import Djeca from './pages/Djeca'
+import UsersOverview from './pages/usersOverview'
 
 function App() {
 
@@ -38,6 +40,7 @@ function App() {
             <Route path={"doniraj"} element={<ProtectedRoute> <Donation /> </ProtectedRoute>} />
             <Route path={"djeca"} element={<ProtectedRoute> <Djeca /> </ProtectedRoute>} />
             <Route path={"user"} element={<ProtectedRoute> <User /> </ProtectedRoute>} />
+            <Route path={"pregledKorisnika"} element={<ProtectedRoute> <UsersOverview /> </ProtectedRoute>} />
         </Routes>
   </BrowserRouter>
   );

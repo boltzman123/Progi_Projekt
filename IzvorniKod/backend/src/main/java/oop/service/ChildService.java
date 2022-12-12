@@ -7,6 +7,7 @@ import java.util.Optional;
 
 public interface ChildService {
     List<Child> listAll();
+    List<Child> listChildByUser(String email);
     Optional<Child> listChildByUserAndId(String email, Long id);
     Child createChild(Child child);
     Child updateChild(Child child);

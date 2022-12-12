@@ -26,7 +26,7 @@ public class UsersDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email){
-        return new User(email, adminPasswordHash, authorities(email));
+        return new User(email, password(email), authorities(email));
     }
 
     private List<GrantedAuthority> authorities(String email) {
@@ -39,5 +39,15 @@ public class UsersDetailsService implements UserDetailsService {
                 () -> new UsernameNotFoundException("No user '" + email + "'")
         );
         return commaSeparatedStringToAuthorityList("ROLE_USER");
+    }
+
+    private String password(String email){
+        if("admin".equals(email)){
+            return adminPasswordHash;
+        }
+        Users user = service.findByEmail(email).orElseThrow(
+                () -> new UsernameNotFoundException("No user '" + email + "'")
+        );
+        return user.getPassword();
     }
 }
