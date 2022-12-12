@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 
-import RegForm from "../style/components/RegistracijaForm.module.css"
-import "../style/components/Buttons.css";
+import { TextField, Select, Button, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, Grid, InputLabel, MenuItem} from '@mui/material';
 
 import { toast } from 'react-toastify';
 
@@ -17,8 +16,11 @@ const NovoDijeteForm = () => {
 
     const onSubmit = (e) =>{
         e.preventDefault();
+        console.log(ime)
+        console.log(spol)
+        console.log(dob)
 
-        {/* Treba popraviti ove metode, urlove i sve ostalo */}
+        {/* Treba popraviti ove metode, urlove i sve ostalo 
         
         axios({
             method: 'post',
@@ -40,59 +42,58 @@ const NovoDijeteForm = () => {
             console.log(err)
             toast.error("Neispravno uneseni podaci")
         });
+        */}
     }
 
-    return ( 
+    return(
         <React.Fragment>
             <form onSubmit={ onSubmit }>
-                <div className={RegForm.frame}>
-                    <input 
-                        value={ime} type="text" name="ime" id="ime" 
-                        placeholder="Perica" className={RegForm.inputFrame}
-                        minLength={3} required={true}
-                        onChange={ (e) => setIme(e.target.value)}
-                    />
-                </div>
+                <Grid container spacing={2}>
+                    <Grid item>
+                        <TextField id="ime" value={ime} label="Ime" variant="outlined" onChange={(e) => setIme(e.target.value)}/>
+                    </Grid>
 
-                {/* Treba biti choice radio button M/F */}
-                <div className={RegForm.frame}>
-                    <input 
-                        value={spol} type="radio" id="m" name="spol"
-                        onChange={ (e) => setSpol(e.target.value)}
-                    />
-                    <label htmlFor="m">Muško</label><br/>
-                    <input 
-                        value={spol} type="radio" id="f" name="spol"
-                        onChange={ (e) => setSpol(e.target.value)}
-                    />
-                    <label htmlFor="f">Žensko</label><br/>
-                </div>
+                    <Grid item>
+                        <FormControl fullWidth>
+                            <FormLabel id="spol">Spol</FormLabel>
+                            <RadioGroup
+                                name="spol-radio-buttons-group"
+                                value={spol}
+                                onChange={(e) => setSpol(e.target.value)}
+                            >
+                                <FormControlLabel value="z" control={<Radio />} label="Žensko" />
+                                <FormControlLabel value="m" control={<Radio />} label="Muško" />
+                            </RadioGroup>
+                        </FormControl>
+                    </Grid>
+                    
+                    <Grid item>
+                        <FormControl fullWidth>
+                            <InputLabel>Dob</InputLabel>
+                            <Select
+                                labelId="dob-select-label"
+                                id="dob-select"
+                                value={dob}
+                                label="Dob"
+                                onChange={(e) => setDob(e.target.value)}
+                            >
+                                {/* JS loop za 15 MenuItema */}
+                                <MenuItem value={10}>Ten</MenuItem>
+                                <MenuItem value={20}>Twenty</MenuItem>
+                                <MenuItem value={30}>Thirty</MenuItem>
+                            </Select>
+                        </FormControl>
+                    </Grid>
 
-                {/* Neki onaj mali wheel sto scrolla po brojevima (max dob?) - 0 za nije se jos rodilo */}
-                <div className={RegForm.frame}>
-                    <input 
-                        value={dob} type="number" name="dob" id="dob" 
-                        className={RegForm.inputFrame}
-                        min='0' max='15' required={true}
-                        onChange={ (e) => setDob(e.target.value)}
-                    />
-                </div>
-                {/* Treba postaviti age na 0 i onda se opva opcija prikazuje */}
-                <div className={RegForm.frame}>
-                    <input 
-                        value={expBirthDate} type="date" name="expBirthDate" id="expBirthDate"  
-                        className={RegForm.inputFrame}
-                        min='2022-10-01' max='2028-10-01' required={true}
-                        onChange={ (e) => setExpBirthDate(e.target.value)}
-                    />    
-                </div>
 
-                <div className='frame buttonFrame'>
-                    <button type='submit' className='gumbic tamniji buttonreg'>Dodaj dijete</button>
-                </div>
+
+                    <Grid item>
+                        <Button type="submit">Submit</Button>
+                    </Grid>
+                </Grid>
             </form>
         </React.Fragment>
     );
 }
- 
+
 export default NovoDijeteForm;
