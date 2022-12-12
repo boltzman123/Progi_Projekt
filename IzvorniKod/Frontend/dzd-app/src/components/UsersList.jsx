@@ -17,7 +17,7 @@ function UsersList() {
       },
     })
       .then((response) => {
-        setUsers(response.data);
+        setUsers(response.data); 
       })
       .catch((err) => {
         toast.error("Greška iz baze!");
