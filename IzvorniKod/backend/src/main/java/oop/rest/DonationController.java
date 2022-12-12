@@ -73,11 +73,15 @@ public class DonationController {
         // Pronađi sve podkategorije usera preko djece
         List<Child> childList = childService.listChildByUser(email);
         Set<String> subcategoryNames = new HashSet<>();
+        Set<Integer> childAges = new HashSet<>();
+        Set<Character> childSex = new HashSet<>();
         for(Child c: childList){
             Set<Subcategory> subcategories = c.getSubcategory();
             subcategories.stream().forEach(s -> {
                 subcategoryNames.add(s.getSubcategoryName());
             });
+            childAges.add(c.getChildAge());
+            childSex.add(c.getChildSex());
         }
         // Filter aktivnih i (preporučenih koji nisu stariji od 3 dana)
         List<Donation> donationsFiltered = new ArrayList<>();
@@ -88,7 +92,10 @@ public class DonationController {
         Instant compareDate = before3Days.atStartOfDay(ZoneId.systemDefault()).toInstant();
 
         for(Donation d: allActiveDonations){
-            if(subcategoryNames.contains(d.getItem().getSubcategory().getSubcategoryName()) && d.getDateOfPublication().toInstant().compareTo(compareDate)>=0){
+            if(subcategoryNames.contains(d.getItem().getSubcategory().getSubcategoryName()) &&
+                    d.getDateOfPublication().toInstant().compareTo(compareDate)>=0 &&
+                    childAges.contains(d.getItem().getForAge()) &&
+                    childSex.contains(d.getItem().getForSex())){
                 donationsFiltered.add(d);
             } else {
                 donationsFilteredActive.add(d);
@@ -104,9 +111,9 @@ public class DonationController {
                 Float expired =d.getItem().getSubcategory().getUseDateExpires();
                 LocalDate date = LocalDate.now().minusMonths((int)(expired * 12));
                 Instant compareDate2 = date.atStartOfDay(ZoneId.systemDefault()).toInstant();
-                System.out.println(dateClosedDonation.toInstant());
+/*                System.out.println(dateClosedDonation.toInstant());
                 System.out.println(compareDate2);
-                System.out.println(dateClosedDonation.toInstant().compareTo(compareDate2)>0);
+                System.out.println(dateClosedDonation.toInstant().compareTo(compareDate2)>0);*/
                 if(dateClosedDonation.toInstant().compareTo(compareDate2)<0) {
                     return true;
                 }
@@ -119,8 +126,8 @@ public class DonationController {
             if(d.getDonatedToUser() != null && d.getDonatedToUser().getEmail().equals(email)){
                 int month = LocalDate.now().getMonthValue();
                 Season season = d.getItem().getSubcategory().getSeason();
-
-                if(season.equals(Season.WINTER) && ((month > 0 && month <3) || month == 12)) return true;
+                if(season.equals(Season.ALL)) return true;
+                else if(season.equals(Season.WINTER) && ((month > 0 && month <3) || month == 12)) return true;
                 else if(season.equals(Season.SPRING) && (month >= 3 && month < 6)) return true;
                 else if (season.equals(Season.SUMMER) && (month >= 6 && month < 9)) return true;
                 else if (season.equals(Season.AUTUMN) && (month >= 9 && month < 12)) return true;
@@ -154,7 +161,7 @@ public class DonationController {
             donation.setActive(true);
         }
         donation.setItem(itemService.createItem(donation.getItem()));
-
+        donation.setDateOfPublication(new Date());
         Donation saved = service.createDonation(donation);
         return ResponseEntity.created(URI.create("/donation/" + saved.getIdDonation())).body(saved);
     }

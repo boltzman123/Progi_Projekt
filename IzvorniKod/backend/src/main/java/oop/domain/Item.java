@@ -12,7 +12,7 @@ public class Item {
     private Long productionYear;
     private String productBrand;
     private int forAge;
-    private String forSex;
+    private char forSex;
     @ManyToOne
     @JoinColumn(name = "category_name")
     private Category category;
@@ -81,11 +81,11 @@ public class Item {
         this.forAge = forAge;
     }
 
-    public String getForSex() {
+    public char getForSex() {
         return forSex;
     }
 
-    public void setForSex(String forSex) {
+    public void setForSex(char forSex) {
         this.forSex = forSex;
     }
 
