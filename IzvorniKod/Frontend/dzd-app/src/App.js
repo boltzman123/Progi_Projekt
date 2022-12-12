@@ -34,13 +34,13 @@ function App() {
     <BrowserRouter>
         <Routes>
             <Route path={"/"} element={<Home />} />
-            <Route path={"login"} element={ <Login /> } />
-            <Route path={"registracija"} element={<Registracija /> } />
+            <Route path={"login"} element={ <LoggedIn> <Login /> </LoggedIn> } />
+            <Route path={"registracija"} element={<LoggedIn> <Registracija/> </LoggedIn> } />
             <Route path={"base"} element={<ProtectedRoute> <Base /> </ProtectedRoute>} />
             <Route path={"doniraj"} element={<ProtectedRoute> <Donation /> </ProtectedRoute>} />
-            <Route path={"djeca"} element={<ProtectedRoute> <Djeca /> </ProtectedRoute>} />
             <Route path={"user"} element={<ProtectedRoute> <User /> </ProtectedRoute>} />
             <Route path={"pregledKorisnika"} element={<ProtectedRoute> <UsersOverview /> </ProtectedRoute>} />
+            <Route path={"djeca"} element={<ProtectedRoute> <Djeca /> </ProtectedRoute>} />
         </Routes>
   </BrowserRouter>
   );
