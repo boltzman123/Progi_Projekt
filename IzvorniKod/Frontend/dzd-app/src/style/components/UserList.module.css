@@ -1,0 +1,10 @@
+.userList {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    justify-content: space-between;
+    padding-top: 80px;
+    padding-left: 220px;
+    padding-right: 220px;
+    padding-bottom: 80px;
+    
+}

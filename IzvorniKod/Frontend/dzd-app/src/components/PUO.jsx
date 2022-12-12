@@ -28,7 +28,6 @@ const User = () => {
       setDonate(JSON.parse(localStorage.getItem("user")).canDonate);
       setSentMail(JSON.parse(localStorage.getItem("user")).mailSent);
     }, []);
-    
     const navigate=useNavigate();
 
     const logOff= ()=> {

@@ -9,6 +9,7 @@ import ProtectedRoute from './components/Protected'
 import LoggedIn from './components/LoggedIn'
 import Donation from './pages/Donation'
 import User from './pages/User'
+import UsersOverview from './pages/usersOverview'
 
 function App() {
 
@@ -36,6 +37,7 @@ function App() {
             <Route path={"base"} element={<ProtectedRoute> <Base /> </ProtectedRoute>} />
             <Route path={"doniraj"} element={<ProtectedRoute> <Donation /> </ProtectedRoute>} />
             <Route path={"user"} element={<ProtectedRoute> <User /> </ProtectedRoute>} />
+            <Route path={"pregledKorisnika"} element={<ProtectedRoute> <UsersOverview /> </ProtectedRoute>} />
         </Routes>
   </BrowserRouter>
   );
