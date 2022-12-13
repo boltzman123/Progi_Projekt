@@ -17,7 +17,6 @@ public class Subcategory {
     @JoinColumn(name = "category_name")
     @NotNull
     private Category category;
-    private int itemDuration;
     private float useDateExpires;
     @Enumerated(EnumType.STRING)
     private Season season;
@@ -26,10 +25,9 @@ public class Subcategory {
     private Set<Child> childrenSub = new HashSet<>();
     public Subcategory(){}
 
-    public Subcategory(String subCategoryName, Category category, int itemDuration, Season season, float useDateExpires) {
+    public Subcategory(String subCategoryName, Category category, Season season, float useDateExpires) {
         this.subcategoryName = subCategoryName;
         this.category = category;
-        this.itemDuration = itemDuration;
         this.useDateExpires = useDateExpires;
         this.season = season;
     }
@@ -56,14 +54,6 @@ public class Subcategory {
 
     public void setSeason(Season season) {
         this.season = season;
-    }
-
-    public int getItemDuration() {
-        return itemDuration;
-    }
-
-    public void setItemDuration(int itemDuration) {
-        this.itemDuration = itemDuration;
     }
 
     public String getSubcategoryName() {

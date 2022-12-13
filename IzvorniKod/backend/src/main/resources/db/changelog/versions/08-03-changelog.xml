@@ -87,7 +87,7 @@
             <column name="for_age" type="INT">
                 <constraints nullable="false"/>
             </column>
-            <column name="for_sex" type="VARCHAR(255)"/>
+            <column name="for_sex" type="CHAR"/>
             <column name="category_name" type="VARCHAR(255)"/>
             <column name="subcategory_name" type="VARCHAR(255)"/>
         </createTable>
@@ -98,9 +98,6 @@
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_subcategory"/>
             </column>
             <column name="category_name" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="item_duration" type="INT">
                 <constraints nullable="false"/>
             </column>
             <column name="use_date_expires" type="FLOAT">
