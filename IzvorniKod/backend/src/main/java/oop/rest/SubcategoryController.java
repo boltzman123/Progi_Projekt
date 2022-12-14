@@ -43,10 +43,9 @@ public class SubcategoryController {
     }
 
     // Izlistaj podkategorije po imenu kategorije
-    @GetMapping("/{categoryName}")
+    @GetMapping("/category/{categoryName}")
     public List<Subcategory> getSubcategoryByCategory(@PathVariable("categoryName") String categoryName){
-        List<Subcategory> subcategoryList = service.listAll();
-        subcategoryList.stream().filter(s -> s.getCategory().getCategoryName() == categoryName ).collect(Collectors.toList());
+        List<Subcategory> subcategoryList = service.listAll().stream().filter(s -> s.getCategory().getCategoryName().equals(categoryName)).collect(Collectors.toList());
         return subcategoryList;
     }
 
