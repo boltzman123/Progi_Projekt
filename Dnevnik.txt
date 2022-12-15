@@ -129,8 +129,17 @@
 
 17. sastanak
     -Datum: 11. prosinca 2022
-    -Prisustvovali: D.Kiramarios, K.Tomičić, D.Kovačević, D.Jambrović
+    -Prisustvovali: D.Kiramarios, K.Tomičić, S.Barac, D.Jambrović
     -Trajanje sastanka: 2h
+    -Teme sastanka:
+        -pregled do sad napravljenoga
+        -savjeti oko sljedećih koraka razvoja frontenda
+        -daljnja podjela posla oko rada na frontendu
+
+18. sastanak
+    -Datum: 15. prosinca 2022
+    -Prisustvovali: D.Kiramarios, K.Tomičić, S.Barac, D.Jambrović
+    -Trajanje sastanka: 1h
     -Teme sastanka:
         -pregled do sad napravljenoga
         -savjeti oko sljedećih koraka razvoja frontenda
