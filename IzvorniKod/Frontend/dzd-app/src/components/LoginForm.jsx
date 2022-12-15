@@ -102,8 +102,8 @@ export const LoginAll = () => {
             onBlur={() => {
               if (!pass) {
                 setPassErr("Lozinka mora biti upisana.")
-              } else if (pass.length < 4){
-                setPassErr("Lozinka mora biti dulja od 3 znaka.")
+              } else if (pass.length < 3){
+                setPassErr("Lozinka mora biti dulja od 2 znaka.")
               } else {
                 setPassErr("")
               }

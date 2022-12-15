@@ -72,11 +72,12 @@ const RegistracijaForm = () => {
                         name="ime" id="ime" 
                         placeholder="Pero"
                         className={imeErr ? `${RegForm.inputFrame} ${RegForm.inputFrameErr}` : RegForm.inputFrame}
-                        minLength={3}
                         onChange={ (e) => setIme(e.target.value)}
                         onBlur={() => {
                             if (!ime) {
                                 setImeErr("Ime mora biti upisano.")
+                            } else if (ime.length < 3){
+                                setImeErr("Ime mora biti dulje od 2 znaka.")
                             } else {
                                 setImeErr("")
                             }
@@ -88,11 +89,12 @@ const RegistracijaForm = () => {
                     <input 
                         value={prezime} type="text" name="prezime" id="prezime" 
                         placeholder="Perić" className={prezimeErr ? `${RegForm.inputFrame} ${RegForm.inputFrameErr}` : RegForm.inputFrame}
-                        minLength={3}
                         onChange={ (e) => setPrezime(e.target.value)}
                         onBlur={() => {
                             if (!prezime) {
                                 setPrezimeErr("Prezime mora biti upisano.")
+                            } else if (prezime.length < 3){
+                                setPrezimeErr("Prezime mora biti dulje od 2 znaka.")
                             } else {
                                 setPrezimeErr("")
                             }
@@ -104,11 +106,12 @@ const RegistracijaForm = () => {
                     <input 
                         value={mjesto} type="text" name="mjesto" id="mjesto" 
                         placeholder="Ulica Perića, Perkovci" className={mjestoErr ? `${RegForm.inputFrame} ${RegForm.inputFrameErr}` : RegForm.inputFrame}
-                        minLength={4}
                         onChange={ (e) => setMjesto(e.target.value)}
                         onBlur={() => {
                             if (!mjesto) {
-                                setMjestoErr("Mjesto mora biti upisano.")
+                                setMjestoErr("Naziv mjesta mora biti upisan.")
+                            } else if (mjesto.length < 4){
+                                setMjestoErr("Naziv mjesta mora biti dulji od 3 znaka.")
                             } else {
                                 setMjestoErr("")
                             }
@@ -121,12 +124,11 @@ const RegistracijaForm = () => {
                     <input 
                         value={email} type="email" name="email" id="email" 
                         placeholder="peroperic@email.com" className={emailErr ? `${RegForm.inputFrame} ${RegForm.inputFrameErr}` : RegForm.inputFrame}
-                        minLength={3}
                         onChange={ (e) => setEmail(e.target.value)}
                         onBlur={() => {
                             if (!email) {
                                 setEmailErr("Email adresa mora biti upisana.")
-                            } else if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email) || email == "admin")) {
+                            } else if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email))) {
                                 setEmailErr("Email adresa mora biti ispravno formatirana.")
                             } else {
                                 setEmailErr("")
@@ -141,13 +143,12 @@ const RegistracijaForm = () => {
                         value={pass} type="password" name="pass" id="pass" 
                         placeholder="Lozinka" 
                         className={passErr ? `${RegForm.inputFrame} ${RegForm.inputFrameErr}` : RegForm.inputFrame}
-                        minLength={3}
                         onChange={ (e) => setPass(e.target.value)}
                         onBlur={() => {
                             if (!pass) {
                               setPassErr("Lozinka mora biti upisana.")
-                            } else if (pass.length < 4){
-                              setPassErr("Lozinka mora biti dulja od 3 znaka.")
+                            } else if (pass.length < 3){
+                              setPassErr("Lozinka mora biti dulja od 2 znaka.")
                             } else {
                               setPassErr("")
                             }
