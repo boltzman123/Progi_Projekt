@@ -13,20 +13,25 @@
     margin: 20px 20px;
     text-align: center;
     align-items: center;
-    
 }
+
 .tamniji{
-    background-color: rgba(229, 93, 17, 255);
+    background-color: rgba(229, 93, 17, 1);
+}
+
+.tamniji:disabled {
+    background-color: rgba(229, 93, 17, 0.5);
 }
 
 .svijetliji{
-    background-color: rgba(244,177,131,255);
+    background-color: rgba(244,177,131,1);
     width: 161px;
 }
 
-.gumbic:hover {
-opacity: 0.8;
+.gumbic:hover:not([disabled]) {
+    opacity: 0.8;
 }
+
 .upitnik {
     width: 200px;
 }
