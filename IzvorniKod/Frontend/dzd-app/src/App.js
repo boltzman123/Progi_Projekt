@@ -1,6 +1,6 @@
 import './App.css'
 import { BrowserRouter, Routes, Route } from "react-router-dom"
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 
 import Home from "./pages/Home"
 import Login from "./pages/Login"
@@ -42,6 +42,7 @@ function App() {
             <Route path={"user"} element={<ProtectedRoute> <User /> </ProtectedRoute>} />
             <Route path={"pregledKorisnika"} element={<ProtectedRoute> <UsersOverview /> </ProtectedRoute>} />
             <Route path={"djeca"} element={<ProtectedRoute> <Djeca /> </ProtectedRoute>} />
+            <Route path={"*"} element={<div> Dobrodosli na Easter egg stranicu</div>} />
         </Routes>
     </BrowserRouter>
   );
