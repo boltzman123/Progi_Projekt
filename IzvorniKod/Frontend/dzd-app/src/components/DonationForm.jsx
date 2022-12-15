@@ -15,7 +15,7 @@ function setOptions() {
   }).then((response) => {
     var pod = Object.values(response.data);
     privremeniAry = response.data;
-    console.log(response.data[0]);
+    // console.log(response.data[0]);
     var podMap = new Map();
     for (let i = 0; i < pod.length; ++i) {
       let data = pod[i].category.categoryName;
@@ -59,7 +59,7 @@ const DonationForm = () => {
     setSelectedImage(event.target.files[0]);
     setPictureURL(URL.createObjectURL(event.target.files[0]));
   };
-  console.log(pictureURL);
+  // console.log(pictureURL);
 
   const navigate = useNavigate();
 

@@ -55,7 +55,7 @@ function Header() {
         </Navbar>
       </React.Fragment>
     );
-  } else if (user.canDonate) {
+  } else if (user.canDonate===true) {
     return (
       <React.Fragment>
         <Navbar bg="light" variant="light">
@@ -125,15 +125,6 @@ function Header() {
               }
               to="/base">
               Aktivne donacije
-            </NavLink>
-            <NavLink
-              style={({ isActive }) =>
-                isActive
-                  ? { textDecoration: "underline" }
-                  : { textDecoration: "none" }
-              }
-              to="/doniraj">
-              Doniraj
             </NavLink>
             <NavLink
               style={({ isActive }) =>

@@ -9,7 +9,7 @@ const DonacijaKard = (props) => {
   let { productName, forAge} = props.donacija.item;
   let { donationName, dateOfPublication,pictureURL} = props.donacija;
   let { userLocation } = props.donacija.user;
-  console.log(props.donacija)
+//   console.log(props.donacija)
 
   return (
         <Card className={DonacijaKardCSS.malaKartica} variant="outlined">
