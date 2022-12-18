@@ -5,3 +5,12 @@
     width: 500px;
     height: auto;
 }
+
+.modal {
+    display: grid;
+    grid-template-columns: auto auto;
+}
+.predmeti *{
+    display: block;
+    margin-bottom: 9px;
+}
