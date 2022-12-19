@@ -13,7 +13,8 @@ import CanDonateRoute from './components/canDonate'
 import User from './pages/User'
 import Djeca from './pages/Djeca'
 import UsersOverview from './pages/usersOverview'
-
+import MojeDonacije from './pages/MojeDonacije'
+import NeobjavljeneDonacije from './pages/NeobjavljeneDonacije'
 
 
 function App() {
@@ -42,6 +43,8 @@ function App() {
             <Route path={"base"} element={<ProtectedRoute> <Base /> </ProtectedRoute>} />
             <Route path={"doniraj"} element={<CanDonateRoute> <Donation /> </CanDonateRoute>} />
             <Route path={"user"} element={<ProtectedRoute> <User /> </ProtectedRoute>} />
+            <Route path={"mojeDonacije"} element={<ProtectedRoute> <MojeDonacije /> </ProtectedRoute>} />
+            <Route path={"neobjavljeneDonacije"} element={<ProtectedRoute> <NeobjavljeneDonacije /> </ProtectedRoute>} />
             <Route path={"pregledKorisnika"} element={<ProtectedRoute> <UsersOverview /> </ProtectedRoute>} />
             <Route path={"djeca"} element={<ProtectedRoute> <Djeca /> </ProtectedRoute>} />
             <Route path={"*"} element={<div> Dobrodosli na Easter egg stranicu</div>} />

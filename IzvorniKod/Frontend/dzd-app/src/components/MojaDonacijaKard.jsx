@@ -10,14 +10,10 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
-import { Modal, IconButton } from "@mui/material";
-import { TextField, Select, Button, FormControl, FormLabel, Typography} from "@mui/material";
-import { RadioGroup, FormControlLabel, Radio, Grid, InputLabel, MenuItem, Box, Container} from "@mui/material";
+import { Modal } from "@mui/material";
+import { TextField, Select, Button, FormControl, FormLabel} from "@mui/material";
+import { RadioGroup, FormControlLabel, Radio, InputLabel, MenuItem, Box, Container} from "@mui/material";
 
-import NovoDijeteCategoryPicker from "./NovoDijeteCategoryPicker.jsx";
-
-import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
-import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import DropdownCategory from "./DropdownCategory";
 //`api/donation/${props.donacija.idDonation}`
 
@@ -35,7 +31,7 @@ const style = {
   pb: 3,
 };
 
-const DonacijaKard = (props) => {
+const MojeDonacijaKard = (props) => {
   let [productName, setProductName] = useState(props.donacija.item.productName);
   let [itemState, setItemState] = useState(props.donacija.item.itemState);
   let [productBrand, setProductBrand] = useState(props.donacija.item.productBrand);
@@ -48,6 +44,9 @@ const DonacijaKard = (props) => {
   let { email } = props.donacija.user;
   let { idDonation } = props.donacija;
   let { id } = props.donacija.item;
+  let [message, setMessage] = useState(props.donacija.message);
+  let [valid, setValid] = useState(props.donacija.valid);
+  let [edit, setEdit] = useState(props.donacija.edit);
   let userL = JSON.parse(localStorage.getItem("user"));
   let emailL = userL.email;
 
@@ -208,6 +207,9 @@ const DonacijaKard = (props) => {
             <h3>Predviđena dob korisnika: {dob}</h3>
             <h3>Datum objave: {dateOfPublication} </h3>
             <h3>Lokacija: {userLocation} </h3>
+            <h3 id="sit">Validno: {String(valid)}</h3>
+            <h3 id="sit">Treba urediti: {String(edit)}</h3>
+            <h3 id="sit">Poruka od admina: {message}</h3>
           </CardContent>
         </CardActionArea>
       </Card>
@@ -361,4 +363,4 @@ const DonacijaKard = (props) => {
   );
 };
 
-export default DonacijaKard;
+export default MojeDonacijaKard;

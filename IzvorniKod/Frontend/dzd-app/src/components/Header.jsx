@@ -21,7 +21,16 @@ function Header() {
                     : { textDecoration: "none" }
                 }
                 to="/base">
-                Pregled donacija
+                Pregled aktivnih donacija
+              </NavLink>
+              <NavLink
+                style={({ isActive }) =>
+                  isActive
+                    ? { textDecoration: "underline" }
+                    : { textDecoration: "none" }
+                }
+                to="/neobjavljeneDonacije">
+                Pregled neobjavljenih donacija
               </NavLink>
               <NavLink
                 style={({ isActive }) =>
