@@ -1,7 +1,7 @@
 import React, {useState, useEffect, Component} from "react";
 import {toast} from "react-toastify"
 import axios from "axios";
-import MojaDonacijaKard from "./MojaDonacijaKard";
+import AdminDonacijaKard from "./AdminDonacijaKard";
 import KarticaCSS from '../style/components/Kartica.module.css'
 
 function NeobjavljeneDonacije() {
@@ -33,7 +33,7 @@ function NeobjavljeneDonacije() {
     return (
         <div className={KarticaCSS.karticaList}>
             {donacije.map((donacija) => {
-            return <MojaDonacijaKard key={donacija.idDonation} donacija={donacija}></MojaDonacijaKard>;
+            return <AdminDonacijaKard key={donacija.idDonation} donacija={donacija}></AdminDonacijaKard>;
             })}
         </div>
     );

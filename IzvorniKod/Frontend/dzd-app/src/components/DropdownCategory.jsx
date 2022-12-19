@@ -34,7 +34,7 @@ function setOptions(chosenCategory, arraySub, setArySub) {
     }
     let values = mapCat.get(chosenCategory.categoryName);
     setArySub([].concat(values));
-    console.log(arraySub);
+    // console.log(arraySub);
   });
 }
 
@@ -49,7 +49,7 @@ function DropdownCategory(props) {
 
   useEffect(() => {
     setOptions(chosenCategory, arraySub, setArySub);
-    console.log("ovdje");
+    // console.log("ovdje");
   }, []);
 
   const checkSubInCat = (cat) => {
@@ -94,7 +94,7 @@ function DropdownCategory(props) {
                 let obj = privremeniAry[i];
                 setChosenSubCategory(obj);
                 localStorage.setItem("sub", JSON.stringify(obj))
-                console.log(e.value);
+                // console.log(e.value);
               }
             }
           }}

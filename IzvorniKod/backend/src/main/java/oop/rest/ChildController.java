@@ -57,6 +57,7 @@ public class ChildController {
     }
     // Brisi djecu
     @DeleteMapping("")
+    @Secured("ROLE_USER")
     public Child deleteChild(@RequestBody Child child) {
         return service.deleteChild(child);
     }

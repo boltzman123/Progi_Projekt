@@ -16,6 +16,7 @@ public class Donation {
     private boolean isValid = false;
     private boolean isActive = true;
     private boolean edit = false;
+    private String message;
     private String pictureURL;
     private String handoverLocation;
     @ManyToOne
@@ -121,6 +122,13 @@ public class Donation {
 
     public void setHandoverLocation(String handoverLocation) {
         this.handoverLocation = handoverLocation;
+    }
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 
 }

@@ -1,15 +1,15 @@
 package oop.rest;
 
-import net.bytebuddy.description.method.ParameterList;
 import oop.domain.*;
 import oop.service.ChildService;
 import oop.service.DonationService;
 import oop.service.ItemService;
+import oop.service.UploadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.net.URI;
 import java.time.Instant;
@@ -29,6 +29,9 @@ public class DonationController {
     private ItemService itemService;
     @Autowired
     private ChildService childService;
+
+    @Autowired
+    private UploadService uploadService;
 
     // Izlistaj sve donacije
     @GetMapping("")
@@ -156,10 +159,12 @@ public class DonationController {
 
     // Donacija s itemom
     @PostMapping("")
-    public ResponseEntity<Donation> createDonationWithItem(@RequestBody Donation donation){
+    public ResponseEntity<Donation> createDonationWithItem(@RequestBody Donation donation) throws Exception{
+
         if(donation.getDateOfClosing()==null){
             donation.setActive(true);
         }
+
         donation.setItem(itemService.createItem(donation.getItem()));
         donation.setDateOfPublication(new Date());
         Donation saved = service.createDonation(donation);
@@ -175,6 +180,12 @@ public class DonationController {
         donation.setDateOfPublication(new Date());
         Donation saved = service.createDonation(donation);
         return ResponseEntity.created(URI.create("/donation/" + saved.getIdDonation())).body(saved);
+    }
+
+    @PostMapping("/uploadPicture")
+    public ResponseEntity<String> uploadImage(@RequestBody MultipartFile file) throws Exception{
+
+        return ResponseEntity.created(URI.create(file.getOriginalFilename())).body(uploadService.uploadFile(file));
     }
 
     // Update donaciju
