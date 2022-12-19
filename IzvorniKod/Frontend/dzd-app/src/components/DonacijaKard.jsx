@@ -52,11 +52,28 @@ const style = {
 };
 
 const DonacijaKard = (props) => {
-  let { productName, forAge, itemState, productBrand, productionYear } =
-    props.donacija.item;
-  let { donationName, dateOfPublication, pictureURL } = props.donacija;
-  let { userLocation } = props.donacija.user;
-  let { user } = props.donacija.user;
+  let [productName, setProductName] = useState(props.donacija.item.productName);
+  let [itemState, setItemState] = useState(props.donacija.item.itemState);
+  let [productBrand, setProductBrand] = useState(
+    props.donacija.item.productBrand
+  );
+  let [productionYear, setProductionYear] = useState(
+    props.donacija.item.productionYear
+  );
+
+  let [donationName, setDonationName] = useState(props.donacija.donationName);
+  let [dateOfPublication, setDateOfPublication] = useState(
+    props.donacija.dateOfPublication
+  );
+  let [userLocation, setUserLocation] = useState(
+    props.donacija.user.userLocation
+  );
+
+  let { email } = props.donacija.user;
+  let { idDonation } = props.donacija;
+  let { id } = props.donacija.item;
+  let userL = JSON.parse(localStorage.getItem("user"));
+  let emailL = userL.email;
 
   const ageRange = [...Array(16).keys()];
   const [dob, setDob] = useState(props.donacija.item.forAge);
@@ -64,14 +81,137 @@ const DonacijaKard = (props) => {
 
   const [checkedCat, setCheckedCat] = useState(props.donacija.item.category);
   const [checkedSub, setCheckedSub] = useState(props.donacija.item.subcategory);
+  const [checkedUser, setCheckedUser] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [pictureURL, setPictureURL] = useState(props.donacija.pictureURL);
+
   //   console.log(props.donacija)
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {
+    localStorage.removeItem("cat");
+    localStorage.removeItem("sub");
+    setOpen(false);
+  };
 
-  const onSubmit = (e) => {};
-  console.log(props.donacija.item);
+  const handleImageChange = (event) => {
+    // Update the selected image in state
+    setSelectedImage(event.target.files[0]);
+    setPictureURL(URL.createObjectURL(event.target.files[0]));
+  };
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (emailL == email) {
+      setCheckedUser(false);
+      console.log(emailL == email);
+    } else {
+      setCheckedUser(true);
+    }
+  }, []);
+
+  const onSubmit = (e) => {
+
+    e.preventDefault();
+    let cat = JSON.parse(localStorage.getItem("cat"));
+    let sub = JSON.parse(localStorage.getItem("sub"));
+    setCheckedCat(cat);
+    setCheckedSub(sub);
+
+    axios({
+      method: "put",
+      url: `/api/item/${id}`,
+      headers: {
+        "Content-Type": "application/json; charset=utf-8",
+      },
+      data: {
+        id,
+        productName: productName,
+        itemState: itemState,
+        productionYear: parseInt(productionYear),
+        productBrand: productBrand,
+        forAge: dob,
+        forSex: spol,
+        category: cat,
+        subcategory: sub,
+      },
+    })
+      .then((response) => {
+        console.log(response.data);
+        let user = JSON.parse(localStorage.getItem("user"));
+        let item = response.data;
+        axios({
+          method: "put",
+          url: `/api/donation/${idDonation}`,
+          headers: {
+            "Content-Type": "application/json; charset=utf-8",
+          },
+          data: {
+            idDonation,
+            donationName,
+            pictureURL,
+            user,
+            item,
+            dateOfPublication,
+            handoverLocation: userLocation,
+          },
+        })
+          .then((response) => {
+            console.log(response.data);
+            handleClose();
+            navigate("/base");
+            toast.success("Promjene spremljene u bazu!");
+          })
+          .catch((err) => {
+            console.log(err);
+            toast.error("Došlo je do greške s donacijom");
+          });
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error("Došlo je do greške s predmetom");
+      });
+  };
+
+  const deleteOglas = () => {
+
+    let cat = JSON.parse(localStorage.getItem("cat"));
+    let sub = JSON.parse(localStorage.getItem("sub"));
+
+    axios({
+      method: "delete",
+      url: `/api/donation/${idDonation}`,
+      headers: {
+        "Content-Type": "application/json; charset=utf-8",
+      },
+    })
+      .then((response) => {
+        console.log(response.data);
+        axios({
+          method: "delete",
+          url: `/api/item/${id}`,
+          headers: {
+            "Content-Type": "application/json; charset=utf-8",
+          },
+        })
+          .then((response) => {
+            console.log(response.data);
+          })
+          .catch((err) => {
+            toast.error("Došlo je do greške");
+          });
+        handleClose();
+        window.location.reload();
+        toast.success("Donacija uspješno obrisana!");
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error("Došlo je do greške");
+      });
+  };
+
   return (
     <React.Fragment>
       <Card className={DonacijaKardCSS.malaKartica} variant="outlined">
@@ -89,7 +229,7 @@ const DonacijaKard = (props) => {
           </h1>
           <CardContent sx={{ bgcolor: "#E8E8E8" }}>
             <h3>Ime predmeta: {productName}</h3>
-            <h3>Predviđena dob korisnika: {forAge}</h3>
+            <h3>Predviđena dob korisnika: {dob}</h3>
             <h3>Datum objave: {dateOfPublication} </h3>
             <h3>Lokacija: {userLocation} </h3>
           </CardContent>
@@ -113,33 +253,43 @@ const DonacijaKard = (props) => {
             <Container maxWidth="s">
               <Box>
                 <TextField
+                  onChange={(e) => setDonationName(e.target.value)}
                   label="Ime donacije"
                   id="ImeDonacije"
                   value={donationName}
-                  disabled={true}></TextField>
+                  disabled={checkedUser}></TextField>
 
                 <TextField
+                  onChange={(e) => setProductName(e.target.value)}
                   label="Ime predmeta"
                   id="ImePredmeta"
                   value={productName}
-                  disabled={true}></TextField>
+                  disabled={checkedUser}></TextField>
 
                 <TextField
+                  onChange={(e) => setDateOfPublication(e.target.value)}
                   label="Datum objave"
                   id="datumObjave"
                   value={dateOfPublication}
-                  disabled={true}></TextField>
+                  disabled={checkedUser}></TextField>
+
+                <TextField
+                  onChange={(e) => setUserLocation(e.target.value)}
+                  label="Lokacija preuzimanja"
+                  id="datumObjave"
+                  value={userLocation}
+                  disabled={checkedUser}></TextField>
 
                 <FormControl fullWidth>
                   <InputLabel>Predviđena dob:</InputLabel>
                   <Select
                     style={{ width: 225 }}
+                    disabled={checkedUser}
                     labelId="dob-select-label"
                     id="dob-select"
                     value={dob}
                     label="Dob"
                     required
-                    disabled={true}
                     MenuProps={{
                       PaperProps: { sx: { maxHeight: 175 } },
                     }}
@@ -163,13 +313,13 @@ const DonacijaKard = (props) => {
                     <div>
                       <FormControlLabel
                         value="F"
-                        disabled={true}
+                        disabled={checkedUser}
                         control={<Radio />}
                         label="Žensko"
                       />
                       <FormControlLabel
                         value="M"
-                        disabled={true}
+                        disabled={checkedUser}
                         control={<Radio />}
                         label="Muško"
                       />
@@ -178,48 +328,57 @@ const DonacijaKard = (props) => {
                 </FormControl>
 
                 <TextField
+                  onChange={(e) => setItemState(e.target.value)}
                   label="Stanje predmeta"
                   id="stanjePredmeta"
                   value={itemState}
-                  disabled={true}></TextField>
+                  disabled={checkedUser}></TextField>
 
                 <TextField
+                  onChange={(e) => setProductBrand(e.target.value)}
                   label="Naziv marke predmeta"
                   id="markaPredmeta"
                   value={productBrand}
-                  disabled={true}></TextField>
+                  disabled={checkedUser}></TextField>
 
                 <TextField
+                  type="number"
+                  onChange={(e) => setProductionYear(e.target.value)}
                   label="Godina proizvodnje"
                   id="godinaProizvodnje"
                   value={productionYear}
-                  disabled={true}></TextField>
+                  disabled={checkedUser}></TextField>
 
                 <DropdownCategory
-                  value={true}
+                  value={checkedUser}
                   category={checkedCat}
                   subcategory={checkedSub}></DropdownCategory>
-            
+                <div>
+                  <input
+                    style={email != emailL ? { display: `none` } : {}}
+                    type="file"
+                    onChange={handleImageChange}
+                  />
+                </div>
               </Box>
               <CardActions>
-                  <Button
-                    variant="outlined"
-                    color="info"
-                   >
-                    Update
-                  </Button>
-                  <Button
-                    variant="outlined"
-                    color="error"
-                    >
-                    Obriši oglas
-                  </Button>
-                </CardActions>
-              
+                <Button
+                  type="submit"
+                  style={email != emailL ? { display: `none` } : {}}
+                  variant="outlined"
+                  color="info">
+                  Update
+                </Button>
+                <Button
+                  onClick={deleteOglas}
+                  style={email != emailL ? { display: `none` } : {}}
+                  variant="outlined"
+                  color="error">
+                  Obriši oglas
+                </Button>
+              </CardActions>
             </Container>
-         
           </form>
-          
         </Box>
       </Modal>
     </React.Fragment>

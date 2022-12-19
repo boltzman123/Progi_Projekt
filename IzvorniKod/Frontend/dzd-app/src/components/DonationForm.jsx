@@ -107,6 +107,7 @@ const DonationForm = () => {
           })
             .then((response) => {
               console.log(response.data);
+              navigate("/base")
               toast.success("Donacija poslana na odobravanje");
             })
             .catch((err) => {
@@ -251,6 +252,7 @@ const DonationForm = () => {
                     let obj = privremeniAry[i];
                     setChosenSubCategory(e.value);
                     setSubcategoryName(obj);
+                    console.log(subcategoryName);
                   }
                 }
                 console.log(e.value);
