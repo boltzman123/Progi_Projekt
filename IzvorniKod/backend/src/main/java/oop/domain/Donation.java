@@ -16,7 +16,7 @@ public class Donation {
     private boolean isValid = false;
     private boolean isActive = true;
     private boolean edit = false;
-    private String message;
+    private String message = "";
     private String pictureURL;
     private String handoverLocation;
     @ManyToOne
