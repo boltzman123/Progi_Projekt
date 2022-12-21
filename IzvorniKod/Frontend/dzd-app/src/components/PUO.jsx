@@ -129,10 +129,30 @@ const User = () => {
                 </div>
                 </form>
                 <div className={`${PUOCSS.frame} ${PUOCSS.buttonFrame}`}>
-                    <button className='gumbic tamniji buttonreg' onClick={() => { if (window.confirm('Provjerite jeste li sve dobro upisali')) onSubmit() } }>Updateaj podatke</button>
-                    <DjecaBtn/>
-                    <button className="gumbic upitnik buttonreg" onClick={() => { if (window.confirm('Sigurno želite obrisati račun?')) obrisiRacun() }}>Obrisi racun</button>{" "}
-                    <button className="gumbic upitnik buttonreg" onClick={() => { if (window.confirm('Sigurno se želiš odlogirati?')) logOff() }}>Log out</button>{" "}
+                  <button className='gumbic tamniji buttonreg' 
+                      onClick={() => { if (window.confirm('Provjerite jeste li sve dobro upisali')) 
+                      onSubmit() } }>
+                      Updateaj podatke
+                  </button>
+                      
+                  <Link to={"/djeca"}>
+                    <button className="gumbic upitnik buttonreg" style={{display:email=="admin"?"none":""}}
+                      onClick={() => obrisiRacun() }>
+                        Obrisi racun
+                      </button>{" "}
+                    </Link> 
+
+                      <button className="gumbic upitnik buttonreg" style={{display:email=="admin"?"none":""}}
+                        onClick={() => { if (window.confirm('Sigurno želite obrisati račun?')) 
+                        obrisiRacun() }}>
+                        Obrisi racun
+                      </button>{" "}
+                      
+                      <button className="gumbic upitnik buttonreg" 
+                        onClick={() => { if (window.confirm('Sigurno se želiš odlogirati?')) 
+                        logOff() }}>
+                        Log out
+                      </button>{" "}
                 </div>
             
         </React.Fragment>
