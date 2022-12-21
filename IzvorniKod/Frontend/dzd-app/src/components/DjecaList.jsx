@@ -52,6 +52,7 @@ const DjecaList = ({updatePage, setUpdatePage}) => {
             console.log('Ubili smo ' + dijete.childName);
             getAllChildren();
         }).catch(err => {
+            console.log(dijete)
             console.log('Delete child nevalja');
             toast.error("Neispravno uneseni podaci");
         });

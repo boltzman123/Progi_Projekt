@@ -7,7 +7,7 @@ class DjecaBtn extends Component {
     return (
       <React.Fragment>
             <Link to={"/djeca"}>
-                <button type="button" className='gumbic tamniji'>
+                <button type="button" className='gumbic tamniji' >
                   Pregled djece
                 </button>
               </Link>
