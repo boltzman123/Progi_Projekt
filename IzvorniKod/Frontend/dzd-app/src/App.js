@@ -15,6 +15,7 @@ import Djeca from './pages/Djeca'
 import UsersOverview from './pages/usersOverview'
 import MojeDonacije from './pages/MojeDonacije'
 import NeobjavljeneDonacije from './pages/NeobjavljeneDonacije'
+import Kategorije from './pages/Kategorije'
 
 
 function App() {
@@ -47,6 +48,7 @@ function App() {
             <Route path={"neobjavljeneDonacije"} element={<ProtectedRoute> <NeobjavljeneDonacije /> </ProtectedRoute>} />
             <Route path={"pregledKorisnika"} element={<ProtectedRoute> <UsersOverview /> </ProtectedRoute>} />
             <Route path={"djeca"} element={<ProtectedRoute> <Djeca /> </ProtectedRoute>} />
+            <Route path={"kategorije"} element={<ProtectedRoute> <Kategorije/> </ProtectedRoute>} />
             <Route path={"*"} element={<div> Dobrodosli na Easter egg stranicu</div>} />
         </Routes>
     </BrowserRouter>

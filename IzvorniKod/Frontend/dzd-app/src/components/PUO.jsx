@@ -8,6 +8,7 @@ import "../style/components/Buttons.css";
 
 import { FiMail } from "react-icons/fi";
 import { toast } from 'react-toastify';
+import { Button } from '@mui/material';
 
 // PUO je Pregledaj, Uredi, Obrisi
 
@@ -19,6 +20,8 @@ const User = () => {
     const [pass, setPass] = useState('');
     const [donate, setDonate] = useState('');
     const [sentMail, setSentMail] = useState('');
+
+    let user = JSON.parse(localStorage.getItem("user"));
 
     useEffect(() => {
       setIme(JSON.parse(localStorage.getItem("user")).userName);
@@ -137,8 +140,8 @@ const User = () => {
                       
                   <Link to={"/djeca"}>
                     <button className="gumbic upitnik buttonreg" style={{display:email=="admin"?"none":""}}
-                      onClick={() => obrisiRacun() }>
-                        Obrisi racun
+                      >
+                        Pregled djece
                       </button>{" "}
                     </Link> 
 
@@ -148,6 +151,14 @@ const User = () => {
                         Obrisi racun
                       </button>{" "}
                       
+                      {user.email == 'admin' ? 
+                      <Link to={"/kategorije"}>
+                        <button type="button" className='gumbic tamniji'>
+                          Upravljanje kategorijama
+                        </button>
+                      </Link> : <></>
+                      }
+
                       <button className="gumbic upitnik buttonreg" 
                         onClick={() => { if (window.confirm('Sigurno se želiš odlogirati?')) 
                         logOff() }}>
