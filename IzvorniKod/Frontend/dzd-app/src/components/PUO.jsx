@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import DjecaBtn from "../components/DjecaBtn"
 
 import PUOCSS from "../style/components/PUO.module.css"
