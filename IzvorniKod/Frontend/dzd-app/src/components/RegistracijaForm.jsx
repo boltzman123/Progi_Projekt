@@ -54,7 +54,11 @@ const RegistracijaForm = () => {
           }
         }).then((response) => {
             console.log(response.data);
-            navigate('/login');
+            window.localStorage.setItem('user', JSON.stringify(response.data));
+            
+            var now = new Date().getTime();
+            localStorage.setItem('setupTime', now)
+            navigate('/base');
           })
           .catch(err => {
             console.log(err)
