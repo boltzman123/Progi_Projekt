@@ -9,7 +9,6 @@ import "../style/components/Buttons.css";
 import { FiMail } from "react-icons/fi";
 import { toast } from 'react-toastify';
 import { Button } from '@mui/material';
-import { Link } from 'react-router-dom';
 
 // PUO je Pregledaj, Uredi, Obrisi
 
@@ -93,14 +92,6 @@ const User = () => {
     return ( 
         <React.Fragment>
             <form>
-              {user.email == 'admin' ? 
-              <Link to={"/kategorije"}>
-                <button type="button" className='gumbic tamniji'>
-                  Upravljanje kategorijama
-                </button>
-              </Link> : <></>
-              }
-              
               <div>Pregledaj i/ili uredi svoje podatke</div>
                 <div className={PUOCSS.frame}>
                     <input 
@@ -139,7 +130,7 @@ const User = () => {
                         className={PUOCSS.inputFrame}
                     />    
                 </div>
-                </form>
+              </form>
                 <div className={`${PUOCSS.frame} ${PUOCSS.buttonFrame}`}>
                     <button className='gumbic tamniji buttonreg' 
                     onClick={() => { if (window.confirm('Provjerite jeste li sve dobro upisali')) 
@@ -147,17 +138,27 @@ const User = () => {
                     onSubmit() } }>Updateaj podatke</button>
                     
                     <Link to={"/djeca"}>
-                    <button className="gumbic upitnik buttonreg" style={{display:email=="admin"?"none":""}}
-                    onClick={() => obrisiRacun() }>Obrisi racun</button>{" "}
+                    <button className="gumbic upitnik buttonreg tamniji" style={{display:email=="admin"?"none":""}}
+                    >Pregled djece</button>{" "}
                     </Link> 
 
                     <button className="gumbic upitnik buttonreg" style={{display:email=="admin"?"none":""}}
                     onClick={() => { if (window.confirm('Sigurno želite obrisati račun?')) 
                     obrisiRacun() }}>Obrisi racun</button>{" "}
                     
+                    {user.email == 'admin' ? 
+                    <Link to={"/kategorije"}>
+                      <button type="button" className='gumbic tamniji'>
+                        Upravljanje kategorijama
+                      </button>
+                    </Link> : <></>
+                    }
+
                     <button className="gumbic upitnik buttonreg" 
                     onClick={() => { if (window.confirm('Sigurno se želiš odlogirati?')) 
                     logOff() }}>Log out</button>{" "}
+
+              
                 </div>
             
         </React.Fragment>
