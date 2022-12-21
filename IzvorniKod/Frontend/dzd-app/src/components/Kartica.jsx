@@ -40,25 +40,25 @@ function Kartica() {
     return (
       <>
         <div className={KarticaCSS.karticaList} style={{display:primljen.length==0 ?"none":""}}>
-          <div>Test</div>
+          <div>Primljene donacije</div>
             {primljen.map((donacija) => {
             return <DonacijaKard key={donacija.idDonation} donacija={donacija}></DonacijaKard>;
             })}
         </div>
         <div className={KarticaCSS.karticaList} style={{display:sezona.length==0 ?"none":""}}>
-          <div>Test</div>
+          <div>Sezonske donacije</div>
             {sezona.map((donacija) => {
             return <DonacijaKard key={donacija.idDonation} donacija={donacija}></DonacijaKard>;
             })}
         </div>
         <div className={KarticaCSS.karticaList} style={{display:preporucen.length==0 ?"none":""}}>
-          <div>Test</div>
+          <div>Preporucene donacije</div>
             {preporucen.map((donacija) => {
             return <DonacijaKard key={donacija.idDonation} donacija={donacija}></DonacijaKard>;
             })}
         </div>
         <div className={KarticaCSS.karticaList} style={{display:aktivan.length==0 ?"none":""}}>
-          <div>Test</div>
+          <div>Aktivne donacije</div>
             {aktivan.map((donacija) => {
             return <DonacijaKard key={donacija.idDonation} donacija={donacija}></DonacijaKard>;
             })}
