@@ -46,11 +46,11 @@ const RegistracijaForm = () => {
             "Content-Type": "application/json; charset=utf-8"
           },
             data:{
-                userName: ime,
-                userSurname: prezime,
-                userLocation: mjesto,
-                email: email,
-                password: pass
+                "email": email,
+                "userName": ime,
+                "userSurname": prezime,
+                "password": pass,
+                "userLocation": mjesto                
           }
         }).then((response) => {
             console.log(response.data);

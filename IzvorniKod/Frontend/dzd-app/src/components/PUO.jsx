@@ -8,6 +8,8 @@ import "../style/components/Buttons.css";
 
 import { FiMail } from "react-icons/fi";
 import { toast } from 'react-toastify';
+import { Button } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 // PUO je Pregledaj, Uredi, Obrisi
 
@@ -19,6 +21,8 @@ const User = () => {
     const [pass, setPass] = useState('');
     const [donate, setDonate] = useState('');
     const [sentMail, setSentMail] = useState('');
+
+    let user = JSON.parse(localStorage.getItem("user"));
 
     useEffect(() => {
       setIme(JSON.parse(localStorage.getItem("user")).userName);
@@ -89,6 +93,14 @@ const User = () => {
     return ( 
         <React.Fragment>
             <form>
+              {user.email == 'admin' ? 
+              <Link to={"/kategorije"}>
+                <button type="button" className='gumbic tamniji'>
+                  Upravljanje kategorijama
+                </button>
+              </Link> : <></>
+              }
+              
               <div>Pregledaj i/ili uredi svoje podatke</div>
                 <div className={PUOCSS.frame}>
                     <input 
