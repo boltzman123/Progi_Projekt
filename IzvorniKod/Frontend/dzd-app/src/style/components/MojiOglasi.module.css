@@ -1,0 +1,28 @@
+.okvir{
+    padding: 10px 10px;
+    margin: 40px 40px;
+    background-color: rgba(244, 177, 131, 255);
+    border-radius: 10px;   
+}
+
+.karticaList {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    justify-content: space-between;
+    padding: 20px 20px;
+    margin: 40px 40px;
+    background-color: rgba(244, 177, 131, 255);
+    border-radius: 10px;
+}
+
+h2{
+    padding-left: 20px;
+    margin-left: 40px;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+}
+
+.blue{
+    background-color: lightblue;
+}

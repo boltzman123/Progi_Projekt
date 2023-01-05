@@ -1,8 +1,7 @@
-import React, {useState, useEffect, Component} from "react";
-import {toast} from "react-toastify"
+import React, {useState, useEffect} from "react";
 import axios from "axios";
 import MojaDonacijaKard from "./MojaDonacijaKard";
-import KarticaCSS from '../style/components/Kartica.module.css'
+import MojiOglasiCSS from '../style/components/MojiOglasi.module.css'
 
 function MojeDonacije() {
   const [donacije, setDonacije] = useState([]);
@@ -13,7 +12,12 @@ function MojeDonacije() {
   const [pass, setPass] = useState('');
   const [donate, setDonate] = useState('');
   const [sentMail, setSentMail] = useState('');
-  
+  const [doniraniOglasiList, setdoniraniOglasiList] = useState([]);
+  const [mojiOglasiList, setmojiOglasiList] = useState([]);
+
+  const doniraniOglasi=[]
+  const mojiOglasi=[]
+
   useEffect(() => {
 
     setIme(JSON.parse(localStorage.getItem("user")).userName);
@@ -23,8 +27,7 @@ function MojeDonacije() {
     setPass(JSON.parse(localStorage.getItem("user")).password);
     setDonate(JSON.parse(localStorage.getItem("user")).canDonate);
     setSentMail(JSON.parse(localStorage.getItem("user")).mailSent);
-    console.log("Ispisujem userov email")
-    console.log(email)
+
 
     axios({
       method: "get",
@@ -43,11 +46,22 @@ function MojeDonacije() {
       }
     })
       .then((response) => {
+        var mapa=response.data
         setDonacije(response.data)
+        for (const obj of mapa){
+          // console.log(obj)
+          if (obj.donatedToUser!=null){
+            doniraniOglasi.push(obj);
+          }
+          else {
+            mojiOglasi.push(obj)
+          }
+        }
+        setdoniraniOglasiList(doniraniOglasi)
+        setmojiOglasiList(mojiOglasi)
       })
       .catch((err) => {
         console.log(err)
-        toast.error("Greška iz baze!");
       });
 
   },[email]);
@@ -58,11 +72,25 @@ function MojeDonacije() {
   }
   else {
     return (
-        <div className={KarticaCSS.karticaList}>
-            {donacije.map((donacija) => {
-            return <MojaDonacijaKard key={donacija.idDonation} donacija={donacija}></MojaDonacijaKard>;
-            })}
+      <>
+        <div className={MojiOglasiCSS.okvir}>
+        <h2>Donirane donacije</h2>
+          <div className={MojiOglasiCSS.karticaList} style={{display:doniraniOglasiList.length==0 ?"none":""}}>
+              {doniraniOglasiList.map((donacija) => {
+              return <MojaDonacijaKard key={donacija.idDonation} donacija={donacija}></MojaDonacijaKard>;
+              })}
+          </div>
         </div>
+
+        <div className={MojiOglasiCSS.okvir}>
+        <h2>Moje aktivne donacije</h2>
+          <div className={MojiOglasiCSS.karticaList} style={{display:mojiOglasiList.length==0 ?"none":""}}>
+              {mojiOglasiList.map((donacija) => {
+              return <MojaDonacijaKard key={donacija.idDonation} donacija={donacija}></MojaDonacijaKard>;
+              })}
+          </div>
+        </div>
+    </>
     );
     }
 }

@@ -36,12 +36,15 @@ const MojeDonacijaKard = (props) => {
   let [itemState, setItemState] = useState(props.donacija.item.itemState);
   let [productBrand, setProductBrand] = useState(props.donacija.item.productBrand);
   let [productionYear, setProductionYear] = useState(props.donacija.item.productionYear);
+  let [opis, setOpis] = useState(props.donacija.description);
 
   let [donationName, setDonationName] = useState(props.donacija.donationName);
   let [dateOfPublication, setDateOfPublication] = useState(props.donacija.dateOfPublication);
   let [handoverLocation, setHandoverLocation] = useState(props.donacija.handoverLocation);
-  let [dobivatelj,setDobivatelj] = useState(props.donacija.donatedToUser);
+  let [dobivatelj,setDobivatelj] = useState("");
+  let [dobivateljEmail,setDobivateljEmail] = useState("");
   let [userLocation, setUserLocation] = useState(props.donacija.user.userLocation);
+  
 
   let { email } = props.donacija.user;
   let { idDonation } = props.donacija;
@@ -55,12 +58,14 @@ const MojeDonacijaKard = (props) => {
   const ageRange = [...Array(16).keys()];
   const [dob, setDob] = useState(props.donacija.item.forAge);
   const [spol, setSpol] = useState(props.donacija.item.forSex);
+  const [donatedTo, setDonatedTo] = useState(props.donacija.donatedToUser);
 
   const [checkedCat, setCheckedCat] = useState(props.donacija.item.category);
   const [checkedSub, setCheckedSub] = useState(props.donacija.item.subcategory);
-  const [checkedUser, setCheckedUser] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
   const [pictureURL, setPictureURL] = useState(props.donacija.pictureURL);
+  const [smijeMijenjati, setSmijeMijenati] = useState()
+  const [btnDisabled, setBtnDisabled] = useState(true)
 
   let datum=String(dateOfPublication.substring(8,10)+ "." +dateOfPublication.substring(5,7)+ "." +dateOfPublication.substring(0,4)+".")
 
@@ -74,10 +79,6 @@ const MojeDonacijaKard = (props) => {
     setOpen(false);
   };
 
-  const predajOglas= ()=>{
-
-  }
-
   const handleImageChange = (event) => {
     // Update the selected image in state
     setSelectedImage(event.target.files[0]);
@@ -87,13 +88,13 @@ const MojeDonacijaKard = (props) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (emailL == email) {
-      setCheckedUser(false);
-      console.log(emailL == email);
-    } else {
-      setCheckedUser(true);
+    if (donatedTo!=null){
+      setSmijeMijenati(true);
     }
-  }, []);
+    else{
+      setSmijeMijenati(false);
+    }
+  }, [donatedTo]);
 
   const onSubmit = (e) => {
 
@@ -195,6 +196,68 @@ const MojeDonacijaKard = (props) => {
       });
   };
 
+  const dohvatiKorisnika= ()=>{
+    if (dobivateljEmail!=props.donacija.user.email){
+      axios({
+      method: 'get',
+      url: `/api/users/${dobivateljEmail}`,
+      headers: {
+        "Content-Type": "application/json; charset=utf-8"
+      }
+    }).then((response)=>{
+      // console.log(response.data)
+      toast.success("Korisnik postoji i možete mu donirati ovaj predmet")
+      setBtnDisabled(false)
+      setDobivatelj(response.data)
+    }).catch((err) => {
+      console.log(err);
+      setBtnDisabled(true);
+  });}
+  else {
+    console.log("Ne mozes sam sebi donirati");
+    toast.error("Ne možete sami sebi donirati donaciju!")
+    setBtnDisabled(true)
+  }
+    
+  }
+
+  const predajOglas= (e)=>{
+      e.preventDefault();
+  
+      axios({
+        method: "put",
+        url: `/api/donation/${props.donacija.idDonation}`,
+        headers: {
+          "Content-Type": "application/json; charset=utf-8",
+        },
+        data: {
+          "idDonation":props.donacija.idDonation,
+          "donationName": props.donacija.donationName,
+          "dateOfPublication": props.donacija.dateOfPublication,
+          "dateOfClosing": new Date(),
+          "edit": "false",
+          "message": "",
+          "pictureURL": props.donacija.pictureURL,
+          "handoverLocation": props.donacija.handoverLocation,
+          donatedToUser: dobivatelj,
+          "active": "true",
+          "valid": "true",
+          "description":opis,
+          user:props.donacija.user,
+          item:props.donacija.item
+        },
+      }).then((response) => {
+          handleClose();
+          toast.success("Donirali ste svoj predmet!");
+          window.location.reload(false)
+      })
+      .catch((err) => {
+          console.log(err);
+          toast.error("Došlo je do greške s doniranjem");
+      });
+    };
+
+
   return (
     <React.Fragment>
       <Card className={DonacijaKardCSS.malaKartica} variant="outlined">
@@ -221,6 +284,7 @@ const MojeDonacijaKard = (props) => {
           </CardContent>
         </CardActionArea>
       </Card>
+
       <Modal open={open} onClose={handleClose}>
         <Box
           className={DonacijaKardCSS.modal}
@@ -243,40 +307,46 @@ const MojeDonacijaKard = (props) => {
                   label="Ime donacije"
                   id="ImeDonacije"
                   value={donationName}
-                  disabled={checkedUser}></TextField>
+                  disabled={smijeMijenjati}></TextField>
 
                 <TextField
                   onChange={(e) => setProductName(e.target.value)}
                   label="Ime predmeta"
                   id="ImePredmeta"
                   value={productName}
-                  disabled={checkedUser}></TextField>
+                  disabled={smijeMijenjati}></TextField>
 
                 <TextField
                   onChange={(e) => setDateOfPublication(e.target.value)}
                   label="Datum objave"
                   id="datumObjave"
                   value={datum}
-                  disabled="True"></TextField>
+                  disabled={true}></TextField>
 
                 <TextField
                   onChange={(e) => setHandoverLocation(e.target.value)}
                   label="Lokacija preuzimanja"
                   id="datumObjave"
                   value={handoverLocation}
-                  disabled={checkedUser}></TextField>
+                  disabled={smijeMijenjati}></TextField>
 
                 <TextField
                   label="Lokacija donatora"
                   id="datumObjave"
                   value={userLocation}
-                  disabled="true"></TextField>
+                  disabled={true}></TextField>
+
+                <TextField
+                  label="Email donatora"
+                  id="datumObjave"
+                  value={email}
+                  disabled={true}></TextField>
 
                 <FormControl fullWidth>
                   <InputLabel>Predviđena dob:</InputLabel>
                   <Select
                     style={{ width: 225 }}
-                    disabled={checkedUser}
+                    disabled={smijeMijenjati}
                     labelId="dob-select-label"
                     id="dob-select"
                     value={dob}
@@ -305,13 +375,13 @@ const MojeDonacijaKard = (props) => {
                     <div>
                       <FormControlLabel
                         value="F"
-                        disabled={checkedUser}
+                        disabled={smijeMijenjati}
                         control={<Radio />}
                         label="Žensko"
                       />
                       <FormControlLabel
                         value="M"
-                        disabled={checkedUser}
+                        disabled={smijeMijenjati}
                         control={<Radio />}
                         label="Muško"
                       />
@@ -324,14 +394,14 @@ const MojeDonacijaKard = (props) => {
                   label="Stanje predmeta"
                   id="stanjePredmeta"
                   value={itemState}
-                  disabled={checkedUser}></TextField>
+                  disabled={smijeMijenjati}></TextField>
 
                 <TextField
                   onChange={(e) => setProductBrand(e.target.value)}
                   label="Naziv marke predmeta"
                   id="markaPredmeta"
                   value={productBrand}
-                  disabled={checkedUser}></TextField>
+                  disabled={smijeMijenjati}></TextField>
 
                 <TextField
                   type="number"
@@ -339,10 +409,10 @@ const MojeDonacijaKard = (props) => {
                   label="Godina proizvodnje"
                   id="godinaProizvodnje"
                   value={productionYear}
-                  disabled={checkedUser}></TextField>
+                  disabled={smijeMijenjati}></TextField>
 
-                <DropdownCategory
-                  value={checkedUser}
+                <DropdownCategory 
+                  value={smijeMijenjati}
                   category={checkedCat}
                   subcategory={checkedSub}></DropdownCategory>
                 <div>
@@ -354,14 +424,27 @@ const MojeDonacijaKard = (props) => {
                   /> */}
                 </div>
                 <TextField
-                  onChange={(e) => setDobivatelj(e.target.value)}
-                  label="Oglas predajete korisniku"
+                  onChange={(e) => setDobivateljEmail(e.target.value)}
+                  label="Email primatelja donacije"
+                  sx={{display:smijeMijenjati==true?"none":""}}
                   id="predajeSeKorisniku"
-                  value={dobivatelj}
-                  disabled={checkedUser}></TextField>
+                  type="email"
+                  value={dobivateljEmail}
+                  disabled={smijeMijenjati}></TextField>
+                  
+                <Button
+                  onClick={dohvatiKorisnika}
+                  sx={{display:smijeMijenjati==true?"none":""}}
+                  style={email != emailL ? { display: `none` } : {}}
+                  variant="outlined"
+                  color="info"
+                  id="provjera">
+                  Provjera korisnika
+                </Button>
 
               </Box>
-              <CardActions>
+              <hr/>
+              <CardActions sx={{display:smijeMijenjati==true?"none":""}}>
                 <Button
                   type="submit"
                   style={email != emailL ? { display: `none` } : {}}
@@ -380,7 +463,8 @@ const MojeDonacijaKard = (props) => {
                   onClick={predajOglas}
                   style={email != emailL ? { display: `none` } : {}}
                   variant="outlined"
-                  color="error">
+                  color="error"
+                  id="predaj">
                   Predaj oglas
                 </Button>
               </CardActions>
