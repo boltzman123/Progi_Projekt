@@ -44,6 +44,7 @@ const DonacijaKard = (props) => {
   let [donationName, setDonationName] = useState(props.donacija.donationName);
   let [dateOfPublication, setDateOfPublication] = useState(props.donacija.dateOfPublication);
   let [handoverLocation, setHandoverLocation] = useState(props.donacija.handoverLocation);
+  let [userLocation, setUserLocation] = useState(props.donacija.user.userLocation);
 
   let { email } = props.donacija.user.email;
   let { idDonation } = props.donacija;
@@ -256,6 +257,13 @@ const DonacijaKard = (props) => {
                   label="Lokacija preuzimanja"
                   id="handoverLocation"
                   value={handoverLocation}
+                  disabled={checkedUser}></TextField>
+
+                <TextField
+                  onChange={(e) => setHandoverLocation(e.target.value)}
+                  label="Lokacija donatora"
+                  id="datumObjave"
+                  value={userLocation}
                   disabled={checkedUser}></TextField>
 
                 <TextField
