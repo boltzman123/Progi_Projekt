@@ -315,10 +315,9 @@
 		
 		\section{Dijagram stanja}
 			
-			
-			%\textbf{\textit{dio 2. revizije}}\\
-			
-			\begin{figure}[H]
+                Dijagram stanja prikazan na slici 4.8 prikazuje stanja u kojima se može naći sustav (konkretno, u pitanju je korisničko sučelje - frontend), kao i prijelaze pomoću kojih sustav dolazi u druga stanja. Svaki prijelaz označen je događajem (npr. "Klik na proizvoljni oglas"), kao i akcijom (npr. "Prikaži aktivne oglase()") koja se izvršava "tijekom prijelaza" - nakon što se dogodio događaj koji je potaknuo prijelaz u drugo stanje. Većina akcija označenih na prijelazima isto tako mogla je biti označena kao entry odnosno exit akcija samoga stanja, ali je zbog preglednosti i konzistentnosti odabran prikaz takvih akcija na prijelazima. Dijagram na slici 4.8 prikazuje stanja u kojima se sustav može naći kada je u sustav ulogiran registrirani korisnik za kojeg je administrator stavio dopuštenje da može donirati - da korisnik nema dopuštenje, sustav se pri radu s takvim korisnikom ne bi mogao naći u stanju "Kreiranje oglasa". \\
+
+                \begin{figure}[H]
 				\includegraphics[width=\textwidth,height=0.5\textheight]{dijagrami/Dijagram stanja.png}
 				\centering
 				\caption{Dijagram stanja}
@@ -326,6 +325,13 @@
 			\end{figure}
 			
 			\eject 
+                
+                Kako bi napravili razliku između akcija koje izvršava sustav i akcija koje radi korisnik u interakciji sa sustavom, sve akcije koje izvršava sustav na kraju imaju oznaku () (slično pozivu funkcije u kodu). Radi preglednosti, neke od strelica nisu prikazane na dijagramu - korisnik iz bilo kojeg stanja može preći u stanje "Aktivne donacije", "Korisnikove donacije", "Kreiranje oglasa" i "Osobno podaci korisnika" jer je prijelaz u ta stanja ostvaren klikom na odgovarajući dio zaglavlja stranice. Akcije koje radi korisnik u interakciji u sustavu naznačene su kao do akcije unutar stanja ili kao događaji koji potiču prijelaze u druga stanja.\\
+                                
+			Nakon uspješnog logina, registrirani korisnik preusmjeren je na stranicu Aktivne donacije na kojoj može pregledavati sve oglase, ali isto tako i pregledavati detalje proizvoljnih oglasa. Pomoću zaglavlja stranice korisnik može doći do stranice Aktivne donacije, stranice za kreiranje oglasa, stranice za prikaz i uređivanje osobnih podataka te stranice za prikaz vlastitih donacija. Na stranici za kreiranje oglasa korisnik unosi podatke i nakon unosa klikom na gumb "Spremi donaciju" biva preusmjeren na stranicu Aktivne donacije. Na stranici za prikaz vlastitih donacija korisnik može pregledavati sve oglase koje je sam kreirao ili zaprimio, kao i detalje o istima. Na stranici za prikaz i uređivanje osobnih podataka korisnik se također može i odjaviti, obrisati svoj račun i otići na stranicu za dodavanje, brisanje i prikaz podataka o djeci. Rad s aplikacijom završava kada korisnik odabere opciju "Log out".
+			%\textbf{\textit{dio 2. revizije}}\\
+
+                \eject
 		
 		%\section{Dijagram aktivnosti}
 			
