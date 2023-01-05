@@ -144,3 +144,19 @@
         -pregled do sad napravljenoga
         -savjeti oko sljedećih koraka razvoja frontenda
         -daljnja podjela posla oko rada na frontendu
+
+19. sastanak
+    -Datum: 3. siječnja 2023
+    -Prisustvovali: D.Jambrović, K.Kijac
+    -Trajanje sastanka: 1h
+    -Teme sastanka:
+        -podjela posla oko druge revizije dokumentacije
+
+20. sastanak
+    -Datum: 5. siječnja 2023
+    -Prisustvovali: D.Kiramarios, D.Kovačević, K.Tomičić, D.Jambrović, K.Orešković, K.Kijac, S.Barac
+    -Trajanje sastanka: 1h
+    -Teme sastanka:
+        -pregled do sad napravljenoga
+	-podjela posla oko rada na frontendu i backendu
+	-dogovor vremena testiranja
