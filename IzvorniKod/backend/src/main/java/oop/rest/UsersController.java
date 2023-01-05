@@ -60,6 +60,10 @@ public class UsersController {
             throw new UsernameNotFoundException("Email or password is wrong");
         }
     }
+    @GetMapping("/{email}")
+    public Users getUserByUsername(@PathVariable String email){
+        return userService.fetch(email);
+    }
 
 
     // Login te vraća inforamcije o useru
