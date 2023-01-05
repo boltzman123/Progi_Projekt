@@ -74,6 +74,7 @@
             <column name="item_id" type="BIGINT"/>
             <column name="donated_to_user_email" type="VARCHAR(255)"/>
             <column name="message" type="VARCHAR(255)"/>
+            <column name="description" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
     <changeSet id="1670872033775-7" author="david (generated)">

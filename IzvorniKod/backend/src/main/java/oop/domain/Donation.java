@@ -16,9 +16,10 @@ public class Donation {
     private boolean isValid = false;
     private boolean isActive = true;
     private boolean edit = false;
-    private String message = "";
+    private String message;
     private String pictureURL;
     private String handoverLocation;
+    private String description;
     @ManyToOne
     @JoinColumn(name = "user_email", referencedColumnName = "email")
     private Users user;
@@ -27,6 +28,14 @@ public class Donation {
     private Item item;
     @ManyToOne
     private Users donatedToUser;
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     public Item getItem() {
         return item;
