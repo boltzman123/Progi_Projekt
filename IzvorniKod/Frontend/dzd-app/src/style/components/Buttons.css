@@ -33,7 +33,7 @@
 }
 
 .upitnik {
-    width: 200px;
+    width: auto;
 }
 /*mobitel*/
 @media only screen and (max-width: 449px) {

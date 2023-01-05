@@ -43,9 +43,9 @@ const DonacijaKard = (props) => {
 
   let [donationName, setDonationName] = useState(props.donacija.donationName);
   let [dateOfPublication, setDateOfPublication] = useState(props.donacija.dateOfPublication);
-  let [userLocation, setUserLocation] = useState(props.donacija.user.userLocation);
+  let [handoverLocation, setHandoverLocation] = useState(props.donacija.handoverLocation);
 
-  let { email } = props.donacija.user;
+  let { email } = props.donacija.user.email;
   let { idDonation } = props.donacija;
   let { id } = props.donacija.item;
   let userL = JSON.parse(localStorage.getItem("user"));
@@ -60,6 +60,8 @@ const DonacijaKard = (props) => {
   const [checkedUser, setCheckedUser] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
   const [pictureURL, setPictureURL] = useState(props.donacija.pictureURL);
+
+  let datum=String(dateOfPublication.substring(8,10)+ "." +dateOfPublication.substring(5,7)+ "." +dateOfPublication.substring(0,4)+".")
 
   //   console.log(props.donacija)
 
@@ -131,7 +133,7 @@ const DonacijaKard = (props) => {
             user,
             item,
             dateOfPublication,
-            handoverLocation: userLocation,
+            handoverLocation: handoverLocation,
           },
         })
           .then((response) => {
@@ -206,8 +208,8 @@ const DonacijaKard = (props) => {
           <CardContent sx={{ bgcolor: "#E8E8E8" }}>
             <h3>Ime predmeta: {productName}</h3>
             <h3>Predviđena dob korisnika: {dob}</h3>
-            <h3>Datum objave: {dateOfPublication} </h3>
-            <h3>Lokacija: {userLocation} </h3>
+            <h3>Datum objave: {datum} </h3>
+            <h3>Lokacija: {handoverLocation} </h3>
           </CardContent>
         </CardActionArea>
       </Card>
@@ -246,15 +248,22 @@ const DonacijaKard = (props) => {
                   onChange={(e) => setDateOfPublication(e.target.value)}
                   label="Datum objave"
                   id="datumObjave"
-                  value={dateOfPublication}
+                  value={datum}
                   disabled={checkedUser}></TextField>
 
                 <TextField
-                  onChange={(e) => setUserLocation(e.target.value)}
+                  onChange={(e) => setHandoverLocation(e.target.value)}
                   label="Lokacija preuzimanja"
-                  id="datumObjave"
-                  value={userLocation}
+                  id="handoverLocation"
+                  value={handoverLocation}
                   disabled={checkedUser}></TextField>
+
+                <TextField
+                  label="Email donatora"
+                  id="emailDonatora"
+                  value={props.donacija.user.email}
+                  disabled="True"
+                  ></TextField>
 
                 <FormControl fullWidth>
                   <InputLabel>Predviđena dob:</InputLabel>
@@ -280,7 +289,7 @@ const DonacijaKard = (props) => {
                   </Select>
                 </FormControl>
                 <FormControl fullWidth>
-                  <FormLabel id="spol">Spol</FormLabel>
+                  <FormLabel id="spol">Namijenjeni spol</FormLabel>
                   <RadioGroup
                     name="spol-radio-buttons-group"
                     value={spol}

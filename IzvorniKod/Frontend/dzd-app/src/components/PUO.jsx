@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import { useNavigate, Link } from 'react-router-dom';
-import DjecaBtn from "../components/DjecaBtn"
 
 import PUOCSS from "../style/components/PUO.module.css"
 import "../style/components/Buttons.css";
 
-import { FiMail } from "react-icons/fi";
 import { toast } from 'react-toastify';
-import { Button } from '@mui/material';
 
 // PUO je Pregledaj, Uredi, Obrisi
 
@@ -92,69 +89,76 @@ const User = () => {
     return ( 
         <React.Fragment>
             <form>
-              <div>Pregledaj i/ili uredi svoje podatke</div>
+              <h2>Pregledaj i/ili uredi svoje podatke</h2>
                 <div className={PUOCSS.frame}>
-                    <input 
-                        value={ime}
-                        type="text"
-                        name="ime" id="ime" 
-                        className={PUOCSS.inputFrame}
-                        minLength={3}
-                        onChange={ (e) => setIme(e.target.value)}
-                    />
+                  <label for="ime" className={PUOCSS.formLabel}>Ime:
+                      <input 
+                          value={ime}
+                          type="text"
+                          name="ime" id="ime" 
+                          className={PUOCSS.inputFrame}
+                          minLength={3}
+                          onChange={ (e) => setIme(e.target.value)}
+                      />
+                  </label>   
                 </div>
                 <div className={PUOCSS.frame}>
-                    <input 
-                        value={prezime}  
-                        type="text" name="prezime" id="prezime" 
-                        className={PUOCSS.inputFrame}
-                        minLength={3} 
-                        onChange={ (e) => setPrezime(e.target.value)}
-                    />
+                  <label for="fname" className={PUOCSS.formLabel}>Prezime:
+                      <input 
+                          value={prezime}  
+                          type="text" name="prezime" id="prezime" 
+                          className={PUOCSS.inputFrame}
+                          minLength={3} 
+                          onChange={ (e) => setPrezime(e.target.value)}
+                      />
+                  </label>
                 </div>
                 <div className={PUOCSS.frame}>
-                    <input 
-                        value={mjesto}
-                        type="text" name="mjesto" id="mjesto" 
-                        className={PUOCSS.inputFrame}
-                        minLength={4} 
-                        onChange={ (e) => setMjesto(e.target.value)}
-                    />
+                  <label for="fname" className={PUOCSS.formLabel}>Adresa:
+                      <input 
+                          value={mjesto}
+                          type="text" name="mjesto" id="mjesto" 
+                          className={PUOCSS.inputFrame}
+                          minLength={4} 
+                          onChange={ (e) => setMjesto(e.target.value)}
+                      />
+                  </label>
                 </div>
+
                 <div className={PUOCSS.frame}>
-                    <FiMail className="icon"></FiMail>
+                    <label for="fname" className={PUOCSS.formLabel}>Email adresa:
                     <input disabled
                         value={email} 
                         type="email" name="email" id="email" 
                         placeholder={JSON.parse(localStorage.getItem("user")).email}
                         className={PUOCSS.inputFrame}
-                    />    
+                    />
+                    </label>    
                 </div>
               </form>
-                <div className={`${PUOCSS.frame} ${PUOCSS.buttonFrame}`}>
+                <div className={PUOCSS.buttonFrame}>
                     <button className='gumbic tamniji buttonreg' 
                     onClick={() => { if (window.confirm('Provjerite jeste li sve dobro upisali')) 
-                    
                     onSubmit() } }>Updateaj podatke</button>
-                    
+
                     <Link to={"/djeca"}>
-                    <button className="gumbic upitnik buttonreg tamniji" style={{display:email=="admin"?"none":""}}
+                    <button className="gumbic buttonreg tamniji" style={{display:email=="admin"?"none":""}}
                     >Pregled djece</button>{" "}
                     </Link> 
 
-                    <button className="gumbic upitnik buttonreg" style={{display:email=="admin"?"none":""}}
+                    <button className="gumbic buttonreg" style={{display:email=="admin"?"none":""}}
                     onClick={() => { if (window.confirm('Sigurno želite obrisati račun?')) 
                     obrisiRacun() }}>Obrisi racun</button>{" "}
                     
                     {user.email == 'admin' ? 
                     <Link to={"/kategorije"}>
-                      <button type="button" className='gumbic tamniji'>
+                      <button className='gumbic tamniji buttonreg'>
                         Upravljanje kategorijama
                       </button>
                     </Link> : <></>
                     }
 
-                    <button className="gumbic upitnik buttonreg" 
+                    <button className="gumbic buttonreg" 
                     onClick={() => { if (window.confirm('Sigurno se želiš odlogirati?')) 
                     logOff() }}>Log out</button>{" "}
 

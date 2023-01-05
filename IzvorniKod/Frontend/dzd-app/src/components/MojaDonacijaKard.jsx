@@ -39,7 +39,8 @@ const MojeDonacijaKard = (props) => {
 
   let [donationName, setDonationName] = useState(props.donacija.donationName);
   let [dateOfPublication, setDateOfPublication] = useState(props.donacija.dateOfPublication);
-  let [userLocation, setUserLocation] = useState(props.donacija.user.userLocation);
+  let [handoverLocation, setHandoverLocation] = useState(props.donacija.handoverLocation);
+  let [dobivatelj,setDobivatelj] = useState(props.donacija.donatedToUser);
 
   let { email } = props.donacija.user;
   let { idDonation } = props.donacija;
@@ -60,6 +61,8 @@ const MojeDonacijaKard = (props) => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [pictureURL, setPictureURL] = useState(props.donacija.pictureURL);
 
+  let datum=String(dateOfPublication.substring(8,10)+ "." +dateOfPublication.substring(5,7)+ "." +dateOfPublication.substring(0,4)+".")
+
   //   console.log(props.donacija)
 
   const [open, setOpen] = useState(false);
@@ -69,6 +72,10 @@ const MojeDonacijaKard = (props) => {
     localStorage.removeItem("sub");
     setOpen(false);
   };
+
+  const predajOglas= ()=>{
+
+  }
 
   const handleImageChange = (event) => {
     // Update the selected image in state
@@ -130,7 +137,7 @@ const MojeDonacijaKard = (props) => {
             user,
             item,
             dateOfPublication,
-            handoverLocation: userLocation,
+            handoverLocation: handoverLocation,
           },
         })
           .then((response) => {
@@ -205,10 +212,10 @@ const MojeDonacijaKard = (props) => {
           <CardContent sx={{ bgcolor: "#E8E8E8" }}>
             <h3>Ime predmeta: {productName}</h3>
             <h3>Predviđena dob korisnika: {dob}</h3>
-            <h3>Datum objave: {dateOfPublication} </h3>
-            <h3>Lokacija: {userLocation} </h3>
-            <h3 id="sit">Validno: {String(valid)}</h3>
-            <h3 id="sit">Treba urediti: {String(edit)}</h3>
+            <h3>Datum objave: {datum} </h3>
+            <h3>Lokacija: {handoverLocation} </h3>
+            <h3 id="sit">Validno: {String(valid)=="true"?"Oglas je validan":"Oglas nije validan"}</h3>
+            <h3 id="sit">Treba urediti: {String(edit)=="true"?"Treba urediti":"Ne treba urediti"}</h3>
             <h3 id="sit">Poruka od admina: {message}</h3>
           </CardContent>
         </CardActionArea>
@@ -248,14 +255,14 @@ const MojeDonacijaKard = (props) => {
                   onChange={(e) => setDateOfPublication(e.target.value)}
                   label="Datum objave"
                   id="datumObjave"
-                  value={dateOfPublication}
-                  disabled={checkedUser}></TextField>
+                  value={datum}
+                  disabled="True"></TextField>
 
                 <TextField
-                  onChange={(e) => setUserLocation(e.target.value)}
+                  onChange={(e) => setHandoverLocation(e.target.value)}
                   label="Lokacija preuzimanja"
                   id="datumObjave"
-                  value={userLocation}
+                  value={handoverLocation}
                   disabled={checkedUser}></TextField>
 
                 <FormControl fullWidth>
@@ -282,7 +289,7 @@ const MojeDonacijaKard = (props) => {
                   </Select>
                 </FormControl>
                 <FormControl fullWidth>
-                  <FormLabel id="spol">Spol</FormLabel>
+                  <FormLabel id="spol">Namijenjeni spol</FormLabel>
                   <RadioGroup
                     name="spol-radio-buttons-group"
                     value={spol}
@@ -332,12 +339,20 @@ const MojeDonacijaKard = (props) => {
                   category={checkedCat}
                   subcategory={checkedSub}></DropdownCategory>
                 <div>
-                  <input
+                  {/* ONEMOGUCIO SAM MIJENJANJE SLIKE, zasad barem */}
+                  {/* <input
                     style={email != emailL ? { display: `none` } : {}}
                     type="file"
                     onChange={handleImageChange}
-                  />
+                  /> */}
                 </div>
+                <TextField
+                  onChange={(e) => setDobivatelj(e.target.value)}
+                  label="Oglas predajete korisniku"
+                  id="predajeSeKorisniku"
+                  value={dobivatelj}
+                  disabled={checkedUser}></TextField>
+
               </Box>
               <CardActions>
                 <Button
@@ -353,6 +368,13 @@ const MojeDonacijaKard = (props) => {
                   variant="outlined"
                   color="error">
                   Obriši oglas
+                </Button>
+                <Button
+                  onClick={predajOglas}
+                  style={email != emailL ? { display: `none` } : {}}
+                  variant="outlined"
+                  color="error">
+                  Predaj oglas
                 </Button>
               </CardActions>
             </Container>
