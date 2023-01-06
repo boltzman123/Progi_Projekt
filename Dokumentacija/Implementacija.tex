@@ -74,17 +74,94 @@
 		\section{Upute za puštanje u pogon}
 		
 			%\textbf{\textit{dio 2. revizije}}\\
-		
-			 \textit{U ovom poglavlju potrebno je dati upute za puštanje u pogon (engl. deployment) ostvarene aplikacije. 
-			 Na primjer, za web aplikacije, opisati postupak kojim se od izvornog kôda dolazi do potpuno postavljene baze podataka i poslužitelja koji odgovara na upite korisnika. 
-			 Za mobilnu aplikaciju, postupak kojim se aplikacija izgradi, te postavi na neku od trgovina. Za stolnu (engl. desktop) aplikaciju, postupak kojim se aplikacija instalira na računalo. 
-			 Ukoliko mobilne i stolne aplikacije komuniciraju s poslužiteljem i/ili bazom podataka, opisati i postupak njihovog postavljanja. 
-			 Pri izradi uputa preporučuje se \textbf{naglasiti korake instalacije uporabom natuknica} te koristiti što je više moguće \textbf{slike ekrana} (engl. screenshots) kako bi upute bile jasne i jednostavne za slijediti.}
-			
-			
-			 \textit{Dovršenu aplikaciju potrebno je pokrenuti na javno dostupnom poslužitelju. 
-			 Studentima se preporuča korištenje neke od sljedećih besplatnih usluga: \href{https://aws.amazon.com/}{Amazon AWS}, \href{https://azure.microsoft.com/en-us/}{Microsoft Azure} 
-			 ili \href{https://www.heroku.com/}{Heroku}. Mobilne aplikacije trebaju biti objavljene na F-Droid, Google Play ili Amazon App trgovini.}
-			
+                Frontend, backend i baza podatka puštene su u pogon na platformi Render. Upute za pristupanje platformi Render, kao i upute za puštanje u pogon (engl. deploy) slijede u sljedećim sekcijama.
+          
+			    \subsection{Pristupanje Renderu}
+
+                Kako bi pristupili Renderu, prilikom prijave u web aplikaciju koristimo GitLab račune koji se direktno mogu povezati s njime. Povezivanjem Gitlab računa s platformom Render dobivamo lakši pristup kodu koji će se pustiti u pogon.
+
+                \begin{figure}[H]
+				\includegraphics[width=0.6\textwidth,height=0.3\textheight]{slike/renderSignIn.png}
+				\centering
+				\caption{Render sign in}
+				\label{fig:renderSignIn}
+			\end{figure}
+
+                \subsection{Backend deploy na Render}
+
+                \textbf{1. Priprema}\\
+                
+                Prije puštanja aplikacije u pogon na Renderu potrebno je u izvorni kod za backend dodati Dockerfile za Maven projekt te u datoteci application.properties postaviti property server.servlet.context-path na /api da bude prefiks svim zahtjevima na backend.
 			
 			\eject 
+
+                \textbf{2. Kreiranje baze podataka}\\
+
+                U render dashboard potrebno je:
+
+                \begin{itemize}
+                    \item Pritisnuti tipku New te onda odabrati opciju PostgreSQL za kreiranje baze
+                    \begin{figure}[H]
+    			\includegraphics[width=0.6\textwidth,height=0.3\textheight]{slike/postgresqlCreate.png}
+    			\centering
+    			\caption{Kreiranje nove PostgreSQL baze}
+    			\label{fig:newPostgreSQLDB}
+    			\end{figure}
+                    \item Postaviti ime baze
+                    \item Database i User ostaviti prazno jer se automatski generira pri kreiranju baze
+                    \item Postaviti Region na Frankfurt
+                    \item Pritisnuti Create Database
+                \end{itemize}
+
+                \begin{figure}[H]
+				\includegraphics[width=0.8\textwidth,height=0.25\textheight]{slike/postgresqlNew.png}
+				\centering
+				\caption{Ispunjavanje podataka o bazi}
+				\label{fig:postgresqlFillData}
+			\end{figure}
+
+                Prije puštanja backend-a u pogon, u datoteci application.properties moramo uvrstiti username, password za pristup bazi, database, hostname i port za url prema bazi na koju se treba spojiti.
+
+                \begin{figure}[H]
+				\includegraphics[width=0.8\textwidth,height=0.25\textheight]{slike/postgresqlNewFilled.png}
+				\centering
+				\caption{Ispunjavanje podataka u datoteci application.properties}
+				\label{fig:applicationPropertiesDB}
+			\end{figure}
+
+                \textbf{3. Kreiranje backenda}\\
+
+                U Render dashboard potrebno je:
+
+                \begin{itemize}
+                    \item Pritisnuti tipku New te onda odabrati opciju Web Service za kreiranje web usluge
+                    \item Povezati GitLab račun - nakon povezivanja su za odabir dostupni svi projekti na koje imate prava pristupa
+                    \item Pritisnuti Connect pokraj odgovarajućeg projekta
+                    \begin{figure}[H]
+    			\includegraphics[width=0.8\textwidth,height=0.25\textheight]{slike/connectRepo.png}
+    			\centering
+    			\caption{Povezivanje repozitorija}
+    			\label{fig:connectRepo}
+    			\end{figure}
+                    \item Postaviti ime za servis (ime servisa na kraju će biti dio web adrese)
+                    \item Root directory postaviti na IzvorniKod/backend
+                    \item Environment postaviti na Docker
+                    \item Region postaviti na Frankfurt
+                    \begin{figure}[H]
+    			\includegraphics[width=0.8\textwidth,height=0.25\textheight]{slike/deployWebService.png}
+    			\centering
+    			\caption{Podaci za puštanje web servisa u pogon}
+    			\label{fig:deployWebService}
+    			\end{figure}
+                    \item Na dnu proširiti \textit{advanced}
+                    \item Postaviti putanju za Dockerfile ovisno koji se package manager koristi (u ovom slučaju putanja je ./docker/maven/Dockerfile)
+                    \begin{figure}[H]
+                    \makebox[\textwidth][c]{\includegraphics[]{slike/dockerfilePath.png}}%
+    			\centering
+    			\caption{Putanja Dockerfile-a}
+    			\label{fig:dockerFilePath}
+    			\end{figure}
+                    \item Pritisnuti Create Web Service
+                \end{itemize}
+
+                Nakon izvođenja svih ovih koraka, u pogon bi se trebala uspješno pustiti (eng. deployati) backend aplikacija. Nakon puštanja backend aplikacije u pogon, isto ćemo napraviti i za frontend aplikaciju.
