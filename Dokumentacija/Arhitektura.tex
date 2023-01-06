@@ -252,7 +252,7 @@
 			
 			%\textit{Prilikom prve predaje projekta, potrebno je priložiti potpuno razrađen dijagram razreda vezan uz \textbf{generičku funkcionalnost} sustava. Ostale funkcionalnosti trebaju biti idejno razrađene u dijagramu sa sljedećim komponentama: nazivi razreda, nazivi metoda i vrste pristupa metodama (npr. javni, zaštićeni), nazivi atributa razreda, veze i odnosi između razreda.}\\
 			
-			Na slikama 4.4 do 4.7 prikazani su razredi koji pripadaju backend dijelu našeg sustava.\\[5pt]
+			Na slikama 4.4 do 4.7 prikazani su razredi koji pripadaju backend dijelu našeg sustava. U pitanju su specifikacijski dijagrami razreda - implementacijski dijagrami prikazani su nakon opisa specifikacijskih dijagrama.\\[5pt]
 
 			Slika 4.4 prikazuje razrede koji predstavljaju modele - preslikane relacije baze podataka. Razred User predstavlja registriranog korisnika sustava. Razred Child predstavlja dijete registriranog korisnika sustava. Razred Donation predstavlja jednu donaciju zabilježenu u sustavu. 
 			Razred Item predstavlja jedan predmet vezan za neke od donacija. Razred Category predstavlja podatke o jednoj od kategorija u koje mogu biti svrstani predmeti. Razred Subcategory predstavlja podatke o jednoj od potkategorija u koje mogu biti svrstani predmeti.\\[10pt]
@@ -305,12 +305,75 @@
 				\label{fig:Repositories}
 			\end{figure}
 
-			%\textbf{\textit{dio 2. revizije}}\\			
+			%\textbf{\textit{dio 2. revizije}}\\
+
+                Na slikama 4.8 - 4.15 prikazani su implementacijski dijagrami razreda generirani direktno iz koda. Uz dijagrame razreda za koje su već opisani specifikacijski dijagrami (Models, odnos komponenti, Controllers, Repositories) dodatno su uključeni i dijagram razreda koji prikazuje odnos između UsersController klase i EmailSenderService klase koja se koristi za slanje potvrde o registraciji korisnika na mail, kao i dijagram razreda koji prikazuje odnos klasa za ostvarenje sigurnosti, autentifikacije i autorizacije korisnika. Zbog preglednosti dijagrami razreda za dio Controllers i dio Repositories podijeljeni su u dva dijela.
 			
-			%\textit{Prilikom druge predaje projekta dijagram razreda i opisi moraju odgovarati stvarnom stanju implementacije}
-			
-			
-			
+			\eject
+
+                \begin{figure}[H]
+				\includegraphics[width=\textwidth,height=0.95\textheight]{dijagrami/Modeli Final.png}
+				\centering
+				\caption{Dijagram razreda - dio Models (finalna verzija)}
+				\label{fig:ModelsFinal}
+			\end{figure}
+
+                \begin{figure}[H]
+				\includegraphics[width=\textwidth,height=0.8\textheight]{dijagrami/Odnos komponenti Final.png}
+				\centering
+				\caption{Dijagram razreda - odnos komponenti (finalna verzija)}
+				\label{fig:OdnosKomponentiFinal}
+			\end{figure}
+
+                %   \begin{figure}[H]
+                %   \makebox[\textwidth][c]{\includegraphics[width=1.3\textwidth,height=0.6\textheight]{dijagrami/Controlleri Final.png}}%
+			% 	\centering
+			% 	\caption{Dijagram razreda - dio Controllers (finalna verzija)}
+			% 	\label{fig:ControllersFinal}
+			% \end{figure}
+
+                \begin{figure}[H]
+				\includegraphics[width=\textwidth,height=0.4\textheight]{dijagrami/Controlleri Final Part1.png}
+				\centering
+				\caption{Dijagram razreda - dio Controllers, prvi dio (finalna verzija)}
+				\label{fig:ControllersFinalPt1}
+			\end{figure}
+
+                \begin{figure}[H]
+				\includegraphics[width=\textwidth,height=0.4\textheight]{dijagrami/Controlleri Final Part2.png}
+				\centering
+				\caption{Dijagram razreda - dio Controllers, drugi dio (finalna verzija)}
+				\label{fig:ControllersFinalPt2}
+			\end{figure}
+
+                \begin{figure}[H]
+                \makebox[\textwidth][c]{\includegraphics[width=1.2\textwidth,height=0.4\textheight]{dijagrami/Repozitoriji Final Part1.png}}%
+				\centering
+				\caption{Dijagram razreda - dio Repositories, prvi dio (finalna verzija)}
+				\label{fig:RepositoriesFinalPt1}
+			\end{figure}
+
+                \begin{figure}[H]
+				\makebox[\textwidth][c]{\includegraphics[width=1.2\textwidth,height=0.4\textheight]{dijagrami/Repozitoriji Final Part2.png}}%
+				\centering
+				\caption{Dijagram razreda - dio Repositories, drugi dio (finalna verzija)}
+				\label{fig:RepositoriesFinalPt2}
+			\end{figure}
+
+                \begin{figure}[H]
+				\includegraphics[width=\textwidth,height=0.4\textheight]{dijagrami/EmailService.png}
+				\centering
+				\caption{Dijagram razreda - dio Email Service}
+				\label{fig:EmailService}
+			\end{figure}
+
+                \begin{figure}[H]
+				\includegraphics[width=\textwidth,height=0.4\textheight]{dijagrami/Security.png}
+				\centering
+				\caption{Dijagram razreda - dio Security}
+				\label{fig:Security}
+			\end{figure}
+   
 			\eject
 		
 		\section{Dijagram stanja}
