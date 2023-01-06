@@ -6,6 +6,10 @@ import { CardActionArea, grid2Classes } from "@mui/material";
 import DonacijaKardCSS from "../style/components/DonacijaKard.module.css";
 import CardActions from "@mui/material/CardActions";
 
+import storage from "../firebaseConfig.js"
+import { ref, uploadBytesResumable, getDownloadURL  } from "firebase/storage"
+import {v4} from 'uuid'
+
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
@@ -67,9 +71,42 @@ const MojeDonacijaKard = (props) => {
   const [smijeMijenjati, setSmijeMijenati] = useState()
   const [btnDisabled, setBtnDisabled] = useState(true)
 
+  const [file, setFile] = useState("");
+  const [percent, setPercent] = useState(0);
+
   let datum=String(dateOfPublication.substring(8,10)+ "." +dateOfPublication.substring(5,7)+ "." +dateOfPublication.substring(0,4)+".")
 
   //   console.log(props.donacija)
+
+  // Event handler for when the user selects an image
+  const handleChange = (event) => {
+    setFile(event.target.files[0]);
+    handleUpload();
+  };
+  // console.log(pictureURL);
+
+  function handleUpload() {
+      if (!file) {
+        alert("Molimo Vas da odaberete sliku")
+      }
+      const storageRef = ref(storage, `/files/${file.name + v4()}`);
+      const uploadTask = uploadBytesResumable(storageRef, file);
+
+      uploadTask.on("state_changed",
+          (snapshot) => { 
+          setPercent(Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100));
+        },
+          (err) => console.log(err),
+          () => {
+            // download url
+            getDownloadURL(uploadTask.snapshot.ref)
+            .then((url) => {
+              console.log(url); 
+              setPictureURL(url);
+            });
+          }
+        ); 
+    }
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -77,12 +114,6 @@ const MojeDonacijaKard = (props) => {
     localStorage.removeItem("cat");
     localStorage.removeItem("sub");
     setOpen(false);
-  };
-
-  const handleImageChange = (event) => {
-    // Update the selected image in state
-    setSelectedImage(event.target.files[0]);
-    setPictureURL(URL.createObjectURL(event.target.files[0]));
   };
 
   const navigate = useNavigate();
@@ -418,11 +449,10 @@ const MojeDonacijaKard = (props) => {
                   subcategory={checkedSub}></DropdownCategory>
                 <div>
                   {/* ONEMOGUCIO SAM MIJENJANJE SLIKE, zasad barem */}
-                  {/* <input
-                    style={email != emailL ? { display: `none` } : {}}
-                    type="file"
-                    onChange={handleImageChange}
-                  /> */}
+                  <input type="file" accept="image/*" onChange={handleChange} />
+                  <p style={{display:percent=="100"?"none":""}}>{percent} "% done"</p>
+                  <button onClick={handleUpload} type="button">Upload slike</button>
+
                 </div>
                 <TextField
                   onChange={(e) => setDobivateljEmail(e.target.value)}

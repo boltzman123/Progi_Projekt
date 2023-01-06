@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useFetcher, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Dropdown from "react-dropdown";
+import storage from "../firebaseConfig.js"
+import { ref, uploadBytesResumable, getDownloadURL  } from "firebase/storage"
+import {v4} from 'uuid'
 
 var arraySub = [];
 var mapCat = new Map();
 var aryCat = [];
 var privremeniAry = [];
+
 function setOptions() {
   axios({
     method: "get",
@@ -37,8 +41,7 @@ function setOptions() {
 
 const DonationForm = () => {
   const [donationName, setDonatioName] = useState("");
-  const [handoverLocation, setHandoverLocation] = useState("");
-  const [pictureURL, setPictureURL] = useState();
+  const [handoverLocation, setHandoverLocation] = useState(""); 
   const [selectedImage, setSelectedImage] = useState(null);
   const [forAge, setforAge] = useState("");
   const [forSex, setSex] = useState(["M", "F"]);
@@ -51,15 +54,41 @@ const DonationForm = () => {
   const [productName, setProductName] = useState("");
   const [chosenCategory, setChosenCategory] = useState("");
   const [chosenSubcategory, setChosenSubCategory] = useState("");
+  
+  const [pictureURL, setPictureURL] = useState();
+  const [file, setFile] = useState("");
+  const [percent, setPercent] = useState(0);
   setOptions();
 
   // Event handler for when the user selects an image
-  const handleImageChange = (event) => {
-    // Update the selected image in state
-    setSelectedImage(event.target.files[0]);
-    setPictureURL(URL.createObjectURL(event.target.files[0]));
+  const handleChange = (event) => {
+    setFile(event.target.files[0]);
+    handleUpload();
   };
   // console.log(pictureURL);
+
+  function handleUpload() {
+      if (!file) {
+        alert("Molimo Vas da odaberete sliku")
+      }
+      const storageRef = ref(storage, `/files/${file.name + v4()}`);
+      const uploadTask = uploadBytesResumable(storageRef, file);
+
+      uploadTask.on("state_changed",
+          (snapshot) => { 
+          setPercent(Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100));
+        },
+          (err) => console.log(err),
+          () => {
+            // download url
+            getDownloadURL(uploadTask.snapshot.ref)
+            .then((url) => {
+              console.log(url); 
+              setPictureURL(url);
+            });
+          }
+        ); 
+    }
 
   const navigate = useNavigate();
 
@@ -67,7 +96,7 @@ const DonationForm = () => {
     e.preventDefault();
     if (chosenCategory == "" || chosenSex == "" || chosenSubcategory == "") {
       window.alert("Odaberite spol, kategoriju i podkategoriju");
-    } else if (selectedImage == null) {
+    } else if (pictureURL == null) {
       window.alert("Odaberite sliku za donaciju");
     } else {
       axios({
@@ -150,11 +179,14 @@ const DonationForm = () => {
         </div>
 
         <div>
-          <input type="file" onChange={handleImageChange} />
-          {selectedImage && <img src={URL.createObjectURL(selectedImage)} />}
+          <input type="file" accept="image/*" onChange={handleChange} />
+          <p style={{display:percent=="100"?"none":""}}>{percent} "% done"</p>
+          <button onClick={handleUpload} type="button">Upload slike</button>
         </div>
-
+          {percent=="100"?<img src={pictureURL} />:""}
+          {/* <img src={pictureURL} /> */}
         <div className="frame">
+
           <input
             value={productName}
             onChange={(e) => setProductName(e.target.value)}
@@ -165,6 +197,7 @@ const DonationForm = () => {
             className="inputFrame"
             required={true}></input>
         </div>
+
         <div className="frame">
           <input
             value={forAge}
