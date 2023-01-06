@@ -83,7 +83,7 @@ function MojeDonacije() {
         </div>
 
         <div className={MojiOglasiCSS.okvir}>
-        <h2>Moje aktivne donacije</h2>
+        <h2>Moje trenutne donacije</h2>
           <div className={MojiOglasiCSS.karticaList} style={{display:mojiOglasiList.length==0 ?"none":""}}>
               {mojiOglasiList.map((donacija) => {
               return <MojaDonacijaKard key={donacija.idDonation} donacija={donacija}></MojaDonacijaKard>;

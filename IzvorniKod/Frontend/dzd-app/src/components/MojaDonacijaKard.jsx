@@ -278,6 +278,7 @@ const MojeDonacijaKard = (props) => {
             <h3>Predviđena dob korisnika: {dob}</h3>
             <h3>Datum objave: {datum} </h3>
             <h3>Lokacija: {handoverLocation} </h3>
+            <hr/>
             <h3 id="sit">Validno: {String(valid)=="true"?"Oglas je validan":"Oglas nije validan"}</h3>
             <h3 id="sit">Treba urediti: {String(edit)=="true"?"Treba urediti":"Ne treba urediti"}</h3>
             <h3 id="sit">Poruka od admina: {message}</h3>
