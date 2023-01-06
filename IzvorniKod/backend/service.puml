@@ -1,0 +1,24 @@
+@startuml
+
+class oop.rest.UsersController {
+- UsersService userService
+- ChildService childService
+- DonationService donationService
+- EmailSenderService senderService
+~ ApplicationEventPublisher eventPublisher
+- PasswordEncoder passwordEncoder
++ List<Users> listUsers()
++ Users getUser(String,String)
++ Users getUserByUsername(String)
++ ResponseEntity<Users> getUser(LoginForm)
++ ResponseEntity<Users> createUser(Users)
++ Users updateUser(String,Users)
++ Users deleteUser(String)
+}
+class oop.service.EmailSenderService {
+- JavaMailSender mailSender
++ void sendEmail(String,String,String)
+}
+
+oop.rest.UsersController --> oop.service.EmailSenderService
+@enduml

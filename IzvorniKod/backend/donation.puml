@@ -1,0 +1,172 @@
+@startuml
+oop.domain.Donation --* oop.domain.Users
+oop.domain.Child --* oop.domain.Users
+oop.domain.Donation *-- oop.domain.Item
+oop.domain.Category *-- oop.domain.Subcategory
+oop.domain.Child --o oop.domain.Category
+oop.domain.Child --o oop.domain.Subcategory
+oop.domain.Item --o oop.domain.Subcategory
+oop.domain.Item --o oop.domain.Category
+oop.domain.Season <-- oop.domain.Item
+
+
+class oop.domain.Subcategory {
+- String subcategoryName
+- Category category
+- float useDateExpires
+- Season season
+- Set<Child> childrenSub
++ Category getCategory()
++ void setCategory(Category)
++ float getUseDateExpires()
++ void setUseDateExpires(float)
++ Season getSeason()
++ void setSeason(Season)
++ String getSubcategoryName()
++ void setSubcategoryName(String)
++ Set<Child> getChildrenSub()
++ void setChildrenSub(Set<Child>)
+}
+class oop.domain.Users {
+- String email
+- String userName
+- String userSurname
+- String password
+- String userLocation
+- boolean canDonate
+- boolean mailSent
+- Set<Donation> donations
+- Set<Donation> donation
+- Set<Child> children
++ Set<Donation> getDonations()
++ void setDonations(Set<Donation>)
++ void setCanDonate(boolean)
++ boolean isCanDonate()
++ String getEmail()
++ void setEmail(String)
++ boolean isMailSent()
++ void setMailSent(boolean)
++ String getUserName()
++ void setUserName(String)
++ String getUserSurname()
++ void setUserSurname(String)
++ String getPassword()
++ void setPassword(String)
++ String getUserLocation()
++ void setUserLocation(String)
++ String generateRegistrationMessage()
+}
+class oop.domain.Item {
+- Long id
+- String productName
+- String itemState
+- Long productionYear
+- String productBrand
+- int forAge
+- char forSex
+- Category category
+- Subcategory subcategory
++ Subcategory getSubcategory()
++ void setSubcategory(Subcategory)
++ Category getCategory()
++ void setCategory(Category)
++ Long getId()
++ String getProductName()
++ void setProductName(String)
++ String getItemState()
++ void setItemState(String)
++ Long getProductionYear()
++ void setProductionYear(Long)
++ String getProductBrand()
++ void setProductBrand(String)
++ int getForAge()
++ void setForAge(int)
++ char getForSex()
++ void setForSex(char)
+}
+class oop.domain.Donation {
+- Long idDonation
+- String donationName
+- Date dateOfPublication
+- Date dateOfClosing
+- boolean isValid
+- boolean isActive
+- boolean edit
+- String message
+- String pictureURL
+- String handoverLocation
+- String description
+- Users user
+- Item item
+- Users donatedToUser
++ String getDescription()
++ void setDescription(String)
++ Item getItem()
++ void setIdDonation(Long)
++ boolean isEdit()
++ void setEdit(boolean)
++ void setItem(Item)
++ Users getUser()
++ void setUser(Users)
++ Long getIdDonation()
++ String getDonationName()
++ void setDonationName(String)
++ Date getDateOfPublication()
++ void setDateOfPublication(Date)
++ Date getDateOfClosing()
++ void setDateOfClosing(Date)
++ boolean isValid()
++ void setValid(boolean)
++ boolean isActive()
++ void setActive(boolean)
++ String getPictureURL()
++ Users getDonatedToUser()
++ void setDonatedToUser(Users)
++ void setPictureURL(String)
++ String getHandoverLocation()
++ void setHandoverLocation(String)
++ String getMessage()
++ void setMessage(String)
+}
+class oop.domain.Category {
+- String categoryName
+- Set<Child> children
++ void setCategoryName(String)
++ String getCategoryName()
++ Set<Child> getChildren()
++ void setChildren(Set<Child>)
+}
+enum oop.domain.Season {
++  SPRING
++  SUMMER
++  AUTUMN
++  WINTER
++  ALL
+}
+class oop.domain.Child {
+- Long childId
+- String childName
+- char childSex
+- int childAge
+- Date predictedBirthDate
+- Users user
+- Set<Category> category
+- Set<Subcategory> subcategory
++ void setUser(Users)
++ void addCategory(Category)
++ Users getUser()
++ Long getChildId()
++ String getChildName()
++ void setChildName(String)
++ char getChildSex()
++ void setChildSex(char)
++ int getChildAge()
++ void setChildAge(int)
++ Date getPredictedBirthDate()
++ void setPredictedBirthDate(Date)
++ Set<Category> getCategory()
++ Set<Subcategory> getSubcategory()
++ void setCategory(Set<Category>)
++ void setSubcategory(Set<Subcategory>)
+}
+@enduml
