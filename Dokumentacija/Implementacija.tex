@@ -165,3 +165,46 @@
                 \end{itemize}
 
                 Nakon izvođenja svih ovih koraka, u pogon bi se trebala uspješno pustiti (eng. deployati) backend aplikacija. Nakon puštanja backend aplikacije u pogon, isto ćemo napraviti i za frontend aplikaciju.
+
+                \eject
+
+                \subsection{Frontend deploy na Render}
+
+                Kako bi se frontend uspješno pustio u pogon, u Render dashboard potrebno je:
+
+                \begin{itemize}
+                    \item Pritisnuti tipku New i odabrati opciju Web Service za kreiranje web usluge
+                    \item Povezati GitLab račun - nakon povezivanja su za odabir dostupni svi projekti na koje imate prava pristupa
+                    \item Pritisnuti Connect pokraj odgovarajućeg projekta
+                    \begin{figure}[H]
+    			\includegraphics[width=\textwidth,height=0.25\textheight]{slike/connectFront.png}
+    			\centering
+    			\caption{Povezivanje repozitorija za frontend}
+    			\label{fig:connectRepoFront}
+    			\end{figure}
+                    \item Postaviti ime za servis (ime servisa na kraju će biti dio web adrese)
+                    \item Root directory postaviti na "IzvorniKod/Frontend/dzd-app/"
+                    \item Environment postaviti na "Node"
+                    \begin{figure}[H]
+    			\includegraphics[scale=0.75]{slike/fillDataDeployFront.png}
+    			\centering
+    			\caption{Ispunjavanje podataka o frontendu}
+    			\label{fig:fillDataFront}
+    			\end{figure}
+                    \item Region postaviti na "Frankfurt"
+                    \item Odabrati branch iz kojeg se uzimaju datoteke za frontend
+                    \item Build Command postaviti na "yarn build"
+                    \item Start Command postaviti na "yarn start-prod"
+                    \begin{figure}[H]
+    			\includegraphics[]{slike/buildFront.png}
+    			\centering
+    			\caption{Unošenje ispravnih naredbi}
+    			\label{fig:buildFrontCommands}
+    			\end{figure}\textbf{}
+                    \item Na dnu pritisnuti "Advanced"
+                    \item Dodati potrebne Environment varijable - API\_BASE\_URL postaviti na adresu deployanog backenda aplikacije dostupnu na Render dashboardu
+                    \item Isključiti "Auto-Deploy" kako se projekt ne bi ponovno deployao za svaki novi commit
+                    \item Pritisnuti Create Web Service
+                \end{itemize}
+
+                Nakon izvođenja svih ovih koraka, u pogon bi se trebala uspješno pustiti (eng. deployati) frontend aplikacija. Stranici pristupamo preko URL-a za \underline{frontend}\footnote{\url{https://frontend-service.onrender.com/}}.
