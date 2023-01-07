@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
+
+    <changeSet id="20221018-000-1" author="david (generated)">
+        <insert tableName="category">
+            <column name="category_name" value="Kolica"/>
+        </insert>
+    </changeSet>
+    <changeSet id="20221018-000-2" author="david (generated)">
+        <insert tableName="category">
+            <column name="category_name" value="Igračke"/>
+        </insert>
+    </changeSet>
+    <changeSet id="20221018-000-3" author="david (generated)">
+        <insert tableName="category">
+            <column name="category_name" value="Pomoćne naprave"/>
+        </insert>
+    </changeSet>
+    <changeSet id="20221018-000-4" author="david (generated)">
+        <insert tableName="category">
+            <column name="category_name" value="Odjeća i obuća"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="20221018-001-1" author="david (generated)">
+        <insert tableName="subcategory">
+            <column name="subcategory_name" value="Dodaci za sunčano vrijeme"/>
+            <column name="category_name" value="Kolica"/>
+            <column name="use_date_expires" value="1"/>
+            <column name="season" value="SUMMER"/>
+        </insert>
+    </changeSet>
+    <changeSet id="20221018-001-2" author="david (generated)">
+        <insert tableName="subcategory">
+            <column name="subcategory_name" value="Kišobran kolica"/>
+            <column name="category_name" value="Kolica"/>
+            <column name="use_date_expires" value="1.5"/>
+            <column name="season" value="AUTUMN"/>
+        </insert>
+    </changeSet>
+    <changeSet id="20221018-001-3" author="david (generated)">
+        <insert tableName="subcategory">
+            <column name="subcategory_name" value="3 u 1 kolica"/>
+            <column name="category_name" value="Kolica"/>
+            <column name="use_date_expires" value="1.5"/>
+            <column name="season" value="ALL"/>
+        </insert>
+    </changeSet>
+    <changeSet id="20221018-001-4" author="david (generated)">
+        <insert tableName="subcategory">
+            <column name="subcategory_name" value="Dodatci za kišno vrijeme"/>
+            <column name="category_name" value="Kolica"/>
+            <column name="use_date_expires" value="1"/>
+            <column name="season" value="AUTUMN"/>
+        </insert>
+    </changeSet>
+    <changeSet id="20221018-001-5" author="david (generated)">
+        <insert tableName="subcategory">
+            <column name="subcategory_name" value="Autići"/>
+            <column name="category_name" value="Igračke"/>
+            <column name="use_date_expires" value="4"/>
+            <column name="season" value="ALL"/>
+        </insert>
+    </changeSet>
+    <changeSet id="20221018-001-6" author="david (generated)">
+        <insert tableName="subcategory">
+            <column name="subcategory_name" value="Lutke"/>
+            <column name="category_name" value="Igračke"/>
+            <column name="use_date_expires" value="4"/>
+            <column name="season" value="ALL"/>
+        </insert>
+    </changeSet>
+    <changeSet id="20221018-001-7" author="david (generated)">
+        <insert tableName="subcategory">
+            <column name="subcategory_name" value="Plišanci"/>
+            <column name="category_name" value="Igračke"/>
+            <column name="use_date_expires" value="3"/>
+            <column name="season" value="ALL"/>
+        </insert>
+    </changeSet>
+    <changeSet id="20221018-001-8" author="david (generated)">
+        <insert tableName="subcategory">
+            <column name="subcategory_name" value="Hodalica"/>
+            <column name="category_name" value="Pomoćne naprave"/>
+            <column name="use_date_expires" value="1"/>
+            <column name="season" value="ALL"/>
+        </insert>
+    </changeSet>
+    <changeSet id="20221018-001-9" author="david (generated)">
+        <insert tableName="subcategory">
+            <column name="subcategory_name" value="Baby monitor"/>
+            <column name="category_name" value="Pomoćne naprave"/>
+            <column name="use_date_expires" value="3"/>
+            <column name="season" value="ALL"/>
+        </insert>
+    </changeSet>
+    <changeSet id="20221018-001-10" author="david (generated)">
+        <insert tableName="subcategory">
+            <column name="subcategory_name" value="Kahlica"/>
+            <column name="category_name" value="Pomoćne naprave"/>
+            <column name="use_date_expires" value="3.5"/>
+            <column name="season" value="ALL"/>
+        </insert>
+    </changeSet>
+    <changeSet id="20221018-001-11" author="david (generated)">
+        <insert tableName="subcategory">
+            <column name="subcategory_name" value="Majice"/>
+            <column name="category_name" value="Odjeća i obuća"/>
+            <column name="use_date_expires" value="1"/>
+            <column name="season" value="ALL"/>
+        </insert>
+    </changeSet>
+    <changeSet id="20221018-001-12" author="david (generated)">
+        <insert tableName="subcategory">
+            <column name="subcategory_name" value="Jakne"/>
+            <column name="category_name" value="Odjeća i obuća"/>
+            <column name="use_date_expires" value="2"/>
+            <column name="season" value="WINTER"/>
+        </insert>
+    </changeSet>
+    <changeSet id="20221018-001-13" author="david (generated)">
+        <insert tableName="subcategory">
+            <column name="subcategory_name" value="Hlače"/>
+            <column name="category_name" value="Odjeća i obuća"/>
+            <column name="use_date_expires" value="1"/>
+            <column name="season" value="ALL"/>
+        </insert>
+    </changeSet>
+    <changeSet id="20221018-001-14" author="david (generated)">
+        <insert tableName="subcategory">
+            <column name="subcategory_name" value="Tenisice"/>
+            <column name="category_name" value="Odjeća i obuća"/>
+            <column name="use_date_expires" value="1.5"/>
+            <column name="season" value="SPRING"/>
+        </insert>
+    </changeSet>
+
+
+    <changeSet id="20221018-000-5" author="david(generated)">
+        <insert tableName="users">
+            <column name="email" value="kidkid24799@gmail.com"/>
+            <column name="password" value="$2a$10$kCvtMi7cZRd1/97MF87Uie0ehEqc2m8ifYJpXMZ4kPoWkWRBCjKGe"/>
+            <column name="user_name" value="Kid"/>
+            <column name="user_surname" value="Dik"/>
+            <column name="user_location" value="Zagreb"/>
+            <column name="mail_sent" value="false"/>
+            <column name="can_donate" value="false"/>
+        </insert>
+    </changeSet>
+    <changeSet id="20221018-000-6" author="david(generated)">
+        <insert tableName="users">
+            <column name="email" value="admin"/>
+            <column name="password" value="$2a$10$QV82E7WEHLmp8EwINolfaOVM/38dcwi1Bo/ZiMtmtBAbvrvDcmoCi"/>
+            <column name="user_name" value="Admin"/>
+            <column name="user_surname" value="Admin"/>
+            <column name="user_location" value="Zagreb"/>
+            <column name="mail_sent" value="false"/>
+            <column name="can_donate" value="false"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

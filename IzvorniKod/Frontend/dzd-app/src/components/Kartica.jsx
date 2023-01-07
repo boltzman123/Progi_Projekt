@@ -11,7 +11,6 @@ function Kartica() {
   const [sezona, setSezona] = useState([]);
 
   let user = JSON.stringify(localStorage.getItem("user"))
-
   
   useEffect(() => {
     axios({
@@ -26,7 +25,6 @@ function Kartica() {
         setPrimljen(response.data.primljen)
         setPreporucen(response.data.preporucen)
         setSezona(response.data.sezona)
-
       })
       .catch((err) => {
         toast.error("Greška iz baze!");

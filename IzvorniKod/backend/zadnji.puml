@@ -1,0 +1,34 @@
+@startuml
+class oop.rest.CategoryController {
+- CategoryService service
++ List<Category> listCategory()
++ Category getCategoryByName(String)
++ ResponseEntity<Category> createCategory(Category)
++ Category updateCategory(String,Category)
++ Category deleteCategory(String)
++ Category delete(Category)
+}
+class oop.service.impl.CategoryServiceJpa {
+- CategoryRepository repository
++ List<Category> listAll()
++ Category createCategory(Category)
++ Category updateCategory(Category)
++ Optional<Category> getCategoryByName(String)
++ Category deleteCategory(String)
++ Category delete(Category)
+}
+interface oop.service.CategoryService {
+~ List<Category> listAll()
+~ Category createCategory(Category)
+~ Category updateCategory(Category)
+~ Optional<Category> getCategoryByName(String)
+~ Category deleteCategory(String)
+~ Category delete(Category)
+}
+class oop.dao.CategoryRepository {
+}
+
+oop.service.impl.CategoryServiceJpa <-- oop.rest.CategoryController
+oop.service.impl.CategoryServiceJpa --> oop.dao.CategoryRepository
+oop.service.CategoryService <|.. oop.service.impl.CategoryServiceJpa
+@enduml

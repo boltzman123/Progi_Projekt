@@ -50,7 +50,7 @@ const RegistracijaForm = () => {
                 "userName": ime,
                 "userSurname": prezime,
                 "password": pass,
-                "userLocation": mjesto 
+                "userLocation": mjesto                
           }
         }).then((response) => {
             console.log(response.data);

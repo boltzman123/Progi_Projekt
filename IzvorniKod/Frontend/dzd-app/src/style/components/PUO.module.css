@@ -1,3 +1,9 @@
+.frame {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content:center;
+}
 
 .inputFrame{   
     border:1px solid rgb(221, 215, 215);
@@ -6,18 +12,30 @@
     height: 65px;
     width: 25rem;
     background-color: rgb(242, 242, 242);
+    margin:20px  0px 10px -0.5px;
     justify-content: center;
-    margin: 20px 20px;
     text-align: center;
     font-size: larger;
+    display:block;
 }
-.frame {
+
+.buttonFrame{
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content:center;
+}
+
+.formLabel{
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+form {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content:center
-}
-form .form {
-    margin-top: 30px;
 }
 
 ::placeholder{
@@ -27,6 +45,11 @@ form .form {
     width: 2em;
     height: 2em;
 }
+
+h2{
+    margin-left: -20px;
+}
+
 /*mobitel*/
 @media only screen and (max-width: 449px) {
     .inputFrame{
@@ -37,6 +60,7 @@ form .form {
         margin-left: 20px;
     }
     .buttonFrame {
+        flex-wrap: wrap; 
         margin-right: 20px;
         justify-content: center;
     }
