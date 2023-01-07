@@ -1,5 +1,5 @@
-import { initializeApp } from "firebase/app";
-import { getStorage } from 'firebase/storage';
+import { initializeApp } from "firebase/compat/app";
+import { getStorage } from 'firebase/compat/storage';
 
 const app = initializeApp ({
   apiKey: "AIzaSyAyf2Lk8w-05rERpJADOgIbHvE6YtEGZEQ",
