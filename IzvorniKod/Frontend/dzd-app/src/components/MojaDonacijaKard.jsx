@@ -7,7 +7,7 @@ import DonacijaKardCSS from "../style/components/DonacijaKard.module.css";
 import CardActions from "@mui/material/CardActions";
 
 import storage from "../firebaseConfig.js"
-import { ref, uploadBytesResumable, getDownloadURL  } from "firebase/app"
+import { ref, uploadBytesResumable, getDownloadURL  } from "firebase/storage"
 import {v4} from 'uuid'
 
 import axios from "axios";
