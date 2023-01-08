@@ -447,12 +447,10 @@ const MojeDonacijaKard = (props) => {
                   value={smijeMijenjati}
                   category={checkedCat}
                   subcategory={checkedSub}></DropdownCategory>
-                <div>
-                  {/* ONEMOGUCIO SAM MIJENJANJE SLIKE, zasad barem */}
-                  <input type="file" accept="image/*" onChange={handleChange} />
+                <div style={{display:smijeMijenjati==true?"none":""}}>
+                  <input type="file" accept="image/*" onChange={handleChange}/>
                   <p style={{display:percent=="100"?"none":""}}>{percent} "% done"</p>
                   <button onClick={handleUpload} type="button">Upload slike</button>
-
                 </div>
                 <TextField
                   onChange={(e) => setDobivateljEmail(e.target.value)}

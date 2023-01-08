@@ -12,7 +12,7 @@ function Kartica() {
   const [sezona, setSezona] = useState([]);
 
 
-  let user = JSON.stringify(localStorage.getItem("user"))
+  let user = JSON.parse(localStorage.getItem("user"))
   
   useEffect(() => {
     axios({
