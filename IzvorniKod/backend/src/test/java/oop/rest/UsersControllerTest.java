@@ -13,6 +13,7 @@ import oop.service.UsersService;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -44,9 +46,6 @@ import static ru.yandex.qatools.embed.postgresql.distribution.Version.Main.V9_6;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-@TestPropertySource(properties = {"spring.datasource.url=jdbc:postgresql://localhost:5432/db"})
-@AutoConfigureTestDatabase
-@Import({UsersRepository.class, ChildRepository.class, DonationRepository.class, CategoryRepository.class, DonationRepository.class, ItemRepository.class, SubcategoryRepository.class, UsersService.class, ChildService.class, DonationService.class, EmailSenderService.class, ApplicationEventPublisher.class, PasswordEncoder.class })
 class UsersControllerTest {
     @Autowired
     private MockMvc mvc;
@@ -69,38 +68,22 @@ class UsersControllerTest {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @Autowired
-    private CategoryRepository categoryRepository;
 
-    @Autowired
-    private ChildRepository childRepository;
-
-    @MockBean
-    private DonationRepository donationRepository;
-
-    @Autowired
-    private ItemRepository itemRepository;
-
-    @Autowired
-    private  SubcategoryRepository subcategoryRepository;
-
-    @Autowired
-    private UsersRepository usersRepository;
 
     @Test
-    public void test() {
-        Users user = new Users("hehe@gmail.com", "hehe", "hehe", "hehe", "hehe");
+    public void proba() {
+        //Users user = new Users("hehe@gmail.com", "hehe", "hehe", "hehe", "hehe");
 
-        doNothing().when(userService).createUser(user);
 
-        userService.createUser(user);
+        //userService.createUser(user);
         System.out.println(userService.listAll());
+        userService.listAll().forEach(u -> System.out.println(u.getEmail()));
     }
 
 
     @Test
     //@WithMockUser(username="admin", password = "pass")
-    public void loginTest() throws Exception {
+    public void probaloginTest() throws Exception {
 
         Users user = new Users("hehe@gmail.com", "hehe", "hehe", "hehe", "hehe");
         userService.createUser(user);

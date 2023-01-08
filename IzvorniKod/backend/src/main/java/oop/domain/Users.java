@@ -36,6 +36,8 @@ public class Users {
         return donations;
     }
 
+    public Users(){}
+
     public Users(String email, String userName, String userSurname, String password, String userLocation) {
         this.email = email;
         this.userName = userName;

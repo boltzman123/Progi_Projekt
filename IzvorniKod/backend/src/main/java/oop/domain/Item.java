@@ -21,6 +21,18 @@ public class Item {
     @JoinColumn(name = "subcategory_name")
     private Subcategory subcategory;
 
+    public Item() {}
+    public Item(String productName, String itemState, Long productionYear, String productBrand, int forAge, char forSex, Category category, Subcategory subcategory) {
+        this.productName = productName;
+        this.itemState = itemState;
+        this.productionYear = productionYear;
+        this.productBrand = productBrand;
+        this.forAge = forAge;
+        this.forSex = forSex;
+        this.category = category;
+        this.subcategory = subcategory;
+    }
+
     public Subcategory getSubcategory() {
         return subcategory;
     }
