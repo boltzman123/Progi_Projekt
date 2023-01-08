@@ -1,4 +1,10 @@
-.okvir{
+.okvirDD{
+    padding: 10px 10px;
+    margin: 40px 40px;
+    background-color: rgba(244, 177, 131, 255);
+    border-radius: 10px;   
+}
+.okvirMD{
     padding: 10px 10px;
     margin: 40px 40px;
     background-color: rgba(244, 177, 131, 255);
@@ -39,4 +45,7 @@ h2{
     .karticaList{
         margin: 0px 0px;
     }
+}
+.nevidljiv {
+    height: 72.6%;
 }

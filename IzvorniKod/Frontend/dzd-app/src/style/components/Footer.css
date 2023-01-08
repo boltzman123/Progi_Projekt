@@ -1,5 +1,5 @@
 @media only screen and (min-width: 450px) {
-  .footer {
+  .footerNormal {
     width: 100%;
     text-align: center;
     background-color: rgba(244, 177, 131, 255);
@@ -7,8 +7,35 @@
     font-size: 30px;
     font-weight: 400;
     padding: 12px;
-    height: 2.5rem;
-    margin-top: 50px;
+    bottom: 0;
+  }
+
+
+    .footerExpand {
+      width: 100%;
+      text-align: center;
+      background-color: rgba(244, 177, 131, 255);
+      color: white;
+      font-size: 30px;
+      font-weight: 400;
+      padding: 12px;
+      bottom: 0;
+      margin-top: 100px;
+      position: relative;
+    }
+  
+
+
+  .footerProfil {
+    width: 100%;
+    text-align: center;
+    background-color: rgba(244, 177, 131, 255);
+    color: white;
+    font-size: 30px;
+    font-weight: 400;
+    padding: 12px;
+    bottom: 0;
+    position: fixed;
   }
 }
 

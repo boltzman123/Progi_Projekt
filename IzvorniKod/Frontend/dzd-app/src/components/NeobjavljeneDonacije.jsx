@@ -27,7 +27,7 @@ function NeobjavljeneDonacije() {
 
   if (donacije.length==0){
     console.log("Nema oglasa")
-    return <div>Nema oglasa</div>
+    return <div className={KarticaCSS.nevidljiv}>Nema oglasa</div>
   }
   else {
     return (

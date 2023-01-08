@@ -4,11 +4,13 @@ import axios from "axios";
 import DonacijaKard from "./DonacijaKard";
 import KarticaCSS from '../style/components/Kartica.module.css'
 
+
 function Kartica() {
   const [aktivan, setAktivan] = useState([]);
   const [primljen, setPrimljen] = useState([]);
   const [preporucen, setPreporucen] = useState([]);
   const [sezona, setSezona] = useState([]);
+
 
   let user = JSON.stringify(localStorage.getItem("user"))
   
@@ -34,7 +36,7 @@ function Kartica() {
 
   if (aktivan.length==0 && primljen.length==0 && preporucen.length==0 && sezona.length==0 ){
     console.log("Nema oglasa")
-    return <div>Nema oglasa</div>
+    return <div className={KarticaCSS.nevidljiv}>Nema oglasa</div>
   }
   else {
     return (

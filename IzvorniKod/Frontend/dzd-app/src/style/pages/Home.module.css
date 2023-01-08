@@ -97,3 +97,16 @@
  }
 
 }
+.wrapper {
+  height: 100%;
+}
+.wrapUsers {
+  height: 100%;
+  display: grid;
+  grid-template-rows: 15% auto 16.5%;
+}
+.wrapChild {
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto auto 15%;
+}

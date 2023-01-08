@@ -14,6 +14,7 @@ function MojeDonacije() {
   const [sentMail, setSentMail] = useState('');
   const [doniraniOglasiList, setdoniraniOglasiList] = useState([]);
   const [mojiOglasiList, setmojiOglasiList] = useState([]);
+  const [imaOglasa, setImaOglasa] = useState(false)
 
   const doniraniOglasi=[]
   const mojiOglasi=[]
@@ -68,12 +69,12 @@ function MojeDonacije() {
 
   if (donacije.length==0){
     console.log("Nema oglasa")
-    return <div>Nema oglasa</div>
+    return <div className={MojiOglasiCSS.nevidljiv}>Nema oglasa</div>
   }
   else {
     return (
       <>
-        <div className={MojiOglasiCSS.okvir}>
+        <div className={MojiOglasiCSS.okvirDD}>
         <h2>Donirane donacije</h2>
           <div className={MojiOglasiCSS.karticaList} style={{display:doniraniOglasiList.length==0 ?"none":""}}>
               {doniraniOglasiList.map((donacija) => {
@@ -82,7 +83,7 @@ function MojeDonacije() {
           </div>
         </div>
 
-        <div className={MojiOglasiCSS.okvir}>
+        <div className={MojiOglasiCSS.okvirMD}>
         <h2>Moje trenutne donacije</h2>
           <div className={MojiOglasiCSS.karticaList} style={{display:mojiOglasiList.length==0 ?"none":""}}>
               {mojiOglasiList.map((donacija) => {

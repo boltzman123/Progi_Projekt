@@ -8,6 +8,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import DijeteEditModal from './DijeteEditModal';
 
+
 const DjecaList = ({updatePage, setUpdatePage}) => {
     const [user, setUser] = useState();
     const [djeca, setDjeca] = useState([]);
@@ -61,14 +62,15 @@ const DjecaList = ({updatePage, setUpdatePage}) => {
 
     return(
         <React.Fragment>
-            <Container maxWidth='xs'>
+            <Container maxWidth='xs' style={{height: "17.1%"}}>
                 <List>
                     {djeca.map((dijete) => {
                         return(
                             <ListItem 
+                            style={{height: "70%"}}
                                 key={dijete.childId}
                                 >
-                                <ListItemText primary={`${dijete.childName}`}/>
+                                <ListItemText  primary={`${dijete.childName}`}/>
                                 <DijeteEditModal dijete={dijete} updatePage={updatePage} setUpdatePage={setUpdatePage}>
                                 </DijeteEditModal>
                                 <IconButton onClick={deleteChild(dijete)}>

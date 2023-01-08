@@ -3,9 +3,10 @@ import axios from "axios";
 import { useFetcher, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Dropdown from "react-dropdown";
-import storage from "../firebaseConfig.js"
-import { ref, uploadBytesResumable, getDownloadURL  } from "firebase/storage"
-import {v4} from 'uuid'
+import storage from "../firebaseConfig.js";
+import { ref, uploadBytesResumable, getDownloadURL  } from "firebase/storage";
+import { v4 } from 'uuid';
+
 
 var arraySub = [];
 var mapCat = new Map();
@@ -122,7 +123,7 @@ const DonationForm = () => {
           let item = response.data;
           axios({
             method: "post",
-            url: `/api/donation`,
+            url: `/api/donation/createDonation`,
             headers: {
               "Content-Type": "application/json; charset=utf-8",
             },
