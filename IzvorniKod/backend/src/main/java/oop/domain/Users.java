@@ -36,6 +36,15 @@ public class Users {
         return donations;
     }
 
+    public Users(){}
+
+    public Users(String email, String userName, String userSurname, String password, String userLocation) {
+        this.email = email;
+        this.userName = userName;
+        this.userSurname = userSurname;
+        this.password = password;
+        this.userLocation = userLocation;
+    }
 
     public void setDonations(Set<Donation> donations) {
         this.donations = donations;

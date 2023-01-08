@@ -29,6 +29,20 @@ public class Donation {
     @ManyToOne
     private Users donatedToUser;
 
+    public Donation(){}
+
+    public Donation(String donationName, Date dateOfPublication, String message, String pictureURL, String handoverLocation, String description, Users user, Item item) {
+        this.donationName = donationName;
+        this.dateOfPublication = dateOfPublication;
+        this.message = message;
+        this.pictureURL = pictureURL;
+        this.handoverLocation = handoverLocation;
+        this.description = description;
+        this.user = user;
+        this.item = item;
+
+    }
+
     public String getDescription() {
         return description;
     }

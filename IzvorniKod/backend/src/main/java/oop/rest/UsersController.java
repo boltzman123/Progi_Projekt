@@ -71,6 +71,8 @@ public class UsersController {
     //@Secured({"ROLE_USER","ROLE_ADMIN"})
     public ResponseEntity<Users> getUser(@RequestBody LoginForm loginForm){
         Users user = userService.fetch(loginForm.getEmail());
+        //System.out.println(loginForm.getEmail() + " " + loginForm.getPassword());
+        //System.out.println(user.getEmail() + " " + passwordEncoder.matches(loginForm.getPassword(), user.getPassword()));
         if(passwordEncoder.matches(loginForm.getPassword(), user.getPassword())){
             return ResponseEntity.created(URI.create("/users/" + user.getEmail())).body(user);
         } else{
@@ -83,8 +85,10 @@ public class UsersController {
     public ResponseEntity<Users> createUser(@RequestBody Users user){
         Optional<Users> user1 = userService.findByEmail(user.getEmail());
         if(user1.isPresent()){
+            //System.out.println("da");
             throw new IllegalArgumentException("User already exists");
         } else{
+            //System.out.println("ne");
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             String email = user.getEmail();
             String subject = "Successful registration!";
