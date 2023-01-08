@@ -102,7 +102,6 @@ const DonationForm = () => {
   // Event handler for when the user selects an image
   const handleChange = (event) => {
     setFile(event.target.files[0]);
-    handleUpload();
   };
   // console.log(pictureURL);
 
@@ -395,24 +394,14 @@ const DonationForm = () => {
 
 
             </div>
-
-        
-
-          
-
-
-       
-
-          
-           
           </div>
         </div>
 
         <div className="dDio">
           <div>
             <input type="file" accept="image/*" onChange={handleChange} />
-            <p style={{ display: percent == "100" ? "none" : "" }}>
-              {percent} "% done"
+            <p style={{ display: ((percent == "100")||(percent == "0")) ? "none" : "" }}>
+              {percent} "% gotovo"
             </p>
             <button onClick={handleUpload} type="button">
               Upload slike

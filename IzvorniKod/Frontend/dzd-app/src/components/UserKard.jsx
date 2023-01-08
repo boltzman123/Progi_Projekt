@@ -91,7 +91,7 @@ const UserKard = (props) => {
         </CardContent>
         <CardActions>
           <Button variant="outlined" color="success" onClick={giveUserLicence}>
-            Dodjeli dozvolu
+            Dodijeli dozvolu
           </Button>
           <Button variant="outlined" color="error" onClick={deleteUserLicence}>
             Oduzmi dozvolu
