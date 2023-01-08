@@ -31,13 +31,13 @@ class UsersServiceJpaTest {
     private PasswordEncoder passwordEncoder;
 
     @Test
-    public void Test3() {
+    public void TestIsAdminInDatabase() {
         Users users = usersService.fetch("admin");
         Assertions.assertEquals(passwordEncoder.matches("pass", users.getPassword()), true);
     }
 
     @Test
-    public void Test4() {
+    public void TestEntityMissingException() {
         Throwable exception = Assertions.assertThrows(EntityMissingException.class, ()->usersService.fetch("ksj@gmai.com"));
         Assertions.assertEquals(exception.getMessage() ,"Entity with reference ksj@gmai.com of class oop.domain.Users not found.");
     }

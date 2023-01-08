@@ -29,7 +29,7 @@ class ItemServiceJpaTest {
     private SubcategoryService subcategoryService;
 
     @Test
-    public void test5() {
+    public void testIsItemUpdated() {
         Subcategory subcategory = subcategoryService.getSubcategoryByName("Lutke").get();
         Category category = subcategory.getCategory();
         Item createdItem = itemService.createItem(new Item("jadbh", "kadna", (long) 200, "akdn", 2, 'M', category, subcategory));
@@ -38,7 +38,7 @@ class ItemServiceJpaTest {
     }
 
     @Test
-    public void test6() {
+    public void testIsItemDeleted() {
         Subcategory subcategory = subcategoryService.getSubcategoryByName("Lutke").get();
         Category category = subcategory.getCategory();
         Item createdItem = itemService.createItem(new Item("jadbh", "kadna", (long) 200, "akdn", 2, 'M', category, subcategory));

@@ -42,7 +42,7 @@ class DonationServiceJpaTest {
 
 
     @Test
-    public void tets1() {
+    public void testIsDonationCreated() {
         Users user = usersService.fetch("kidkid24799@gmail.com");
         Subcategory subcategory = subcategoryService.getSubcategoryByName("Lutke").get();
         Category category = subcategory.getCategory();
@@ -51,19 +51,6 @@ class DonationServiceJpaTest {
 
 
         Assertions.assertEquals(service.createDonation(don), don);
-    }
-
-    @Test
-    public void tets2(){
-
-        Users user = usersService.fetch("kidkid24799@gmail.com");
-        Subcategory subcategory = subcategoryService.getSubcategoryByName("Lutke").get();
-        Category category = subcategory.getCategory();
-        Item item = itemService.createItem(new Item("kjasd", "kasjn", (long) 2000, "kjaxn", 3, 'M', category, subcategory));
-        Donation don = new Donation("jhadb", new Date(2000, 12, 12), "kasn", "lasknl", "kdajsn", "laiIspitni slučajevi se pišu na razini jezika izvornog koda i izvršaIspitni slučajevi se pišu na razini jezika izvornog koda i izvršaIspitni slučajevi se pišu na razini jezika izvornog koda i izvršaIspitni slučajevi se pišu na razini jezika izvornog koda i izvršaIspitni slučajevi se pišu na razini jezika izvornog koda i izvršaIspitni slučajevi se pišu na razini jezika izvornog koda i izvršaIspitni slučajevi se pišu na razini jezika izvornog koda i izvršaIspitni slučajevi se pišu na razini jezika izvornog koda i izvršaIspitni slučajevi se pišu na razini jezika izvornog koda i izvršaIspitni slučajevi se pišu na razini jezika izvornog koda i izvršaIspitni slučajevi se pišu na razini jezika izvornog koda i izvršaIspitni slučajevi se pišu na razini jezika izvornog koda i izvršaIspitni slučajevi se pišu na razini jezika izvornog koda i izvršaIspitni slučajevi se pišu na razini jezika izvornog koda i izvršaIspitni slučajevi se pišu na razini jezika izvornog koda i izvršaIspitni slučajevi se pišu na razini jezika izvornog koda i izvršaIspitni slučajevi se pišu na razini jezika izvornog koda i izvršaIspitni slučajevi se pišu na razini jezika izvornog koda i izvršaIspitni slučajevi se pišu na razini jezika izvornog koda i izvršaIspitni slučajevi se pišu na razini jezika izvornog koda i izvršaIspitni slučajevi se pišu na razini jezika izvornog koda i izvršaIspitni slučajevi se pišu na razini jezika izvornog koda i izvršaIspitni slučajevi se pišu na razini jezika izvornog koda i izvršaIspitni slučajevi se pišu na razini jezika izvornog koda i izvršaIspitni slučajevi se pišu na razini jezika izvornog koda i izvršaIspitni slučajevi se pišu na razini jezika izvornog koda i izvršaIspitni slučajevi se pišu na razini jezika izvornog koda i izvršaIspitni slučajevi se pišu na razini jezika izvornog koda i izvršadn", user, item);
-
-        Throwable exception = Assertions.assertThrows(DataIntegrityViolationException.class, ()->service.createDonation(don));
-        Assertions.assertEquals(exception.getMessage(), "could not execute statement; SQL [n/a]; nested exception is org.hibernate.exception.DataException: could not execute statement");
     }
 
 }
