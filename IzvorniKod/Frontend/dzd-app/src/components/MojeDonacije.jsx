@@ -74,7 +74,7 @@ function MojeDonacije() {
   else {
     return (
       <>
-        <div className={MojiOglasiCSS.okvirDD}>
+        <div className={MojiOglasiCSS.okvir}>
         <h2>Donirane donacije</h2>
           <div className={MojiOglasiCSS.karticaList} style={{display:doniraniOglasiList.length==0 ?"none":""}}>
               {doniraniOglasiList.map((donacija) => {
@@ -83,7 +83,7 @@ function MojeDonacije() {
           </div>
         </div>
 
-        <div className={MojiOglasiCSS.okvirMD}>
+        <div className={MojiOglasiCSS.okvir}>
         <h2>Moje trenutne donacije</h2>
           <div className={MojiOglasiCSS.karticaList} style={{display:mojiOglasiList.length==0 ?"none":""}}>
               {mojiOglasiList.map((donacija) => {

@@ -1,3 +1,10 @@
+.okvir{
+    padding: 10px 10px;
+    margin: 40px 40px;
+    background-color: rgba(244, 177, 131, 255);
+    border-radius: 10px;   
+}
+
 .karticaList {
     display: flex;
     flex-direction: row;
@@ -37,4 +44,18 @@ h2{
     margin: 40px 40px;
     background-color: rgba(244, 177, 131, 255);
     border-radius: 10px;   
+}
+
+@media only screen and (max-width: 449px) {
+    .okvir{
+        padding: 10px 10px;
+        margin: 20px 20px;
+    }
+
+    .karticaList{
+        margin: 0px 0px;
+    }
+}
+.nevidljiv {
+    height: 72.6%;
 }
