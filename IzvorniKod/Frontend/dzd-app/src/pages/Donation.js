@@ -10,7 +10,7 @@ function Donation() {
         <React.Fragment>
             <Header /> 
             <DonationForm></DonationForm>
-            <Footer></Footer>
+            <Footer name={"footerProfil"} ></Footer>
         </React.Fragment>
     )
 }

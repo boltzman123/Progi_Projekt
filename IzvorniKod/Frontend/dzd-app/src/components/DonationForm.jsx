@@ -6,6 +6,8 @@ import Dropdown from "react-dropdown";
 import storage from "../firebaseConfig.js";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { v4 } from "uuid";
+import DonationFormCSS from "../style/components/DonationForm.module.css";
+import HomeCSS from "../style/pages/Home.module.css"
 
 import {
   TextField,
@@ -91,6 +93,9 @@ const DonationForm = () => {
 
   useEffect(() => {
     setOptions(chosenCategory, arraySub, setArySub);
+    setCategoryName(aryCat);
+    console.log(categoryName);
+
     // console.log("ovdje");
   }, []);
 
@@ -201,183 +206,221 @@ const DonationForm = () => {
 
   return (
     <React.Fragment>
-      <form onSubmit={onSubmitForm}>
-        <div className="frame">
-          <input
-            value={donationName}
-            onChange={(e) => setDonatioName(e.target.value)}
-            type="text"
-            name="donationName"
-            id="donationName"
-            placeholder="Naziv donacije"
-            className="inputFrame"
-            required={true}></input>
-        </div>
+      <div className={HomeCSS.title} style={{fontSize:30}}>Kreiraj svoju donaciju</div>
+      <form className={DonationFormCSS.dForm} onSubmit={onSubmitForm}>
+        <div className="lDio">
+          <div className="frame">
+            <input
+              value={donationName}
+              onChange={(e) => setDonatioName(e.target.value)}
+              type="text"
+              name="donationName"
+              id="donationName"
+              placeholder="Naziv donacije"
+              className="inputFrame"
+              required={true}></input>
+          </div>
 
-        <div className="frame">
-          <input
-            value={handoverLocation}
-            onChange={(e) => setHandoverLocation(e.target.value)}
-            type="text"
-            name="handoverLocation"
-            id="handoverLocation"
-            placeholder="Lokacija preuzimanja"
-            className="inputFrame"
-            required={true}></input>
-        </div>
+          <div className="frame">
+            <input
+              value={productName}
+              onChange={(e) => setProductName(e.target.value)}
+              type="text"
+              name="productName"
+              id="productName"
+              placeholder="Naziv predmeta"
+              className="inputFrame"
+              required={true}></input>
+          </div>
 
-        <div>
-          <input type="file" accept="image/*" onChange={handleChange} />
-          <p style={{ display: percent == "100" ? "none" : "" }}>
-            {percent} "% done"
-          </p>
-          <button onClick={handleUpload} type="button">
-            Upload slike
-          </button>
-        </div>
-        {percent == "100" ? <img src={pictureURL} /> : ""}
-        {/* <img src={pictureURL} /> */}
-        <div className="frame">
-          <input
-            value={productName}
-            onChange={(e) => setProductName(e.target.value)}
-            type="text"
-            name="productName"
-            id="productName"
-            placeholder="Naziv predmeta"
-            className="inputFrame"
-            required={true}></input>
-        </div>
+          <div className="frame">
+            <input
+              value={handoverLocation}
+              onChange={(e) => setHandoverLocation(e.target.value)}
+              type="text"
+              name="handoverLocation"
+              id="handoverLocation"
+              placeholder="Lokacija preuzimanja"
+              className="inputFrame"
+              required={true}></input>
+          </div>
 
-        <div className="frame" style={{ width: "200px" }}>
-          <FormControl fullWidth>
-            <InputLabel>Predviđena dob</InputLabel>
-            <Select
-              labelId="dob-select-label"
-              id="dob-select"
-              value={forAge}
-              label="dob"
-              required
-              MenuProps={{
-                PaperProps: { sx: { maxHeight: 175 } },
-              }}
-              onChange={(e) => setforAge(e.target.value)}>
-              {ageRange.map((ageSelect) => {
-                return (
-                  <MenuItem key={ageSelect} value={ageSelect}>
-                    {ageSelect}
-                  </MenuItem>
-                );
-              })}
-            </Select>
-          </FormControl>
-        </div>
+          <div className="frame">
+            <input
+              value={itemState}
+              onChange={(e) => setState(e.target.value)}
+              type="text"
+              name="itemState"
+              id="itemState"
+              placeholder="Stanje predmeta"
+              className="inputFrame"
+              required={true}></input>
+          </div>
 
-        <div className="frame">
-          <FormControl fullWidth>
-            <FormLabel id="spol">Predviđeni spol</FormLabel>
-            <RadioGroup
-              name="spol-radio-buttons-group"
-              value={chosenSex}
-              required
-              onChange={(e) => setChosenSex(e.target.value)}>
-              <div style={{ display: "flex" }}>
-                <FormControlLabel
-                  value="z"
-                  control={<Radio />}
-                  label="Žensko"
-                />
-                <FormControlLabel value="m" control={<Radio />} label="Muško" />
+          <div className="frame">
+            <input
+              value={productionBrand}
+              onChange={(e) => setProductionBrand(e.target.value)}
+              type="text"
+              name="productionBrand"
+              id="productionBrand"
+              placeholder="Marka predmeta"
+              className="inputFrame"
+              required={true}></input>
+          </div>
+
+          <div className="frame">
+              <FormControl fullWidth>
+                <FormLabel id="spol">Predviđeni spol</FormLabel>
+                <RadioGroup
+                  name="spol-radio-buttons-group"
+                  value={chosenSex}
+                  required
+                  onChange={(e) => setChosenSex(e.target.value)}>
+                  <div style={{ display: "flex" }}>
+                    <FormControlLabel
+                      value="z"
+                      control={<Radio />}
+                      label="Žensko"
+                    />
+                    <FormControlLabel
+                      value="m"
+                      control={<Radio />}
+                      label="Muško"
+                    />
+                  </div>
+                </RadioGroup>
+              </FormControl>
+            </div>
+
+
+
+          <div className={DonationFormCSS.odabiri}>
+
+          <div className={DonationFormCSS.r}>
+
+          <div className="frame" style={{ width: "200px" }}>
+              <FormControl fullWidth>
+                <InputLabel>Predviđena dob</InputLabel>
+                <Select
+                  labelId="dob-select-label"
+                  id="dob-select"
+                  value={forAge}
+                  label="dob"
+                  required
+                  MenuProps={{
+                    PaperProps: { sx: { maxHeight: 175 } },
+                  }}
+                  onChange={(e) => setforAge(e.target.value)}>
+                  {ageRange.map((ageSelect) => {
+                    return (
+                      <MenuItem key={ageSelect} value={ageSelect}>
+                        {ageSelect}
+                      </MenuItem>
+                    );
+                  })}
+                </Select>
+              </FormControl>
+            </div>
+
+            <div className="frame" style={{ width: "200px" }}>
+              <FormControl fullWidth>
+                <InputLabel>Godina proizvodnje</InputLabel>
+                <Select
+                  labelId="year-select-label"
+                  id="year-select"
+                  value={productionYear}
+                  label="productionYear"
+                  required
+                  MenuProps={{
+                    PaperProps: { sx: { maxHeight: 175 } },
+                  }}
+                  onChange={(e) => setProductionYear(e.target.value)}>
+                  {yearRange.map((yearSelect) => {
+                    return (
+                      <MenuItem key={yearSelect} value={yearSelect}>
+                        {yearSelect}
+                      </MenuItem>
+                    );
+                  })}
+                </Select>
+              </FormControl>
               </div>
-            </RadioGroup>
-          </FormControl>
-        </div>
+              
 
-        <div className="frame" style={{ width: "200px" }}>
-          <FormControl fullWidth>
-            <InputLabel>Godina proizvodnje</InputLabel>
-            <Select
-              labelId="year-select-label"
-              id="year-select"
-              value={productionYear}
-              label="productionYear"
-              required
-              MenuProps={{
-                PaperProps: { sx: { maxHeight: 175 } },
-              }}
-              onChange={(e) => setProductionYear(e.target.value)}>
-              {yearRange.map((yearSelect) => {
-                return (
-                  <MenuItem key={yearSelect} value={yearSelect}>
-                    {yearSelect}
-                  </MenuItem>
-                );
-              })}
-            </Select>
-          </FormControl>
-        </div>
-  
+              </div>
+          
+              <div className={DonationFormCSS.r}>
+            <div className="frame">
+              <div style={{ width: 225 }}>
+                <Dropdown
+                  menuClassName={DonationFormCSS.dropdown}
+                  className={DonationFormCSS.box}
+                  options={aryCat}
+                  value={chosenCategory.categoryName}
+                  onChange={(e) => {
+                    let obj = { categoryName: e.value };
+                    setChosenCategory(obj);
+                    setCategoryName(e.value);
+                    let values = mapCat.get(e.value);
+                    setArySub([].concat(values));
+                    checkSubInCat(e.value);
+                  }}
+                  placeholder="Kategorije"
+                  required={true}
+                />
+              </div>
+            </div>
 
-        <div className="frame">
-          <input
-            value={itemState}
-            onChange={(e) => setState(e.target.value)}
-            type="text"
-            name="itemState"
-            id="itemState"
-            placeholder="Stanje predmeta"
-            className="inputFrame"
-            required={true}></input>
-        </div>
+            <div className="frame">
+              <div style={{ width: 225, height: 27 }}>
+                <Dropdown
+                  menuClassName={DonationFormCSS.dropdown}
+                  options={arraySub}
+                  value={chosenSubcategory.subcategoryName}
+                  onChange={(e) => {
+                    for (let i = 0; i < privremeniAry.length; ++i) {
+                      if (e.value == privremeniAry[i].subcategoryName) {
+                        let obj = privremeniAry[i];
+                        setChosenSubCategory(obj);
+                        setSubcategoryName(obj);
+                      }
+                    }
+                  }}
+                  placeholder="Potkategorije"
+                  required={true}
+                />
+              </div>
+            </div>
 
-        <div className="frame">
-          <input
-            value={productionBrand}
-            onChange={(e) => setProductionBrand(e.target.value)}
-            type="text"
-            name="productionBrand"
-            id="productionBrand"
-            placeholder="Marka predmeta"
-            className="inputFrame"
-            required={true}></input>
-        </div>
 
-        <div className="frame">
-          <div style={{ width: 225 }}>
-            <Dropdown
-              options={aryCat}
-              value={chosenCategory.categoryName}
-              onChange={(e) => {
-                let obj = { categoryName: e.value };
-                setChosenCategory(obj);
-                setCategoryName(e.value);
-                let values = mapCat.get(e.value);
-                setArySub([].concat(values));
-                checkSubInCat(e.value);
-              }}
-              placeholder="Kategorije"
-              required={true}
-            />
+            </div>
+
+        
+
+          
+
+
+       
+
+          
+           
           </div>
-          <div style={{ width: 225 }}>
-            <Dropdown
-              options={arraySub}
-              value={chosenSubcategory.subcategoryName}
-              onChange={(e) => {
-                for (let i = 0; i < privremeniAry.length; ++i) {
-                  if (e.value == privremeniAry[i].subcategoryName) {
-                    let obj = privremeniAry[i];
-                    setChosenSubCategory(obj);
-                    setSubcategoryName(obj);
+        </div>
 
-                    console.log();
-                  }
-                }
-              }}
-              placeholder="Potkategorije"
-              required={true}
-            />
+        <div className="dDio">
+          <div>
+            <input type="file" accept="image/*" onChange={handleChange} />
+            <p style={{ display: percent == "100" ? "none" : "" }}>
+              {percent} "% done"
+            </p>
+            <button onClick={handleUpload} type="button">
+              Upload slike
+            </button>
           </div>
+          {percent == "100" ? <img src={pictureURL} /> : ""}
+          {/* <img src={pictureURL} /> */}
+
           <button type="submit">Spremi donaciju</button>
         </div>
       </form>

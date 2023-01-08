@@ -1,0 +1,27 @@
+.dForm {
+    display: grid;
+    grid-template-columns: auto auto;
+}
+.dropdown {
+    height: 115px;
+    overflow-y: auto;
+    top: 0%;
+}
+
+.box {
+    margin-top: 10px;
+}
+
+.r {
+    display: flex;
+}
+
+.r > div, Dropdown {
+    padding-right: 10px;
+}
+.odabiri {
+    display: grid;
+    grid-template-rows: auto auto ;
+    justify-content: space-around;
+    align-content: space-around;
+}
