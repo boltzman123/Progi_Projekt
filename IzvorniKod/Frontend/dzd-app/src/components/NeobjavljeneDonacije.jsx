@@ -31,11 +31,16 @@ function NeobjavljeneDonacije() {
   }
   else {
     return (
-        <div className={KarticaCSS.karticaList}>
-            {donacije.map((donacija) => {
-            return <AdminDonacijaKard key={donacija.idDonation} donacija={donacija}></AdminDonacijaKard>;
-            })}
-        </div>
+      <>
+      <div className={KarticaCSS.okvirMD}>
+        <h2>Neobjavljene donacije</h2>
+          <div className={KarticaCSS.karticaList}>
+              {donacije.map((donacija) => {
+              return <AdminDonacijaKard key={donacija.idDonation} donacija={donacija}></AdminDonacijaKard>;
+              })}
+          </div>
+      </div>
+      </>
     );
     }
 }

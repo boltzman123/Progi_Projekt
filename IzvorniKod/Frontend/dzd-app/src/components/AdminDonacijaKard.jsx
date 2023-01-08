@@ -61,11 +61,15 @@ const MojeDonacijaKard = (props) => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [pictureURL, setPictureURL] = useState(props.donacija.pictureURL);
 
+  let [handoverLocation, setHandoverLocation] = useState(props.donacija.handoverLocation);
+
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
     setOpen(false);
   };
+
+  let datum=String(dateOfPublication.substring(8,10)+ "." +dateOfPublication.substring(5,7)+ "." +dateOfPublication.substring(0,4)+".")
 
   const handleImageChange = (event) => {
     // Update the selected image in state
@@ -207,7 +211,7 @@ const MojeDonacijaKard = (props) => {
           <CardContent sx={{ bgcolor: "#E8E8E8" }}>
             <h3>Ime predmeta: {productName}</h3>
             <h3>Predviđena dob korisnika: {dob}</h3>
-            <h3>Datum objave: {dateOfPublication} </h3>
+            <h3>Datum objave: {datum} </h3>
             <h3>Lokacija: {userLocation} </h3>
             <h3 id="sit">Validno: {String(valid)}</h3>
             <h3 id="sit">Treba urediti: {String(edit)}</h3>
@@ -252,15 +256,27 @@ const MojeDonacijaKard = (props) => {
                   onChange={(e) => setDateOfPublication(e.target.value)}
                   label="Datum objave"
                   id="datumObjave"
-                  value={dateOfPublication}
+                  value={datum}
                   disabled={checkedUser}></TextField>
 
                 <TextField
-                  onChange={(e) => setUserLocation(e.target.value)}
+                  onChange={(e) => setHandoverLocation(e.target.value)}
                   label="Lokacija preuzimanja"
                   id="datumObjave"
-                  value={userLocation}
+                  value={handoverLocation}
                   disabled={checkedUser}></TextField>
+
+                <TextField
+                  label="Lokacija donatora"
+                  id="datumObjave"
+                  value={userLocation}
+                  disabled={true}></TextField>
+
+                <TextField
+                  label="Email donatora"
+                  id="datumObjave"
+                  value={email}
+                  disabled={true}></TextField>
 
                 <FormControl fullWidth>
                   <InputLabel>Predviđena dob:</InputLabel>

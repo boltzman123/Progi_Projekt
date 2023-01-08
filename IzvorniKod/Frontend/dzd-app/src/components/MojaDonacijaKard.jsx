@@ -470,6 +470,15 @@ const MojeDonacijaKard = (props) => {
                   id="provjera">
                   Provjera korisnika
                 </Button>
+                
+                <Button
+                  onClick={predajOglas}
+                  style={email != emailL ? { display: `none` } : {}}
+                  variant="outlined"
+                  color="error"
+                  id="predaj">
+                  Predaj oglas
+                </Button>
 
               </Box>
               <hr/>
@@ -487,14 +496,6 @@ const MojeDonacijaKard = (props) => {
                   variant="outlined"
                   color="error">
                   Obriši oglas
-                </Button>
-                <Button
-                  onClick={predajOglas}
-                  style={email != emailL ? { display: `none` } : {}}
-                  variant="outlined"
-                  color="error"
-                  id="predaj">
-                  Predaj oglas
                 </Button>
               </CardActions>
             </Container>
