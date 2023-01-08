@@ -9,7 +9,18 @@
     padding: 12px;
     bottom: 0;
   }
-
+  .footerDeca {
+    width: 100%;
+      text-align: center;
+      background-color: rgba(244, 177, 131, 255);
+      color: white;
+      font-size: 30px;
+      font-weight: 400;
+      padding: 12px;
+      bottom: 0;
+      margin-top: 200px;
+      position: relative;
+  }
 
     .footerExpand {
       width: 100%;

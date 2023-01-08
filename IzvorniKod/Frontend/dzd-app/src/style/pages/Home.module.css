@@ -108,5 +108,4 @@
 .wrapChild {
   height: 100%;
   display: grid;
-  grid-template-rows: auto auto 15%;
 }

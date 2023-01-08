@@ -4,16 +4,33 @@ import { useFetcher, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Dropdown from "react-dropdown";
 import storage from "../firebaseConfig.js";
-import { ref, uploadBytesResumable, getDownloadURL  } from "firebase/storage";
-import { v4 } from 'uuid';
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { v4 } from "uuid";
 
+import {
+  TextField,
+  Select,
+  Button,
+  FormControl,
+  FormLabel,
+  Typography,
+} from "@mui/material";
+import {
+  RadioGroup,
+  FormControlLabel,
+  Radio,
+  Grid,
+  InputLabel,
+  MenuItem,
+  Box,
+  Container,
+} from "@mui/material";
 
-var arraySub = [];
 var mapCat = new Map();
 var aryCat = [];
 var privremeniAry = [];
 
-function setOptions() {
+function setOptions(chosenCategory, arraySub, setArySub) {
   axios({
     method: "get",
     url: "/api/subcategory",
@@ -21,9 +38,10 @@ function setOptions() {
     var pod = Object.values(response.data);
     privremeniAry = response.data;
     // console.log(response.data[0]);
-    var podMap = new Map();
+
     for (let i = 0; i < pod.length; ++i) {
       let data = pod[i].category.categoryName;
+
       if (!mapCat.has(data)) {
         let ary = [pod[i].subcategoryName];
         aryCat.push(data);
@@ -31,6 +49,7 @@ function setOptions() {
       } else if (data != undefined && mapCat.has(data)) {
         let key = pod[i].category.categoryName;
         let ary = [].concat(mapCat.get(pod[i].category.categoryName));
+
         if (!ary.includes(pod[i].subcategoryName)) {
           ary.push(pod[i].subcategoryName);
           mapCat.set(key, ary);
@@ -42,7 +61,7 @@ function setOptions() {
 
 const DonationForm = () => {
   const [donationName, setDonatioName] = useState("");
-  const [handoverLocation, setHandoverLocation] = useState(""); 
+  const [handoverLocation, setHandoverLocation] = useState("");
   const [selectedImage, setSelectedImage] = useState(null);
   const [forAge, setforAge] = useState("");
   const [forSex, setSex] = useState(["M", "F"]);
@@ -55,11 +74,25 @@ const DonationForm = () => {
   const [productName, setProductName] = useState("");
   const [chosenCategory, setChosenCategory] = useState("");
   const [chosenSubcategory, setChosenSubCategory] = useState("");
-  
+  let [arraySub, setArySub] = useState([]);
+  let [value, setValue] = useState("");
+
   const [pictureURL, setPictureURL] = useState();
   const [file, setFile] = useState("");
   const [percent, setPercent] = useState(0);
+
+  const ageRange = [...Array(16).keys()];
+  const now = new Date().getUTCFullYear();
+  const yearRange = Array(now - (now - 50))
+    .fill("")
+    .map((v, idx) => now - idx);
+
   setOptions();
+
+  useEffect(() => {
+    setOptions(chosenCategory, arraySub, setArySub);
+    // console.log("ovdje");
+  }, []);
 
   // Event handler for when the user selects an image
   const handleChange = (event) => {
@@ -69,27 +102,29 @@ const DonationForm = () => {
   // console.log(pictureURL);
 
   function handleUpload() {
-      if (!file) {
-        alert("Molimo Vas da odaberete sliku")
-      }
-      const storageRef = ref(storage, `/files/${file.name + v4()}`);
-      const uploadTask = uploadBytesResumable(storageRef, file);
-
-      uploadTask.on("state_changed",
-          (snapshot) => { 
-          setPercent(Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100));
-        },
-          (err) => console.log(err),
-          () => {
-            // download url
-            getDownloadURL(uploadTask.snapshot.ref)
-            .then((url) => {
-              console.log(url); 
-              setPictureURL(url);
-            });
-          }
-        ); 
+    if (!file) {
+      alert("Molimo Vas da odaberete sliku");
     }
+    const storageRef = ref(storage, `/files/${file.name + v4()}`);
+    const uploadTask = uploadBytesResumable(storageRef, file);
+
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        setPercent(
+          Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100)
+        );
+      },
+      (err) => console.log(err),
+      () => {
+        // download url
+        getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+          console.log(url);
+          setPictureURL(url);
+        });
+      }
+    );
+  }
 
   const navigate = useNavigate();
 
@@ -100,6 +135,7 @@ const DonationForm = () => {
     } else if (pictureURL == null) {
       window.alert("Odaberite sliku za donaciju");
     } else {
+      console.log(subcategoryName);
       axios({
         method: "post",
         url: `/api/item`,
@@ -137,7 +173,7 @@ const DonationForm = () => {
           })
             .then((response) => {
               console.log(response.data);
-              navigate("/base")
+              navigate("/base");
               toast.success("Donacija poslana na odobravanje");
             })
             .catch((err) => {
@@ -149,6 +185,17 @@ const DonationForm = () => {
           console.log(err);
           toast.error("Došlo je do greške");
         });
+    }
+  };
+  const checkSubInCat = (cat) => {
+    let subs = mapCat.get(cat);
+    if (!subs.includes(chosenSubcategory.subcategoryName)) {
+      for (let i = 0; i < privremeniAry.length; ++i) {
+        if (privremeniAry[i].subcategoryName == subs[0]) {
+          setChosenSubCategory(privremeniAry[i]);
+          setSubcategoryName(privremeniAry[i]);
+        }
+      }
     }
   };
 
@@ -181,13 +228,16 @@ const DonationForm = () => {
 
         <div>
           <input type="file" accept="image/*" onChange={handleChange} />
-          <p style={{display:percent=="100"?"none":""}}>{percent} "% done"</p>
-          <button onClick={handleUpload} type="button">Upload slike</button>
+          <p style={{ display: percent == "100" ? "none" : "" }}>
+            {percent} "% done"
+          </p>
+          <button onClick={handleUpload} type="button">
+            Upload slike
+          </button>
         </div>
-          {percent=="100"?<img src={pictureURL} />:""}
-          {/* <img src={pictureURL} /> */}
+        {percent == "100" ? <img src={pictureURL} /> : ""}
+        {/* <img src={pictureURL} /> */}
         <div className="frame">
-
           <input
             value={productName}
             onChange={(e) => setProductName(e.target.value)}
@@ -199,42 +249,74 @@ const DonationForm = () => {
             required={true}></input>
         </div>
 
-        <div className="frame">
-          <input
-            value={forAge}
-            onChange={(e) => setforAge(e.target.value)}
-            type="number"
-            name="forAge"
-            id="forAge"
-            placeholder="Predviđena dob"
-            className="inputFrame"
-            required={true}></input>
-        </div>
-        <div className="frame">
-          <div style={{ width: 200 }}>
-            <Dropdown
-              options={forSex}
-              value={chosenSex}
-              onChange={(e) => {
-                setChosenSex(e.value);
+        <div className="frame" style={{ width: "200px" }}>
+          <FormControl fullWidth>
+            <InputLabel>Predviđena dob</InputLabel>
+            <Select
+              labelId="dob-select-label"
+              id="dob-select"
+              value={forAge}
+              label="dob"
+              required
+              MenuProps={{
+                PaperProps: { sx: { maxHeight: 175 } },
               }}
-              placeholder="Predviđeni spol"
-              required={true}
-            />
-          </div>
+              onChange={(e) => setforAge(e.target.value)}>
+              {ageRange.map((ageSelect) => {
+                return (
+                  <MenuItem key={ageSelect} value={ageSelect}>
+                    {ageSelect}
+                  </MenuItem>
+                );
+              })}
+            </Select>
+          </FormControl>
         </div>
 
         <div className="frame">
-          <input
-            value={productionYear}
-            onChange={(e) => setProductionYear(e.target.value)}
-            type="number"
-            name="productionYear"
-            id="productionYear"
-            placeholder="Godina proizvodnje"
-            className="inputFrame"
-            required={true}></input>
+          <FormControl fullWidth>
+            <FormLabel id="spol">Predviđeni spol</FormLabel>
+            <RadioGroup
+              name="spol-radio-buttons-group"
+              value={chosenSex}
+              required
+              onChange={(e) => setChosenSex(e.target.value)}>
+              <div style={{ display: "flex" }}>
+                <FormControlLabel
+                  value="z"
+                  control={<Radio />}
+                  label="Žensko"
+                />
+                <FormControlLabel value="m" control={<Radio />} label="Muško" />
+              </div>
+            </RadioGroup>
+          </FormControl>
         </div>
+
+        <div className="frame" style={{ width: "200px" }}>
+          <FormControl fullWidth>
+            <InputLabel>Godina proizvodnje</InputLabel>
+            <Select
+              labelId="year-select-label"
+              id="year-select"
+              value={productionYear}
+              label="productionYear"
+              required
+              MenuProps={{
+                PaperProps: { sx: { maxHeight: 175 } },
+              }}
+              onChange={(e) => setProductionYear(e.target.value)}>
+              {yearRange.map((yearSelect) => {
+                return (
+                  <MenuItem key={yearSelect} value={yearSelect}>
+                    {yearSelect}
+                  </MenuItem>
+                );
+              })}
+            </Select>
+          </FormControl>
+        </div>
+  
 
         <div className="frame">
           <input
@@ -261,7 +343,7 @@ const DonationForm = () => {
         </div>
 
         <div className="frame">
-          <div style={{ width: 200 }}>
+          <div style={{ width: 225 }}>
             <Dropdown
               options={aryCat}
               value={chosenCategory.categoryName}
@@ -270,26 +352,27 @@ const DonationForm = () => {
                 setChosenCategory(obj);
                 setCategoryName(e.value);
                 let values = mapCat.get(e.value);
-                arraySub = [].concat(values);
+                setArySub([].concat(values));
+                checkSubInCat(e.value);
               }}
               placeholder="Kategorije"
               required={true}
             />
           </div>
-          <div style={{ width: 250 }}>
+          <div style={{ width: 225 }}>
             <Dropdown
               options={arraySub}
-              value={chosenSubcategory}
+              value={chosenSubcategory.subcategoryName}
               onChange={(e) => {
                 for (let i = 0; i < privremeniAry.length; ++i) {
                   if (e.value == privremeniAry[i].subcategoryName) {
                     let obj = privremeniAry[i];
-                    setChosenSubCategory(e.value);
+                    setChosenSubCategory(obj);
                     setSubcategoryName(obj);
-                    console.log(subcategoryName);
+
+                    console.log();
                   }
                 }
-                console.log(e.value);
               }}
               placeholder="Potkategorije"
               required={true}

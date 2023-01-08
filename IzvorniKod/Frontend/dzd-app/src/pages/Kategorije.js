@@ -28,7 +28,7 @@ const Kategorije = () =>{
                 pauseOnHover
                 theme="light"
             />
-            <Footer></Footer>
+            <Footer name={"footerProfil"}></Footer>
         </React.Fragment>
     )
 }

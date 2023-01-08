@@ -62,12 +62,11 @@ const DjecaList = ({updatePage, setUpdatePage}) => {
 
     return(
         <React.Fragment>
-            <Container maxWidth='xs' style={{height: "17.1%"}}>
+            <Container maxWidth='xs'>
                 <List>
                     {djeca.map((dijete) => {
                         return(
                             <ListItem 
-                            style={{height: "70%"}}
                                 key={dijete.childId}
                                 >
                                 <ListItemText  primary={`${dijete.childName}`}/>
