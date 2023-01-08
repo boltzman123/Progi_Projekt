@@ -80,7 +80,6 @@ public class DonationController {
     @GetMapping("/user/{email}")
     //@Secured({"ROLE_USER","ROLE_ADMIN"})
     public Map<String,List<Donation>> donationByChild(@PathVariable("email") String email){
-        // Pronađi sve podkategorije usera preko djece
         List<Child> childList = childService.listChildByUser(email);
         Set<String> subcategoryNames = new HashSet<>();
         Set<Integer> childAges = new HashSet<>();
@@ -96,7 +95,7 @@ public class DonationController {
         // Filter aktivnih i (preporučenih koji nisu stariji od 3 dana)
         List<Donation> donationsFiltered = new ArrayList<>();
         List<Donation> donationsFilteredActive = new ArrayList<>();
-        List<Donation> allActiveDonations = service.listAll().stream().filter(l -> l.isActive() == true && l.isValid() == true && !l.getUser().getEmail().equals(email)).collect(Collectors.toList());
+        List<Donation> allActiveDonations = service.listAll().stream().filter(l -> l.isActive() == true && l.isValid() == true ).collect(Collectors.toList());
         List<Donation> allDonations = service.listAll();
         LocalDate before3Days = LocalDate.now().minusDays(3);
         Instant compareDate = before3Days.atStartOfDay(ZoneId.systemDefault()).toInstant();
@@ -111,19 +110,15 @@ public class DonationController {
                 donationsFilteredActive.add(d);
             }
         }
-        //par primjera
-        //donationsFiltered.add(service.getDonationById((long)2));
-        //donationsFilteredActive.add(service.getDonationById((long)3));
-        // Primljene donacije kojima je isteklo poslovno pravilo
+
+
         List<Donation> donatedToMe = service.listAll().stream().filter(d -> {
             if(d.getDonatedToUser()!=null && d.getDonatedToUser().getEmail().equals(email)){
                 Date dateClosedDonation = d.getDateOfClosing();
                 Float expired =d.getItem().getSubcategory().getUseDateExpires();
                 LocalDate date = LocalDate.now().minusMonths((int)(expired * 12));
                 Instant compareDate2 = date.atStartOfDay(ZoneId.systemDefault()).toInstant();
-/*                System.out.println(dateClosedDonation.toInstant());
-                System.out.println(compareDate2);
-                System.out.println(dateClosedDonation.toInstant().compareTo(compareDate2)>0);*/
+
                 if(dateClosedDonation.toInstant().compareTo(compareDate2)<0) {
                     return true;
                 }
@@ -147,14 +142,21 @@ public class DonationController {
             return false;
 
         }).collect(Collectors.toList());
-
-
-
+        
         Map<String,List<Donation>> returnMap = new HashMap<>();
-        returnMap.put("preporucen",donationsFiltered);
-        returnMap.put("aktivan", donationsFilteredActive);
-        returnMap.put("primljen",donatedToMe);
-        returnMap.put("sezona", seasonDonations);
+
+        if(!(email == "admin")){
+            returnMap.put("preporucen",donationsFiltered);
+            returnMap.put("aktivan", donationsFilteredActive);
+            returnMap.put("primljen",donatedToMe);
+            returnMap.put("sezona", seasonDonations);
+        }
+        else{
+            returnMap.put("preporucen",donationsFiltered);
+            returnMap.put("aktivan", allActiveDonations);
+            returnMap.put("primljen",donatedToMe);
+            returnMap.put("sezona", seasonDonations);
+        }
         return returnMap;
     }
 
