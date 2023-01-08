@@ -1,0 +1,116 @@
+@startuml
+oop.rest.UsersController --> oop.service.EmailSenderService
+oop.rest.UsersController --> oop.rest.classes.LoginForm
+oop.rest.CategoryController ..> oop.rest.RestExceptionHandler
+oop.rest.ChildController ..> oop.rest.RestExceptionHandler
+oop.rest.DonationController ..> oop.rest.RestExceptionHandler
+oop.rest.ItemController ..> oop.rest.RestExceptionHandler
+oop.rest.SubcategoryController ..> oop.rest.RestExceptionHandler
+oop.rest.UsersController ..> oop.rest.RestExceptionHandler
+oop.rest.UsersDetailsService ..> oop.rest.RolesController
+
+class oop.rest.DonationController {
+- DonationService service
+- ItemService itemService
+- ChildService childService
+- UploadService uploadService
++ List<Donation> listDonation()
++ List<Donation> listDonationsByUser(String)
++ Donation listDonationById(Long)
++ List<Donation> getEditableDonations(String)
++ List<Donation> listActive()
++ List<Donation> listNotValid()
++ Map<String,List<Donation>> donationByChild(String)
++ ResponseEntity<Donation> createDonationWithItem(Donation)
++ ResponseEntity<Donation> createDonation(Donation)
++ ResponseEntity<String> uploadImage(MultipartFile)
++ Donation updateDonation(Long,Donation)
++ Donation deleteDonation(Long)
++ Donation delete(Donation)
+}
+class oop.rest.RolesController {
++ User getCurrentUserRole(User)
+}
+class oop.rest.UsersDetailsService {
+- String adminPasswordHash
+- UsersService service
++ UserDetails loadUserByUsername(String)
+- List<GrantedAuthority> authorities(String)
+- String password(String)
+}
+class oop.rest.ItemController {
+- ItemService service
++ List<Item> listItem()
++ ResponseEntity<Item> createItem(Item)
++ Item updateItem(Long,Item)
++ Item deleteItem(Long)
++ Item delete(Item)
+}
+class oop.rest.SubcategoryController {
+- SubcategoryService service
++ List<Subcategory> listSubcategory()
++ Subcategory getSubcategoryByName(String)
++ List<Season> getAllSeasons()
++ List<Subcategory> getSubcategoryByCategory(String)
++ ResponseEntity<Subcategory> createSubcategory(Subcategory)
++ Subcategory updateSubcategory(String,Subcategory)
++ Subcategory deleteSubcategoryByName(String)
++ Subcategory deleteSubcategory(Subcategory)
+}
+class oop.rest.classes.LoginForm {
+- String email
+- String password
++ String getEmail()
++ String getPassword()
++ void setEmail(String)
++ void setPassword(String)
+}
+class oop.rest.ChildController {
+- ChildService service
++ List<Child> listChildren()
++ List<Child> listChildrenByUser(String)
++ Optional<Child> listChild(String,Long)
++ ResponseEntity<Child> createChild(Child)
++ Child updateChild(String,Long,Child)
++ Child deleteChild(Child)
+}
+class oop.rest.WebSecurityBasic {
++ void configure(HttpSecurity)
+}
+class oop.service.EmailSenderService {
+- JavaMailSender mailSender
++ void sendEmail(String,String,String)
+}
+class oop.rest.UsersController {
+- UsersService userService
+- ChildService childService
+- DonationService donationService
+- EmailSenderService senderService
+~ ApplicationEventPublisher eventPublisher
+- PasswordEncoder passwordEncoder
++ List<Users> listUsers()
++ Users getUser(String,String)
++ Users getUserByUsername(String)
++ ResponseEntity<Users> getUser(LoginForm)
++ ResponseEntity<Users> createUser(Users)
++ Users updateUser(String,Users)
++ Users deleteUser(String)
+}
+class oop.rest.RestExceptionHandler {
+# ResponseEntity<?> handleIllegalArgument(Exception,WebRequest)
+# ResponseEntity<?> handleException(Exception,WebRequest)
+}
+class oop.rest.CategoryController {
+- CategoryService service
++ List<Category> listCategory()
++ Category getCategoryByName(String)
++ ResponseEntity<Category> createCategory(Category)
++ Category updateCategory(String,Category)
++ Category deleteCategory(String)
++ Category delete(Category)
+}
+
+
+org.springframework.security.core.userdetails.UserDetailsService <|.. oop.rest.UsersDetailsService
+org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter <|-- oop.rest.WebSecurityBasic
+@enduml
