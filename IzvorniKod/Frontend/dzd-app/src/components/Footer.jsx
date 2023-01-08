@@ -4,8 +4,7 @@ import { useState, useEffect } from 'react';
 
 
 const Footer = (props) => {
-    const [ime, setIme] = useState(props.name)
-    console.log(props.name)
+  const [ime, setIme] = useState(props.name)
   return (
     <div className={ime}>
       <span>Djeca za djecu</span>

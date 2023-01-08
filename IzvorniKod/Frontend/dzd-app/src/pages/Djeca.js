@@ -31,7 +31,7 @@ const Djeca = () => {
           pauseOnHover
           theme="light"
         />
-        <Footer name={"footerExpand"}></Footer>
+        <Footer name={"footerDeca"}></Footer>
       </div>
     </React.Fragment>
   );
