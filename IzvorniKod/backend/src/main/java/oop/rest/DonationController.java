@@ -101,7 +101,6 @@ public class DonationController {
         Instant compareDate = before3Days.atStartOfDay(ZoneId.systemDefault()).toInstant();
 
         for(Donation d: allActiveDonations){
-            System.out.println(d.getUser().getEmail() + " " + email);
             if(subcategoryNames.contains(d.getItem().getSubcategory().getSubcategoryName()) &&
                     d.getDateOfPublication().toInstant().compareTo(compareDate)>=0 &&
                     childAges.contains(d.getItem().getForAge()) &&
@@ -143,14 +142,21 @@ public class DonationController {
             return false;
 
         }).collect(Collectors.toList());
-
-
-
+        
         Map<String,List<Donation>> returnMap = new HashMap<>();
-        returnMap.put("preporucen",donationsFiltered);
-        returnMap.put("aktivan", donationsFilteredActive);
-        returnMap.put("primljen",donatedToMe);
-        returnMap.put("sezona", seasonDonations);
+
+        if(!(email == "admin")){
+            returnMap.put("preporucen",donationsFiltered);
+            returnMap.put("aktivan", donationsFilteredActive);
+            returnMap.put("primljen",donatedToMe);
+            returnMap.put("sezona", seasonDonations);
+        }
+        else{
+            returnMap.put("preporucen",donationsFiltered);
+            returnMap.put("aktivan", allActiveDonations);
+            returnMap.put("primljen",donatedToMe);
+            returnMap.put("sezona", seasonDonations);
+        }
         return returnMap;
     }
 
