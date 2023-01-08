@@ -14,10 +14,6 @@ import { Modal, IconButton } from "@mui/material";
 import { TextField, Select, Button, FormControl, FormLabel, Typography} from "@mui/material";
 import { RadioGroup, FormControlLabel, Radio, Grid, InputLabel, MenuItem, Box, Container} from "@mui/material";
 
-import NovoDijeteCategoryPicker from "./NovoDijeteCategoryPicker.jsx";
-
-import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
-import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import DropdownCategory from "./DropdownCategory";
 //`api/donation/${props.donacija.idDonation}`
 
@@ -52,9 +48,17 @@ const DonacijaKard = (props) => {
   let userL = JSON.parse(localStorage.getItem("user"));
   let emailL = userL.email;
 
+  if (props.donacija.donatedToUser!=null){
+    var emailPrim=props.donacija.donatedToUser.email;
+  }
+  // console.log(emailPrim==emailL)
+
+
   const ageRange = [...Array(16).keys()];
   const [dob, setDob] = useState(props.donacija.item.forAge);
   const [spol, setSpol] = useState(props.donacija.item.forSex);
+
+  // console.log(props.donacija)
 
   const [checkedCat, setCheckedCat] = useState(props.donacija.item.category);
   const [checkedSub, setCheckedSub] = useState(props.donacija.item.subcategory);
@@ -191,6 +195,49 @@ const DonacijaKard = (props) => {
       });
   };
 
+  const ponovnoDoniraj = () => {
+    
+    let cat = JSON.parse(localStorage.getItem("cat"));
+    let sub = JSON.parse(localStorage.getItem("sub"));
+    setCheckedCat(cat);
+    setCheckedSub(sub);
+
+    axios({
+          method: "put",
+          url: `/api/donation/${idDonation}`,
+          headers: {
+            "Content-Type": "application/json; charset=utf-8",
+          },
+          data: {
+            idDonation,
+            donationName,
+            edit:false,
+            pictureURL,
+            user:props.donacija.donatedToUser,
+            item:props.donacija.item,
+            dateOfPublication,
+            message:null,
+            pictureURL,
+            description:props.donacija.description,
+            handoverLocation: handoverLocation,
+            dateOfClosing:null,
+            donatedToUser:null,
+            active:true,
+            valid:false
+          },
+        })
+          .then((response) => {
+            console.log(response.data);
+            handleClose();
+            toast.success("Oglas je poslan na provjeru Adminu");
+            window.location.reload(false)
+          })
+          .catch((err) => {
+            console.log(err);
+            toast.error("Došlo je do greške s donacijom");
+          });
+  }
+
   return (
     <React.Fragment>
       <Card className={DonacijaKardCSS.malaKartica} variant="outlined">
@@ -270,7 +317,7 @@ const DonacijaKard = (props) => {
                   label="Email donatora"
                   id="emailDonatora"
                   value={props.donacija.user.email}
-                  disabled="True"
+                  disabled={true}
                   ></TextField>
 
                 <FormControl fullWidth>
@@ -346,6 +393,16 @@ const DonacijaKard = (props) => {
                   value={checkedUser}
                   category={checkedCat}
                   subcategory={checkedSub}></DropdownCategory>
+
+                <Button
+                  type="submit"
+                  style={emailPrim != emailL ? { display: `none` } : {}}
+                  onClick={ponovnoDoniraj}
+                  variant="outlined"
+                  color="info">
+                  Ponovno doniraj
+                  </Button>
+
                 <div>
                   <input
                     style={email != emailL ? { display: `none` } : {}}

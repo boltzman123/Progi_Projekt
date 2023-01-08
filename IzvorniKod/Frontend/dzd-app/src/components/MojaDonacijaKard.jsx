@@ -242,6 +242,7 @@ const MojeDonacijaKard = (props) => {
       setDobivatelj(response.data)
     }).catch((err) => {
       console.log(err);
+      toast.error("Upisani korisnik ne postoji")
       setBtnDisabled(true);
   });}
   else {
@@ -473,9 +474,9 @@ const MojeDonacijaKard = (props) => {
                 
                 <Button
                   onClick={predajOglas}
-                  style={email != emailL ? { display: `none` } : {}}
+                  style={donatedTo!=null ? { display: `none` } : {}}
                   variant="outlined"
-                  color="error"
+                  color="info"
                   id="predaj">
                   Predaj oglas
                 </Button>
