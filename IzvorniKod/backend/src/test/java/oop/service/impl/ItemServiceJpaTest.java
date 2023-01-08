@@ -1,6 +1,6 @@
 package oop.service.impl;
 
-import liquibase.pro.packaged.A;
+
 import oop.domain.Category;
 import oop.domain.Item;
 import oop.domain.Subcategory;
@@ -9,15 +9,14 @@ import oop.service.ItemService;
 import oop.service.SubcategoryService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import static org.junit.jupiter.api.Assertions.*;
 
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @SpringBootTest
 @AutoConfigureMockMvc
 class ItemServiceJpaTest {
