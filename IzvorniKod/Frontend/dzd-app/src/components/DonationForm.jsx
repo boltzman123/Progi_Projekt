@@ -108,7 +108,7 @@ const DonationForm = () => {
 
   function handleUpload() {
     if (!file) {
-      alert("Molimo Vas da odaberete sliku");
+      alert("Molimo Vas da prvo odaberete sliku i zatim upload");
     }
     const storageRef = ref(storage, `/files/${file.name + v4()}`);
     const uploadTask = uploadBytesResumable(storageRef, file);
@@ -207,8 +207,8 @@ const DonationForm = () => {
   return (
     <React.Fragment>
       <div
-        className={HomeCSS.title}
-        style={{ fontSize: 30, marginTop: 50, marginLeft: 120 }}>
+        className={DonationFormCSS.donacijaNaslov}
+        >
         Kreiraj svoju donaciju
       </div>
       <form className={DonationFormCSS.dForm} onSubmit={onSubmitForm}>
@@ -275,7 +275,7 @@ const DonationForm = () => {
             </div>
           </div>
 
-          <div>
+          <div className={DonationFormCSS.donjiDio}>
             <div className="frame">
               <FormControl fullWidth>
                 <FormLabel id="spol">Predviđeni spol</FormLabel>
@@ -302,7 +302,7 @@ const DonationForm = () => {
 
             <div className={DonationFormCSS.odabiri}>
               <div className={DonationFormCSS.r}>
-                <div className="frame" style={{ width: "200px" }}>
+                <div className={DonationFormCSS.pravokutnici}>
                   <FormControl fullWidth>
                     <InputLabel>Predviđena dob</InputLabel>
                     <Select
@@ -326,7 +326,7 @@ const DonationForm = () => {
                   </FormControl>
                 </div>
 
-                <div className="frame" style={{ width: "200px" }}>
+                <div className={DonationFormCSS.pravokutnici} >
                   <FormControl fullWidth>
                     <InputLabel>Godina proizvodnje</InputLabel>
                     <Select
@@ -352,8 +352,8 @@ const DonationForm = () => {
               </div>
 
               <div className={DonationFormCSS.r}>
-                <div className="frame">
-                  <div style={{ width: 200 }}>
+                <div className={DonationFormCSS.pravokutnici}>
+                  <div style={{ width: 200 }} >
                     <Dropdown
                       menuClassName={DonationFormCSS.dropdown}
                       className={DonationFormCSS.box}
@@ -373,8 +373,8 @@ const DonationForm = () => {
                   </div>
                 </div>
 
-                <div className="frame">
-                  <div style={{ width: 200, height: 27 }}>
+                <div className={DonationFormCSS.pravokutnici}>
+                  <div id={DonationFormCSS.godine}>
                     <Dropdown
                       menuClassName={DonationFormCSS.dropdown}
                       options={arraySub}
@@ -405,12 +405,12 @@ const DonationForm = () => {
 
         <div className={DonationFormCSS.dDio}>
           <div className={DonationFormCSS.donacijaGumbi}>
-            <div >
-              <button  className="gumbic slike" style={{ height: 30}}>
+            <div className={DonationFormCSS.odabir1}>
+              <div className="gumbic slike donacijaSlika" style={{ height: 30}}>
               <label for="files">
               Odaberi sliku
             </label>
-              </button>
+              </div>
             <span>{file.name}</span>
             <input
               id="files"
@@ -421,11 +421,11 @@ const DonationForm = () => {
               />
               </div>
              
-              <div>
+              <div className={DonationFormCSS.odabir2}>
               <button
                 onClick={handleUpload}
                 type="button"
-                className="gumbic tamniji slike"
+                className="gumbic tamniji slike donacijaSlika"
                 style={{ height: 30 }}>
                 Upload slike
               </button>
