@@ -21,19 +21,101 @@
 			\eject 
 		
 	
-		%\section{Ispitivanje programskog rješenja}
+		\section{Ispitivanje programskog rješenja}
 			
 			%\textbf{\textit{dio 2. revizije}}\\
 			
-			 %\textit{U ovom poglavlju je potrebno opisati provedbu ispitivanja implementiranih funkcionalnosti na razini komponenti i na razini cijelog sustava s prikazom odabranih ispitnih slučajeva. 
-			 %Studenti trebaju ispitati temeljnu funkcionalnost i rubne uvjete.}
+			 Kako bismo što učinkovitije testirali naš sustav, testirali smo ispravnost rada pojedinih komponenti koristeći unit testove, ali i ispravnost rada čitavog sustava koristeći alat Selenium.
 	
 			
-			%\subsection{Ispitivanje komponenti}
+			\subsection{Ispitivanje komponenti}
+
+                Za testiranje rada komponenti, napisano je i pokrenuto 9 unit testova. Na slikama se nalazi kod samih testova, kao i dokaz da testovi prolaze (redak Tests passed). Uz to, vidljivo je i trajanje izvođenja testova.\\
+                
+                \subsubsection{Test 1}
+                Prvim testom provjerava se valjanost zapisa o kategoriji pri dohvaćanju potkategorije - ako je dohvaćena potkategorija "Lutke", u dohvaćenom podatku trebao bi postojati i zapis o pripadnoj kategoriji - "Igračke". \underline{Test prolazi.}
+
+                \begin{figure}[H]
+				\includegraphics[]{slike/unit1.png}
+				\centering
+				\caption{Kod prvog unit testa}
+				\label{fig:unit1}
+			\end{figure}
+
+                \eject
+
+                \subsubsection{Test 2}
+                Drugim testom provjerava se dolazi li do pogreške ako pri registraciji korisnik unese mail adresu koja je već unešena u bazi. \underline{Test prolazi.}
+
+                \begin{figure}[H]
+				\includegraphics[]{slike/unit2.png}
+				\centering
+				\caption{Kod drugog unit testa}
+				\label{fig:unit2}
+			\end{figure}
+
+                \subsubsection{Test 3}
+                Trećim testom provjerava se dolazi li do pogreške ako pri loginu korisnik unese mail adresu za koju u bazi ne postoji zapis tj. podaci o korisniku. \underline{Test prolazi.}
+
+                \begin{figure}[H]
+				\includegraphics[scale=0.8]{slike/unit3.png}
+				\centering
+				\caption{Kod trećeg unit testa}
+				\label{fig:unit3}
+			\end{figure}
+
+                \eject
+            
+                \subsubsection{Test 4}
+                Četvrtim testom provjerava se uspješnost logina korisnika za kojeg u bazi postoje podaci. \underline{Test prolazi.}
+
+                \begin{figure}[H]
+				\includegraphics[]{slike/unit4.png}
+				\centering
+				\caption{Kod četvrtog unit testa}
+				\label{fig:unit4}
+			\end{figure}
+
+                \subsubsection{Test 5}
+                Petim testom provjerava se uspješnost stvaranja donacije. \underline{Test prolazi.}
+
+                \begin{figure}[H]
+				\includegraphics[]{slike/unit5.png}
+				\centering
+				\caption{Kod petog unit testa}
+				\label{fig:unit5}
+			\end{figure}
+
+                \subsubsection{Testovi 6, 7}
+                Šestim testom provjerava se uspješnost ažuriranja podataka o predmetu. \underline{Test prolazi.}
+                Sedmim testom provjerava se uspješnost brisanja predmeta iz baze podataka, kao i dolazi li do "custom" pogreške "EntityMissingException" pri pokušaju dohvaćanja izbrisanog predmeta. \underline{Test prolazi.}
+
+                \begin{figure}[H]
+				\includegraphics[]{slike/unit6.png}
+				\centering
+				\caption{Kod šestog i sedmog unit testa}
+				\label{fig:unit67}
+			\end{figure}
+
+                \subsubsection{Testovi 8, 9}
+                Osmim testom provjerava se postoji li admin račun u bazi podataka. \underline{Test prolazi.}
+                Devetim testom provjerava se dolazi li do "custom" pogreške "EntityMissingException" pri pokušaju dohvaćanja nepostojećeg korisnika. \underline{Test prolazi.}
+
+                \begin{figure}[H]
+				\includegraphics[]{slike/unit7.png}
+				\centering
+				\caption{Kod osmog i devetog unit testa}
+				\label{fig:unit89}
+			\end{figure}
+
+                \eject
+                
 			%\textit{Potrebno je provesti ispitivanje jedinica (engl. unit testing) nad razredima koji implementiraju temeljne funkcionalnosti. 
 			%Razraditi \textbf{minimalno 6 ispitnih slučajeva} u kojima će se ispitati redovni slučajevi, rubni uvjeti te izazivanje pogreške (engl. exception throwing). 
 			%Poželjno je stvoriti i ispitni slučaj koji koristi funkcionalnosti koje nisu implementirane. 
 			%Potrebno je priložiti izvorni kôd svih ispitnih slučajeva te prikaz rezultata izvođenja ispita u razvojnom okruženju (prolaz/pad ispita). }
+
+        
 			
 			
 			
@@ -63,7 +145,7 @@
                 Uz ovo, na platformi Firebase napravljen je Cloud Storage Bucket koji služi za jednostavnu pohranu slika potrebnih za uspješan prikaz oglasa. Komunikacija između zasebnih uređaja i platformi osigurana je protokolom HTTPS (komunikacija između klijentovog računala tj. web preglednika na istome i web poslužitelja deployanog na platformi Render, kao i komunikacija između web poslužitelja i Cloud Storage Bucket-a deployanog na platformi Firebase). Kako bi web poslužitelj korisniku mogao poslužiti sav potreban sadržaj, on komunicira s backendom koji po potrebi komunicira s bazom podataka.
 
                 \begin{figure}[H]
-				\includegraphics[width=\textwidth,height=0.8\textheight]{dijagrami/Dijagram razmjestaja.png}
+				\includegraphics[width=\textwidth,height=0.8\textheight]{dijagrami/Dijagram razmjestajav2.png}
 				\centering
 				\caption{Dijagram razmještaja}
 				\label{fig:DeploymentDiagram}

@@ -395,6 +395,23 @@
 			%\textbf{\textit{dio 2. revizije}}\\
 
                 \eject
+                \textbf{V2}
+
+                Dijagram stanja prikazan na slici 4.9 prikazuje stanja u kojima se može naći sustav (konkretno, u pitanju je korisničko sučelje - frontend), kao i prijelaze pomoću kojih sustav dolazi u druga stanja. Svaki prijelaz označen je događajem (npr. "Klik na proizvoljni oglas"), a po potrebi i uvjetom (u uglatim zagradama). \\
+
+                \begin{figure}[H]
+                \makebox[\textwidth][c]{\includegraphics[scale=0.35]{dijagrami/Dijagram stanja v2.png}}%
+				\centering
+				\caption{Dijagram stanja, druga inačica}
+				\label{fig:StateDiagramv2}
+			\end{figure}
+                 Ovisno o tome koja je razina prava dodijeljena korisniku s unešenim podacima, nakon uspješnog logina korisniku se prikaže jedna od tri moguće stranice. Stranice se razlikuju u izgledu svoga zaglavlja (engl. page header) - administrator ima opcije pregledavati aktivne oglase, pregledavati i odobravati neobjavljene oglase, pregledavati popis korisnika i dodijeljivati im pravo za doniranje, ali i pregledavati i mijenjati svoje podatke. S druge strane, običan korisnik ima pravo samo pregledavati aktivne oglase i pregledavati i mijenjati vlastite podatke, pritom dodajući, brišući ili izmjenjujući podatke o svojoj djeci. Donator uz mogućnosti običnog korisnika može i stvarati oglase te pregledavati svoje do sada objavljene oglase, bilo da je u pitanju već zatvoren oglas ili trenutno otvoreni oglas - trenutno otvorene oglase donatori mogu urediti, obrisati ili zatvoriti. \\
+                 
+                 Radi preglednosti, neke od strelica nisu prikazane na dijagramu - običan korisnik iz bilo kojeg stanja može preći u stanje "Prikaz aktivnih donacija za obične korisnike" i  "Prikaz podataka korisnika". Donator uz prijelaz u navedena stanja ("Pregled aktivnih donacija za korisnike donatore", "Prikaz podataka korisnika") može iz bilo kojeg stanja prijeći i u stanja "Prikaz za pregled korisnikovih donacija" i "Prikaz za stvaranja donacija", a administrator može iz bilo kojeg stanja prijeći u jedno od sljedećih stanja: "Pregled aktivnih donacija za administratora", "Prikaz podataka administratora", "Prikaz pregleda korisnika", "Pregled neobjavljenih donacija" i "Pregled aktivnih donacija za administratora". Prijelazi u stanja navedena u ovome odlomku ostvareni su klikom na prikladne dijelove zaglavlja stranice, a sama zaglavlja razlikuju se ovisno o razini ovlasti korisnika.\\
+
+                 Radi preglednosti, nakon klika na gumb "Log out" ili "Obriši račun" sustav ide u završno stanje - u stvarnosti time samo završava trenutna sesija korištenja sustava te se korisniku prikazuje landing page, ali bi dodavanjem strelica za prijelaz u stanje "Landing page" iz potrebnih stanja bila narušena preglednost dijagrama. Akcije sustava (npr. prikaziOglase()) zbog preglednosti također su izostavljena iz dijagrama, time na dijagramu ostavljajući samo korisničke akcije kao događaje koji potiču prijelaz iz jednog stanja sustava u drugo. Isto tako, provjere ispravnosti podataka (npr. provjera jesu li izmijenjeni podaci o korisniku i dalje važeći) izostavljene su iz dijagrama - za svaku provjeru bilo bi potrebno uvesti grananje gdje bi ovisno o ispravnosti podataka sustav ponovno došao u prethodno stanje ili mogao dalje napredovati. 
+
+                \eject
 		
 		%\section{Dijagram aktivnosti}
 			
