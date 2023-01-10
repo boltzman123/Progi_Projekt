@@ -9,16 +9,24 @@ import DjecaList from "../components/DjecaList";
 import DijeteEditModal from "../components/DijeteEditModal";
 import Footer from "../components/Footer";
 import HomeCSS from "../style/pages/Home.module.css";
-
+import { StyledEngineProvider } from '@mui/material/styles';
 
 const Djeca = () => {
   const [updatePage, setUpdatePage] = useState();
   return (
-    <React.Fragment>
+    <StyledEngineProvider injectFirst>
       <div className={HomeCSS.wrapChild}>
         <Header></Header>
-        <NovoDijeteForm updatePage={updatePage} setUpdatePage={setUpdatePage} />
-        <DjecaList updatePage={updatePage} setUpdatePage={setUpdatePage} />
+        <div className={HomeCSS.split}>
+          <div className={HomeCSS.splitItem}>
+            <h3>Dodaj dijete</h3>
+            <NovoDijeteForm updatePage={updatePage} setUpdatePage={setUpdatePage} />
+          </div>
+          <div className={HomeCSS.splitItem}>
+            <h3>Pregled djece</h3>
+            <DjecaList updatePage={updatePage} setUpdatePage={setUpdatePage} />
+          </div>
+        </div>
         <ToastContainer
           position="top-center"
           autoClose={5000}
@@ -33,7 +41,7 @@ const Djeca = () => {
         />
         <Footer name={"footerDeca"}></Footer>
       </div>
-    </React.Fragment>
+    </StyledEngineProvider>
   );
 };
 export default Djeca;

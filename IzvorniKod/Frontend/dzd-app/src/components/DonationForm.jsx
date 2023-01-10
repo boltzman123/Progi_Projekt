@@ -208,7 +208,8 @@ const DonationForm = () => {
       <div className={HomeCSS.title} style={{fontSize:30}}>Kreiraj svoju donaciju</div>
       <form className={DonationFormCSS.dForm} onSubmit={onSubmitForm}>
         <div className="lDio">
-          <div className="frame">
+          <div className={DonationFormCSS.frame}>
+            <label htmlFor="nazivDonacije">Naziv donacije</label>
             <input
               value={donationName}
               onChange={(e) => setDonatioName(e.target.value)}
@@ -220,7 +221,8 @@ const DonationForm = () => {
               required={true}></input>
           </div>
 
-          <div className="frame">
+          <div className={DonationFormCSS.frame}>
+            <label htmlFor="nazivPredmeta">Naziv predmeta</label>
             <input
               value={productName}
               onChange={(e) => setProductName(e.target.value)}
@@ -232,7 +234,8 @@ const DonationForm = () => {
               required={true}></input>
           </div>
 
-          <div className="frame">
+          <div className={DonationFormCSS.frame}>
+            <label htmlFor="lokacija">Lokacija preuzimanja</label>
             <input
               value={handoverLocation}
               onChange={(e) => setHandoverLocation(e.target.value)}
@@ -244,7 +247,8 @@ const DonationForm = () => {
               required={true}></input>
           </div>
 
-          <div className="frame">
+          <div className={DonationFormCSS.frame}>
+            <label htmlFor="stanje">Stanje predmeta</label>
             <input
               value={itemState}
               onChange={(e) => setState(e.target.value)}
@@ -256,7 +260,8 @@ const DonationForm = () => {
               required={true}></input>
           </div>
 
-          <div className="frame">
+          <div className={DonationFormCSS.frame}>
+            <label htmlFor="marka">Marka predmeta</label>
             <input
               value={productionBrand}
               onChange={(e) => setProductionBrand(e.target.value)}
@@ -268,7 +273,7 @@ const DonationForm = () => {
               required={true}></input>
           </div>
 
-          <div className="frame">
+          <div className={DonationFormCSS.frame}>
               <FormControl fullWidth>
                 <FormLabel id="spol">Predviđeni spol</FormLabel>
                 <RadioGroup

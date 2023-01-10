@@ -8,11 +8,12 @@ import { TextField, Select, Button, FormControl, FormLabel, Typography} from '@m
 import { RadioGroup, FormControlLabel, Radio, Grid, InputLabel, MenuItem, Box, Container } from '@mui/material';
 import { LocalizationProvider, DatePicker } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
-
 import NovoDijeteCategoryPicker from './NovoDijeteCategoryPicker.jsx'
-
 import { Modal, IconButton} from '@mui/material'
 import EditIcon from '@mui/icons-material/Edit';
+
+import ndfCSS from "../style/components/NovoDijeteForm.module.css";
+
 
 const style = {
     position: 'absolute',
@@ -132,72 +133,84 @@ const DijeteModal = ({dijete, updatePage, setUpdatePage}) => {
             <Modal
                 open={open}
                 onClose={handleClose}>
-                <Box sx={{...style, width: 340, maxHeight: 480, overflow: 'auto'}}>
+                <Box className={ndfCSS.modal}sx={{...style, width: 340, maxHeight: 480, overflow: 'auto'}}>
                     <form onSubmit={ onSubmit }>
                         <Container maxWidth='xs'>
                             <Box>
-                                <TextField
-                                    label="Ime" 
-                                    id="ime" 
-                                    value={ime} 
-                                    required
-                                    variant="outlined" 
-                                    fullWidth
-                                    onChange={(e) => setIme(e.target.value)}/>
+                                <Box className={ndfCSS.FormControl}>
+                                    <Typography>Ime</Typography>
+                                    <TextField
+                                        id="ime" 
+                                        value={ime} 
+                                        required
+                                        variant="outlined" 
+                                        fullWidth
+                                        onChange={(e) => setIme(e.target.value)}
+                                        className={ndfCSS.item}/>
+                                </Box>
 
-                                <FormControl fullWidth>
-                                    <FormLabel id="spol">Spol</FormLabel>
-                                    <RadioGroup
-                                        name="spol-radio-buttons-group"
-                                        value={spol}
-                                        required
-                                        onChange={(e) => setSpol(e.target.value)}
-                                    >
-                                        <FormControlLabel value="z" control={<Radio />} label="Žensko" />
-                                        <FormControlLabel value="m" control={<Radio />} label="Muško" />
-                                    </RadioGroup>
-                                </FormControl>
+                                <Box className={ndfCSS.FormControl}>
+                                    <Typography>Spol</Typography>
+                                    <FormControl fullWidth>
+                                        <RadioGroup
+                                            name="spol-radio-buttons-group"
+                                            value={spol}
+                                            required
+                                            onChange={(e) => setSpol(e.target.value)}
+                                            className={ndfCSS.item}
+                                        >
+                                            <FormControlLabel value="z" control={<Radio />} label="Žensko" />
+                                            <FormControlLabel value="m" control={<Radio />} label="Muško" />
+                                        </RadioGroup>
+                                    </FormControl>
+                                </Box>
                         
-                                <FormControl fullWidth>
-                                    <InputLabel>Dob</InputLabel>
-                                    <Select
-                                        labelId="dob-select-label"
-                                        id="dob-select"
-                                        value={dob}
-                                        label="Dob"
-                                        required
-                                        MenuProps={{
-                                            PaperProps: { sx: { maxHeight: 175 }}
-                                        }}
-                                        onChange={(e) => setDob(e.target.value)}>
-                                        {ageRange.map((ageSelect) => {
-                                            return <MenuItem key={ageSelect} value={ageSelect}>{ageSelect}</MenuItem>
-                                        })}
-                                    </Select>
-                                </FormControl>
+                                <Box className={ndfCSS.FormControl}>
+                                    <Typography>Dob</Typography>
+                                    <FormControl fullWidth>
+                                        <Select
+                                            labelId="dob-select-label"
+                                            id="dob-select"
+                                            value={dob}
+                                            className={ndfCSS.item}
+                                            required
+                                            MenuProps={{
+                                                PaperProps: { sx: { maxHeight: 175 }}
+                                            }}
+                                            onChange={(e) => setDob(e.target.value)}>
+                                            {ageRange.map((ageSelect) => {
+                                                return <MenuItem key={ageSelect} value={ageSelect}>{ageSelect}</MenuItem>
+                                            })}
+                                        </Select>
+                                    </FormControl>
+                                </Box>
                                 
                                 {dob == 0 ?
-                                <LocalizationProvider dateAdapter={AdapterDateFns}>
-                                    <DatePicker
-                                        label="Očekivan datum rođenja"
-                                        value={expBirthDate}
-                                        inputFormat="dd/MM/yyyy"
-                                        onChange={(newDate) => {setExpBirthDate(newDate);
-                                        }}
-                                        renderInput={(params) => <TextField {...params} />}
-                                    />
-                                </LocalizationProvider>
+                                <Box className={ndfCSS.FormControl}>
+                                    <Typography>Očekivani datum rođenja</Typography>
+                                    <LocalizationProvider dateAdapter={AdapterDateFns}>
+                                        <DatePicker
+                                            value={expBirthDate}
+                                            className={ndfCSS.item}
+                                            inputFormat="dd/MM/yyyy"
+                                            onChange={(newDate) => {setExpBirthDate(newDate);
+                                            }}
+                                            renderInput={(params) => <TextField {...params} />}
+                                        />
+                                    </LocalizationProvider>
+                                </Box>
                                 :<></>
                                 }
                                 
-                                <Box>
-                                    <Typography/>
+                                
+                                <Box className={ndfCSS.FormControl}>
+                                    <Typography>Odabrane kategorije</Typography>
+                                    <NovoDijeteCategoryPicker 
+                                        checkedSub={checkedSub} setCheckedSub={setCheckedSub}
+                                        categories={categories} setCategories={setCategories}
+                                        subcategories={subcategories} setSubCategories={setSubCategories}/>
                                 </Box>
-                                <NovoDijeteCategoryPicker 
-                                    checkedSub={checkedSub} setCheckedSub={setCheckedSub}
-                                    categories={categories} setCategories={setCategories}
-                                    subcategories={subcategories} setSubCategories={setSubCategories}/>
-                                <Button type="submit">Update</Button>
+                                <Button type="submit" variant='contained' sx={{borderRadius: 20}} size='large'>Update</Button>
 
                             </Box>
                         </Container>

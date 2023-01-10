@@ -1,3 +1,12 @@
+.frame {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    color: #121212;
+}
+
 .dForm {
     display: grid;
     grid-template-columns: auto auto;

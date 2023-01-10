@@ -91,7 +91,7 @@ const User = () => {
             <form>
               <h2>Pregledaj i/ili uredi svoje podatke</h2>
                 <div className={PUOCSS.frame}>
-                  <label for="ime" className={PUOCSS.formLabel}>Ime:
+                  <label for="ime" className={PUOCSS.formLabel}>Ime
                       <input 
                           value={ime}
                           type="text"
@@ -103,7 +103,7 @@ const User = () => {
                   </label>   
                 </div>
                 <div className={PUOCSS.frame}>
-                  <label for="fname" className={PUOCSS.formLabel}>Prezime:
+                  <label for="fname" className={PUOCSS.formLabel}>Prezime
                       <input 
                           value={prezime}  
                           type="text" name="prezime" id="prezime" 
@@ -114,7 +114,7 @@ const User = () => {
                   </label>
                 </div>
                 <div className={PUOCSS.frame}>
-                  <label for="fname" className={PUOCSS.formLabel}>Adresa:
+                  <label for="fname" className={PUOCSS.formLabel}>Adresa
                       <input 
                           value={mjesto}
                           type="text" name="mjesto" id="mjesto" 
@@ -126,7 +126,7 @@ const User = () => {
                 </div>
 
                 <div className={PUOCSS.frame}>
-                    <label for="fname" className={PUOCSS.formLabel}>Email adresa:
+                    <label for="fname" className={PUOCSS.formLabel}>Email adresa
                     <input disabled
                         value={email} 
                         type="email" name="email" id="email" 
