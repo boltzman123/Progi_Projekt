@@ -242,28 +242,29 @@ const DonacijaKard = (props) => {
 
   return (
     <React.Fragment>
-      <Card className={DonacijaKardCSS.malaKartica} variant="outlined">
-        {/* OVDJE UPISI LINK KOJI VODI NA FULL PREGLED TOG PREDMETA */}
-        <CardActionArea onClick={handleOpen}>
-          <CardMedia
-            className={DonacijaKardCSS.img}
-            component="img"
-            image={pictureURL}
-            alt="slika predmeta koji se donira"
-          />
-          <h1
-            style={{ color: "rgba(244, 177, 131, 255)", textAlign: "center" }}>
-            {donationName}
-          </h1>
-          <CardContent sx={{ bgcolor: "#E8E8E8" }}>
-            <h3>Ime predmeta: {productName}</h3>
-            <h3>Predviđena dob korisnika: {dob}</h3>
-            <h3>Datum objave: {datum} </h3>
-            <h3>Opis: {opis}</h3>
-            <h3>Lokacija: {handoverLocation} </h3>
-          </CardContent>
-        </CardActionArea>
-      </Card>
+        <Card className={DonacijaKardCSS.malaKartica} variant="outlined" 
+        {...(props.istaknut && { sx: {border: 'solid 6px gold'} })}>
+          {/* OVDJE UPISI LINK KOJI VODI NA FULL PREGLED TOG PREDMETA */}
+          <CardActionArea onClick={handleOpen}>
+            <CardMedia
+              className={DonacijaKardCSS.img}
+              component="img"
+              image={pictureURL}
+              alt="slika predmeta koji se donira"
+            />
+            <h1
+              style={{ color: "rgba(244, 177, 131, 255)", textAlign: "center" }}>
+              {donationName}
+            </h1>
+            <CardContent sx={{ bgcolor: "#E8E8E8" }}>
+              <h3>Ime predmeta: {productName}</h3>
+              <h3>Predviđena dob korisnika: {dob}</h3>
+              <h3>Datum objave: {datum} </h3>
+              <h3>Opis: {opis}</h3>
+              <h3>Lokacija: {handoverLocation} </h3>
+            </CardContent>
+          </CardActionArea>
+        </Card>
       <Modal open={open} onClose={handleClose}>
         <Box
           className={DonacijaKardCSS.modal}

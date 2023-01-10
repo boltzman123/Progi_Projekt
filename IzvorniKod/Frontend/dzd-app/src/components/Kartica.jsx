@@ -63,7 +63,7 @@ function Kartica() {
         <h2>Preporucene donacije</h2>
           <div className={KarticaCSS.karticaList}>
               {preporucen.map((donacija) => {
-              return <DonacijaKard key={donacija.idDonation} donacija={donacija}></DonacijaKard>;
+              return <DonacijaKard key={donacija.idDonation} donacija={donacija} istaknut={true}></DonacijaKard>;
               })}
           </div>
         </div>
@@ -72,7 +72,7 @@ function Kartica() {
         <h2>Aktivne donacije</h2>
           <div className={KarticaCSS.karticaList}>
               {aktivan.map((donacija) => {
-              return <DonacijaKard key={donacija.idDonation} donacija={donacija}></DonacijaKard>;
+              return <DonacijaKard key={donacija.idDonation} donacija={donacija} ></DonacijaKard>;
               })}
           </div>
         </div> 
