@@ -15,7 +15,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 import { Modal } from "@mui/material";
-import { TextField, Select, Button, FormControl, FormLabel} from "@mui/material";
+import { TextField, Select, Button, FormControl, FormLabel, Typography} from "@mui/material";
 import { RadioGroup, FormControlLabel, Radio, InputLabel, MenuItem, Box, Container} from "@mui/material";
 
 import DropdownCategory from "./DropdownCategory";
@@ -169,6 +169,7 @@ const MojeDonacijaKard = (props) => {
             pictureURL,
             user,
             item,
+            description: opis,
             dateOfPublication,
             handoverLocation: handoverLocation,
           },
@@ -309,6 +310,7 @@ const MojeDonacijaKard = (props) => {
             <h3>Ime predmeta: {productName}</h3>
             <h3>Predviđena dob korisnika: {dob}</h3>
             <h3>Datum objave: {datum} </h3>
+            <h3>Opis: {opis}</h3>
             <h3>Lokacija: {handoverLocation} </h3>
             <hr/>
             <h3 id="sit">Validno: {String(valid)=="true"?"Oglas je validan":"Oglas nije validan"}</h3>
@@ -443,6 +445,20 @@ const MojeDonacijaKard = (props) => {
                   id="godinaProizvodnje"
                   value={productionYear}
                   disabled={smijeMijenjati}></TextField>
+
+                <Box>
+                  <Typography>Opis oglasa</Typography>
+                  <TextField
+                    name="descriptionField"
+                    id="descriptionField"
+                    placeholder="Doniram ovaj proizdvod zato što..."
+                    value={opis}
+                    onChange={(e) => setOpis(e.target.value)}
+                    required={true}
+                    multiline
+                  >
+                  </TextField>
+                </Box>
 
                 <DropdownCategory 
                   value={smijeMijenjati}

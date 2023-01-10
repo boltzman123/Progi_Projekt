@@ -7,6 +7,8 @@ import { TextField, Select, Button, FormControl, FormLabel, Typography} from '@m
 import { RadioGroup, FormControlLabel, Radio, Grid, InputLabel, MenuItem, Box, Container } from '@mui/material';
 import { List, ListItem, ListSubheader, ListItemText, ListItemButton, ListItemIcon} from '@mui/material';
 
+import nkpCSS from "../style/components/NovaKat-Potkat.module.css";
+
 const NovaPotkategorijaForm = ({updatePage, setUpdatePage}) => {
     const [categories, setCategories] = useState([]);
     const [seasons, setSeasons] = useState([]);
@@ -83,84 +85,88 @@ const NovaPotkategorijaForm = ({updatePage, setUpdatePage}) => {
 
     return (  
         <form onSubmit={onSubmit}>
-            <Container maxWidth='xs'>
+            <Container maxWidth='xs' className={nkpCSS.container}>
                 <Box>
-                    <TextField
-                            label="Ime potkategorije" 
-                            id="imePodKategorije" 
-                            value={subcategoryName} 
+                    <Box className={nkpCSS.FormControl}>
+                        <Typography>Naziv potkategorije</Typography>
+                        <TextField
+                                id="imePodKategorije" 
+                                value={subcategoryName} 
+                                required
+                                variant="outlined" 
+                                fullWidth
+                                displayEmpty
+                                onChange={(e) => setSubcategoryName(e.target.value)}
+                                className={nkpCSS.item}/>
+                    </Box>
+
+                    <Box className={nkpCSS.FormControl}>
+                        <Typography>Odaberi kategoriju</Typography>
+                        <RadioGroup
+                            name="kategorije-radio-buttons-group"
+                            value={checkedCat}
                             required
-                            variant="outlined" 
-                            fullWidth
-                            onChange={(e) => setSubcategoryName(e.target.value)}/>
-
-
-                    <RadioGroup
-                        name="kategorije-radio-buttons-group"
-                        value={checkedCat}
-                        required
-                        
-                        onChange={(e) => setCheckedCat(e.target.value)}
-                        style={{maxHeight: 250, overflow: 'auto'}}
-                    >
-                        
-                        <List
-                            variant="outlined"
-                            subheader={
-                                <ListSubheader component="div" id="nested-list-subheader">
-                                    Kategorije
-                                </ListSubheader>}
+                            className={nkpCSS.item}
+                            onChange={(e) => setCheckedCat(e.target.value)}
+                            style={{maxHeight: 200, overflow: 'auto'}}
                         >
-                            {categories.map((cat) => {
-                                            return(
-                                                <ListItem key={"kategorija item" + cat.categoryName}>
-                                                    <FormControlLabel value={`${cat.categoryName}`}control={<Radio />} label={`${cat.categoryName}`} />
-                                                </ListItem>
-                                            );
-                            })}
-                        </List>
-                    </RadioGroup>
+                            
+                            <List
+                                variant="outlined"
+                            >
+                                {categories.map((cat) => {
+                                                return(
+                                                    <ListItem key={"kategorija item" + cat.categoryName}>
+                                                        <FormControlLabel value={`${cat.categoryName}`}control={<Radio />} label={`${cat.categoryName}`} />
+                                                    </ListItem>
+                                                );
+                                })}
+                            </List>
+                        </RadioGroup>
+                    </Box>
 
 
-                    <RadioGroup
-                        name="sezone-radio-buttons-group"
-                        value={checkedSeason}
-                        required
-                        
-                        onChange={(e) => setCheckedSeason(e.target.value)}
-                        style={{maxHeight: 150, overflow: 'auto'}}
-                    >
-                        
-                        <List
-                            variant="outlined"
-                            subheader={
-                                <ListSubheader component="div" id="nested-list-subheader">
-                                    Sezone
-                                </ListSubheader>}
+                    <Box className={nkpCSS.FormControl}>
+                        <Typography>Odaberi sezonu</Typography>
+                        <RadioGroup
+                            name="sezone-radio-buttons-group"
+                            value={checkedSeason}
+                            required
+                            className={nkpCSS.item}
+                            onChange={(e) => setCheckedSeason(e.target.value)}
+                            style={{maxHeight: 120, overflow: 'auto'}}
                         >
-                            {seasons.map((season) => {
-                                            return(
-                                                <ListItem key={"season item" + season}>
-                                                    <FormControlLabel value={`${season}`}control={<Radio />} label={`${season}`} />
-                                                </ListItem>
-                                            );
-                            })}
-                        </List>
-                    </RadioGroup>
+                            
+                            <List
+                                variant="outlined"
+                            >
+                                {seasons.map((season) => {
+                                                return(
+                                                    <ListItem key={"season item" + season}>
+                                                        <FormControlLabel value={`${season}`}control={<Radio />} label={`${season}`} />
+                                                    </ListItem>
+                                                );
+                                })}
+                            </List>
+                        </RadioGroup>
+                    </Box>
 
-                    <TextField
-                        name="itemDuration" 
-                        value={useDateExpires}
-                        onChange={(e) => setUseDateExpires(e.target.value)}
-                        type="number"
-                        InputProps={{
-                            inputProps: { 
-                                max: 10, min: 0, step: 0.5 
-                            }
-                        }}
-                        label="Trajanje"
-                    />
-                    <Button type="submit">Dodaj potkategoriju</Button>
+                    <Box className={nkpCSS.FormControl}>
+                        <Typography>Odaberi trajanje</Typography>
+                        <TextField
+                            name="itemDuration" 
+                            value={useDateExpires}
+                            onChange={(e) => setUseDateExpires(e.target.value)}
+                            type="number"
+                            className={nkpCSS.item}
+                            InputProps={{
+                                inputProps: { 
+                                    max: 10, min: 0, step: 0.5 
+                                }
+                            }}
+                        />
+                    </Box>
+                    <Button type="submit" variant='contained' sx={{borderRadius: 20, m: 5}} size='large'>Dodaj potkategoriju</Button>
                 </Box>
             </Container>
         </form>

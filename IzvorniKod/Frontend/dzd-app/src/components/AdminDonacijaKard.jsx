@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 import { Modal } from "@mui/material";
-import { TextField, Select, Button, FormControl, FormLabel} from "@mui/material";
+import { TextField, Select, Button, FormControl, FormLabel, Typography} from "@mui/material";
 import { RadioGroup, FormControlLabel, Radio, InputLabel, MenuItem, Box, Container} from "@mui/material";
 
 import DropdownCategory from "./DropdownCategory";
@@ -43,6 +43,7 @@ const MojeDonacijaKard = (props) => {
   let [donationName, setDonationName] = useState(props.donacija.donationName);
   let [dateOfPublication, setDateOfPublication] = useState(props.donacija.dateOfPublication);
   let [userLocation, setUserLocation] = useState(props.donacija.user.userLocation);
+  let [opis, setOpis] = useState(props.donacija.description);
 
   let { email } = props.donacija.user;
   let [message, setMessage] = useState(props.donacija.message);
@@ -105,6 +106,7 @@ const MojeDonacijaKard = (props) => {
         "dateOfClosing": null,
         "edit": "false",
         "message": message,
+        "description": opis,
         "pictureURL": props.donacija.pictureURL,
         "handoverLocation": props.donacija.handoverLocation,
         "donatedToUser": props.donacija.donatedToUser,
@@ -141,6 +143,7 @@ const MojeDonacijaKard = (props) => {
         "dateOfClosing": null,
         "edit": "false",
         "message": message,
+        "description": opis,
         "pictureURL": props.donacija.pictureURL,
         "handoverLocation": props.donacija.handoverLocation,
         "donatedToUser": props.donacija.donatedToUser,
@@ -175,6 +178,7 @@ const MojeDonacijaKard = (props) => {
         "dateOfClosing": null,
         "edit": "true",
         "message": message,
+        "description": opis,
         "pictureURL": props.donacija.pictureURL,
         "handoverLocation": props.donacija.handoverLocation,
         "donatedToUser": props.donacija.donatedToUser,
@@ -212,6 +216,7 @@ const MojeDonacijaKard = (props) => {
             <h3>Ime predmeta: {productName}</h3>
             <h3>Predviđena dob korisnika: {dob}</h3>
             <h3>Datum objave: {datum} </h3>
+            <h3>Opis: {opis}</h3>
             <h3>Lokacija: {userLocation} </h3>
             <h3 id="sit">Validno: {String(valid)}</h3>
             <h3 id="sit">Treba urediti: {String(edit)}</h3>
@@ -346,6 +351,28 @@ const MojeDonacijaKard = (props) => {
                   id="godinaProizvodnje"
                   value={productionYear}
                   disabled={checkedUser}></TextField>
+
+
+                <Box>
+                  <Typography>Opis oglasa</Typography>
+                  <TextField
+                    name="descriptionField"
+                    id="descriptionField"
+                    value={opis}
+                    onChange={(e) => setOpis(e.target.value)}
+                    disabled={checkedUser}
+                    multiline                  >
+                  </TextField>
+                </Box>
+
+
+
+
+
+
+
+
+
 
                 <DropdownCategory
                   value={checkedUser}

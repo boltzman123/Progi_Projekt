@@ -41,6 +41,7 @@ const DonacijaKard = (props) => {
   let [dateOfPublication, setDateOfPublication] = useState(props.donacija.dateOfPublication);
   let [handoverLocation, setHandoverLocation] = useState(props.donacija.handoverLocation);
   let [userLocation, setUserLocation] = useState(props.donacija.user.userLocation);
+  let [opis, setOpis] = useState(props.donacija.description)
 
   let { email } = props.donacija.user.email;
   let { idDonation } = props.donacija;
@@ -137,6 +138,7 @@ const DonacijaKard = (props) => {
             pictureURL,
             user,
             item,
+            description: opis,
             dateOfPublication,
             handoverLocation: handoverLocation,
           },
@@ -257,6 +259,7 @@ const DonacijaKard = (props) => {
             <h3>Ime predmeta: {productName}</h3>
             <h3>Predviđena dob korisnika: {dob}</h3>
             <h3>Datum objave: {datum} </h3>
+            <h3>Opis: {opis}</h3>
             <h3>Lokacija: {handoverLocation} </h3>
           </CardContent>
         </CardActionArea>
@@ -388,6 +391,19 @@ const DonacijaKard = (props) => {
                   id="godinaProizvodnje"
                   value={productionYear}
                   disabled={checkedUser}></TextField>
+
+                <Box>
+                  <Typography>Opis oglasa</Typography>
+                  <TextField
+                    name="descriptionField"
+                    id="descriptionField"
+                    value={opis}
+                    onChange={(e) => setOpis(e.target.value)}
+                    disabled={checkedUser}
+                    multiline
+                  >
+                  </TextField>
+                </Box>
 
                 <DropdownCategory
                   value={checkedUser}

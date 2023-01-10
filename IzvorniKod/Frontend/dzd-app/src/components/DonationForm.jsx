@@ -77,6 +77,7 @@ const DonationForm = () => {
   const [productName, setProductName] = useState("");
   const [chosenCategory, setChosenCategory] = useState("");
   const [chosenSubcategory, setChosenSubCategory] = useState("");
+  const [description, setDescription] = useState("");
   let [arraySub, setArySub] = useState([]);
   let [value, setValue] = useState("");
 
@@ -174,6 +175,7 @@ const DonationForm = () => {
               handoverLocation,
               user,
               item,
+              description: description
             },
           })
             .then((response) => {
@@ -214,6 +216,7 @@ const DonationForm = () => {
       <form className={DonationFormCSS.dForm} onSubmit={onSubmitForm}>
         <div className={DonationFormCSS.lDio}>
           <div>
+            <Typography>Naziv donacije</ Typography>
             <div className="frame">
               <input
                 value={donationName}
@@ -221,11 +224,11 @@ const DonationForm = () => {
                 type="text"
                 name="donationName"
                 id="donationName"
-                placeholder="Naziv donacije"
+                placeholder="Kao novi Hot Wheels Ferari F40"
                 className="inputFrame"
                 required={true}></input>
             </div>
-
+            <Typography>Naziv predmeta</Typography>
             <div className="frame">
               <input
                 value={productName}
@@ -233,11 +236,11 @@ const DonationForm = () => {
                 type="text"
                 name="productName"
                 id="productName"
-                placeholder="Naziv predmeta"
+                placeholder="Ferrari F40"
                 className="inputFrame"
                 required={true}></input>
             </div>
-
+            <Typography>Lokacija preuzimanja</Typography>
             <div className="frame">
               <input
                 value={handoverLocation}
@@ -245,11 +248,11 @@ const DonationForm = () => {
                 type="text"
                 name="handoverLocation"
                 id="handoverLocation"
-                placeholder="Lokacija preuzimanja"
+                placeholder="Zagreb"
                 className="inputFrame"
                 required={true}></input>
             </div>
-
+            <Typography>Stanje predmeta</Typography>
             <div className="frame">
               <input
                 value={itemState}
@@ -257,11 +260,11 @@ const DonationForm = () => {
                 type="text"
                 name="itemState"
                 id="itemState"
-                placeholder="Stanje predmeta"
+                placeholder="Dobro, manji znakovi korištenja"
                 className="inputFrame"
                 required={true}></input>
             </div>
-
+            <Typography>Marka predmeta</Typography>
             <div className="frame">
               <input
                 value={productionBrand}
@@ -269,16 +272,16 @@ const DonationForm = () => {
                 type="text"
                 name="productionBrand"
                 id="productionBrand"
-                placeholder="Marka predmeta"
+                placeholder="Hot Wheels"
                 className="inputFrame"
                 required={true}></input>
             </div>
           </div>
 
           <div className={DonationFormCSS.donjiDio}>
+          <Typography>Predviđeni spol</Typography>
             <div className="frame">
               <FormControl fullWidth>
-                <FormLabel id="spol">Predviđeni spol</FormLabel>
                 <RadioGroup
                   name="spol-radio-buttons-group"
                   value={chosenSex}
@@ -303,8 +306,8 @@ const DonationForm = () => {
             <div className={DonationFormCSS.odabiri}>
               <div className={DonationFormCSS.r}>
                 <div className={DonationFormCSS.pravokutnici}>
+                  <Typography>Predviđena dob</Typography>
                   <FormControl fullWidth>
-                    <InputLabel>Predviđena dob</InputLabel>
                     <Select
                       labelId="dob-select-label"
                       id="dob-select"
@@ -327,8 +330,8 @@ const DonationForm = () => {
                 </div>
 
                 <div className={DonationFormCSS.pravokutnici} >
+                  <Typography>Godina proizvodnje</Typography>
                   <FormControl fullWidth>
-                    <InputLabel>Godina proizvodnje</InputLabel>
                     <Select
                       labelId="year-select-label"
                       id="year-select"
@@ -353,6 +356,7 @@ const DonationForm = () => {
 
               <div className={DonationFormCSS.r}>
                 <div className={DonationFormCSS.pravokutnici}>
+                <Typography>Odaberi kategoriju</Typography>
                   <div style={{ width: 200 }} >
                     <Dropdown
                       menuClassName={DonationFormCSS.dropdown}
@@ -374,6 +378,7 @@ const DonationForm = () => {
                 </div>
 
                 <div className={DonationFormCSS.pravokutnici}>
+                  <Typography>Odaberi potkategoriju</Typography>
                   <div id={DonationFormCSS.godine}>
                     <Dropdown
                       menuClassName={DonationFormCSS.dropdown}
@@ -394,6 +399,22 @@ const DonationForm = () => {
                   </div>
                 </div>
               </div>
+
+              <Box>
+                <Typography>Opis oglasa</Typography>
+                <TextField
+                  name="descriptionField"
+                  id="descriptionField"
+                  placeholder="Doniram ovaj proizdvod zato što..."
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                  required={true}
+                  multiline
+                  className={DonationFormCSS.description}
+                >
+                </TextField>
+              </Box>
+
               <div className="donacija">
                 <button className="gumbic tamniji" type="submit">
                   Spremi donaciju
