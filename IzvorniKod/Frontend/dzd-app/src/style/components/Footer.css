@@ -45,8 +45,8 @@
     font-size: 30px;
     font-weight: 400;
     padding: 12px;
-    bottom: 0;
-    position: fixed;
+    bottom:0;
+    position: relative;
   }
 }
 

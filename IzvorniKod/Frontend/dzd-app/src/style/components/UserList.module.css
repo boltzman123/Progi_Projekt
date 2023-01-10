@@ -1,4 +1,5 @@
-.userList {
+@media only screen and (min-width: 450px) {
+  .userList {
     display: grid;
     grid-template-columns: auto auto auto;
     justify-content: space-between;
@@ -6,5 +7,16 @@
     padding-left: 220px;
     padding-right: 220px;
     padding-bottom: 80px;
-    
+  }
+}
+@media only screen and (max-width: 450px) {
+    .userList {
+        display: grid;
+        grid-template-columns: auto;
+        justify-content: space-between;
+        padding-top: 40px;
+        padding-left: 45px;
+        padding-right: 45px;
+        padding-bottom: 0px;
+      }
 }
