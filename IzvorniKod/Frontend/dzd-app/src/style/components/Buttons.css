@@ -1,6 +1,6 @@
 .gumbic {
     height: 65px;
-    width: 151px;
+    width: 161px;
     color: white;
     font-weight: 600;
     font-size: 23px;
@@ -13,6 +13,14 @@
     margin: 20px 20px;
     text-align: center;
     align-items: center;
+}
+.donacija {
+    margin-top: 80px;
+    display: flex;
+    justify-content: center;
+}
+.slike {
+    margin-top: -5px;
 }
 
 .tamniji{
@@ -42,5 +50,8 @@
     }
     .upitnik {
         width: 80%;
+    }
+    .donacijaSlika {
+        width: 185px;
     }
 }

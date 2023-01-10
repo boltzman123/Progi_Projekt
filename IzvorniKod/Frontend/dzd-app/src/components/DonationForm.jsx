@@ -7,7 +7,8 @@ import storage from "../firebaseConfig.js";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { v4 } from "uuid";
 import DonationFormCSS from "../style/components/DonationForm.module.css";
-import HomeCSS from "../style/pages/Home.module.css"
+import HomeCSS from "../style/pages/Home.module.css";
+import "../style/components/Buttons.css";
 
 import {
   TextField,
@@ -107,7 +108,7 @@ const DonationForm = () => {
 
   function handleUpload() {
     if (!file) {
-      alert("Molimo Vas da odaberete sliku");
+      alert("Molimo Vas da prvo odaberete sliku i zatim upload");
     }
     const storageRef = ref(storage, `/files/${file.name + v4()}`);
     const uploadTask = uploadBytesResumable(storageRef, file);
@@ -205,75 +206,77 @@ const DonationForm = () => {
 
   return (
     <React.Fragment>
-      <div className={HomeCSS.title} style={{fontSize:30}}>Kreiraj svoju donaciju</div>
+      <div
+        className={DonationFormCSS.donacijaNaslov}
+        >
+        Kreiraj svoju donaciju
+      </div>
       <form className={DonationFormCSS.dForm} onSubmit={onSubmitForm}>
-        <div className="lDio">
-          <div className={DonationFormCSS.frame}>
-            <label htmlFor="nazivDonacije">Naziv donacije</label>
-            <input
-              value={donationName}
-              onChange={(e) => setDonatioName(e.target.value)}
-              type="text"
-              name="donationName"
-              id="donationName"
-              placeholder="Naziv donacije"
-              className="inputFrame"
-              required={true}></input>
+        <div className={DonationFormCSS.lDio}>
+          <div>
+            <div className="frame">
+              <input
+                value={donationName}
+                onChange={(e) => setDonatioName(e.target.value)}
+                type="text"
+                name="donationName"
+                id="donationName"
+                placeholder="Naziv donacije"
+                className="inputFrame"
+                required={true}></input>
+            </div>
+
+            <div className="frame">
+              <input
+                value={productName}
+                onChange={(e) => setProductName(e.target.value)}
+                type="text"
+                name="productName"
+                id="productName"
+                placeholder="Naziv predmeta"
+                className="inputFrame"
+                required={true}></input>
+            </div>
+
+            <div className="frame">
+              <input
+                value={handoverLocation}
+                onChange={(e) => setHandoverLocation(e.target.value)}
+                type="text"
+                name="handoverLocation"
+                id="handoverLocation"
+                placeholder="Lokacija preuzimanja"
+                className="inputFrame"
+                required={true}></input>
+            </div>
+
+            <div className="frame">
+              <input
+                value={itemState}
+                onChange={(e) => setState(e.target.value)}
+                type="text"
+                name="itemState"
+                id="itemState"
+                placeholder="Stanje predmeta"
+                className="inputFrame"
+                required={true}></input>
+            </div>
+
+            <div className="frame">
+              <input
+                value={productionBrand}
+                onChange={(e) => setProductionBrand(e.target.value)}
+                type="text"
+                name="productionBrand"
+                id="productionBrand"
+                placeholder="Marka predmeta"
+                className="inputFrame"
+                required={true}></input>
+            </div>
           </div>
 
-          <div className={DonationFormCSS.frame}>
-            <label htmlFor="nazivPredmeta">Naziv predmeta</label>
-            <input
-              value={productName}
-              onChange={(e) => setProductName(e.target.value)}
-              type="text"
-              name="productName"
-              id="productName"
-              placeholder="Naziv predmeta"
-              className="inputFrame"
-              required={true}></input>
-          </div>
-
-          <div className={DonationFormCSS.frame}>
-            <label htmlFor="lokacija">Lokacija preuzimanja</label>
-            <input
-              value={handoverLocation}
-              onChange={(e) => setHandoverLocation(e.target.value)}
-              type="text"
-              name="handoverLocation"
-              id="handoverLocation"
-              placeholder="Lokacija preuzimanja"
-              className="inputFrame"
-              required={true}></input>
-          </div>
-
-          <div className={DonationFormCSS.frame}>
-            <label htmlFor="stanje">Stanje predmeta</label>
-            <input
-              value={itemState}
-              onChange={(e) => setState(e.target.value)}
-              type="text"
-              name="itemState"
-              id="itemState"
-              placeholder="Stanje predmeta"
-              className="inputFrame"
-              required={true}></input>
-          </div>
-
-          <div className={DonationFormCSS.frame}>
-            <label htmlFor="marka">Marka predmeta</label>
-            <input
-              value={productionBrand}
-              onChange={(e) => setProductionBrand(e.target.value)}
-              type="text"
-              name="productionBrand"
-              id="productionBrand"
-              placeholder="Marka predmeta"
-              className="inputFrame"
-              required={true}></input>
-          </div>
-
-          <div className={DonationFormCSS.frame}>
+          <div className={DonationFormCSS.donjiDio}>
+            <div className="frame">
               <FormControl fullWidth>
                 <FormLabel id="spol">Predviđeni spol</FormLabel>
                 <RadioGroup
@@ -297,125 +300,153 @@ const DonationForm = () => {
               </FormControl>
             </div>
 
-
-
-          <div className={DonationFormCSS.odabiri}>
-
-          <div className={DonationFormCSS.r}>
-
-          <div className="frame" style={{ width: "200px" }}>
-              <FormControl fullWidth>
-                <InputLabel>Predviđena dob</InputLabel>
-                <Select
-                  labelId="dob-select-label"
-                  id="dob-select"
-                  value={forAge}
-                  label="dob"
-                  required
-                  MenuProps={{
-                    PaperProps: { sx: { maxHeight: 175 } },
-                  }}
-                  onChange={(e) => setforAge(e.target.value)}>
-                  {ageRange.map((ageSelect) => {
-                    return (
-                      <MenuItem key={ageSelect} value={ageSelect}>
-                        {ageSelect}
-                      </MenuItem>
-                    );
-                  })}
-                </Select>
-              </FormControl>
-            </div>
-
-            <div className="frame" style={{ width: "200px" }}>
-              <FormControl fullWidth>
-                <InputLabel>Godina proizvodnje</InputLabel>
-                <Select
-                  labelId="year-select-label"
-                  id="year-select"
-                  value={productionYear}
-                  label="productionYear"
-                  required
-                  MenuProps={{
-                    PaperProps: { sx: { maxHeight: 175 } },
-                  }}
-                  onChange={(e) => setProductionYear(e.target.value)}>
-                  {yearRange.map((yearSelect) => {
-                    return (
-                      <MenuItem key={yearSelect} value={yearSelect}>
-                        {yearSelect}
-                      </MenuItem>
-                    );
-                  })}
-                </Select>
-              </FormControl>
-              </div>
-              
-
-              </div>
-          
+            <div className={DonationFormCSS.odabiri}>
               <div className={DonationFormCSS.r}>
-            <div className="frame">
-              <div style={{ width: 225 }}>
-                <Dropdown
-                  menuClassName={DonationFormCSS.dropdown}
-                  className={DonationFormCSS.box}
-                  options={aryCat}
-                  value={chosenCategory.categoryName}
-                  onChange={(e) => {
-                    let obj = { categoryName: e.value };
-                    setChosenCategory(obj);
-                    setCategoryName(e.value);
-                    let values = mapCat.get(e.value);
-                    setArySub([].concat(values));
-                    checkSubInCat(e.value);
-                  }}
-                  placeholder="Kategorije"
-                  required={true}
-                />
+                <div className={DonationFormCSS.pravokutnici}>
+                  <FormControl fullWidth>
+                    <InputLabel>Predviđena dob</InputLabel>
+                    <Select
+                      labelId="dob-select-label"
+                      id="dob-select"
+                      value={forAge}
+                      label="dob"
+                      required
+                      MenuProps={{
+                        PaperProps: { sx: { maxHeight: 175 } },
+                      }}
+                      onChange={(e) => setforAge(e.target.value)}>
+                      {ageRange.map((ageSelect) => {
+                        return (
+                          <MenuItem key={ageSelect} value={ageSelect}>
+                            {ageSelect}
+                          </MenuItem>
+                        );
+                      })}
+                    </Select>
+                  </FormControl>
+                </div>
+
+                <div className={DonationFormCSS.pravokutnici} >
+                  <FormControl fullWidth>
+                    <InputLabel>Godina proizvodnje</InputLabel>
+                    <Select
+                      labelId="year-select-label"
+                      id="year-select"
+                      value={productionYear}
+                      label="productionYear"
+                      required
+                      MenuProps={{
+                        PaperProps: { sx: { maxHeight: 175 } },
+                      }}
+                      onChange={(e) => setProductionYear(e.target.value)}>
+                      {yearRange.map((yearSelect) => {
+                        return (
+                          <MenuItem key={yearSelect} value={yearSelect}>
+                            {yearSelect}
+                          </MenuItem>
+                        );
+                      })}
+                    </Select>
+                  </FormControl>
+                </div>
               </div>
-            </div>
 
-            <div className="frame">
-              <div style={{ width: 225, height: 27 }}>
-                <Dropdown
-                  menuClassName={DonationFormCSS.dropdown}
-                  options={arraySub}
-                  value={chosenSubcategory.subcategoryName}
-                  onChange={(e) => {
-                    for (let i = 0; i < privremeniAry.length; ++i) {
-                      if (e.value == privremeniAry[i].subcategoryName) {
-                        let obj = privremeniAry[i];
-                        setChosenSubCategory(obj);
-                        setSubcategoryName(obj);
-                      }
-                    }
-                  }}
-                  placeholder="Potkategorije"
-                  required={true}
-                />
+              <div className={DonationFormCSS.r}>
+                <div className={DonationFormCSS.pravokutnici}>
+                  <div style={{ width: 200 }} >
+                    <Dropdown
+                      menuClassName={DonationFormCSS.dropdown}
+                      className={DonationFormCSS.box}
+                      options={aryCat}
+                      value={chosenCategory.categoryName}
+                      onChange={(e) => {
+                        let obj = { categoryName: e.value };
+                        setChosenCategory(obj);
+                        setCategoryName(e.value);
+                        let values = mapCat.get(e.value);
+                        setArySub([].concat(values));
+                        checkSubInCat(e.value);
+                      }}
+                      placeholder="Kategorije"
+                      required={true}
+                    />
+                  </div>
+                </div>
+
+                <div className={DonationFormCSS.pravokutnici}>
+                  <div id={DonationFormCSS.godine}>
+                    <Dropdown
+                      menuClassName={DonationFormCSS.dropdown}
+                      options={arraySub}
+                      value={chosenSubcategory.subcategoryName}
+                      onChange={(e) => {
+                        for (let i = 0; i < privremeniAry.length; ++i) {
+                          if (e.value == privremeniAry[i].subcategoryName) {
+                            let obj = privremeniAry[i];
+                            setChosenSubCategory(obj);
+                            setSubcategoryName(obj);
+                          }
+                        }
+                      }}
+                      placeholder="Potkategorije"
+                      required={true}
+                    />
+                  </div>
+                </div>
               </div>
-            </div>
-
-
+              <div className="donacija">
+                <button className="gumbic tamniji" type="submit">
+                  Spremi donaciju
+                </button>
+              </div>
             </div>
           </div>
         </div>
 
-        <div className="dDio">
-          <div>
-            <input type="file" accept="image/*" onChange={handleChange} />
-            <p style={{ display: ((percent == "100")||(percent == "0")) ? "none" : "" }}>
-              {percent} "% gotovo"
-            </p>
-            <button onClick={handleUpload} type="button">
-              Upload slike
-            </button>
-          </div>
-          {percent == "100" ? <img src={pictureURL} /> : ""}
-          {/* <img src={pictureURL} /> */}
+        <div className={DonationFormCSS.dDio}>
+          <div className={DonationFormCSS.donacijaGumbi}>
+            <div className={DonationFormCSS.odabir1}>
+              <div className="gumbic slike donacijaSlika" style={{ height: 30}}>
+              <label for="files">
+              Odaberi sliku
+            </label>
+              </div>
+            <span>{file.name}</span>
+            <input
+              id="files"
+              type="file"
+              accept="image/*"
+              style={{ display: "none", width:100 }}
+              onChange={handleChange}
+              />
+              </div>
+             
+              <div className={DonationFormCSS.odabir2}>
+              <button
+                onClick={handleUpload}
+                type="button"
+                className="gumbic tamniji slike donacijaSlika"
+                style={{ height: 30 }}>
+                Upload slike
+              </button>
+              <span
+                style={{
+                  display: percent == "100" || percent == "0" ? "none" : "",
+                }}>
+                {percent} "% gotovo"
+              </span>
+              </div>
+              
 
-          <button type="submit">Spremi donaciju</button>
+          </div>
+          <div id={DonationFormCSS["picture-frame"]}>
+            {percent == "100" ? (
+              <img src={pictureURL} id={DonationFormCSS["picture"]} />
+            ) : (
+              ""
+            )}
+            {/* <img src={pictureURL} /> */}
+          </div>
         </div>
       </form>
     </React.Fragment>

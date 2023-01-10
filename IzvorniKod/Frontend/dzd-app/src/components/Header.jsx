@@ -53,14 +53,7 @@ function Header() {
             </Nav>
           </Container>
           <div
-            style={{
-              marginTop: "0%",
-              borderTop: "2px solid  ",
-              marginLeft: 55,
-              marginRight: 55,
-              marginTop: 20,
-              height: 0,
-            }}></div>
+            className={HeaderCSS.linija}></div>
         </Navbar>
       </React.Fragment>
     );
@@ -73,7 +66,7 @@ function Header() {
               <NavLink
                 style={({ isActive }) =>
                   isActive
-                    ? { textDecoration: "underline" }
+                    ? { textDecoration: "underline"}
                     : { textDecoration: "none" }
                 }
                 to="/base">
@@ -108,15 +101,7 @@ function Header() {
               </NavLink>
             </Nav>
           </Container>
-          <div
-            style={{
-              marginTop: "0%",
-              borderTop: "2px solid  ",
-              marginLeft: 55,
-              marginRight: 55,
-              marginTop: 20,
-              height: 0,
-            }}></div>
+          <div className={HeaderCSS.linija}></div>
         </Navbar>
       </React.Fragment>
     );
@@ -147,14 +132,7 @@ function Header() {
           </Nav>
         </Container>
         <div
-          style={{
-            marginTop: "0%",
-            borderTop: "2px solid  ",
-            marginLeft: 55,
-            marginRight: 55,
-            marginTop: 20,
-            height: 0,
-          }}></div>
+          className={HeaderCSS.linija}></div>
       </Navbar>
     </React.Fragment>
     );

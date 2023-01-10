@@ -1,36 +1,188 @@
-.frame {
-    display: flex;
-    flex-direction: column;
-}
-
-label {
-    color: #121212;
-}
-
-.dForm {
+@media only screen and (min-width: 449px) {
+  .dForm {
     display: grid;
     grid-template-columns: auto auto;
-}
-.dropdown {
+  }
+  .dropdown {
     height: 115px;
     overflow-y: auto;
     top: 0%;
-}
+  }
 
-.box {
+  .box {
     margin-top: 10px;
-}
+  }
 
-.r {
+  .r {
     display: flex;
-}
+  }
 
-.r > div, Dropdown {
+  .r > div,
+  Dropdown {
     padding-right: 10px;
-}
-.odabiri {
+  }
+  .odabiri {
     display: grid;
-    grid-template-rows: auto auto ;
+    grid-template-rows: auto auto;
     justify-content: space-around;
     align-content: space-around;
+  }
+  .lDio {
+    display: grid;
+    grid-template-columns: auto auto;
+    padding-bottom: 120px;
+  }
+
+  .dDio {
+    margin-left: 70px;
+    padding-bottom: 100px;
+  }
+
+  .donacijaGumbi {
+    display: flex;
+    flex-wrap: nowrap;
+    align-content: stretch;
+    height: 35px;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+  }
+
+  #picture-frame {
+    width: 750px;
+    height: 570px;
+    border: 1px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #picture {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  .donacijaNaslov {
+    font-size: 35px;
+    font-weight: 700;
+    padding-top: 1%;
+    font-size: 30px;
+    margin-top: 50px;
+    margin-left: 120px;
+  }
+  .pravokutnici {
+    width: 200px;
+    align-items: center;
+  
+  }
+  #godine {
+    margin-top: 10px;
+  }
+  .odabir1 {
+    display: flex;
+    flex-direction: row;
+  }
+}
+
+/*mobitel*/
+@media only screen and (max-width: 449px) {
+  .dForm {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column-reverse;
+  }
+  .dropdown {
+    height: 115px;
+    overflow-y: auto;
+    top: 0%;
+  }
+
+  .box {
+    margin-top: 10px;
+  }
+
+  .r {
+    display: flex;
+  }
+
+  .r > div,
+  Dropdown {
+    padding-right: 10px;
+  }
+  .odabiri {
+    display: grid;
+    grid-template-rows: auto auto;
+    justify-content: space-around;
+    align-content: space-around;
+  }
+  .lDio {
+    display: grid;
+    grid-template-columns: auto;
+  }
+
+  .dDio {
+    padding-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 90px;
+  }
+
+  .donacijaGumbi {
+    display: flex;
+    flex-wrap: nowrap;
+    align-content: stretch;
+    height: 35px;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+  }
+
+  .donjiDio {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #picture-frame {
+    width: 20rem;
+    height: 30rem;
+    border: 1px solid black;
+    display: flex;
+    align-items: center;
+    margin-left: 50px;
+    justify-content: center;
+  }
+
+  #picture {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .pravokutnici {
+    width: 180px;
+    margin-left: 10px;
+  }
+  #godine {
+    margin-top: 10px;
+  }
+  .odabir1 {
+    display: flex;
+    flex-direction: column;
+  }
+  .odabir2 {
+    display: flex;
+  }
+  .odabir1 > span {
+    margin-left: 10px;
+    margin-bottom: 10px;
+  }
+
+  .donacijaNaslov {
+    font-size: 35px;
+    font-weight: 700;
+    margin-left: 7%;
+    margin-bottom: 8%;
+    margin-top: 5%;
+  }
 }
