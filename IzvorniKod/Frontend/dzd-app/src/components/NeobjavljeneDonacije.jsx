@@ -13,6 +13,10 @@ function NeobjavljeneDonacije() {
       url: "/api/donation/notvalid",
       headers: {
         "Content-Type": "application/json; charset=utf-8",
+      },
+      auth: {
+        username: "admin",
+        password: "pass"
       }
     })
       .then((response) => {
