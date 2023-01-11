@@ -29,6 +29,7 @@ const Kategorije = () =>{
                         <NovaPotkategorijaForm updatePage={updatePage} setUpdatePage={setUpdatePage}/>
                     </div>
                 </div>
+                <Footer name={"footerProfil"}></Footer>
                 <ToastContainer
                     position="top-center"
                     autoClose={5000}
@@ -41,7 +42,6 @@ const Kategorije = () =>{
                     pauseOnHover
                     theme="light"
                 />
-                <Footer name={"footerProfil"}></Footer>
             </div>
         </StyledEngineProvider>
     )

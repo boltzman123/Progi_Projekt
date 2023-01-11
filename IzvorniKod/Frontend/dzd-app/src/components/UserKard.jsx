@@ -37,6 +37,7 @@ const UserKard = (props) => {
     })
       .then((response) => {
         console.log(response.data);
+        toast.success("Uspješno ste dali dozvolu korisniku")
       })
       .catch((err) => {
         toast.error("Došlo je do greške");
@@ -62,6 +63,7 @@ const UserKard = (props) => {
     })
       .then((response) => {
         console.log(response.data);
+        toast.success("Uspješno ste oduzeli dozvolu korisniku")
       })
       .catch((err) => {
         toast.error("Došlo je do greške");
