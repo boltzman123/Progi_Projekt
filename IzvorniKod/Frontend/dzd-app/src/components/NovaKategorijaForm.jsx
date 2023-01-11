@@ -31,8 +31,9 @@ const NovaKategorijaForm = ({updatePage, setUpdatePage}) => {
             }
         }).then((response) => {
             console.log("Dodana kategorija");
+            toast.success("Uspješno ste nadodali novu kategoriju")
             clearForm();
-            setUpdatePage(Math.random());
+            setUpdatePage(Math.random()*5);
             navigate('/kategorije');
           })
           .catch(err => {

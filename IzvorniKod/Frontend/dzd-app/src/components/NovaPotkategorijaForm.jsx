@@ -67,6 +67,7 @@ const NovaPotkategorijaForm = ({updatePage, setUpdatePage}) => {
         }).then((response) => {
             console.log("Dodana potkategorija");
             clearForm();
+            toast.success("Uspješno ste nadodali novu podkategoriju")
             setUpdatePage(Math.random());
             navigate('/kategorije');
           })
@@ -151,7 +152,7 @@ const NovaPotkategorijaForm = ({updatePage, setUpdatePage}) => {
                     </Box>
 
                     <Box className={nkpCSS.FormControl}>
-                        <Typography>Odaberi trajanje</Typography>
+                        <Typography>Upiši trajanje (u godinama)</Typography>
                         <TextField
                             name="itemDuration" 
                             value={useDateExpires}
