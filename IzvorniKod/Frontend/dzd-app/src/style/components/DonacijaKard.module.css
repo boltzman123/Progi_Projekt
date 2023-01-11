@@ -13,16 +13,6 @@
     align-items: center;
 }
 
-.img{
-    height: 400px;
-}
-
-
-.predmeti {
-    display: block;
-    margin-bottom: 9px;
-}
-
 .FormControl{
     padding-bottom: 10px;
     margin-top: 0px;
@@ -34,9 +24,7 @@
     .modal {
         display: flex;
         flex-direction: column;
-    }
-
-    .imgV{
         width: auto;
     }
+
 }

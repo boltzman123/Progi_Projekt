@@ -277,7 +277,7 @@ const DonacijaKard = (props) => {
             />
           <form
             onSubmit={onSubmit}>
-            <Container maxWidth="xs">
+            <Container maxWidth="s">
                 <Box className={DonacijaKardCSS.FormControl}>
                   <TextField
                     onChange={(e) => setDonationName(e.target.value)}
