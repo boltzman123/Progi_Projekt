@@ -267,11 +267,12 @@ const DonacijaKard = (props) => {
       {/* MODAL */}
 
       <Modal open={open} onClose={handleClose}>
-        <Box className={DonacijaKardCSS.modal}
-          sx={{ ...style, maxHeight: 800, overflow: "auto" }}>
+        <Box className={DonacijaKardCSS.modal} sx={{ ...style, maxHeight: 800, overflow: "auto" }}>
+
             <CardMedia
-              className={DonacijaKardCSS.img}
+              className={DonacijaKardCSS.slikica}
               component="img"
+              style={{ height: "auto" }}
               image={pictureURL}
               alt="slika predmeta koji se donira"
             />
