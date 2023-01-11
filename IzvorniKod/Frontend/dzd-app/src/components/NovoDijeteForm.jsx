@@ -85,7 +85,7 @@ const NovoDijeteForm = ({updatePage, setUpdatePage}) => {
         }).then((response) => {
             clearForm();
             setUpdatePage(Math.random());
-            navigate('/djeca');
+            toast.success("Uspješno kreirano dijete")
           })
           .catch(err => {
             console.log(err)

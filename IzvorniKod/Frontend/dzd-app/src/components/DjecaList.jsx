@@ -51,6 +51,7 @@ const DjecaList = ({updatePage, setUpdatePage}) => {
             data: dijete
         }).then((response) =>{
             getAllChildren();
+            toast.success("Dijete je uspješno obrisano");
         }).catch(err => {
             console.log(err)
             toast.error("Neispravno uneseni podaci");

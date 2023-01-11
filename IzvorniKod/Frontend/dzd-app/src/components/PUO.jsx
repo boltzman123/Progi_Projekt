@@ -79,6 +79,7 @@ const User = () => {
         }).then((response) => {
             localStorage.setItem("user", JSON.stringify(response.data))
             console.log(response.data);
+            toast.success("Podaci su uspješno ažurirani")
           })
           .catch(err => {
             console.log(err)
@@ -89,7 +90,7 @@ const User = () => {
     return ( 
         <React.Fragment>
             <form>
-              <h2 style={{paddingLeft:"-20px"}}>Pregledaj i/ili uredi svoje podatke</h2>
+              <h2>Pregledaj i/ili uredi svoje podatke</h2>
                 <div className={PUOCSS.frame}>
                   <label for="ime" className={PUOCSS.formLabel}>Ime
                       <input 

@@ -47,7 +47,7 @@ form {
     height: 2em;
 }
 
-h2{
+.h2{
     margin-left: -20px;
 }
 
@@ -62,7 +62,6 @@ h2{
     }
     .buttonFrame {
         flex-wrap: wrap; 
-        margin-right: 20px;
         justify-content: center;
     }
     .button{
