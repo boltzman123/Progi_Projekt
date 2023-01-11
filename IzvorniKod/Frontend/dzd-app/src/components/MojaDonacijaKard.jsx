@@ -26,7 +26,6 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 1000,
   bgcolor: "background.paper",
   border: "2px solid #000",
   boxShadow: 24,
@@ -294,7 +293,6 @@ const MojeDonacijaKard = (props) => {
   return (
     <React.Fragment>
       <Card className={DonacijaKardCSS.malaKartica} variant="outlined">
-        {/* OVDJE UPISI LINK KOJI VODI NA FULL PREGLED TOG PREDMETA */}
         <CardActionArea onClick={handleOpen}>
           <CardMedia
             className={DonacijaKardCSS.img}
@@ -320,56 +318,70 @@ const MojeDonacijaKard = (props) => {
         </CardActionArea>
       </Card>
 
+      {/* MODAL */}
+
       <Modal open={open} onClose={handleClose}>
         <Box
           className={DonacijaKardCSS.modal}
-          sx={{ ...style, width: 1200, maxHeight: 1000, overflow: "auto" }}>
+          sx={{ ...style, maxHeight: 800, overflow: "auto" }}>
           <CardMedia
-            className={DonacijaKardCSS.img}
-            style={{ width: 800, height: 800 }}
+            className={DonacijaKardCSS.slikica}
             component="img"
+            style={{ height: "auto" }}
             image={pictureURL}
             alt="slika predmeta koji se donira"
           />
           <form
-            className={DonacijaKardCSS.predmeti}
-            style={{ marginTop: 10 }}
             onSubmit={onSubmit}>
             <Container maxWidth="s">
-              <Box>
-                <TextField
-                  onChange={(e) => setDonationName(e.target.value)}
-                  label="Ime donacije"
-                  id="ImeDonacije"
-                  value={donationName}
-                  disabled={smijeMijenjati}></TextField>
+                <Box className={DonacijaKardCSS.FormControl}>
+                  <TextField
+                    onChange={(e) => setDonationName(e.target.value)}
+                    label="Ime donacije"
+                    id="ImeDonacije"
+                    value={donationName}
+                    disabled={smijeMijenjati}>
+                  </TextField>
+                </Box>
 
-                <TextField
-                  onChange={(e) => setProductName(e.target.value)}
-                  label="Ime predmeta"
-                  id="ImePredmeta"
-                  value={productName}
-                  disabled={smijeMijenjati}></TextField>
+                <Box className={DonacijaKardCSS.FormControl}>
+                  <TextField
+                    onChange={(e) => setProductName(e.target.value)}
+                    label="Ime predmeta"
+                    id="ImePredmeta"
+                    value={productName}
+                    disabled={smijeMijenjati}>
+                  </TextField>
+                </Box>
 
-                <TextField
-                  onChange={(e) => setDateOfPublication(e.target.value)}
-                  label="Datum objave"
-                  id="datumObjave"
-                  value={datum}
-                  disabled={true}></TextField>
+                <Box className={DonacijaKardCSS.FormControl}>
+                  <TextField
+                    onChange={(e) => setDateOfPublication(e.target.value)}
+                    label="Datum objave"
+                    id="datumObjave"
+                    value={datum}
+                    disabled={true}>
+                  </TextField>
+                </Box>
 
-                <TextField
-                  onChange={(e) => setHandoverLocation(e.target.value)}
-                  label="Lokacija preuzimanja"
-                  id="datumObjave"
-                  value={handoverLocation}
-                  disabled={smijeMijenjati}></TextField>
-
-                <TextField
-                  label="Lokacija donatora"
-                  id="datumObjave"
-                  value={userLocation}
-                  disabled={true}></TextField>
+                <Box className={DonacijaKardCSS.FormControl}>
+                  <TextField
+                    onChange={(e) => setHandoverLocation(e.target.value)}
+                    label="Lokacija preuzimanja"
+                    id="datumObjave"
+                    value={handoverLocation}
+                    disabled={smijeMijenjati}>
+                  </TextField>
+                </Box>
+                
+                <Box className={DonacijaKardCSS.FormControl}>
+                  <TextField
+                    label="Lokacija donatora"
+                    id="datumObjave"
+                    value={userLocation}
+                    disabled={true}>
+                  </TextField>
+                </Box>
 
                 <TextField
                   label="Email donatora"
@@ -497,7 +509,6 @@ const MojeDonacijaKard = (props) => {
                   Predaj oglas
                 </Button>
 
-              </Box>
               <hr/>
               <CardActions sx={{display:smijeMijenjati==true?"none":""}}>
                 <Button

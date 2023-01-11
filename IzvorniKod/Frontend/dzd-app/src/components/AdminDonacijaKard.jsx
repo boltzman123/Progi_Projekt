@@ -21,7 +21,6 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 1000,
   bgcolor: "background.paper",
   border: "2px solid #000",
   boxShadow: 24,
@@ -200,7 +199,6 @@ const MojeDonacijaKard = (props) => {
   return (
     <React.Fragment>
       <Card className={DonacijaKardCSS.malaKartica} variant="outlined">
-        {/* OVDJE UPISI LINK KOJI VODI NA FULL PREGLED TOG PREDMETA */}
         <CardActionArea onClick={handleOpen}>
           <CardMedia
             className={DonacijaKardCSS.img}
@@ -226,13 +224,13 @@ const MojeDonacijaKard = (props) => {
       </Card>
 
       {/* MODAL */}
+
       <Modal open={open} onClose={handleClose}>
         <Box
           className={DonacijaKardCSS.modal}
-          sx={{ ...style, width: 1200, maxHeight: 1000, overflow: "auto" }}>
+          sx={{ ...style, maxHeight: 800, overflow: "auto" }}>
           <CardMedia
             className={DonacijaKardCSS.img}
-            style={{ width: 800, height: 800 }}
             component="img"
             image={pictureURL}
             alt="slika predmeta koji se donira"
@@ -243,117 +241,149 @@ const MojeDonacijaKard = (props) => {
             onSubmit={onSubmit}>
             <Container maxWidth="s">
               <Box>
-                <TextField
-                  onChange={(e) => setDonationName(e.target.value)}
-                  label="Ime donacije"
-                  id="ImeDonacije"
-                  value={donationName}
-                  disabled={checkedUser}></TextField>
+                <Box className={DonacijaKardCSS.FormControl}>
+                  <TextField
+                    onChange={(e) => setDonationName(e.target.value)}
+                    label="Ime donacije"
+                    id="ImeDonacije"
+                    value={donationName}
+                    disabled={checkedUser}>
+                  </TextField>
+                </Box>
 
-                <TextField
-                  onChange={(e) => setProductName(e.target.value)}
-                  label="Ime predmeta"
-                  id="ImePredmeta"
-                  value={productName}
-                  disabled={checkedUser}></TextField>
+                <Box className={DonacijaKardCSS.FormControl}>
+                  <TextField
+                    onChange={(e) => setProductName(e.target.value)}
+                    label="Ime predmeta"
+                    id="ImePredmeta"
+                    value={productName}
+                    disabled={checkedUser}>
+                  </TextField>
+                </Box>
 
-                <TextField
-                  onChange={(e) => setDateOfPublication(e.target.value)}
-                  label="Datum objave"
-                  id="datumObjave"
-                  value={datum}
-                  disabled={checkedUser}></TextField>
+                <Box className={DonacijaKardCSS.FormControl}>
+                  <TextField
+                    onChange={(e) => setDateOfPublication(e.target.value)}
+                    label="Datum objave"
+                    id="datumObjave"
+                    value={datum}
+                    disabled={checkedUser}>
+                  </TextField>
+                </Box>
 
-                <TextField
-                  onChange={(e) => setHandoverLocation(e.target.value)}
-                  label="Lokacija preuzimanja"
-                  id="datumObjave"
-                  value={handoverLocation}
-                  disabled={checkedUser}></TextField>
+                <Box className={DonacijaKardCSS.FormControl}>
+                  <TextField
+                    onChange={(e) => setHandoverLocation(e.target.value)}
+                    label="Lokacija preuzimanja"
+                    id="handoverLocation"
+                    value={handoverLocation}
+                    disabled={checkedUser}>
+                  </TextField>
+                </Box>
 
-                <TextField
-                  label="Lokacija donatora"
-                  id="datumObjave"
-                  value={userLocation}
-                  disabled={true}></TextField>
+                <Box className={DonacijaKardCSS.FormControl}>
+                  <TextField
+                    onChange={(e) => setHandoverLocation(e.target.value)}
+                    label="Lokacija donatora"
+                    id="lokacijaDonatora"
+                    value={userLocation}
+                    disabled={checkedUser}>
+                  </TextField>
+                </Box>
 
-                <TextField
-                  label="Email donatora"
-                  id="datumObjave"
-                  value={email}
-                  disabled={true}></TextField>
+                <Box className={DonacijaKardCSS.FormControl}>
+                  <TextField
+                    label="Email donatora"
+                    id="emailDonatora"
+                    value={props.donacija.user.email}
+                    disabled={true}>
+                  </TextField>
+                </Box>
 
-                <FormControl fullWidth>
-                  <InputLabel>Predviđena dob:</InputLabel>
-                  <Select
-                    style={{ width: 225 }}
-                    disabled={checkedUser}
-                    labelId="dob-select-label"
-                    id="dob-select"
-                    value={dob}
-                    label="Dob"
-                    required
-                    MenuProps={{
-                      PaperProps: { sx: { maxHeight: 175 } },
-                    }}
-                    onChange={(e) => setDob(e.target.value)}>
-                    {ageRange.map((ageSelect) => {
-                      return (
-                        <MenuItem key={ageSelect} value={ageSelect}>
-                          {ageSelect}
-                        </MenuItem>
-                      );
-                    })}
-                  </Select>
-                </FormControl>
-                <FormControl fullWidth>
-                  <FormLabel id="spol">Spol</FormLabel>
-                  <RadioGroup
-                    name="spol-radio-buttons-group"
-                    value={spol}
-                    required
-                    onChange={(e) => setSpol(e.target.value)}>
-                    <div>
-                      <FormControlLabel
-                        value="F"
-                        disabled={checkedUser}
-                        control={<Radio />}
-                        label="Žensko"
-                      />
-                      <FormControlLabel
-                        value="M"
-                        disabled={checkedUser}
-                        control={<Radio />}
-                        label="Muško"
-                      />
-                    </div>
-                  </RadioGroup>
-                </FormControl>
+                <Box className={DonacijaKardCSS.FormControl}>
+                  <FormControl fullWidth>
+                    <InputLabel>Predviđena dob:</InputLabel>
+                    <Select
+                      style={{ width: 225 }}
+                      disabled={checkedUser}
+                      labelId="dob-select-label"
+                      id="dob-select"
+                      value={dob}
+                      label="Dob"
+                      required
+                      MenuProps={{
+                        PaperProps: { sx: { maxHeight: 175 } },
+                      }}
+                      onChange={(e) => setDob(e.target.value)}>
+                      {ageRange.map((ageSelect) => {
+                        return (
+                          <MenuItem key={ageSelect} value={ageSelect}>
+                            {ageSelect}
+                          </MenuItem>
+                        );
+                      })}
+                    </Select>
+                  </FormControl>
+                </Box>
 
-                <TextField
-                  onChange={(e) => setItemState(e.target.value)}
-                  label="Stanje predmeta"
-                  id="stanjePredmeta"
-                  value={itemState}
-                  disabled={checkedUser}></TextField>
+                 <Box className={DonacijaKardCSS.FormControl}>
+                  <FormControl fullWidth>
+                    <FormLabel id="spol">Namijenjeni spol</FormLabel>
+                    <RadioGroup
+                      name="spol-radio-buttons-group"
+                      value={spol}
+                      required
+                      onChange={(e) => setSpol(e.target.value)}>
+                      <div>
+                        <FormControlLabel
+                          value="F"
+                          disabled={checkedUser}
+                          control={<Radio />}
+                          label="Žensko"
+                        />
+                        <FormControlLabel
+                          value="M"
+                          disabled={checkedUser}
+                          control={<Radio />}
+                          label="Muško"
+                        />
+                      </div>
+                    </RadioGroup>
+                  </FormControl>
+                </Box>
 
-                <TextField
-                  onChange={(e) => setProductBrand(e.target.value)}
-                  label="Naziv marke predmeta"
-                  id="markaPredmeta"
-                  value={productBrand}
-                  disabled={checkedUser}></TextField>
+                <Box className={DonacijaKardCSS.FormControl}>
+                  <TextField
+                    onChange={(e) => setItemState(e.target.value)}
+                    label="Stanje predmeta"
+                    id="stanjePredmeta"
+                    value={itemState}
+                    disabled={checkedUser}>
+                  </TextField>
+                </Box>
 
-                <TextField
-                  type="number"
-                  onChange={(e) => setProductionYear(e.target.value)}
-                  label="Godina proizvodnje"
-                  id="godinaProizvodnje"
-                  value={productionYear}
-                  disabled={checkedUser}></TextField>
+                <Box className={DonacijaKardCSS.FormControl}>
+                  <TextField
+                    onChange={(e) => setProductBrand(e.target.value)}
+                    label="Naziv marke predmeta"
+                    id="markaPredmeta"
+                    value={productBrand}
+                    disabled={checkedUser}>
+                  </TextField>
+                </Box>
 
+                <Box className={DonacijaKardCSS.FormControl}>
+                  <TextField
+                    type="number"
+                    onChange={(e) => setProductionYear(e.target.value)}
+                    label="Godina proizvodnje"
+                    id="godinaProizvodnje"
+                    value={productionYear}
+                    disabled={checkedUser}>
+                  </TextField>
+                </Box>
 
-                <Box>
+                <Box className={DonacijaKardCSS.FormControl}>
                   <Typography>Opis oglasa</Typography>
                   <TextField
                     name="descriptionField"
@@ -361,23 +391,18 @@ const MojeDonacijaKard = (props) => {
                     value={opis}
                     onChange={(e) => setOpis(e.target.value)}
                     disabled={checkedUser}
-                    multiline                  >
+                    multiline>
                   </TextField>
                 </Box>
 
+                <Box className={DonacijaKardCSS.FormControl}>
+                  <DropdownCategory
+                    value={checkedUser}
+                    category={checkedCat}
+                    subcategory={checkedSub}>
+                  </DropdownCategory>
+                </Box>
 
-
-
-
-
-
-
-
-
-                <DropdownCategory
-                  value={checkedUser}
-                  category={checkedCat}
-                  subcategory={checkedSub}></DropdownCategory>
                 <div>
                   <input
                     style={email != emailL ? { display: `none` } : {}}
@@ -386,9 +411,11 @@ const MojeDonacijaKard = (props) => {
                   />
                 </div>
               </Box>
+
               <br/>
               <hr/>
               <br/>
+
               <TextField
                 id="outlined-multiline-flexible"
                 label="Ostavite komentar"
