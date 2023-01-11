@@ -415,7 +415,7 @@ const MojeDonacijaKard = (props) => {
                 </div>
 
               <br/>
-              <hr style={{marginLeft:"150px"}}/>
+              <hr/>
               <br/>
 
               <Box className={DonacijaKardCSS.FormControl}>

@@ -34,6 +34,9 @@
     align-items: center;
     justify-content: center;
 }
+hr{
+    margin-left: 150px;
+}
 
 @media only screen and (max-width: 900px) {
 

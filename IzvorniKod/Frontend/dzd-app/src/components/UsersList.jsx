@@ -33,9 +33,8 @@ function UsersList() {
     return (
       <div className={UserListCSS.userList}>
         {users.map((user) => {
-          console.log(user.email);
           if (user.email !== "admin") {
-            return <UserKard key={user.email} user={user}></UserKard>;
+            return <div className={UserListCSS.user} key={"Element" +user.email}><UserKard key={user.email} user={user}></UserKard></div>
           }
         })}
       </div>

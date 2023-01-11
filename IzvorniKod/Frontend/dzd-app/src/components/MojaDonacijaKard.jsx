@@ -538,7 +538,7 @@ const MojeDonacijaKard = (props) => {
                   </Button>
                 </Box>
 
-              <hr style={{marginLeft:"150px"}}/>
+              <hr/>
               <Box className={DonacijaKardCSS.FormControl}>
               <CardActions sx={{display:smijeMijenjati==true?"none":""}}>
                 <Button
