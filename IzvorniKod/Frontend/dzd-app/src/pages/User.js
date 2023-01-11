@@ -10,7 +10,7 @@ const User = () => {
         <React.Fragment>
           <Header />
           <PUO />
-          <Footer />
+          <Footer name={"footerProfil"}/>
         </React.Fragment>
     );
 }

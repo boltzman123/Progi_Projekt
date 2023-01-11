@@ -8,6 +8,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import DijeteEditModal from './DijeteEditModal';
 
+
 const DjecaList = ({updatePage, setUpdatePage}) => {
     const [user, setUser] = useState();
     const [djeca, setDjeca] = useState([]);
@@ -49,11 +50,9 @@ const DjecaList = ({updatePage, setUpdatePage}) => {
             },
             data: dijete
         }).then((response) =>{
-            console.log('Ubili smo ' + dijete.childName);
             getAllChildren();
         }).catch(err => {
-            console.log(dijete)
-            console.log('Delete child nevalja');
+            console.log(err)
             toast.error("Neispravno uneseni podaci");
         });
     }
@@ -66,12 +65,12 @@ const DjecaList = ({updatePage, setUpdatePage}) => {
                     {djeca.map((dijete) => {
                         return(
                             <ListItem 
-                                key={dijete.childId}
-                                >
-                                <ListItemText primary={`${dijete.childName}`}/>
-                                <DijeteEditModal dijete={dijete} updatePage={updatePage} setUpdatePage={setUpdatePage}>
+                                key={"dijete " + dijete.childId}
+                            >
+                                <ListItemText  key={"dijete tekst " + dijete.childId} primary={`${dijete.childName}`}/>
+                                <DijeteEditModal key={"modal dijete " + dijete.childId} dijete={dijete} updatePage={updatePage} setUpdatePage={setUpdatePage}>
                                 </DijeteEditModal>
-                                <IconButton onClick={deleteChild(dijete)}>
+                                <IconButton key={"dijete button delete " + dijete.childId}onClick={deleteChild(dijete)}>
                                         <RemoveCircleIcon/>
                                 </IconButton>
                             </ListItem>

@@ -3,16 +3,37 @@ import axios from "axios";
 import { useFetcher, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Dropdown from "react-dropdown";
-import storage from "../firebaseConfig.js"
-import { ref, uploadBytesResumable, getDownloadURL  } from "firebase/storage"
-import {v4} from 'uuid'
+import storage from "../firebaseConfig.js";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { v4 } from "uuid";
+import DonationFormCSS from "../style/components/DonationForm.module.css";
+import HomeCSS from "../style/pages/Home.module.css";
+import "../style/components/Buttons.css";
 
-var arraySub = [];
+import {
+  TextField,
+  Select,
+  Button,
+  FormControl,
+  FormLabel,
+  Typography,
+} from "@mui/material";
+import {
+  RadioGroup,
+  FormControlLabel,
+  Radio,
+  Grid,
+  InputLabel,
+  MenuItem,
+  Box,
+  Container,
+} from "@mui/material";
+
 var mapCat = new Map();
 var aryCat = [];
 var privremeniAry = [];
 
-function setOptions() {
+function setOptions(chosenCategory, arraySub, setArySub) {
   axios({
     method: "get",
     url: "/api/subcategory",
@@ -20,9 +41,10 @@ function setOptions() {
     var pod = Object.values(response.data);
     privremeniAry = response.data;
     // console.log(response.data[0]);
-    var podMap = new Map();
+
     for (let i = 0; i < pod.length; ++i) {
       let data = pod[i].category.categoryName;
+
       if (!mapCat.has(data)) {
         let ary = [pod[i].subcategoryName];
         aryCat.push(data);
@@ -30,6 +52,7 @@ function setOptions() {
       } else if (data != undefined && mapCat.has(data)) {
         let key = pod[i].category.categoryName;
         let ary = [].concat(mapCat.get(pod[i].category.categoryName));
+
         if (!ary.includes(pod[i].subcategoryName)) {
           ary.push(pod[i].subcategoryName);
           mapCat.set(key, ary);
@@ -41,7 +64,7 @@ function setOptions() {
 
 const DonationForm = () => {
   const [donationName, setDonatioName] = useState("");
-  const [handoverLocation, setHandoverLocation] = useState(""); 
+  const [handoverLocation, setHandoverLocation] = useState("");
   const [selectedImage, setSelectedImage] = useState(null);
   const [forAge, setforAge] = useState("");
   const [forSex, setSex] = useState(["M", "F"]);
@@ -54,41 +77,60 @@ const DonationForm = () => {
   const [productName, setProductName] = useState("");
   const [chosenCategory, setChosenCategory] = useState("");
   const [chosenSubcategory, setChosenSubCategory] = useState("");
-  
+  const [description, setDescription] = useState("");
+  let [arraySub, setArySub] = useState([]);
+  let [value, setValue] = useState("");
+
   const [pictureURL, setPictureURL] = useState();
   const [file, setFile] = useState("");
   const [percent, setPercent] = useState(0);
+
+  const ageRange = [...Array(16).keys()];
+  const now = new Date().getUTCFullYear();
+  const yearRange = Array(now - (now - 50))
+    .fill("")
+    .map((v, idx) => now - idx);
+
   setOptions();
+
+  useEffect(() => {
+    setOptions(chosenCategory, arraySub, setArySub);
+    setCategoryName(aryCat);
+    console.log(categoryName);
+
+    // console.log("ovdje");
+  }, []);
 
   // Event handler for when the user selects an image
   const handleChange = (event) => {
     setFile(event.target.files[0]);
-    handleUpload();
   };
   // console.log(pictureURL);
 
   function handleUpload() {
-      if (!file) {
-        alert("Molimo Vas da odaberete sliku")
-      }
-      const storageRef = ref(storage, `/files/${file.name + v4()}`);
-      const uploadTask = uploadBytesResumable(storageRef, file);
-
-      uploadTask.on("state_changed",
-          (snapshot) => { 
-          setPercent(Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100));
-        },
-          (err) => console.log(err),
-          () => {
-            // download url
-            getDownloadURL(uploadTask.snapshot.ref)
-            .then((url) => {
-              console.log(url); 
-              setPictureURL(url);
-            });
-          }
-        ); 
+    if (!file) {
+      alert("Molimo Vas da prvo odaberete sliku i zatim upload");
     }
+    const storageRef = ref(storage, `/files/${file.name + v4()}`);
+    const uploadTask = uploadBytesResumable(storageRef, file);
+
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        setPercent(
+          Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100)
+        );
+      },
+      (err) => console.log(err),
+      () => {
+        // download url
+        getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+          console.log(url);
+          setPictureURL(url);
+        });
+      }
+    );
+  }
 
   const navigate = useNavigate();
 
@@ -99,6 +141,7 @@ const DonationForm = () => {
     } else if (pictureURL == null) {
       window.alert("Odaberite sliku za donaciju");
     } else {
+      console.log(subcategoryName);
       axios({
         method: "post",
         url: `/api/item`,
@@ -122,7 +165,7 @@ const DonationForm = () => {
           let item = response.data;
           axios({
             method: "post",
-            url: `/api/donation`,
+            url: `/api/donation/createDonation`,
             headers: {
               "Content-Type": "application/json; charset=utf-8",
             },
@@ -132,11 +175,12 @@ const DonationForm = () => {
               handoverLocation,
               user,
               item,
+              description: description
             },
           })
             .then((response) => {
               console.log(response.data);
-              navigate("/base")
+              navigate("/base");
               toast.success("Donacija poslana na odobravanje");
             })
             .catch((err) => {
@@ -150,151 +194,280 @@ const DonationForm = () => {
         });
     }
   };
+  const checkSubInCat = (cat) => {
+    let subs = mapCat.get(cat);
+    if (!subs.includes(chosenSubcategory.subcategoryName)) {
+      for (let i = 0; i < privremeniAry.length; ++i) {
+        if (privremeniAry[i].subcategoryName == subs[0]) {
+          setChosenSubCategory(privremeniAry[i]);
+          setSubcategoryName(privremeniAry[i]);
+        }
+      }
+    }
+  };
 
   return (
     <React.Fragment>
-      <form onSubmit={onSubmitForm}>
-        <div className="frame">
-          <input
-            value={donationName}
-            onChange={(e) => setDonatioName(e.target.value)}
-            type="text"
-            name="donationName"
-            id="donationName"
-            placeholder="Naziv donacije"
-            className="inputFrame"
-            required={true}></input>
-        </div>
+      <div
+        className={DonationFormCSS.donacijaNaslov}
+        >
+        Kreiraj svoju donaciju
+      </div>
+      <form className={DonationFormCSS.dForm} onSubmit={onSubmitForm}>
+        <div className={DonationFormCSS.lDio}>
+          <div>
+            <Typography>Naziv donacije</ Typography>
+            <div className="frame">
+              <input
+                value={donationName}
+                onChange={(e) => setDonatioName(e.target.value)}
+                type="text"
+                name="donationName"
+                id="donationName"
+                placeholder="Kao novi Hot Wheels Ferari F40"
+                className="inputFrame"
+                required={true}></input>
+            </div>
+            <Typography>Naziv predmeta</Typography>
+            <div className="frame">
+              <input
+                value={productName}
+                onChange={(e) => setProductName(e.target.value)}
+                type="text"
+                name="productName"
+                id="productName"
+                placeholder="Ferrari F40"
+                className="inputFrame"
+                required={true}></input>
+            </div>
+            <Typography>Lokacija preuzimanja</Typography>
+            <div className="frame">
+              <input
+                value={handoverLocation}
+                onChange={(e) => setHandoverLocation(e.target.value)}
+                type="text"
+                name="handoverLocation"
+                id="handoverLocation"
+                placeholder="Zagreb"
+                className="inputFrame"
+                required={true}></input>
+            </div>
+            <Typography>Stanje predmeta</Typography>
+            <div className="frame">
+              <input
+                value={itemState}
+                onChange={(e) => setState(e.target.value)}
+                type="text"
+                name="itemState"
+                id="itemState"
+                placeholder="Dobro, manji znakovi korištenja"
+                className="inputFrame"
+                required={true}></input>
+            </div>
+            <Typography>Marka predmeta</Typography>
+            <div className="frame">
+              <input
+                value={productionBrand}
+                onChange={(e) => setProductionBrand(e.target.value)}
+                type="text"
+                name="productionBrand"
+                id="productionBrand"
+                placeholder="Hot Wheels"
+                className="inputFrame"
+                required={true}></input>
+            </div>
+          </div>
 
-        <div className="frame">
-          <input
-            value={handoverLocation}
-            onChange={(e) => setHandoverLocation(e.target.value)}
-            type="text"
-            name="handoverLocation"
-            id="handoverLocation"
-            placeholder="Lokacija preuzimanja"
-            className="inputFrame"
-            required={true}></input>
-        </div>
+          <div className={DonationFormCSS.donjiDio}>
+          <Typography>Predviđeni spol</Typography>
+            <div className="frame">
+              <FormControl fullWidth>
+                <RadioGroup
+                  name="spol-radio-buttons-group"
+                  value={chosenSex}
+                  required
+                  onChange={(e) => setChosenSex(e.target.value)}>
+                  <div style={{ display: "flex" }}>
+                    <FormControlLabel
+                      value="z"
+                      control={<Radio />}
+                      label="Žensko"
+                    />
+                    <FormControlLabel
+                      value="m"
+                      control={<Radio />}
+                      label="Muško"
+                    />
+                  </div>
+                </RadioGroup>
+              </FormControl>
+            </div>
 
-        <div>
-          <input type="file" accept="image/*" onChange={handleChange} />
-          <p style={{display:percent=="100"?"none":""}}>{percent} "% done"</p>
-          <button onClick={handleUpload} type="button">Upload slike</button>
-        </div>
-          {percent=="100"?<img src={pictureURL} />:""}
-          {/* <img src={pictureURL} /> */}
-        <div className="frame">
+            <div className={DonationFormCSS.odabiri}>
+              <div className={DonationFormCSS.r}>
+                <div className={DonationFormCSS.pravokutnici}>
+                  <Typography>Predviđena dob</Typography>
+                  <FormControl fullWidth>
+                    <Select
+                      labelId="dob-select-label"
+                      id="dob-select"
+                      value={forAge}
+                      label="dob"
+                      required
+                      MenuProps={{
+                        PaperProps: { sx: { maxHeight: 175 } },
+                      }}
+                      onChange={(e) => setforAge(e.target.value)}>
+                      {ageRange.map((ageSelect) => {
+                        return (
+                          <MenuItem key={ageSelect} value={ageSelect}>
+                            {ageSelect}
+                          </MenuItem>
+                        );
+                      })}
+                    </Select>
+                  </FormControl>
+                </div>
 
-          <input
-            value={productName}
-            onChange={(e) => setProductName(e.target.value)}
-            type="text"
-            name="productName"
-            id="productName"
-            placeholder="Naziv predmeta"
-            className="inputFrame"
-            required={true}></input>
-        </div>
+                <div className={DonationFormCSS.pravokutnici} >
+                  <Typography>Godina proizvodnje</Typography>
+                  <FormControl fullWidth>
+                    <Select
+                      labelId="year-select-label"
+                      id="year-select"
+                      value={productionYear}
+                      label="productionYear"
+                      required
+                      MenuProps={{
+                        PaperProps: { sx: { maxHeight: 175 } },
+                      }}
+                      onChange={(e) => setProductionYear(e.target.value)}>
+                      {yearRange.map((yearSelect) => {
+                        return (
+                          <MenuItem key={yearSelect} value={yearSelect}>
+                            {yearSelect}
+                          </MenuItem>
+                        );
+                      })}
+                    </Select>
+                  </FormControl>
+                </div>
+              </div>
 
-        <div className="frame">
-          <input
-            value={forAge}
-            onChange={(e) => setforAge(e.target.value)}
-            type="number"
-            name="forAge"
-            id="forAge"
-            placeholder="Predviđena dob"
-            className="inputFrame"
-            required={true}></input>
-        </div>
-        <div className="frame">
-          <div style={{ width: 200 }}>
-            <Dropdown
-              options={forSex}
-              value={chosenSex}
-              onChange={(e) => {
-                setChosenSex(e.value);
-              }}
-              placeholder="Predviđeni spol"
-              required={true}
-            />
+              <div className={DonationFormCSS.r}>
+                <div className={DonationFormCSS.pravokutnici}>
+                <Typography>Odaberi kategoriju</Typography>
+                  <div style={{ width: 200 }} >
+                    <Dropdown
+                      menuClassName={DonationFormCSS.dropdown}
+                      className={DonationFormCSS.box}
+                      options={aryCat}
+                      value={chosenCategory.categoryName}
+                      onChange={(e) => {
+                        let obj = { categoryName: e.value };
+                        setChosenCategory(obj);
+                        setCategoryName(e.value);
+                        let values = mapCat.get(e.value);
+                        setArySub([].concat(values));
+                        checkSubInCat(e.value);
+                      }}
+                      placeholder="Kategorije"
+                      required={true}
+                    />
+                  </div>
+                </div>
+
+                <div className={DonationFormCSS.pravokutnici}>
+                  <Typography>Odaberi potkategoriju</Typography>
+                  <div id={DonationFormCSS.godine}>
+                    <Dropdown
+                      menuClassName={DonationFormCSS.dropdown}
+                      options={arraySub}
+                      value={chosenSubcategory.subcategoryName}
+                      onChange={(e) => {
+                        for (let i = 0; i < privremeniAry.length; ++i) {
+                          if (e.value == privremeniAry[i].subcategoryName) {
+                            let obj = privremeniAry[i];
+                            setChosenSubCategory(obj);
+                            setSubcategoryName(obj);
+                          }
+                        }
+                      }}
+                      placeholder="Potkategorije"
+                      required={true}
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <Box>
+                <Typography>Opis oglasa</Typography>
+                <TextField
+                  name="descriptionField"
+                  id="descriptionField"
+                  placeholder="Doniram ovaj proizdvod zato što..."
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                  required={true}
+                  multiline
+                  className={DonationFormCSS.description}
+                >
+                </TextField>
+              </Box>
+
+              <div className="donacija">
+                <button className="gumbic tamniji" type="submit">
+                  Spremi donaciju
+                </button>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div className="frame">
-          <input
-            value={productionYear}
-            onChange={(e) => setProductionYear(e.target.value)}
-            type="number"
-            name="productionYear"
-            id="productionYear"
-            placeholder="Godina proizvodnje"
-            className="inputFrame"
-            required={true}></input>
-        </div>
+        <div className={DonationFormCSS.dDio}>
+          <div className={DonationFormCSS.donacijaGumbi}>
+            <div className={DonationFormCSS.odabir1}>
+              <div className="gumbic slike donacijaSlika" style={{ height: 30}}>
+              <label for="files">
+              Odaberi sliku
+            </label>
+              </div>
+            <span>{file.name}</span>
+            <input
+              id="files"
+              type="file"
+              accept="image/*"
+              style={{ display: "none", width:100 }}
+              onChange={handleChange}
+              />
+              </div>
+             
+              <div className={DonationFormCSS.odabir2}>
+              <button
+                onClick={handleUpload}
+                type="button"
+                className="gumbic tamniji slike donacijaSlika"
+                style={{ height: 30 }}>
+                Upload slike
+              </button>
+              <span
+                style={{
+                  display: percent == "100" || percent == "0" ? "none" : "",
+                }}>
+                {percent} "% gotovo"
+              </span>
+              </div>
+              
 
-        <div className="frame">
-          <input
-            value={itemState}
-            onChange={(e) => setState(e.target.value)}
-            type="text"
-            name="itemState"
-            id="itemState"
-            placeholder="Stanje predmeta"
-            className="inputFrame"
-            required={true}></input>
-        </div>
-
-        <div className="frame">
-          <input
-            value={productionBrand}
-            onChange={(e) => setProductionBrand(e.target.value)}
-            type="text"
-            name="productionBrand"
-            id="productionBrand"
-            placeholder="Marka predmeta"
-            className="inputFrame"
-            required={true}></input>
-        </div>
-
-        <div className="frame">
-          <div style={{ width: 200 }}>
-            <Dropdown
-              options={aryCat}
-              value={chosenCategory.categoryName}
-              onChange={(e) => {
-                let obj = { categoryName: e.value };
-                setChosenCategory(obj);
-                setCategoryName(e.value);
-                let values = mapCat.get(e.value);
-                arraySub = [].concat(values);
-              }}
-              placeholder="Kategorije"
-              required={true}
-            />
           </div>
-          <div style={{ width: 250 }}>
-            <Dropdown
-              options={arraySub}
-              value={chosenSubcategory}
-              onChange={(e) => {
-                for (let i = 0; i < privremeniAry.length; ++i) {
-                  if (e.value == privremeniAry[i].subcategoryName) {
-                    let obj = privremeniAry[i];
-                    setChosenSubCategory(e.value);
-                    setSubcategoryName(obj);
-                    console.log(subcategoryName);
-                  }
-                }
-                console.log(e.value);
-              }}
-              placeholder="Potkategorije"
-              required={true}
-            />
+          <div id={DonationFormCSS["picture-frame"]}>
+            {percent == "100" ? (
+              <img src={pictureURL} id={DonationFormCSS["picture"]} />
+            ) : (
+              ""
+            )}
+            {/* <img src={pictureURL} /> */}
           </div>
-          <button type="submit">Spremi donaciju</button>
         </div>
       </form>
     </React.Fragment>

@@ -16,7 +16,15 @@ import UsersOverview from './pages/usersOverview'
 import MojeDonacije from './pages/MojeDonacije'
 import NeobjavljeneDonacije from './pages/NeobjavljeneDonacije'
 import Kategorije from './pages/Kategorije'
+import {createTheme, ThemeProvider} from '@mui/material'
 
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "rgb(229, 93, 17)"
+    }
+  }
+});
 
 function App() {
 
@@ -36,22 +44,24 @@ function App() {
     }, [])
   
   return (
-    <BrowserRouter>
-        <Routes>
-            <Route path={"/"} element={<Home />} />
-            <Route path={"login"} element={ <LoggedIn> <Login /> </LoggedIn> } />
-            <Route path={"registracija"} element={<LoggedIn> <Registracija/> </LoggedIn> } />
-            <Route path={"base"} element={<ProtectedRoute> <Base /> </ProtectedRoute>} />
-            <Route path={"doniraj"} element={<CanDonateRoute> <Donation /> </CanDonateRoute>} />
-            <Route path={"user"} element={<ProtectedRoute> <User /> </ProtectedRoute>} />
-            <Route path={"mojeDonacije"} element={<ProtectedRoute> <MojeDonacije /> </ProtectedRoute>} />
-            <Route path={"neobjavljeneDonacije"} element={<ProtectedRoute> <NeobjavljeneDonacije /> </ProtectedRoute>} />
-            <Route path={"pregledKorisnika"} element={<ProtectedRoute> <UsersOverview /> </ProtectedRoute>} />
-            <Route path={"djeca"} element={<ProtectedRoute> <Djeca /> </ProtectedRoute>} />
-            <Route path={"kategorije"} element={<ProtectedRoute> <Kategorije/> </ProtectedRoute>} />
-            <Route path={"*"} element={<div> Dobrodosli na Easter egg stranicu</div>} />
-        </Routes>
-    </BrowserRouter>
+    <ThemeProvider theme={theme}>
+      <BrowserRouter>
+          <Routes>
+              <Route path={"/"} element={<Home />} />
+              <Route path={"login"} element={ <LoggedIn> <Login /> </LoggedIn> } />
+              <Route path={"registracija"} element={<LoggedIn> <Registracija/> </LoggedIn> } />
+              <Route path={"base"} element={<ProtectedRoute> <Base /> </ProtectedRoute>} />
+              <Route path={"doniraj"} element={<CanDonateRoute> <Donation /> </CanDonateRoute>} />
+              <Route path={"user"} element={<ProtectedRoute> <User /> </ProtectedRoute>} />
+              <Route path={"mojeDonacije"} element={<ProtectedRoute> <MojeDonacije /> </ProtectedRoute>} />
+              <Route path={"neobjavljeneDonacije"} element={<ProtectedRoute> <NeobjavljeneDonacije /> </ProtectedRoute>} />
+              <Route path={"pregledKorisnika"} element={<ProtectedRoute> <UsersOverview /> </ProtectedRoute>} />
+              <Route path={"djeca"} element={<ProtectedRoute> <Djeca /> </ProtectedRoute>} />
+              <Route path={"kategorije"} element={<ProtectedRoute> <Kategorije/> </ProtectedRoute>} />
+              <Route path={"*"} element={<div> Dobrodosli na Easter egg stranicu</div>} />
+          </Routes>
+      </BrowserRouter>
+    </ThemeProvider>
   );
 }
 

@@ -3,7 +3,10 @@ import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-import { TextField, Button, Container} from '@mui/material';
+import { TextField, Button, Container, Typography, Box} from '@mui/material';
+
+import nkpCSS from "../style/components/NovaKat-Potkat.module.css";
+
 
 const NovaKategorijaForm = ({updatePage, setUpdatePage}) => {
     const [categoryName, setCategoryName] = useState("");
@@ -45,16 +48,19 @@ const NovaKategorijaForm = ({updatePage, setUpdatePage}) => {
 
     return (
         <form onSubmit={onSubmit}>
-            <Container maxWidth='xs'>
-                <TextField
-                label="Ime kategorije" 
-                id="imeKategorije" 
-                value={categoryName} 
-                required
-                variant="outlined" 
-                fullWidth
-                onChange={(e) => setCategoryName(e.target.value)}/>
-                <Button type="submit">Dodaj kategoriju</Button>
+            <Container maxWidth='xs' className={nkpCSS.container}>
+                <Box className={nkpCSS.FormControl}>
+                    <Typography>Naziv kategorije</Typography>
+                    <TextField
+                    id="imeKategorije" 
+                    value={categoryName} 
+                    required
+                    variant="outlined" 
+                    fullWidth
+                    className={nkpCSS.item}
+                    onChange={(e) => setCategoryName(e.target.value)}/>
+                    <Button type="submit" variant='contained' sx={{borderRadius: 20, m: 5}} size='large'>Dodaj kategoriju</Button>
+                </Box>
             </Container>
         </form>
     );

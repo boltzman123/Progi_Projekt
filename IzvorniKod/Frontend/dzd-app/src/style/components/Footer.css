@@ -1,5 +1,5 @@
 @media only screen and (min-width: 450px) {
-  .footer {
+  .footerNormal {
     width: 100%;
     text-align: center;
     background-color: rgba(244, 177, 131, 255);
@@ -7,19 +7,99 @@
     font-size: 30px;
     font-weight: 400;
     padding: 12px;
-    height: 2.5rem;
-    margin-top: 50px;
+    bottom: 0;
+  }
+  .footerDeca {
+    width: 100%;
+      text-align: center;
+      background-color: rgba(244, 177, 131, 255);
+      color: white;
+      font-size: 30px;
+      font-weight: 400;
+      padding: 12px;
+      bottom: 0;
+      margin-top: 200px;
+      position: relative;
+  }
+
+    .footerExpand {
+      width: 100%;
+      text-align: center;
+      background-color: rgba(244, 177, 131, 255);
+      color: white;
+      font-size: 30px;
+      font-weight: 400;
+      padding: 12px;
+      bottom: 0;
+      margin-top: 100px;
+      position: relative;
+    }
+  
+
+
+  .footerProfil {
+    width: 100%;
+    text-align: center;
+    background-color: rgba(244, 177, 131, 255);
+    color: white;
+    font-size: 30px;
+    font-weight: 400;
+    padding: 12px;
+    bottom:0;
+    position: relative;
   }
 }
 
 @media only screen and (max-width: 449px) {
-  .footer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  .footerNormal {
+    width: 100%;
+    text-align: center;
     background-color: rgba(244, 177, 131, 255);
     color: white;
-    font-weight: 500;
-    font-size: 1.3em;
+    font-size: 30px;
+    font-weight: 400;
+    padding: 12px;
+    bottom: 0;
+  }
+  .footerDeca {
+    width: 100%;
+      text-align: center;
+      background-color: rgba(244, 177, 131, 255);
+      color: white;
+      font-size: 22px;
+      font-weight: 400;
+      padding: 12px;
+      bottom: 0;
+      margin-top: 200px;
+      position: relative;
+  }
+
+    .footerExpand {
+      width: 100%;
+      text-align: center;
+      background-color: rgba(244, 177, 131, 255);
+      color: white;
+      font-size: 22px;
+      font-weight: 400;
+      padding: 12px;
+      bottom: 0;
+      margin-top: 70px;
+      position: relative;
+    }
+  
+
+
+  .footerProfil {
+    width: 100%;
+    text-align: center;
+    background-color: rgba(244, 177, 131, 255);
+    color: white;
+    font-size: 22px;
+    font-weight: 400;
+    padding: 12px;
+    bottom: 0;
+    height: 25px;
+    margin-top: 30px;
+
   }
 }

@@ -13,6 +13,10 @@ function NeobjavljeneDonacije() {
       url: "/api/donation/notvalid",
       headers: {
         "Content-Type": "application/json; charset=utf-8",
+      },
+      auth: {
+        username: "admin",
+        password: "pass"
       }
     })
       .then((response) => {
@@ -27,15 +31,20 @@ function NeobjavljeneDonacije() {
 
   if (donacije.length==0){
     console.log("Nema oglasa")
-    return <div>Nema oglasa</div>
+    return <div className={KarticaCSS.nevidljiv}>Nema oglasa</div>
   }
   else {
     return (
-        <div className={KarticaCSS.karticaList}>
-            {donacije.map((donacija) => {
-            return <AdminDonacijaKard key={donacija.idDonation} donacija={donacija}></AdminDonacijaKard>;
-            })}
-        </div>
+      <>
+      <div className={KarticaCSS.okvirMD}>
+        <h2>Neobjavljene donacije</h2>
+          <div className={KarticaCSS.karticaList}>
+              {donacije.map((donacija) => {
+              return <AdminDonacijaKard key={donacija.idDonation} donacija={donacija}></AdminDonacijaKard>;
+              })}
+          </div>
+      </div>
+      </>
     );
     }
 }

@@ -20,14 +20,13 @@ public class ItemController {
 
     // Izlistaj sve iteme
     @GetMapping("")
-    //@Secured({"ROLE_ADMIN"})
+    @Secured({"ROLE_ADMIN"})
     public List<Item> listItem(){
         return service.listAll();
     }
 
     // Stvori novi item
     @PostMapping("")
-    //@Secured({"ROLE_USER","ROLE_ADMIN"})
     public ResponseEntity<Item> createItem(@RequestBody Item item){
         Item saved = service.createItem(item);
         return ResponseEntity.created(URI.create("/item/" + saved.getId())).body(saved);
@@ -35,7 +34,6 @@ public class ItemController {
 
     // Update-aj item
     @PutMapping("/{id}")
-    //@Secured({"ROLE_USER","ROLE_ADMIN"})
     public Item updateItem(@PathVariable("id") Long id, @RequestBody Item item){
         if(!item.getId().equals(id)){
             throw new IllegalArgumentException("Item id must be preserved");
@@ -45,13 +43,11 @@ public class ItemController {
 
     // Obriši item-e na 2 načina
     @DeleteMapping("/{id}")
-    //@Secured({"ROLE_USER","ROLE_ADMIN"})
     public Item deleteItem(@PathVariable("id") Long id){
         return service.deleteItemById(id);
     }
 
     @DeleteMapping
-    //@Secured({"ROLE_USER","ROLE_ADMIN"})
     public Item delete(@RequestBody Item item){
         service.delete(item);
         return item;

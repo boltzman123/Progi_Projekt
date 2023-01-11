@@ -4,13 +4,15 @@ import axios from "axios";
 import DonacijaKard from "./DonacijaKard";
 import KarticaCSS from '../style/components/Kartica.module.css'
 
+
 function Kartica() {
   const [aktivan, setAktivan] = useState([]);
   const [primljen, setPrimljen] = useState([]);
   const [preporucen, setPreporucen] = useState([]);
   const [sezona, setSezona] = useState([]);
 
-  let user = JSON.stringify(localStorage.getItem("user"))
+
+  let user = JSON.parse(localStorage.getItem("user"))
   
   useEffect(() => {
     axios({
@@ -34,34 +36,45 @@ function Kartica() {
 
   if (aktivan.length==0 && primljen.length==0 && preporucen.length==0 && sezona.length==0 ){
     console.log("Nema oglasa")
-    return <div>Nema oglasa</div>
+    return <div className={KarticaCSS.nevidljiv}>Nema oglasa</div>
   }
   else {
     return (
       <>
-        <div className={KarticaCSS.karticaList} style={{display:primljen.length==0 ?"none":""}}>
-          <div>Primljene donacije</div>
-            {primljen.map((donacija) => {
-            return <DonacijaKard key={donacija.idDonation} donacija={donacija}></DonacijaKard>;
-            })}
+        <div className={KarticaCSS.okvir}  style={{display:primljen.length==0 ?"none":""}}>
+          <h2>Primljene donacije</h2>
+          <div className={KarticaCSS.karticaList}>
+              {primljen.map((donacija) => {
+              return <DonacijaKard key={donacija.idDonation} donacija={donacija}></DonacijaKard>;
+              })}
+          </div>
         </div>
-        <div className={KarticaCSS.karticaList} style={{display:sezona.length==0 ?"none":""}}>
-          <div>Sezonske donacije</div>
-            {sezona.map((donacija) => {
-            return <DonacijaKard key={donacija.idDonation} donacija={donacija}></DonacijaKard>;
-            })}
+
+        <div className={KarticaCSS.okvir}  style={{display:sezona.length==0 ?"none":""}}>
+        <h2>Sezonske donacije</h2>
+          <div className={KarticaCSS.karticaList}>
+              {sezona.map((donacija) => {
+              return <DonacijaKard key={donacija.idDonation} donacija={donacija}></DonacijaKard>;
+              })}
+          </div>
         </div>
-        <div className={KarticaCSS.karticaList} style={{display:preporucen.length==0 ?"none":""}}>
-          <div>Preporucene donacije</div>
-            {preporucen.map((donacija) => {
-            return <DonacijaKard key={donacija.idDonation} donacija={donacija}></DonacijaKard>;
-            })}
+
+        <div className={KarticaCSS.okvir}  style={{display:preporucen.length==0 ?"none":""}}>
+        <h2>Preporucene donacije</h2>
+          <div className={KarticaCSS.karticaList}>
+              {preporucen.map((donacija) => {
+              return <DonacijaKard key={donacija.idDonation} donacija={donacija} istaknut={true}></DonacijaKard>;
+              })}
+          </div>
         </div>
-        <div className={KarticaCSS.karticaList} style={{display:aktivan.length==0 ?"none":""}}>
-          <div>Aktivne donacije</div>
-            {aktivan.map((donacija) => {
-            return <DonacijaKard key={donacija.idDonation} donacija={donacija}></DonacijaKard>;
-            })}
+
+        <div className={KarticaCSS.okvir}  style={{display:aktivan.length==0 ?"none":""}}>
+        <h2>Aktivne donacije</h2>
+          <div className={KarticaCSS.karticaList}>
+              {aktivan.map((donacija) => {
+              return <DonacijaKard key={donacija.idDonation} donacija={donacija} ></DonacijaKard>;
+              })}
+          </div>
         </div> 
       </>
     );

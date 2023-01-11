@@ -14,6 +14,7 @@ function MojeDonacije() {
   const [sentMail, setSentMail] = useState('');
   const [doniraniOglasiList, setdoniraniOglasiList] = useState([]);
   const [mojiOglasiList, setmojiOglasiList] = useState([]);
+  const [imaOglasa, setImaOglasa] = useState(false)
 
   const doniraniOglasi=[]
   const mojiOglasi=[]
@@ -68,23 +69,23 @@ function MojeDonacije() {
 
   if (donacije.length==0){
     console.log("Nema oglasa")
-    return <div>Nema oglasa</div>
+    return <div className={MojiOglasiCSS.nevidljiv}>Nema oglasa</div>
   }
   else {
     return (
       <>
-        <div className={MojiOglasiCSS.okvir}>
+        <div className={MojiOglasiCSS.okvir} style={{display:doniraniOglasiList.length==0 ?"none":""}}>
         <h2>Donirane donacije</h2>
-          <div className={MojiOglasiCSS.karticaList} style={{display:doniraniOglasiList.length==0 ?"none":""}}>
+          <div className={MojiOglasiCSS.karticaList}>
               {doniraniOglasiList.map((donacija) => {
               return <MojaDonacijaKard key={donacija.idDonation} donacija={donacija}></MojaDonacijaKard>;
               })}
           </div>
         </div>
 
-        <div className={MojiOglasiCSS.okvir}>
+        <div className={MojiOglasiCSS.okvir} style={{display:mojiOglasiList.length==0 ?"none":""}}>
         <h2>Moje trenutne donacije</h2>
-          <div className={MojiOglasiCSS.karticaList} style={{display:mojiOglasiList.length==0 ?"none":""}}>
+          <div className={MojiOglasiCSS.karticaList}>
               {mojiOglasiList.map((donacija) => {
               return <MojaDonacijaKard key={donacija.idDonation} donacija={donacija}></MojaDonacijaKard>;
               })}

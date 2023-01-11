@@ -41,11 +41,11 @@ function setOptions(chosenCategory, arraySub, setArySub) {
 function DropdownCategory(props) {
   const [chosenSubcategory, setChosenSubCategory] = useState(props.subcategory);
   const [chosenCategory, setChosenCategory] = useState(props.category);
- 
+
   let [arraySub, setArySub] = useState([]);
   let [value, setValue] = useState(props.value);
-  localStorage.setItem("cat", JSON.stringify(chosenCategory))
-  localStorage.setItem("sub", JSON.stringify(chosenSubcategory))
+  localStorage.setItem("cat", JSON.stringify(chosenCategory));
+  localStorage.setItem("sub", JSON.stringify(chosenSubcategory));
 
   useEffect(() => {
     setOptions(chosenCategory, arraySub, setArySub);
@@ -58,7 +58,7 @@ function DropdownCategory(props) {
       for (let i = 0; i < privremeniAry.length; ++i) {
         if (privremeniAry[i].subcategoryName == subs[0]) {
           setChosenSubCategory(privremeniAry[i]);
-          localStorage.setItem("sub", JSON.stringify(privremeniAry[i]))
+          localStorage.setItem("sub", JSON.stringify(privremeniAry[i]));
         }
       }
     }
@@ -77,7 +77,7 @@ function DropdownCategory(props) {
             let values = mapCat.get(e.value);
             setArySub([].concat(values));
             checkSubInCat(e.value);
-            localStorage.setItem("cat", JSON.stringify(obj))
+            localStorage.setItem("cat", JSON.stringify(obj));
           }}
           placeholder="Kategorije"
           required={true}
@@ -93,7 +93,7 @@ function DropdownCategory(props) {
               if (e.value == privremeniAry[i].subcategoryName) {
                 let obj = privremeniAry[i];
                 setChosenSubCategory(obj);
-                localStorage.setItem("sub", JSON.stringify(obj))
+                localStorage.setItem("sub", JSON.stringify(obj));
                 // console.log(e.value);
               }
             }

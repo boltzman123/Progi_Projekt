@@ -15,7 +15,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 import { Modal } from "@mui/material";
-import { TextField, Select, Button, FormControl, FormLabel} from "@mui/material";
+import { TextField, Select, Button, FormControl, FormLabel, Typography} from "@mui/material";
 import { RadioGroup, FormControlLabel, Radio, InputLabel, MenuItem, Box, Container} from "@mui/material";
 
 import DropdownCategory from "./DropdownCategory";
@@ -169,6 +169,7 @@ const MojeDonacijaKard = (props) => {
             pictureURL,
             user,
             item,
+            description: opis,
             dateOfPublication,
             handoverLocation: handoverLocation,
           },
@@ -242,6 +243,7 @@ const MojeDonacijaKard = (props) => {
       setDobivatelj(response.data)
     }).catch((err) => {
       console.log(err);
+      toast.error("Upisani korisnik ne postoji")
       setBtnDisabled(true);
   });}
   else {
@@ -308,6 +310,7 @@ const MojeDonacijaKard = (props) => {
             <h3>Ime predmeta: {productName}</h3>
             <h3>Predviđena dob korisnika: {dob}</h3>
             <h3>Datum objave: {datum} </h3>
+            <h3>Opis: {opis}</h3>
             <h3>Lokacija: {handoverLocation} </h3>
             <hr/>
             <h3 id="sit">Validno: {String(valid)=="true"?"Oglas je validan":"Oglas nije validan"}</h3>
@@ -443,16 +446,28 @@ const MojeDonacijaKard = (props) => {
                   value={productionYear}
                   disabled={smijeMijenjati}></TextField>
 
+                <Box>
+                  <Typography>Opis oglasa</Typography>
+                  <TextField
+                    name="descriptionField"
+                    id="descriptionField"
+                    placeholder="Doniram ovaj proizdvod zato što..."
+                    value={opis}
+                    onChange={(e) => setOpis(e.target.value)}
+                    required={true}
+                    multiline
+                  >
+                  </TextField>
+                </Box>
+
                 <DropdownCategory 
                   value={smijeMijenjati}
                   category={checkedCat}
                   subcategory={checkedSub}></DropdownCategory>
-                <div>
-                  {/* ONEMOGUCIO SAM MIJENJANJE SLIKE, zasad barem */}
-                  <input type="file" accept="image/*" onChange={handleChange} />
+                <div style={{display:smijeMijenjati==true?"none":""}}>
+                  <input type="file" accept="image/*" onChange={handleChange}/>
                   <p style={{display:percent=="100"?"none":""}}>{percent} "% done"</p>
                   <button onClick={handleUpload} type="button">Upload slike</button>
-
                 </div>
                 <TextField
                   onChange={(e) => setDobivateljEmail(e.target.value)}
@@ -472,6 +487,15 @@ const MojeDonacijaKard = (props) => {
                   id="provjera">
                   Provjera korisnika
                 </Button>
+                
+                <Button
+                  onClick={predajOglas}
+                  style={donatedTo!=null ? { display: `none` } : {}}
+                  variant="outlined"
+                  color="info"
+                  id="predaj">
+                  Predaj oglas
+                </Button>
 
               </Box>
               <hr/>
@@ -489,14 +513,6 @@ const MojeDonacijaKard = (props) => {
                   variant="outlined"
                   color="error">
                   Obriši oglas
-                </Button>
-                <Button
-                  onClick={predajOglas}
-                  style={email != emailL ? { display: `none` } : {}}
-                  variant="outlined"
-                  color="error"
-                  id="predaj">
-                  Predaj oglas
                 </Button>
               </CardActions>
             </Container>

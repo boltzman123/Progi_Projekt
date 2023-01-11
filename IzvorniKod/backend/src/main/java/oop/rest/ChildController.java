@@ -23,14 +23,13 @@ public class ChildController {
 
     // Izlistaj svu djecu
     @GetMapping("")
-    //@Secured("ROLE_ADMIN")
+    @Secured("ROLE_ADMIN")
     public List<Child> listChildren(){
         return service.listAll();
     }
 
     // Izlistaj djecu jednog usera
     @GetMapping("/{email}")
-    //@Secured({"ROLE_USER","ROLE_ADMIN"})
     public List<Child> listChildrenByUser(@PathVariable String email){
         return service.listChildByUser(email);
         // return service.listAll().stream().filter(c -> c.getUser().getEmail().equals(email)).collect(Collectors.toList());
@@ -38,14 +37,12 @@ public class ChildController {
 
     // Nađi dijete po mailu usera i id-u djeteta
     @GetMapping("/{email}/{id}")
-    //@Secured({"ROLE_USER","ROLE_ADMIN"})
     public Optional<Child> listChild(@PathVariable("email") String email, @PathVariable("id") Long id){
         return service.listChildByUserAndId(email, id);
     }
 
     // Stvori dijete (ne tako!)
     @PostMapping("")
-    //@Secured({"ROLE_USER","ROLE_ADMIN"})
     public ResponseEntity<Child> createChild(@RequestBody Child child){
         Child saved = service.createChild(child);
         return ResponseEntity.created(URI.create("/child/" + saved.getChildId())).body(saved);
@@ -53,7 +50,6 @@ public class ChildController {
 
     // Update-aj dijete
     @PutMapping("/{email}/{id}")
-    //@Secured({"ROLE_USER","ROLE_ADMIN"})
     public Child updateChild(@PathVariable("email") String email,@PathVariable("id") Long id, @RequestBody Child child){
         if(!child.getChildId().equals(id) && !child.getUser().getEmail().equals(email)){
             throw new IllegalArgumentException("Child id or/and email must be preserved");
@@ -62,7 +58,6 @@ public class ChildController {
     }
     // Brisi djecu
     @DeleteMapping("")
-    //@Secured({"ROLE_USER","ROLE_ADMIN"})
     public Child deleteChild(@RequestBody Child child) {
         return service.deleteChild(child);
     }

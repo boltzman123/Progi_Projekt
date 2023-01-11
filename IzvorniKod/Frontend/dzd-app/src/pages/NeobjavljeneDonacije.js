@@ -9,7 +9,7 @@ function Base() {
         <>
             <Header />
             <NeobjavljeneDonacije />
-            <Footer />
+            <Footer name={"footerExpand" } />
             <ToastContainer
                 position="top-center"
                 autoClose={5000}

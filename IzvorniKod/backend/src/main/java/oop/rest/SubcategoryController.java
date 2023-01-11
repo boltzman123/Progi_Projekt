@@ -23,19 +23,16 @@ public class SubcategoryController {
 
     // Izlistaj sve podkategorije
     @GetMapping("")
-    //@Secured({"ROLE_USER","ROLE_ADMIN"})
     public List<Subcategory> listSubcategory(){
         return service.listAll();
     }
 
     // Izlistaj podkategoriju po imenu
     @GetMapping("/{subcategoryName}")
-    //@Secured({"ROLE_USER","ROLE_ADMIN"})
     public Subcategory getSubcategoryByName(@PathVariable("subcategoryName") String subcategoryName){
         return service.getSubcategoryByName(subcategoryName).get();
     }
     @GetMapping("/seasons")
-    //@Secured({"ROLE_USER","ROLE_ADMIN"})
     public List<Season> getAllSeasons(){
         List<Season> seasons = new ArrayList<>();
         seasons.add(Season.AUTUMN);
@@ -47,7 +44,6 @@ public class SubcategoryController {
 
     // Izlistaj podkategorije po imenu kategorije
     @GetMapping("/category/{categoryName}")
-    //@Secured({"ROLE_USER","ROLE_ADMIN"})
     public List<Subcategory> getSubcategoryByCategory(@PathVariable("categoryName") String categoryName){
         List<Subcategory> subcategoryList = service.listAll().stream().filter(s -> s.getCategory().getCategoryName().equals(categoryName)).collect(Collectors.toList());
         return subcategoryList;
@@ -55,7 +51,7 @@ public class SubcategoryController {
 
     // Dodaj podkategoriju
     @PostMapping("")
-    //@Secured("ROLE_ADMIN")
+    @Secured("ROLE_ADMIN")
     public ResponseEntity<Subcategory> createSubcategory(@RequestBody Subcategory subcategory){
         Subcategory saved = service.createSubcategory(subcategory);
         return ResponseEntity.created(URI.create("/subcategory/" + saved.getSubcategoryName().equalsIgnoreCase(" "))).body(saved);
@@ -63,7 +59,7 @@ public class SubcategoryController {
 
     // Update podkategoriju
     @PutMapping("/{subcategoryName}")
-    //@Secured("ROLE_ADMIN")
+    @Secured("ROLE_ADMIN")
     public Subcategory updateSubcategory(@PathVariable("subcategoryName") String subcategoryName, @RequestBody Subcategory subcategory){
         if(!subcategory.getSubcategoryName().equals(subcategoryName)){
             throw new IllegalArgumentException("Subcategory name must be preserved");
@@ -74,13 +70,13 @@ public class SubcategoryController {
 
     // Obriši podkategoriju pomoću id-a ili objekta
     @DeleteMapping("/{name}")
-    //@Secured("ROLE_ADMIN")
+    @Secured("ROLE_ADMIN")
     public Subcategory deleteSubcategoryByName(@PathVariable("name") String name) {
         return service.deleteSubcategory(name);
     }
 
     @DeleteMapping()
-    //@Secured("ROLE_ADMIN")
+    @Secured("ROLE_ADMIN")
     public Subcategory deleteSubcategory(@RequestBody Subcategory subcategory){
         return service.delete(subcategory);
     }

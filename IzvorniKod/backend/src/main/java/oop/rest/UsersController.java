@@ -51,7 +51,6 @@ public class UsersController {
 
     // Dohvati usera po emailu i passwordu
     @GetMapping("/{email}/{password}")
-    //@Secured({"ROLE_USER","ROLE_ADMIN"})
     public Users getUser(@PathVariable("email") String email, @PathVariable("password") String password){
         Users user =userService.fetch(email);
         if(passwordEncoder.matches(password, user.getPassword())){
@@ -68,9 +67,10 @@ public class UsersController {
 
     // Login te vraća inforamcije o useru
     @PostMapping("/login")
-    //@Secured({"ROLE_USER","ROLE_ADMIN"})
     public ResponseEntity<Users> getUser(@RequestBody LoginForm loginForm){
         Users user = userService.fetch(loginForm.getEmail());
+        //System.out.println(loginForm.getEmail() + " " + loginForm.getPassword());
+        //System.out.println(user.getEmail() + " " + passwordEncoder.matches(loginForm.getPassword(), user.getPassword()));
         if(passwordEncoder.matches(loginForm.getPassword(), user.getPassword())){
             return ResponseEntity.created(URI.create("/users/" + user.getEmail())).body(user);
         } else{
@@ -79,12 +79,13 @@ public class UsersController {
     }
     // Registracija, slanje potvrde na mail, vraća objekt novostvorenog usera
     @PostMapping("")
-    //@Secured({"ROLE_USER","ROLE_ADMIN"})
     public ResponseEntity<Users> createUser(@RequestBody Users user){
         Optional<Users> user1 = userService.findByEmail(user.getEmail());
         if(user1.isPresent()){
+            //System.out.println("da");
             throw new IllegalArgumentException("User already exists");
         } else{
+            //System.out.println("ne");
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             String email = user.getEmail();
             String subject = "Successful registration!";
@@ -101,7 +102,6 @@ public class UsersController {
     }
     // Update usera
     @PutMapping("/{email}")
-    //@Secured({"ROLE_USER","ROLE_ADMIN"})
     public Users updateUser(@PathVariable("email") String email, @RequestBody Users user) {
         if (!user.getEmail().equals(email))
             throw new IllegalArgumentException("User email must be preserved");
@@ -109,7 +109,6 @@ public class UsersController {
     }
     // Obrisi usera po id-u ili objektu
     @DeleteMapping("/{email}")
-    //@Secured({"ROLE_USER","ROLE_ADMIN"})
     public Users deleteUser(@PathVariable("email") String email) {
         List<Child> children = childService.listChildByUser(email);
         for(Child c: children){

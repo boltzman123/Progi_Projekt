@@ -14,10 +14,6 @@ import { Modal, IconButton } from "@mui/material";
 import { TextField, Select, Button, FormControl, FormLabel, Typography} from "@mui/material";
 import { RadioGroup, FormControlLabel, Radio, Grid, InputLabel, MenuItem, Box, Container} from "@mui/material";
 
-import NovoDijeteCategoryPicker from "./NovoDijeteCategoryPicker.jsx";
-
-import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
-import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import DropdownCategory from "./DropdownCategory";
 //`api/donation/${props.donacija.idDonation}`
 
@@ -45,6 +41,7 @@ const DonacijaKard = (props) => {
   let [dateOfPublication, setDateOfPublication] = useState(props.donacija.dateOfPublication);
   let [handoverLocation, setHandoverLocation] = useState(props.donacija.handoverLocation);
   let [userLocation, setUserLocation] = useState(props.donacija.user.userLocation);
+  let [opis, setOpis] = useState(props.donacija.description)
 
   let { email } = props.donacija.user.email;
   let { idDonation } = props.donacija;
@@ -52,9 +49,17 @@ const DonacijaKard = (props) => {
   let userL = JSON.parse(localStorage.getItem("user"));
   let emailL = userL.email;
 
+  if (props.donacija.donatedToUser!=null){
+    var emailPrim=props.donacija.donatedToUser.email;
+  }
+  // console.log(emailPrim==emailL)
+
+
   const ageRange = [...Array(16).keys()];
   const [dob, setDob] = useState(props.donacija.item.forAge);
   const [spol, setSpol] = useState(props.donacija.item.forSex);
+
+  // console.log(props.donacija)
 
   const [checkedCat, setCheckedCat] = useState(props.donacija.item.category);
   const [checkedSub, setCheckedSub] = useState(props.donacija.item.subcategory);
@@ -133,6 +138,7 @@ const DonacijaKard = (props) => {
             pictureURL,
             user,
             item,
+            description: opis,
             dateOfPublication,
             handoverLocation: handoverLocation,
           },
@@ -191,29 +197,74 @@ const DonacijaKard = (props) => {
       });
   };
 
+  const ponovnoDoniraj = () => {
+    
+    let cat = JSON.parse(localStorage.getItem("cat"));
+    let sub = JSON.parse(localStorage.getItem("sub"));
+    setCheckedCat(cat);
+    setCheckedSub(sub);
+
+    axios({
+          method: "put",
+          url: `/api/donation/${idDonation}`,
+          headers: {
+            "Content-Type": "application/json; charset=utf-8",
+          },
+          data: {
+            idDonation,
+            donationName,
+            edit:false,
+            pictureURL,
+            user:props.donacija.donatedToUser,
+            item:props.donacija.item,
+            dateOfPublication,
+            message:null,
+            pictureURL,
+            description:props.donacija.description,
+            handoverLocation: handoverLocation,
+            dateOfClosing:null,
+            donatedToUser:null,
+            active:true,
+            valid:false
+          },
+        })
+          .then((response) => {
+            console.log(response.data);
+            handleClose();
+            toast.success("Oglas je poslan na provjeru Adminu");
+            window.location.reload(false)
+          })
+          .catch((err) => {
+            console.log(err);
+            toast.error("Došlo je do greške s donacijom");
+          });
+  }
+
   return (
     <React.Fragment>
-      <Card className={DonacijaKardCSS.malaKartica} variant="outlined">
-        {/* OVDJE UPISI LINK KOJI VODI NA FULL PREGLED TOG PREDMETA */}
-        <CardActionArea onClick={handleOpen}>
-          <CardMedia
-            className={DonacijaKardCSS.img}
-            component="img"
-            image={pictureURL}
-            alt="slika predmeta koji se donira"
-          />
-          <h1
-            style={{ color: "rgba(244, 177, 131, 255)", textAlign: "center" }}>
-            {donationName}
-          </h1>
-          <CardContent sx={{ bgcolor: "#E8E8E8" }}>
-            <h3>Ime predmeta: {productName}</h3>
-            <h3>Predviđena dob korisnika: {dob}</h3>
-            <h3>Datum objave: {datum} </h3>
-            <h3>Lokacija: {handoverLocation} </h3>
-          </CardContent>
-        </CardActionArea>
-      </Card>
+        <Card className={DonacijaKardCSS.malaKartica} variant="outlined" 
+        {...(props.istaknut && { sx: {border: 'solid 6px gold'} })}>
+          {/* OVDJE UPISI LINK KOJI VODI NA FULL PREGLED TOG PREDMETA */}
+          <CardActionArea onClick={handleOpen}>
+            <CardMedia
+              className={DonacijaKardCSS.img}
+              component="img"
+              image={pictureURL}
+              alt="slika predmeta koji se donira"
+            />
+            <h1
+              style={{ color: "rgba(244, 177, 131, 255)", textAlign: "center" }}>
+              {donationName}
+            </h1>
+            <CardContent sx={{ bgcolor: "#E8E8E8" }}>
+              <h3>Ime predmeta: {productName}</h3>
+              <h3>Predviđena dob korisnika: {dob}</h3>
+              <h3>Datum objave: {datum} </h3>
+              <h3>Opis: {opis}</h3>
+              <h3>Lokacija: {handoverLocation} </h3>
+            </CardContent>
+          </CardActionArea>
+        </Card>
       <Modal open={open} onClose={handleClose}>
         <Box
           className={DonacijaKardCSS.modal}
@@ -270,7 +321,7 @@ const DonacijaKard = (props) => {
                   label="Email donatora"
                   id="emailDonatora"
                   value={props.donacija.user.email}
-                  disabled="True"
+                  disabled={true}
                   ></TextField>
 
                 <FormControl fullWidth>
@@ -342,10 +393,33 @@ const DonacijaKard = (props) => {
                   value={productionYear}
                   disabled={checkedUser}></TextField>
 
+                <Box>
+                  <Typography>Opis oglasa</Typography>
+                  <TextField
+                    name="descriptionField"
+                    id="descriptionField"
+                    value={opis}
+                    onChange={(e) => setOpis(e.target.value)}
+                    disabled={checkedUser}
+                    multiline
+                  >
+                  </TextField>
+                </Box>
+
                 <DropdownCategory
                   value={checkedUser}
                   category={checkedCat}
                   subcategory={checkedSub}></DropdownCategory>
+
+                <Button
+                  type="submit"
+                  style={emailPrim != emailL ? { display: `none` } : {}}
+                  onClick={ponovnoDoniraj}
+                  variant="outlined"
+                  color="info">
+                  Ponovno doniraj
+                  </Button>
+
                 <div>
                   <input
                     style={email != emailL ? { display: `none` } : {}}

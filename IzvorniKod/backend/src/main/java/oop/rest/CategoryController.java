@@ -21,7 +21,6 @@ public class CategoryController {
 
     // Izlistaj sve kategorije
     @GetMapping("")
-    //@Secured({"ROLE_USER","ROLE_ADMIN"})
     public List<Category> listCategory(){
         return service.listAll();
     }
@@ -29,7 +28,6 @@ public class CategoryController {
     // Izlistaj podkategoriju po imenu
     // Pomalo beskorisna funkcija
     @GetMapping("/{categoryName}")
-    //@Secured({"ROLE_USER","ROLE_ADMIN"})
     public Category getCategoryByName(@PathVariable("categoryName") String categoryName){
         return service.getCategoryByName(categoryName).get();
     }

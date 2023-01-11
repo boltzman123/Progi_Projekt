@@ -1,7 +1,16 @@
+.okvir{
+    padding: 10px 10px;
+    margin: 40px 40px;
+    background-color: rgba(244, 177, 131, 255);
+    border-radius: 10px;   
+}
+
 .karticaList {
-    display: grid;
-    grid-template-columns: auto auto auto;
-    justify-content: space-between;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
     padding: 20px 20px;
     margin: 40px 40px;
     background-color: rgba(244, 177, 131, 255);
@@ -10,4 +19,42 @@
 
 .blue{
     background-color: lightblue;
+}
+.nevidljiv  {
+    height: 72.6%;
+}
+
+h2{
+    padding-left: 20px;
+    margin-left: 40px;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+}
+
+.okvirDD{
+    padding: 10px 10px;
+    margin: 40px 40px;
+    background-color: rgba(244, 177, 131, 255);
+    border-radius: 10px;   
+}
+.okvirMD{
+    padding: 10px 10px;
+    margin: 40px 40px;
+    background-color: rgba(244, 177, 131, 255);
+    border-radius: 10px;   
+}
+
+@media only screen and (max-width: 449px) {
+    .okvir{
+        padding: 10px 10px;
+        margin: 20px 20px;
+    }
+
+    .karticaList{
+        margin: 0px 0px;
+    }
+}
+.nevidljiv {
+    height: 72.6%;
 }
