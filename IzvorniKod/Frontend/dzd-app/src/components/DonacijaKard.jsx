@@ -268,7 +268,6 @@ const DonacijaKard = (props) => {
 
       <Modal open={open} onClose={handleClose}>
         <Box className={DonacijaKardCSS.modal} sx={{ ...style, maxHeight: 800, overflow: "auto" }}>
-
             <CardMedia
               className={DonacijaKardCSS.slikica}
               component="img"

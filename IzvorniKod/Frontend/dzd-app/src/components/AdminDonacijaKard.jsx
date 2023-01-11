@@ -233,14 +233,12 @@ const MojeDonacijaKard = (props) => {
             className={DonacijaKardCSS.img}
             component="img"
             image={pictureURL}
+            style={{ height: "auto" }}
             alt="slika predmeta koji se donira"
           />
           <form
-            className={DonacijaKardCSS.predmeti}
-            style={{ marginTop: 10 }}
             onSubmit={onSubmit}>
-            <Container maxWidth="s">
-              <Box>
+            <Container maxWidth="s" className="Test">
                 <Box className={DonacijaKardCSS.FormControl}>
                   <TextField
                     onChange={(e) => setDonationName(e.target.value)}
@@ -310,6 +308,7 @@ const MojeDonacijaKard = (props) => {
                       id="dob-select"
                       value={dob}
                       label="Dob"
+                      
                       required
                       MenuProps={{
                         PaperProps: { sx: { maxHeight: 175 } },
@@ -358,7 +357,8 @@ const MojeDonacijaKard = (props) => {
                     label="Stanje predmeta"
                     id="stanjePredmeta"
                     value={itemState}
-                    disabled={checkedUser}>
+                    disabled={checkedUser}
+                    >
                   </TextField>
                 </Box>
 
@@ -368,7 +368,8 @@ const MojeDonacijaKard = (props) => {
                     label="Naziv marke predmeta"
                     id="markaPredmeta"
                     value={productBrand}
-                    disabled={checkedUser}>
+                    disabled={checkedUser}
+                    >
                   </TextField>
                 </Box>
 
@@ -379,7 +380,8 @@ const MojeDonacijaKard = (props) => {
                     label="Godina proizvodnje"
                     id="godinaProizvodnje"
                     value={productionYear}
-                    disabled={checkedUser}>
+                    disabled={checkedUser}
+                    >
                   </TextField>
                 </Box>
 
@@ -391,7 +393,8 @@ const MojeDonacijaKard = (props) => {
                     value={opis}
                     onChange={(e) => setOpis(e.target.value)}
                     disabled={checkedUser}
-                    multiline>
+                    multiline
+                    fullWidth>
                   </TextField>
                 </Box>
 
@@ -410,12 +413,12 @@ const MojeDonacijaKard = (props) => {
                     onChange={handleImageChange}
                   />
                 </div>
-              </Box>
 
               <br/>
-              <hr/>
+              <hr style={{marginLeft:"150px"}}/>
               <br/>
 
+              <Box className={DonacijaKardCSS.FormControl}>
               <TextField
                 id="outlined-multiline-flexible"
                 label="Ostavite komentar"
@@ -425,9 +428,11 @@ const MojeDonacijaKard = (props) => {
                 value={message}
                 onChange={ (e) => setMessage(e.target.value)}
                 />
-                <CardActions>
+              </Box>
+              
+                <CardActions className={DonacijaKardCSS.Gumbici}>
                     <Button
-                        type="submit"
+                        onClick={onSubmit}
                         variant="outlined"
                         color="info"
                         sx={{ ...style2 }}>   

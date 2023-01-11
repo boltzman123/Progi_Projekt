@@ -80,7 +80,6 @@ const MojeDonacijaKard = (props) => {
   // Event handler for when the user selects an image
   const handleChange = (event) => {
     setFile(event.target.files[0]);
-    handleUpload();
   };
   // console.log(pictureURL);
 
@@ -383,82 +382,99 @@ const MojeDonacijaKard = (props) => {
                   </TextField>
                 </Box>
 
-                <TextField
-                  label="Email donatora"
-                  id="datumObjave"
-                  value={email}
-                  disabled={true}></TextField>
+                <Box className={DonacijaKardCSS.FormControl}>
+                  <TextField
+                    label="Email donatora"
+                    id="datumObjave"
+                    value={email}
+                    disabled={true}>
+                  </TextField>
+                </Box>
 
-                <FormControl fullWidth>
-                  <InputLabel>Predviđena dob:</InputLabel>
-                  <Select
-                    style={{ width: 225 }}
-                    disabled={smijeMijenjati}
-                    labelId="dob-select-label"
-                    id="dob-select"
-                    value={dob}
-                    label="Dob"
-                    required
-                    MenuProps={{
-                      PaperProps: { sx: { maxHeight: 175 } },
-                    }}
-                    onChange={(e) => setDob(e.target.value)}>
-                    {ageRange.map((ageSelect) => {
-                      return (
-                        <MenuItem key={ageSelect} value={ageSelect}>
-                          {ageSelect}
-                        </MenuItem>
-                      );
-                    })}
-                  </Select>
-                </FormControl>
-                <FormControl fullWidth>
-                  <FormLabel id="spol">Namijenjeni spol</FormLabel>
-                  <RadioGroup
-                    name="spol-radio-buttons-group"
-                    value={spol}
-                    required
-                    onChange={(e) => setSpol(e.target.value)}>
-                    <div>
-                      <FormControlLabel
-                        value="F"
-                        disabled={smijeMijenjati}
-                        control={<Radio />}
-                        label="Žensko"
-                      />
-                      <FormControlLabel
-                        value="M"
-                        disabled={smijeMijenjati}
-                        control={<Radio />}
-                        label="Muško"
-                      />
-                    </div>
-                  </RadioGroup>
-                </FormControl>
+                <Box className={DonacijaKardCSS.FormControl}>
+                  <FormControl fullWidth>
+                    <InputLabel>Predviđena dob:</InputLabel>
+                    <Select
+                      style={{ width: 225 }}
+                      disabled={smijeMijenjati}
+                      labelId="dob-select-label"
+                      id="dob-select"
+                      value={dob}
+                      label="Dob"
+                      required
+                      MenuProps={{
+                        PaperProps: { sx: { maxHeight: 175 } },
+                      }}
+                      onChange={(e) => setDob(e.target.value)}>
+                      {ageRange.map((ageSelect) => {
+                        return (
+                          <MenuItem key={ageSelect} value={ageSelect}>
+                            {ageSelect}
+                          </MenuItem>
+                        );
+                      })}
+                    </Select>
+                  </FormControl>
+                </Box>
 
-                <TextField
-                  onChange={(e) => setItemState(e.target.value)}
-                  label="Stanje predmeta"
-                  id="stanjePredmeta"
-                  value={itemState}
-                  disabled={smijeMijenjati}></TextField>
+                <Box className={DonacijaKardCSS.FormControl}>
+                  <FormControl fullWidth>
+                    <FormLabel id="spol">Namijenjeni spol</FormLabel>
+                    <RadioGroup
+                      name="spol-radio-buttons-group"
+                      value={spol}
+                      required
+                      onChange={(e) => setSpol(e.target.value)}>
+                      <div>
+                        <FormControlLabel
+                          value="F"
+                          disabled={smijeMijenjati}
+                          control={<Radio />}
+                          label="Žensko"
+                        />
+                        <FormControlLabel
+                          value="M"
+                          disabled={smijeMijenjati}
+                          control={<Radio />}
+                          label="Muško"
+                        />
+                      </div>
+                    </RadioGroup>
+                  </FormControl>
+                </Box>
 
-                <TextField
-                  onChange={(e) => setProductBrand(e.target.value)}
-                  label="Naziv marke predmeta"
-                  id="markaPredmeta"
-                  value={productBrand}
-                  disabled={smijeMijenjati}></TextField>
+                <Box className={DonacijaKardCSS.FormControl}>
+                  <TextField
+                    onChange={(e) => setItemState(e.target.value)}
+                    label="Stanje predmeta"
+                    id="stanjePredmeta"
+                    value={itemState}
+                    disabled={smijeMijenjati}>
+                    </TextField>
+                </Box>
 
-                <TextField
-                  type="number"
-                  onChange={(e) => setProductionYear(e.target.value)}
-                  label="Godina proizvodnje"
-                  id="godinaProizvodnje"
-                  value={productionYear}
-                  disabled={smijeMijenjati}></TextField>
+                <Box className={DonacijaKardCSS.FormControl}>
+                  <TextField
+                    onChange={(e) => setProductBrand(e.target.value)}
+                    label="Naziv marke predmeta"
+                    id="markaPredmeta"
+                    value={productBrand}
+                    disabled={smijeMijenjati}>
+                  </TextField>
+                </Box>
 
-                <Box>
+                <Box className={DonacijaKardCSS.FormControl}>
+                  <TextField
+                    type="number"
+                    onChange={(e) => setProductionYear(e.target.value)}
+                    label="Godina proizvodnje"
+                    id="godinaProizvodnje"
+                    value={productionYear}
+                    disabled={smijeMijenjati}>
+                  </TextField>
+                </Box>
+
+                <Box className={DonacijaKardCSS.FormControl}>
                   <Typography>Opis oglasa</Typography>
                   <TextField
                     name="descriptionField"
@@ -467,49 +483,63 @@ const MojeDonacijaKard = (props) => {
                     value={opis}
                     onChange={(e) => setOpis(e.target.value)}
                     required={true}
-                    multiline
-                  >
+                    multiline>
                   </TextField>
                 </Box>
 
+                <Box className={DonacijaKardCSS.FormControl}>
                 <DropdownCategory 
                   value={smijeMijenjati}
                   category={checkedCat}
-                  subcategory={checkedSub}></DropdownCategory>
-                <div style={{display:smijeMijenjati==true?"none":""}}>
+                  subcategory={checkedSub}>
+                  </DropdownCategory>
+                </Box>
+
+                <div className={DonacijaKardCSS.FormControl} 
+                style={{display:smijeMijenjati==true?"none":""}}>
                   <input type="file" accept="image/*" onChange={handleChange}/>
-                  <p style={{display:percent=="100"?"none":""}}>{percent} "% done"</p>
+                  <p style={{display:((percent=="100")|| (percent=="0"))?"none":""}}>{percent} "% gotovo"</p>
+                  <br/>
                   <button onClick={handleUpload} type="button">Upload slike</button>
                 </div>
-                <TextField
-                  onChange={(e) => setDobivateljEmail(e.target.value)}
-                  label="Email primatelja donacije"
-                  sx={{display:smijeMijenjati==true?"none":""}}
-                  id="predajeSeKorisniku"
-                  type="email"
-                  value={dobivateljEmail}
-                  disabled={smijeMijenjati}></TextField>
-                  
-                <Button
-                  onClick={dohvatiKorisnika}
-                  sx={{display:smijeMijenjati==true?"none":""}}
-                  style={email != emailL ? { display: `none` } : {}}
-                  variant="outlined"
-                  color="info"
-                  id="provjera">
-                  Provjera korisnika
-                </Button>
                 
-                <Button
-                  onClick={predajOglas}
-                  style={donatedTo!=null ? { display: `none` } : {}}
-                  variant="outlined"
-                  color="info"
-                  id="predaj">
-                  Predaj oglas
-                </Button>
+                <Box className={DonacijaKardCSS.FormControl}>
+                  <TextField
+                    onChange={(e) => setDobivateljEmail(e.target.value)}
+                    label="Email primatelja donacije"
+                    sx={{display:smijeMijenjati==true?"none":""}}
+                    id="predajeSeKorisniku"
+                    type="email"
+                    value={dobivateljEmail}
+                    disabled={smijeMijenjati}>
+                  </TextField>
+                </Box>
+                  
+                <Box className={DonacijaKardCSS.FormControl}>
+                  <Button
+                    onClick={dohvatiKorisnika}
+                    sx={{display:smijeMijenjati==true?"none":""}}
+                    style={email != emailL ? { display: `none` } : {}}
+                    variant="outlined"
+                    color="info"
+                    id="provjera">
+                    Provjera korisnika
+                  </Button>
+                </Box>
+                
+                <Box className={DonacijaKardCSS.FormControl}>
+                  <Button
+                    onClick={predajOglas}
+                    style={donatedTo!=null ? { display: `none` } : {}}
+                    variant="outlined"
+                    color="info"
+                    id="predaj">
+                    Predaj oglas
+                  </Button>
+                </Box>
 
-              <hr/>
+              <hr style={{marginLeft:"150px"}}/>
+              <Box className={DonacijaKardCSS.FormControl}>
               <CardActions sx={{display:smijeMijenjati==true?"none":""}}>
                 <Button
                   type="submit"
@@ -526,6 +556,7 @@ const MojeDonacijaKard = (props) => {
                   Obriši oglas
                 </Button>
               </CardActions>
+              </Box>
             </Container>
           </form>
         </Box>
