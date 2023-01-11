@@ -44,7 +44,6 @@ const NovoDijeteCategoryPicker = ({checkedSub, setCheckedSub,
         newChecked.splice(currentIndex, 1);
         }
         
-        console.log(newChecked);
         setCheckedSub(newChecked);
     };
 
@@ -55,21 +54,22 @@ const NovoDijeteCategoryPicker = ({checkedSub, setCheckedSub,
             <Box>          
                 {categories.map((category) => {
                     return(
-                    <Accordion key={category.categoryName}>
+                    <Accordion key={"kategorija " + category.categoryName}>
                         <AccordionSummary
+                            key={"kategorija summary " + category.categoryName}
                             expandIcon={<ExpandMoreIcon />}
                             aria-controls="panel1a-content"
                             id="panel1a-header"
                         >
-                            <Typography>{category.categoryName}</Typography>
+                            {category.categoryName}
                         </AccordionSummary>
-                        <AccordionDetails style={{maxHeight: 150, overflow: 'auto'}}>
-                            <List>
+                        <AccordionDetails key={"details " + category.categoryName} style={{maxHeight: 150, overflow: 'auto'}}>
+                            <List key={category.categoryName + "potkategorije"}>
                                 {subcategories.map((subcategory) => {
                                     return(
                                         category.categoryName === subcategory.category.categoryName ?
-                                        <ListItem key={category.categoryName + subcategory.subcategoryName}>
-                                            <ListItemButton onClick={checkToggle(subcategory.subcategoryName)}>
+                                        <ListItem key={"kategorija" + category.categoryName + "potkategorija" + subcategory.subcategoryName}>
+                                            <ListItemButton key={"button " + subcategory.subcategoryName} onClick={checkToggle(subcategory.subcategoryName)}>
                                                 <ListItemIcon>
                                                     <Checkbox checked={checkedSub.indexOf(subcategory.subcategoryName) !== -1}/>
                                                 </ListItemIcon>

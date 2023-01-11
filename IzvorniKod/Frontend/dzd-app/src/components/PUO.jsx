@@ -148,7 +148,7 @@ const User = () => {
 
                     <button className="gumbic buttonreg" style={{display:email=="admin"?"none":""}}
                     onClick={() => { if (window.confirm('Sigurno želite obrisati račun?')) 
-                    obrisiRacun() }}>Obrisi racun</button>{" "}
+                    obrisiRacun() }}>Obriši račun</button>{" "}
                     
                     {user.email == 'admin' ? 
                     <Link to={"/kategorije"}>

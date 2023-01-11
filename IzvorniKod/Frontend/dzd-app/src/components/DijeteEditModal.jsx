@@ -80,7 +80,6 @@ const DijeteModal = ({dijete, updatePage, setUpdatePage}) => {
             });
             
         })
-        console.log('newSubcats: ', sendsubcat);                   
         setSendSubCategories(sendsubcat);
 
         // Kreiranje arraya category objekata iz prethodno definiranog skupa
@@ -92,7 +91,6 @@ const DijeteModal = ({dijete, updatePage, setUpdatePage}) => {
                 }
             })
         })
-        console.log('newCats: ', sendcat);                   
         setSendCategories(sendcat);
         
         axios({
@@ -113,13 +111,12 @@ const DijeteModal = ({dijete, updatePage, setUpdatePage}) => {
 
           }
         }).then((response) => {
-            console.log("Updateano dijete");
             handleClose();
             setUpdatePage(Math.random());
             navigate('/djeca');
           })
           .catch(err => {
-            console.log('Forma ne šljaka')
+            console.log(err)
             toast.error("Neispravno uneseni podaci")
         });
     }

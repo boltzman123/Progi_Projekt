@@ -57,7 +57,6 @@ const NovaKategorijaForm = ({updatePage, setUpdatePage}) => {
                     required
                     variant="outlined" 
                     fullWidth
-                    displayEmpty
                     className={nkpCSS.item}
                     onChange={(e) => setCategoryName(e.target.value)}/>
                     <Button type="submit" variant='contained' sx={{borderRadius: 20, m: 5}} size='large'>Dodaj kategoriju</Button>

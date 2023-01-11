@@ -83,13 +83,12 @@ const NovoDijeteForm = ({updatePage, setUpdatePage}) => {
 
           }
         }).then((response) => {
-            console.log("Dodano dijete");
             clearForm();
             setUpdatePage(Math.random());
             navigate('/djeca');
           })
           .catch(err => {
-            console.log('Forma ne šljaka')
+            console.log(err)
             toast.error("Neispravno uneseni podaci")
         });
         
@@ -110,7 +109,6 @@ const NovoDijeteForm = ({updatePage, setUpdatePage}) => {
                         <Box className={ndfCSS.FormControl}>
                             <Typography>Ime</Typography>
                             <TextField
-                                displayEmpty
                                 id="ime" 
                                 value={ime} 
                                 required
@@ -144,7 +142,6 @@ const NovoDijeteForm = ({updatePage, setUpdatePage}) => {
                                     value={dob}
                                     className={ndfCSS.item}
                                     required
-                                    displayEmpty
                                     MenuProps={{
                                         PaperProps: { sx: { maxHeight: 175 }}
                                     }}

@@ -95,7 +95,6 @@ const NovaPotkategorijaForm = ({updatePage, setUpdatePage}) => {
                                 required
                                 variant="outlined" 
                                 fullWidth
-                                displayEmpty
                                 onChange={(e) => setSubcategoryName(e.target.value)}
                                 className={nkpCSS.item}/>
                     </Box>
