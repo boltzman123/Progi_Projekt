@@ -23,19 +23,16 @@ public class SubcategoryController {
 
     // Izlistaj sve podkategorije
     @GetMapping("")
-    @Secured({"ROLE_USER","ROLE_ADMIN"})
     public List<Subcategory> listSubcategory(){
         return service.listAll();
     }
 
     // Izlistaj podkategoriju po imenu
     @GetMapping("/{subcategoryName}")
-    @Secured({"ROLE_USER","ROLE_ADMIN"})
     public Subcategory getSubcategoryByName(@PathVariable("subcategoryName") String subcategoryName){
         return service.getSubcategoryByName(subcategoryName).get();
     }
     @GetMapping("/seasons")
-    @Secured({"ROLE_USER","ROLE_ADMIN"})
     public List<Season> getAllSeasons(){
         List<Season> seasons = new ArrayList<>();
         seasons.add(Season.AUTUMN);
@@ -47,7 +44,6 @@ public class SubcategoryController {
 
     // Izlistaj podkategorije po imenu kategorije
     @GetMapping("/category/{categoryName}")
-    @Secured({"ROLE_USER","ROLE_ADMIN"})
     public List<Subcategory> getSubcategoryByCategory(@PathVariable("categoryName") String categoryName){
         List<Subcategory> subcategoryList = service.listAll().stream().filter(s -> s.getCategory().getCategoryName().equals(categoryName)).collect(Collectors.toList());
         return subcategoryList;

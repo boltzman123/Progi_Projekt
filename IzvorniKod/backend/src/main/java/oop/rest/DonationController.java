@@ -43,21 +43,18 @@ public class DonationController {
 
     // Izlistaj sve donacije pojedinog usera
     @GetMapping("/users/{email}")
-    @Secured({"ROLE_USER","ROLE_ADMIN"})
     public List<Donation> listDonationsByUser(@PathVariable String email){
         return service.listByUser(email);
     }
 
     // Vrati donaciju po id-u
     @GetMapping("/{id}")
-    @Secured({"ROLE_USER","ROLE_ADMIN"})
     public Donation listDonationById(@PathVariable Long id){
         return service.getDonationById(id);
     }
 
     // Vratiti sve donacije poslane na doradu pojedinom korisniku
     @GetMapping("/edit/{email}")
-    @Secured({"ROLE_USER","ROLE_ADMIN"})
     public List<Donation> getEditableDonations(@PathVariable String email){
         return service.listByUser(email).stream().filter(d -> d.isEdit()==true).collect(Collectors.toList());
     }
@@ -78,7 +75,6 @@ public class DonationController {
     }
     // Preporučene i aktivne donacije za usera
     @GetMapping("/user/{email}")
-    @Secured({"ROLE_USER","ROLE_ADMIN"})
     public Map<String,List<Donation>> donationByChild(@PathVariable("email") String email){
         List<Child> childList = childService.listChildByUser(email);
         Set<String> subcategoryNames = new HashSet<>();
@@ -168,7 +164,6 @@ public class DonationController {
 
     // Donacija s itemom
     @PostMapping("")
-    @Secured({"ROLE_USER","ROLE_ADMIN"})
     public ResponseEntity<Donation> createDonationWithItem(@RequestBody Donation donation) throws Exception{
 
         if(donation.getDateOfClosing()==null){
@@ -183,7 +178,6 @@ public class DonationController {
 
     // Donacija s već kreiranim itemom
     @PostMapping("/createDonation")
-    @Secured({"ROLE_USER","ROLE_ADMIN"})
     public ResponseEntity<Donation> createDonation(@RequestBody Donation donation){
         if(donation.getDateOfClosing()==null){
             donation.setActive(true);
@@ -193,16 +187,8 @@ public class DonationController {
         return ResponseEntity.created(URI.create("/donation/" + saved.getIdDonation())).body(saved);
     }
 
-    @PostMapping("/uploadPicture")
-    @Secured({"ROLE_USER","ROLE_ADMIN"})
-    public ResponseEntity<String> uploadImage(@RequestBody MultipartFile file) throws Exception{
-
-        return ResponseEntity.created(URI.create(file.getOriginalFilename())).body(uploadService.uploadFile(file));
-    }
-
     // Update donaciju
     @PutMapping("/{id}")
-    @Secured({"ROLE_USER","ROLE_ADMIN"})
     public Donation updateDonation(@PathVariable("id") Long id, @RequestBody Donation donation){
         if(!donation.getIdDonation().equals(id)){
             throw new IllegalArgumentException("Donation id must be preserved");
@@ -217,13 +203,11 @@ public class DonationController {
 
     // Brisanje donacije na 2 načina
     @DeleteMapping("/{id}")
-    @Secured({"ROLE_USER","ROLE_ADMIN"})
     public Donation deleteDonation(@PathVariable("id") Long id){
         return service.deleteDonation(id);
     }
 
     @DeleteMapping
-    @Secured({"ROLE_USER","ROLE_ADMIN"})
     public Donation delete(@RequestBody Donation donation){
         return service.delete(donation);
     }
