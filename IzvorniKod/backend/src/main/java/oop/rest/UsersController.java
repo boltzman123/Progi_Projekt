@@ -51,7 +51,6 @@ public class UsersController {
 
     // Dohvati usera po emailu i passwordu
     @GetMapping("/{email}/{password}")
-    @Secured({"ROLE_USER","ROLE_ADMIN"})
     public Users getUser(@PathVariable("email") String email, @PathVariable("password") String password){
         Users user =userService.fetch(email);
         if(passwordEncoder.matches(password, user.getPassword())){
@@ -61,7 +60,6 @@ public class UsersController {
         }
     }
     @GetMapping("/{email}")
-    @Secured({"ROLE_USER, ROLE_ADMIN"})
     public Users getUserByUsername(@PathVariable String email){
         return userService.fetch(email);
     }
@@ -104,7 +102,6 @@ public class UsersController {
     }
     // Update usera
     @PutMapping("/{email}")
-    @Secured({"ROLE_USER","ROLE_ADMIN"})
     public Users updateUser(@PathVariable("email") String email, @RequestBody Users user) {
         if (!user.getEmail().equals(email))
             throw new IllegalArgumentException("User email must be preserved");
@@ -112,7 +109,6 @@ public class UsersController {
     }
     // Obrisi usera po id-u ili objektu
     @DeleteMapping("/{email}")
-    @Secured({"ROLE_USER","ROLE_ADMIN"})
     public Users deleteUser(@PathVariable("email") String email) {
         List<Child> children = childService.listChildByUser(email);
         for(Child c: children){
