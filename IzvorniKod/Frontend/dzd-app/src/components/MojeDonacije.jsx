@@ -74,19 +74,19 @@ function MojeDonacije() {
   else {
     return (
       <>
-        <div className={MojiOglasiCSS.okvir} style={{display:doniraniOglasiList.length==0 ?"none":""}}>
-        <h2>Donirane donacije</h2>
+        <div className={MojiOglasiCSS.okvir} style={{display:mojiOglasiList.length==0 ?"none":""}}>
+        <h2>Moje trenutne donacije</h2>
           <div className={MojiOglasiCSS.karticaList}>
-              {doniraniOglasiList.map((donacija) => {
+              {mojiOglasiList.map((donacija) => {
               return <MojaDonacijaKard key={donacija.idDonation} donacija={donacija}></MojaDonacijaKard>;
               })}
           </div>
         </div>
 
-        <div className={MojiOglasiCSS.okvir} style={{display:mojiOglasiList.length==0 ?"none":""}}>
-        <h2>Moje trenutne donacije</h2>
+        <div className={MojiOglasiCSS.okvir} style={{display:doniraniOglasiList.length==0 ?"none":""}}>
+        <h2>Donirane donacije</h2>
           <div className={MojiOglasiCSS.karticaList}>
-              {mojiOglasiList.map((donacija) => {
+              {doniraniOglasiList.map((donacija) => {
               return <MojaDonacijaKard key={donacija.idDonation} donacija={donacija}></MojaDonacijaKard>;
               })}
           </div>

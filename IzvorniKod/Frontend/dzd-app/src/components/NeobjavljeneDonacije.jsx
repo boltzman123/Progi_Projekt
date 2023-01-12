@@ -36,8 +36,9 @@ function NeobjavljeneDonacije() {
   else {
     return (
       <>
-      <div className={KarticaCSS.okvirMD}>
+      <div className={KarticaCSS.okvir}>
         <h2>Neobjavljene donacije</h2>
+        <hr/>
           <div className={KarticaCSS.karticaList}>
               {donacije.map((donacija) => {
               return <AdminDonacijaKard key={donacija.idDonation} donacija={donacija}></AdminDonacijaKard>;
