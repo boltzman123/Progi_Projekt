@@ -47,6 +47,7 @@ const DonacijaKard = (props) => {
   let { id } = props.donacija.item;
   let userL = JSON.parse(localStorage.getItem("user"));
   let emailL = userL.email;
+  let canDonate=userL.canDonate;
 
   if (props.donacija.donatedToUser!=null){
     var emailPrim=props.donacija.donatedToUser.email;
@@ -440,14 +441,16 @@ const DonacijaKard = (props) => {
                   </DropdownCategory>
                 </Box>
 
-                <Button
-                  type="submit"
-                  style={emailPrim != emailL ? { display: `none` } : {}}
-                  onClick={ponovnoDoniraj}
-                  variant="outlined"
-                  color="info">
-                  Ponovno doniraj
+                <Box className={DonacijaKardCSS.FormControl}>
+                  <Button
+                    type="submit"
+                    style={(canDonate && (emailPrim == emailL)) ? {} : {display:"none"}}
+                    onClick={ponovnoDoniraj}
+                    variant="outlined"
+                    color="info">
+                    Ponovno doniraj
                   </Button>
+                </Box>
 
                 <div>
                   <input
