@@ -175,7 +175,6 @@ const MojeDonacijaKard = (props) => {
           .then((response) => {
             console.log(response.data);
             handleClose();
-            navigate("/base");
             toast.success("Promjene spremljene u bazu!");
           })
           .catch((err) => {

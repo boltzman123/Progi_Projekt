@@ -47,9 +47,10 @@ form {
     height: 2em;
 }
 
-.h2{
+h2{
     margin-left: -20px;
 }
+
 
 /*mobitel*/
 @media only screen and (max-width: 449px) {

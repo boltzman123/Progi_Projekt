@@ -146,7 +146,7 @@ const MojeDonacijaKard = (props) => {
         "pictureURL": props.donacija.pictureURL,
         "handoverLocation": props.donacija.handoverLocation,
         "donatedToUser": props.donacija.donatedToUser,
-        "active": props.donacija.active,
+        "active": "false",
         "valid": "false",
         user:props.donacija.user,
         item:props.donacija.item
@@ -154,6 +154,7 @@ const MojeDonacijaKard = (props) => {
     }).then((response) => {
         handleClose();
         toast.success("Donacija je odbijena!");
+        window.location.reload(false)
     })
     .catch((err) => {
         console.log(err);
@@ -181,7 +182,7 @@ const MojeDonacijaKard = (props) => {
         "pictureURL": props.donacija.pictureURL,
         "handoverLocation": props.donacija.handoverLocation,
         "donatedToUser": props.donacija.donatedToUser,
-        "active": "false",
+        "active": "true",
         "valid": "false",
         user:props.donacija.user,
         item:props.donacija.item
@@ -189,6 +190,7 @@ const MojeDonacijaKard = (props) => {
     }).then((response) => {
         handleClose();
         toast.success("Donacija je poslana na doradu!");
+        window.location.reload(false)
     })
     .catch((err) => {
         console.log(err);
