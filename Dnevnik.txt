@@ -160,3 +160,11 @@
         -pregled do sad napravljenoga
 	-podjela posla oko rada na frontendu i backendu
 	-dogovor vremena testiranja
+
+21. sastanak
+    -Datum: 11. siječnja 2023
+    -Prisustvovali: D.Kiramarios, D.Kovačević, K.Tomičić, D.Jambrović, K.Orešković, K.Kijac, S.Barac
+    -Trajanje sastanka: 1h
+    -Teme sastanka:
+        -pregled implementacije aplikacije
+	-provođenje ručnog testiranja aplikacije

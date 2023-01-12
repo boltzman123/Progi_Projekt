@@ -30,7 +30,7 @@
 			
 			\subsection{Ispitivanje komponenti}
 
-                Za testiranje rada komponenti, napisano je i pokrenuto 9 unit testova. Na slikama se nalazi kod samih testova, kao i dokaz da testovi prolaze (redak Tests passed). Uz to, vidljivo je i trajanje izvođenja testova.\\
+                Za testiranje rada komponenti, napisano je i pokrenuto 9 unit testova. Testovi su pisani u programskom jeziku Java koristeći okvir za testiranje JUnit. Na slikama se nalazi kod samih testova, kao i dokaz da testovi prolaze (redak Tests passed). Uz to, vidljivo je i trajanje izvođenja testova.\\
                 
                 \subsubsection{Test 1}
                 Prvim testom provjerava se valjanost zapisa o kategoriji pri dohvaćanju potkategorije - ako je dohvaćena potkategorija "Lutke", u dohvaćenom podatku trebao bi postojati i zapis o pripadnoj kategoriji - "Igračke". \underline{Test prolazi.}
@@ -45,10 +45,10 @@
                 \eject
 
                 \subsubsection{Test 2}
-                Drugim testom provjerava se dolazi li do pogreške ako pri registraciji korisnik unese mail adresu koja je već unešena u bazi. \underline{Test prolazi.}
+                Drugim testom provjerava se dolazi li do pogreške ako pri registraciji korisnik unese mail adresu koja je već unešena u bazi - očekivan je status "400 Bad Request". \underline{Test prolazi.}
 
                 \begin{figure}[H]
-				\includegraphics[]{slike/unit2.png}
+				\includegraphics[scale=0.9]{slike/unit2.png}
 				\centering
 				\caption{Kod drugog unit testa}
 				\label{fig:unit2}
@@ -119,7 +119,77 @@
 			
 			
 			
-			%\subsection{Ispitivanje sustava}
+			\subsection{Ispitivanje sustava}
+
+                Za testiranje rada cjelovitog sustava, korišteni su alati Selenium Webdriver i Selenium IDE. Selenium Webdriver omogućava pisanje testova cjelovitog sustava koristeći proizvoljan programski jezik, kao i integraciju tih testova s unit testovima napisanim za testiranje rada pojedinačnih komponenti. S druge strane, Selenium IDE korisnicima omogućava generiranje testova cjelovitog sustava snimanjem svojih akcija i ponavljanjem tih akcija. \\
+                
+                U našem testiranju, testirali smo funkcionalnosti aplikacije koja je već puštena u pogon (engl. deployana). Pritom smo za jednostavnije funkcionalnosti ručno pisali testove u programskom jeziku Java, dok smo za neke od složenijih funkcionalnosti snimili akcije koristeći alat Selenium IDE. Na slikama vidljiv je kod testova pisanih koristeći Selenium Webdriver, kao i akcije snimljene alatom Selenium IDE. Testovi pisani u programskom jeziku Java izvršeni su zajedno, a rezultat njihovog izvođenja prikazan je na zasebnoj slici. 
+
+                \subsubsection{Test 1}
+                Prvim testom provjerava se registracija koristeći već unesenu mail adresu tj. adresu za koju u bazi već postoji zapis o korisniku. Očekivani rezultat izvođenja testa je da ne dolazi do preusmjeravanja na stranicu s prikazom aktivnih oglasa, već je i dalje prikazana stranica za registraciju (s porukom o neuspješnoj registraciji). \underline{Test prolazi.}
+
+                \begin{figure}[H]
+				\includegraphics[scale=0.55]{slike/selenium1.png}
+				\centering
+				\caption{Kod prvog Selenium testa}
+				\label{fig:selenium1}
+			\end{figure}
+
+                \subsubsection{Test 2}
+                Drugim testom provjerava se registracija koristeći ispravne podatke tj. podatke za koje u bazi do sada ne postoji zapis o korisniku. Očekivani rezultat izvođenja testa je da dolazi do preusmjeravanja na stranicu s prikazom aktivnih oglasa koja u zaglavlju ima poveznice na ostale dijelove stranice. \underline{Test prolazi.}
+
+                \begin{figure}[H]
+				\includegraphics[scale=0.55]{slike/selenium2.png}
+				\centering
+				\caption{Kod drugog Selenium testa}
+				\label{fig:selenium2}
+			\end{figure}
+
+                \subsubsection{Test 3}
+                Trećim testom provjerava se login korisnika koristeći neispravne podatke (kombinacija ispravna mail adresa, neispravna lozinka korisnika). Očekivani rezultat izvođenja testa je da ne dolazi do preusmjeravanja na stranicu s prikazom aktivnih oglasa, već je i dalje prikazana stranica za login (s porukom o neuspješnoj prijavi). \underline{Test prolazi.}
+
+                \begin{figure}[H]
+				\includegraphics[scale=0.55]{slike/selenium3.png}
+				\centering
+				\caption{Kod trećeg Selenium testa}
+				\label{fig:selenium3}
+			\end{figure}
+
+                \subsubsection{Test 4}
+                Četvrtim testom provjerava se login korisnika koristeći ispravne podatke (ispravna mail adresa, ispravna lozinka korisnika). Očekivani rezultat izvođenja testa je da dolazi do preusmjeravanja na stranicu s prikazom aktivnih oglasa koja u zaglavlju ima poveznice na ostale dijelove stranice. \underline{Test prolazi.}
+
+                \begin{figure}[H]
+				\includegraphics[scale=0.55]{slike/selenium4.png}
+				\centering
+				\caption{Kod četvrtog Selenium testa}
+				\label{fig:selenium4}
+			\end{figure}
+
+                \subsubsection{Rezultati izvođenja Selenium testova}
+                Na slici 5.12 prikazani su rezultati izvođenja do sada opisanih testova. Sva četiri testa uspješno prolaze, a na slici je prikazano i trajanje pojedinih testova.
+
+                \begin{figure}[H]
+				\includegraphics[]{slike/selenium_results.png}
+				\centering
+				\caption{Rezultati izvođenja Selenium testova}
+				\label{fig:seleniumResults}
+			\end{figure}
+
+                \eject
+
+                \subsubsection{Test 5}
+                Na slici 5.13 prikazane su akcije snimljene koristeći alat Selenium IDE. Alat Selenium IDE korišten je kako bi se preglednije prikazale potrebne akcije - kod za testiranje složenih funkcionalnosti dugačak je i nepregledniji od ovakvog prikaza. Testirano je dodavanje nove kategorije. Kako bi se dodala nova kategorija, korisnik se mora prijaviti koristeći admin podatke. Tijekom provođenja testa, ti su podaci već bili pohranjeni u pregledniku pa je bilo dovoljno kliknuti na gumb za prijavu. Nakon uspješne prijave, dolazimo do stranice za dodavanje kategorija i potkategorija te pokušavamo stvoriti novu kategoriju proizvoljnog imena. \underline{Test prolazi.}
+
+                \begin{figure}[H]
+                \makebox[\textwidth][c]{\includegraphics[scale=0.4]{slike/selenium5.png}}%
+				\centering
+				\caption{Akcije petog Selenium testa}
+				\label{fig:selenium4}
+			\end{figure}
+
+                Uz pet do sada prikazanih Selenium testova, dodatno su testirane i funkcionalnosti stvaranja oglasa, dodavanja potkategorije i uređivanja podataka, ali zbog preglednosti i sažetosti ti testovi nisu uključeni u dokumentaciju. 
+
+                \eject
 			
 			 %\textit{Potrebno je provesti i opisati ispitivanje sustava koristeći radni okvir Selenium\footnote{\url{https://www.seleniumhq.org/}}. 
 			 %Razraditi \textbf{minimalno 4 ispitna slučaja} u kojima će se ispitati redovni slučajevi, 
@@ -140,7 +210,7 @@
 			
 			%\textbf{\textit{dio 2. revizije}}
 
-                Dijagram razmještaja opisuje konkretno ostvarenje odabrane arhitekture aplikacije - na slici 5.1 moguće je vidjeti raspodjelu programske potpore na konkretno sklopovlje. Kod za prikaz korisničkog sučelja i komunikaciju s korisnikom pisan u React.js pušten je u pogon na platformi Render. Kako bi aplikacija bila funkcionalna, u pogon su zasebno pušteni (engl. deployani) baza podataka ostvarena koristeći PostgreSQL te kod za poslovnu logiku i komunikaciju s bazom (backend) pisan u Java Spring Boot-u. Kako bi kod za backend bio uspješno deployan, za njega postoji i Docker container koji osigurava da je u njemu ispravno "spakiran" sav kod, kao i zavisnosti potrebne za uspješan rad istoga. I backend i baza podataka pušteni su u pogon koristeći platformu Render. \\
+                Dijagram razmještaja opisuje konkretno ostvarenje odabrane arhitekture aplikacije - na slici 5.14 moguće je vidjeti raspodjelu programske potpore na konkretno sklopovlje. Kod za prikaz korisničkog sučelja i komunikaciju s korisnikom pisan u React.js pušten je u pogon na platformi Render. Kako bi aplikacija bila funkcionalna, u pogon su zasebno pušteni (engl. deployani) baza podataka ostvarena koristeći PostgreSQL te kod za poslovnu logiku i komunikaciju s bazom (backend) pisan u Java Spring Boot-u. Kako bi kod za backend bio uspješno deployan, za njega postoji i Docker container koji osigurava da je u njemu ispravno "spakiran" sav kod, kao i zavisnosti potrebne za uspješan rad istoga. I backend i baza podataka pušteni su u pogon koristeći platformu Render. \\
 
                 Uz ovo, na platformi Firebase napravljen je Cloud Storage Bucket koji služi za jednostavnu pohranu slika potrebnih za uspješan prikaz oglasa. Komunikacija između zasebnih uređaja i platformi osigurana je protokolom HTTPS (komunikacija između klijentovog računala tj. web preglednika na istome i web poslužitelja deployanog na platformi Render, kao i komunikacija između web poslužitelja i Cloud Storage Bucket-a deployanog na platformi Firebase). Kako bi web poslužitelj korisniku mogao poslužiti sav potreban sadržaj, on komunicira s backendom koji po potrebi komunicira s bazom podataka.
 
@@ -265,27 +335,27 @@
     			\label{fig:connectRepoFront}
     			\end{figure}
                     \item Postaviti ime za servis (ime servisa na kraju će biti dio web adrese)
-                    \item Root directory postaviti na "IzvorniKod/Frontend/dzd-app/"
-                    \item Environment postaviti na "Node"
+                    \item Root directory postaviti na IzvorniKod/Frontend/dzd-app/
+                    \item Environment postaviti na Node
                     \begin{figure}[H]
     			\includegraphics[scale=0.75]{slike/fillDataDeployFront.png}
     			\centering
     			\caption{Ispunjavanje podataka o frontendu}
     			\label{fig:fillDataFront}
     			\end{figure}
-                    \item Region postaviti na "Frankfurt"
+                    \item Region postaviti na Frankfurt
                     \item Odabrati branch iz kojeg se uzimaju datoteke za frontend
-                    \item Build Command postaviti na "yarn build"
-                    \item Start Command postaviti na "yarn start-prod"
+                    \item Build Command postaviti na yarn build
+                    \item Start Command postaviti na yarn start-prod
                     \begin{figure}[H]
     			\includegraphics[]{slike/buildFront.png}
     			\centering
     			\caption{Unošenje ispravnih naredbi}
     			\label{fig:buildFrontCommands}
     			\end{figure}\textbf{}
-                    \item Na dnu pritisnuti "Advanced"
+                    \item Na dnu pritisnuti Advanced
                     \item Dodati potrebne Environment varijable - API\_BASE\_URL postaviti na adresu deployanog backenda aplikacije dostupnu na Render dashboardu
-                    \item Isključiti "Auto-Deploy" kako se projekt ne bi ponovno deployao za svaki novi commit
+                    \item Isključiti Auto-Deploy kako se projekt ne bi ponovno deployao za svaki novi commit
                     \item Pritisnuti Create Web Service
                 \end{itemize}
 
