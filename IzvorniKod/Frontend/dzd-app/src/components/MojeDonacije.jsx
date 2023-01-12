@@ -47,6 +47,7 @@ function MojeDonacije() {
       }
     })
       .then((response) => {
+        console.log(response)
         var mapa=response.data
         setDonacije(response.data)
         for (const obj of mapa){

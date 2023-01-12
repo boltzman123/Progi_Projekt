@@ -65,6 +65,7 @@ const DonacijaKard = (props) => {
   const [checkedUser, setCheckedUser] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
   const [pictureURL, setPictureURL] = useState(props.donacija.pictureURL);
+  console.log(spol)
 
   let datum=String(dateOfPublication.substring(8,10)+ "." +dateOfPublication.substring(5,7)+ "." +dateOfPublication.substring(0,4)+".")
 
@@ -195,6 +196,7 @@ const DonacijaKard = (props) => {
         toast.error("Došlo je do greške");
       });
   };
+
 
   const ponovnoDoniraj = () => {
     
@@ -362,7 +364,6 @@ const DonacijaKard = (props) => {
                     </Select>
                   </FormControl>
                 </Box>
-
                 <Box className={DonacijaKardCSS.FormControl}>
                   <FormControl fullWidth>
                     <FormLabel id="spol">Namijenjeni spol</FormLabel>
