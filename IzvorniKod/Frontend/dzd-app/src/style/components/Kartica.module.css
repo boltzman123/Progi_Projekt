@@ -75,7 +75,7 @@ h2{
 hr{
     background-color:black;
     height: 1px;
-    margin-left: 150px;
+    margin-left: 0px;
 }
 
 @media only screen and (max-width: 449px) {
@@ -89,16 +89,6 @@ hr{
     }
 
     h2{
-        margin-left: 0px;
-    }
-
-    hr{
-        margin-left: 0px;
-    }
-}
-
-@media only screen and (max-width: 899px) {
-    hr{
         margin-left: 0px;
     }
 }
