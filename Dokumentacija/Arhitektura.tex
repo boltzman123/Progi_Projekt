@@ -9,7 +9,7 @@
 		%\item 	\textit{organizaciju aplikacije (npr. slojevi frontend i backend, MVC arhitektura) }		
 	%\end{itemize}
 				
-		Arhitektura naše aplikacije na najvišoj razni apstrakcije odgovara troslojnoj klijent-poslužitelj arhitekturi sa sljedećim slojevima:
+		Arhitektura naše aplikacije zajedno s vanjskim resursima (bazom) na najvišoj razni apstrakcije odgovara troslojnoj klijent-poslužitelj arhitekturi sa sljedećim slojevima:
 		\begin{itemize}
 			\item Prezentacijski sloj (Frontend)
 			\item Sloj poslovne logike (Backend)
@@ -25,17 +25,21 @@
 
 		\eject
 
-		Općenito govoreći, prezentacijski sloj tj. frontend zadužen je za prikaz stranice korisniku i omogućavanje rada s istom. S druge strane, sloj poslovne logike tj. backend zadužena je za razne izračune i interakciju s bazom. U ovom pogledu, sloj poslovne logike služi kao spona između prezentacijskog sloja i podatkovnog sloja koja pritom obavlja sve akcije neprikladne za izvođenje na klijentovom računalu - u pitanju je "tanki" klijent.\\[2pt]
+		Općenito govoreći, prezentacijski sloj tj. frontend zadužen je za prikaz stranice korisniku i omogućavanje rada s istom. S druge strane, sloj poslovne logike tj. backend zadužena je za razne izračune i interakciju s bazom. U ovom pogledu, sloj poslovne logike služi kao spona između prezentacijskog sloja i podatkovnog sloja koja pritom obavlja sve akcije neprikladne za izvođenje na klijentovom računalu.\\[2pt]
 
-		Korisnik koristeći web preglednik pristupa našoj aplikaciji slanjem HTTP zahtjeva prezentacijskom sloju. Prezentacijski sloj u odgovoru šalje sve potrebne podatke za prikaz korisničkog sučelja - naše stranice.
+		Kada korisnik u web preglednik unese URL naše stranice, web preglednik pristupa našoj aplikaciji slanjem HTTP GET zahtjeva prezentacijskom sloju. Prezentacijski sloj u odgovoru šalje sve potrebne podatke za prikaz korisničkog sučelja - naše stranice.
 		Kada korisniku treba poslužiti neki sadržaj koji nije pohranjen na prezentacijskom sloju (npr. aktivne donacije, podatci o korisniku i oglasima), prezentacijski sloj sloju poslovne logike šalje HTTP zahtjev - npr. GET zahtjev s ciljem dohvata podataka o djeci korisnika.
 		Komunikacija između prezentacijskog sloja i sloja poslovne logike odvija se po REST načelima.\\[2pt]
 
 		Sloj poslovne logike potreban je za kompliciranije izračune, dohvat i izmjenu podataka te odgovaranje na zahtjeve pristigle od strane prezentacijskog sloja.
-		Podatkovni sloj tj. baza podataka služi za pohranu svih potrebnih podataka (npr. podataka o registriranim korisnicima, oglasima i predmetima). Pri radu naše aplikacije, s bazom podataka komunicira isključivo sloj poslovne logike tj. backend - ako prezentacijskom sloju trebaju određeni podaci, poslat će zahtjev sloju poslovne logike te u idealnom slučaju u odgovoru dobiti tražene podatke.\\[2pt]
+		Podatkovni sloj tj. baza podataka služi za pohranu svih potrebnih podataka (npr. podataka o registriranim korisnicima, oglasima i predmetima). Pri radu naše aplikacije, s bazom podataka komunicira isključivo sloj poslovne logike tj. backend - ako prezentacijskom sloju trebaju određeni podaci, poslat će zahtjev sloju poslovne logike te u idealnom slučaju u odgovoru dobiti tražene podatke. Pritom, JPA služi za objektno/relacijsko mapiranje (ORM) zahtjeva backenda u SQL upite pomoću kojih je moguće komunicirati s bazom.\\[2pt]
 
-		Prezentacijski sloj tj. frontend izrađen je koristeći programski jezik Javascript zajedno s "markup" jezikom HTML, CSS-om i radnim okvirom React.
-		Sloj poslovne logike tj. backend izrađen je koristeći programski jezik Java zajedno s radnim okvirom Java Spring Boot. Za komunikaciju s bazom korišten je JPA - Java Persistence API.
+		Dodatno, i prezentacijski sloj i sloj poslovne logike interno imaju vlastitu podjelu - sloj poslovne logike možemo podijeliti na 3 glavne komponente: kontroleri, servisi i repozitoriji (sloj pristupa podacima). Sličnu podjelu moguće je uočiti i na prezentacijskom sloju. Baza podataka vanjski je resurs koji naša aplikacija koristi.
+
+		\eject
+
+		Prezentacijski sloj tj. frontend izrađen je koristeći programski jezik Javascript zajedno s "markup" jezikom HTML, CSS-om i radnim okvirom React. Zbog korištenja radnog okvira React koji omogućava provođenje brojnih izračuna i funkcionalnosti na klijentovom računalu, možemo reći da je u pitanju "debeli" klijent.
+		Sloj poslovne logike tj. backend izrađen je koristeći programski jezik Java zajedno s radnim okvirom Java Spring Boot. Za prevođenje zahtjeva backenda u ispravne SQL upite korišten je JPA - Java Persistence API.
 		Shema baze podataka izrađena je koristeći alat ERDplus, a sama baza podataka izrađena je koristeći sustav za upravljanje bazama PostgreSQL.
 
 		\eject
@@ -248,7 +252,7 @@
 			
 			%\textit{Prilikom prve predaje projekta, potrebno je priložiti potpuno razrađen dijagram razreda vezan uz \textbf{generičku funkcionalnost} sustava. Ostale funkcionalnosti trebaju biti idejno razrađene u dijagramu sa sljedećim komponentama: nazivi razreda, nazivi metoda i vrste pristupa metodama (npr. javni, zaštićeni), nazivi atributa razreda, veze i odnosi između razreda.}\\
 			
-			Na slikama 4.4 do 4.7 prikazani su razredi koji pripadaju backend dijelu našeg sustava.\\[5pt]
+			Na slikama 4.4 do 4.7 prikazani su razredi koji pripadaju backend dijelu našeg sustava. U pitanju su specifikacijski dijagrami razreda - implementacijski dijagrami prikazani su nakon opisa specifikacijskih dijagrama.\\[5pt]
 
 			Slika 4.4 prikazuje razrede koji predstavljaju modele - preslikane relacije baze podataka. Razred User predstavlja registriranog korisnika sustava. Razred Child predstavlja dijete registriranog korisnika sustava. Razred Donation predstavlja jednu donaciju zabilježenu u sustavu. 
 			Razred Item predstavlja jedan predmet vezan za neke od donacija. Razred Category predstavlja podatke o jednoj od kategorija u koje mogu biti svrstani predmeti. Razred Subcategory predstavlja podatke o jednoj od potkategorija u koje mogu biti svrstani predmeti.\\[10pt]
@@ -261,7 +265,7 @@
 			\end{figure}
 			\eject
 			Slika 4.5 prikazuje odnos komponenti na primjeru razreda Category. Razred CategoryController prihvaća i odgovara na HTTP zahtjeve poslane od korisnika tj. konkretnije frontenda. Kako bi na njih ispravno odgovorio, uspostavlja komunikaciju s razredom CategoryServiceJpa.
-			Razred CategoryServiceJpa uspostavlja komunikaciju s razredom CategoryService koji obavlja potrebne izračune i provođenje poslovne logike. Isto tako, razred CategoryServiceJpa uspostavlja komunikaciju i s razredom CategoryRepository koji služi kao sučelje za pohranu i dohvat podataka iz baze.
+			Razred CategoryServiceJpa implementira sučelje CategoryService kako bi obavljao potrebne izračune i osigurao uspješno provođenje poslovne logike. Uz to, razred CategoryServiceJpa uspostavlja komunikaciju s razredom CategoryRepository koji služi kao sučelje za pohranu i dohvat podataka iz baze.
 			Kako bi prikaz bio što sažetiji, odnos komponenti prikazan je samo na jednom razredu. U stvarnoj implementaciji, ovakav odnos komponenti tj. razreda postoji za svaki razred iz dijela Models.\\[10pt]
 
 			\begin{figure}[H]
@@ -301,33 +305,164 @@
 				\label{fig:Repositories}
 			\end{figure}
 
-			%\textbf{\textit{dio 2. revizije}}\\			
-			
-			%\textit{Prilikom druge predaje projekta dijagram razreda i opisi moraju odgovarati stvarnom stanju implementacije}
-			
-			
+			%\textbf{\textit{dio 2. revizije}}\\
+
+                Na slikama 4.8 - 4.15 prikazani su implementacijski dijagrami razreda generirani direktno iz koda. Uz dijagrame razreda za koje su već opisani specifikacijski dijagrami (Models, odnos komponenti, Controllers, Repositories) dodatno su uključeni i dijagram razreda koji prikazuje odnos između UsersController klase i EmailSenderService klase koja se koristi za slanje potvrde o registraciji korisnika na mail, kao i dijagram razreda koji prikazuje odnos klasa za ostvarenje sigurnosti, autentifikacije i autorizacije korisnika. Zbog preglednosti dijagrami razreda za dio Controllers i dio Repositories podijeljeni su u dva dijela.
 			
 			\eject
+
+                \begin{figure}[H]
+				\includegraphics[width=\textwidth,height=0.95\textheight]{dijagrami/Modeli Final.png}
+				\centering
+				\caption{Dijagram razreda - dio Models (finalna verzija)}
+				\label{fig:ModelsFinal}
+			\end{figure}
+
+                \begin{figure}[H]
+				\includegraphics[width=\textwidth,height=0.8\textheight]{dijagrami/Odnos komponenti Final.png}
+				\centering
+				\caption{Dijagram razreda - odnos komponenti (finalna verzija)}
+				\label{fig:OdnosKomponentiFinal}
+			\end{figure}
+
+                %   \begin{figure}[H]
+                %   \makebox[\textwidth][c]{\includegraphics[width=1.3\textwidth,height=0.6\textheight]{dijagrami/Controlleri Final.png}}%
+			% 	\centering
+			% 	\caption{Dijagram razreda - dio Controllers (finalna verzija)}
+			% 	\label{fig:ControllersFinal}
+			% \end{figure}
+
+                \begin{figure}[H]
+				\includegraphics[width=\textwidth,height=0.4\textheight]{dijagrami/Controlleri Final Part1.png}
+				\centering
+				\caption{Dijagram razreda - dio Controllers, prvi dio (finalna verzija)}
+				\label{fig:ControllersFinalPt1}
+			\end{figure}
+
+                \begin{figure}[H]
+				\includegraphics[width=\textwidth,height=0.4\textheight]{dijagrami/Controlleri Final Part2.png}
+				\centering
+				\caption{Dijagram razreda - dio Controllers, drugi dio (finalna verzija)}
+				\label{fig:ControllersFinalPt2}
+			\end{figure}
+
+                \begin{figure}[H]
+                \makebox[\textwidth][c]{\includegraphics[width=1.2\textwidth,height=0.4\textheight]{dijagrami/Repozitoriji Final Part1.png}}%
+				\centering
+				\caption{Dijagram razreda - dio Repositories, prvi dio (finalna verzija)}
+				\label{fig:RepositoriesFinalPt1}
+			\end{figure}
+
+                \begin{figure}[H]
+				\makebox[\textwidth][c]{\includegraphics[width=1.2\textwidth,height=0.4\textheight]{dijagrami/Repozitoriji Final Part2.png}}%
+				\centering
+				\caption{Dijagram razreda - dio Repositories, drugi dio (finalna verzija)}
+				\label{fig:RepositoriesFinalPt2}
+			\end{figure}
+
+                \begin{figure}[H]
+				\includegraphics[width=\textwidth,height=0.4\textheight]{dijagrami/EmailService.png}
+				\centering
+				\caption{Dijagram razreda - dio Email Service}
+				\label{fig:EmailService}
+			\end{figure}
+
+                \begin{figure}[H]
+				\includegraphics[width=\textwidth,height=0.4\textheight]{dijagrami/Security.png}
+				\centering
+				\caption{Dijagram razreda - dio Security}
+				\label{fig:Security}
+			\end{figure}
+   
+			\eject
 		
-		%\section{Dijagram stanja}
+		\section{Dijagram stanja}
 			
+                Dijagram stanja prikazan na slici 4.16 prikazuje stanja u kojima se može naći sustav (konkretno, u pitanju je korisničko sučelje - frontend), kao i prijelaze pomoću kojih sustav dolazi u druga stanja. Svaki prijelaz označen je događajem (npr. "Klik na proizvoljni oglas"), kao i akcijom (npr. "Prikaži aktivne oglase()") koja se izvršava "tijekom prijelaza" - nakon što se dogodio događaj koji je potaknuo prijelaz u drugo stanje. Većina akcija označenih na prijelazima isto tako mogla je biti označena kao entry odnosno exit akcija samoga stanja, ali je zbog preglednosti i konzistentnosti odabran prikaz takvih akcija na prijelazima. Dijagram na slici 4.16 prikazuje stanja u kojima se sustav može naći kada je u sustav ulogiran registrirani korisnik za kojeg je administrator stavio dopuštenje da može donirati - da korisnik nema dopuštenje, sustav se pri radu s takvim korisnikom ne bi mogao naći u stanju "Kreiranje oglasa", kao ni u stanju "Korisnikove donacije" jer ono služi za prikaz korisnikovih prijašnjih, kao i trenutnih donacija. \\
+
+                \begin{figure}[H]
+				\includegraphics[width=\textwidth,height=0.45\textheight]{dijagrami/Dijagram stanja.png}
+				\centering
+				\caption{Dijagram stanja}
+				\label{fig:StateDiagram}
+			\end{figure}
 			
+			\eject 
+                
+                Kako bi napravili razliku između akcija koje izvršava sustav i akcija koje radi korisnik u interakciji sa sustavom, sve akcije koje izvršava sustav na kraju imaju oznaku () (slično pozivu funkcije u kodu). Radi preglednosti, neke od strelica nisu prikazane na dijagramu - korisnik iz bilo kojeg stanja može preći u stanje "Aktivne donacije", "Korisnikove donacije", "Kreiranje oglasa" i "Osobno podaci korisnika" jer je prijelaz u ta stanja ostvaren klikom na odgovarajući dio zaglavlja stranice. Akcije koje radi korisnik u interakciji u sustavu naznačene su kao do akcije unutar stanja ili kao događaji koji potiču prijelaze u druga stanja.\\
+                                
+			Nakon uspješnog logina, registrirani korisnik preusmjeren je na stranicu Aktivne donacije na kojoj može pregledavati sve oglase, ali isto tako i pregledavati detalje proizvoljnih oglasa. Pomoću zaglavlja stranice korisnik može doći do stranice Aktivne donacije, stranice za kreiranje oglasa, stranice za prikaz i uređivanje osobnih podataka te stranice za prikaz vlastitih donacija. Na stranici za kreiranje oglasa korisnik unosi podatke i nakon unosa klikom na gumb "Spremi donaciju" biva preusmjeren na stranicu za prikaz vlastitih donacija. Na stranici za prikaz vlastitih donacija korisnik može pregledavati sve oglase koje je sam kreirao ili zaprimio, kao i detalje o istima. Na stranici za prikaz i uređivanje osobnih podataka korisnik se također može i odjaviti, obrisati svoj račun i otići na stranicu za dodavanje, brisanje i prikaz podataka o djeci. Rad s aplikacijom završava kada korisnik odabere opciju "Log out".
 			%\textbf{\textit{dio 2. revizije}}\\
+
+                \eject
+                %\textbf{V2}
+
+                %Dijagram stanja prikazan na slici 4.9 prikazuje stanja u kojima se može naći sustav (konkretno, u pitanju je korisničko sučelje - frontend), kao i prijelaze pomoću kojih sustav dolazi u druga stanja. Svaki prijelaz označen je događajem (npr. "Klik na proizvoljni oglas"), a po potrebi i uvjetom (u uglatim zagradama). \\
+
+                %\begin{figure}[H]
+                %\makebox[\textwidth][c]{\includegraphics[scale=0.35]{dijagrami/Dijagram stanja v2.png}}%
+				%\centering
+				%\caption{Dijagram stanja, druga inačica}
+				%\label{fig:StateDiagramv2}
+			%\end{figure}
+                 %Ovisno o tome koja je razina prava dodijeljena korisniku s unešenim podacima, nakon uspješnog logina korisniku se prikaže jedna od tri moguće stranice. Stranice se razlikuju u izgledu svoga zaglavlja (engl. page header) - administrator ima opcije pregledavati aktivne oglase, pregledavati i odobravati neobjavljene oglase, pregledavati popis korisnika i dodijeljivati im pravo za doniranje, ali i pregledavati i mijenjati svoje podatke. S druge strane, običan korisnik ima pravo samo pregledavati aktivne oglase i pregledavati i mijenjati vlastite podatke, pritom dodajući, brišući ili izmjenjujući podatke o svojoj djeci. Donator uz mogućnosti običnog korisnika može i stvarati oglase te pregledavati svoje do sada objavljene oglase, bilo da je u pitanju već zatvoren oglas ili trenutno otvoreni oglas - trenutno otvorene oglase donatori mogu urediti, obrisati ili zatvoriti. \\
+                 
+                 %Radi preglednosti, neke od strelica nisu prikazane na dijagramu - običan korisnik iz bilo kojeg stanja može preći u stanje "Prikaz aktivnih donacija za obične korisnike" i  "Prikaz podataka korisnika". Donator uz prijelaz u navedena stanja ("Pregled aktivnih donacija za korisnike donatore", "Prikaz podataka korisnika") može iz bilo kojeg stanja prijeći i u stanja "Prikaz za pregled korisnikovih donacija" i "Prikaz za stvaranja donacija", a administrator može iz bilo kojeg stanja prijeći u jedno od sljedećih stanja: "Pregled aktivnih donacija za administratora", "Prikaz podataka administratora", "Prikaz pregleda korisnika", "Pregled neobjavljenih donacija" i "Pregled aktivnih donacija za administratora". Prijelazi u stanja navedena u ovome odlomku ostvareni su klikom na prikladne dijelove zaglavlja stranice, a sama zaglavlja razlikuju se ovisno o razini ovlasti korisnika.\\
+
+                 %Radi preglednosti, nakon klika na gumb "Log out" ili "Obriši račun" sustav ide u završno stanje - u stvarnosti time samo završava trenutna sesija korištenja sustava te se korisniku prikazuje landing page, ali bi dodavanjem strelica za prijelaz u stanje "Landing page" iz potrebnih stanja bila narušena preglednost dijagrama. Akcije sustava (npr. prikaziOglase()) zbog preglednosti također su izostavljena iz dijagrama, time na dijagramu ostavljajući samo korisničke akcije kao događaje koji potiču prijelaz iz jednog stanja sustava u drugo. Isto tako, provjere ispravnosti podataka (npr. provjera jesu li izmijenjeni podaci o korisniku i dalje važeći) izostavljene su iz dijagrama - za svaku provjeru bilo bi potrebno uvesti grananje gdje bi ovisno o ispravnosti podataka sustav ponovno došao u prethodno stanje ili mogao dalje napredovati. 
+
+                %\eject
+				
+				
+
+
+		\section{Dijagram aktivnosti}
+
+		Dijagram aktivnosti na jednostavan način prikazuje opis modela toka upravljanja. Na slikama 4.17 i 4.18 su prikazani dijagrami aktivnosti za odabrane procese: proces kreiranja oglasa i proces kreiranja korisničkog računa. \\
 			
-			%\textit{Potrebno je priložiti dijagram stanja i opisati ga. Dovoljan je jedan dijagram stanja koji prikazuje \textbf{značajan dio funkcionalnosti} sustava. Na primjer, stanja korisničkog sučelja i tijek korištenja neke ključne funkcionalnosti jesu značajan dio sustava, a registracija i prijava nisu. }
+
+			 \begin{figure}[H]
+                			\includegraphics[width=\textwidth,height=0.5\textheight]{dijagrami/DijagramAktivnosti1.png}%
+				\centering
+				\caption{Dijagram aktivnosti - proces kreiranja oglasa}
+				\label{fig:ActivityDiagram1}
+			\end{figure}
+
+		Na dijagramu jasno možemo razabrati aktore prema particijama i razlučiti njihove aktivnosti. Vidljivo je da započinjemo s korisnikom koji odabire opciju za kreiranje oglasa. Uvjet da bi uopće mogao izabrati tu opciju jest da mu je objavljivanje/kreiranje oglasa dozvoljeno. Nakon što korisnik izabere opciju slijedi akcija od sustava koji će prikazati formu za kreiranje novog oglasa. Potom korisnik unosi podatke i tako kreira oglas koji zatim sustav šalje na provjeru. Oglase provjerava administrator i može odlučiti sadrži li oglas sve potrebne informacije ili ne i na temelju toga ih odobrava ili ne. Ukoliko oglasi nisu odobreni sustav će ih poslati korisniku na doradu. Odobreni oglasi se, pak objavljuju i spremaju u bazu. Nakon objavljivanja korisniku se njegov oglas pojavljuje na stranici za pregled vlastitih oglasa i time završava proces kreiranja oglasa. \\
+			\eject
+
 			
-			
-			%\eject 
+			 \begin{figure}[H]
+               			 \includegraphics[width=\textwidth,height=0.5\textheight]{dijagrami/DijagramAktivnosti2.png}%
+				\centering
+				\caption{Dijagram aktivnosti - registracija korisnika}
+				\label{fig:ActivityDiagram2}
+			\end{figure}
+
+		Na ovom dijagramu prikazan je proces registracije novog korisnika. U procesu sudjeluju korisnik, sustav i baza podataka. Iz particija se ponovo jasno vidi koje aktivnosti pripadaju kojim aktorima, a iz samog dijagrama jasan je i slijed tih akcija. Započinjemo s korisnikom koji odabire opciju za registraciju. Sustav mu potom prikazuje formu za registraciju u koju će korisnik unositi podatke. Nakon što su podaci uneseni sustav ih šalje bazi na provjeru ispravnosti. Baza odlučuje jesu li podaci ispravno popunjeni ili ne i o tome ovisi sljedeći korak. Ukoliko podaci nisu bili ispravni sustav će ponovo prikazati formu i korisnik će ispraviti, tj. ponovo unijeti svoje podatke. Kod ispravnih podataka u bazu će se spremiti novi korisnik i sustav će korisniku poslati mail potvrde uspješne registracije. Po primitku potvrde od strane korisnika proces registracije je završen.
+
+			\eject 
 		
-		%\section{Dijagram aktivnosti}
-			
 			%\textbf{\textit{dio 2. revizije}}\\
 			
 			 %\textit{Potrebno je priložiti dijagram aktivnosti s pripadajućim opisom. Dijagram aktivnosti treba prikazivati značajan dio sustava.}
 			
 			%\eject
-		%\section{Dijagram komponenti}
-		
+		\section{Dijagram komponenti}
+
+		U dijagramu komponenti možemo vidjeti međuovisnosti između implementacijskih komponenti i zaviriti u internu strukturu te odnos programske potpore prema okolini. Slika 4.19 nam prikazuje organizaciju komponenti strukture cijele aplikacije. \\
+			
+			\begin{figure}[H]
+               		 	\includegraphics[width=\textwidth,height=0.5\textheight]{dijagrami/Dijagram_komponenti.png}%
+				\centering
+				\caption{Dijagram komponenti - struktura aplikacije}
+				\label{fig:ComponentDiagram}
+			\end{figure}		
+
+		Na prezentacijskom sloju (frontendu) smještena je komponenta Web preglednik koja uz pomoć komponente React dohvaća i šalje stvari prema sustavu. Komponenta React koristi sučelje Firebase koje kreira linkove za slike koje možemo vidjeti u oglasima. Sustav također komunicira s Bazom podataka na kojoj su pohranjeni svi korisnički računi i oglasi. Na sloju poslovne logike nalaze se komponente koje vrše kompliciranije izračune, dohvat i izmjenu podataka iz baze i odgovaranje na zahtjeve pristigle s prezentacijskog sloja. Komunikacija izmedu prezentacijskog i sloja poslovne logike odvija se prema REST načelima. Za dohvaćanje podataka služi komponenta Sloj pristupa podacima preko koje se komunicira s Bazom podataka koja koristi JPA za prevodenje zahtjeva backenda u sintaksno ispravne SQL upite. Upiti se potom usmjeravaju prema bazi. Podaci zatim "putuju" natrag do frontenda i prikazujju se u pregledniku. 
+
+			\eject
+
 			%\textbf{\textit{dio 2. revizije}}\\
 		
 			% \textit{Potrebno je priložiti dijagram komponenti s pripadajućim opisom. Dijagram komponenti treba prikazivati strukturu cijele aplikacije.}
