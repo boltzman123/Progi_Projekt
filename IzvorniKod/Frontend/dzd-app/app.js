@@ -14,7 +14,7 @@ const { API_BASE_URL } = process.env;
 app.use(
     "/api",
     createProxyMiddleware({
-        target: "https://backend-service-srhr.onrender.com/",
+        target: "https://backend-service-srhr.onrender.com",
         changeOrigin: true
     })
 );
