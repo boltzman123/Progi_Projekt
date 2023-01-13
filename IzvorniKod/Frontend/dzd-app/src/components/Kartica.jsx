@@ -41,10 +41,10 @@ function Kartica() {
   else {
     return (
       <>
-        <div className={KarticaCSS.okvirPlavi}  style={{display:primljen.length==0 ?"none":""}}>
-          <h2>Donacije za prosljeđivanje</h2>
+        <div className={KarticaCSS.okvir}  style={{display:primljen.length==0 ?"none":""}}>
+          <h2>Primljene donacije</h2>
           <hr />
-          <div className={KarticaCSS.karticaListPlava}>
+          <div className={KarticaCSS.karticaList}>
               {primljen.map((donacija) => {
               return <DonacijaKard key={donacija.idDonation} donacija={donacija}></DonacijaKard>;
               })}
@@ -52,7 +52,7 @@ function Kartica() {
         </div>
 
         <div className={KarticaCSS.okvir}  style={{display:sezona.length==0 ?"none":""}}>
-        <h2>Sezonske donacije za prosljeđivanje</h2>
+        <h2>Sezonske donacije</h2>
         <hr />
           <div className={KarticaCSS.karticaList}>
               {sezona.map((donacija) => {
@@ -61,10 +61,10 @@ function Kartica() {
           </div>
         </div>
 
-        <div className={KarticaCSS.okvirPlavi}  style={{display:preporucen.length==0 ?"none":""}}>
+        <div className={KarticaCSS.okvir}  style={{display:preporucen.length==0 ?"none":""}}>
         <h2>Preporučene donacije</h2>
         <hr />
-          <div className={KarticaCSS.karticaListPlava}>
+          <div className={KarticaCSS.karticaList}>
               {preporucen.map((donacija) => {
               return <DonacijaKard key={donacija.idDonation} donacija={donacija} istaknut={true}></DonacijaKard>;
               })}
