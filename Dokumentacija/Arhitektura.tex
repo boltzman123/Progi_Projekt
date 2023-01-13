@@ -412,16 +412,57 @@
                  %Radi preglednosti, nakon klika na gumb "Log out" ili "Obriši račun" sustav ide u završno stanje - u stvarnosti time samo završava trenutna sesija korištenja sustava te se korisniku prikazuje landing page, ali bi dodavanjem strelica za prijelaz u stanje "Landing page" iz potrebnih stanja bila narušena preglednost dijagrama. Akcije sustava (npr. prikaziOglase()) zbog preglednosti također su izostavljena iz dijagrama, time na dijagramu ostavljajući samo korisničke akcije kao događaje koji potiču prijelaz iz jednog stanja sustava u drugo. Isto tako, provjere ispravnosti podataka (npr. provjera jesu li izmijenjeni podaci o korisniku i dalje važeći) izostavljene su iz dijagrama - za svaku provjeru bilo bi potrebno uvesti grananje gdje bi ovisno o ispravnosti podataka sustav ponovno došao u prethodno stanje ili mogao dalje napredovati. 
 
                 %\eject
-		
-		%\section{Dijagram aktivnosti}
+				
+				
+
+
+		\section{Dijagram aktivnosti}
+
+		Dijagram aktivnosti na jednostavan način prikazuje opis modela toka upravljanja. Na slikama 4.17 i 4.18 su prikazani dijagrami aktivnosti za odabrane procese: proces kreiranja oglasa i proces kreiranja korisničkog računa. \\
 			
+
+			 \begin{figure}[H]
+                			\includegraphics[width=\textwidth,height=0.5\textheight]{dijagrami/DijagramAktivnosti1.png}%
+				\centering
+				\caption{Dijagram aktivnosti - proces kreiranja oglasa}
+				\label{fig:ActivityDiagram1}
+			\end{figure}
+
+		Na dijagramu jasno možemo razabrati aktore prema particijama i razlučiti njihove aktivnosti. Vidljivo je da započinjemo s korisnikom koji odabire opciju za kreiranje oglasa. Uvjet da bi uopće mogao izabrati tu opciju jest da mu je objavljivanje/kreiranje oglasa dozvoljeno. Nakon što korisnik izabere opciju slijedi akcija od sustava koji će prikazati formu za kreiranje novog oglasa. Potom korisnik unosi podatke i tako kreira oglas koji zatim sustav šalje na provjeru. Oglase provjerava administrator i može odlučiti sadrži li oglas sve potrebne informacije ili ne i na temelju toga ih odobrava ili ne. Ukoliko oglasi nisu odobreni sustav će ih poslati korisniku na doradu. Odobreni oglasi se, pak objavljuju i spremaju u bazu. Nakon objavljivanja korisniku se njegov oglas pojavljuje na stranici za pregled vlastitih oglasa i time završava proces kreiranja oglasa. \\
+			\eject
+
+			
+			 \begin{figure}[H]
+               			 \includegraphics[width=\textwidth,height=0.5\textheight]{dijagrami/DijagramAktivnosti2.png}%
+				\centering
+				\caption{Dijagram aktivnosti - registracija korisnika}
+				\label{fig:ActivityDiagram2}
+			\end{figure}
+
+		Na ovom dijagramu prikazan je proces registracije novog korisnika. U procesu sudjeluju korisnik, sustav i baza podataka. Iz particija se ponovo jasno vidi koje aktivnosti pripadaju kojim aktorima, a iz samog dijagrama jasan je i slijed tih akcija. Započinjemo s korisnikom koji odabire opciju za registraciju. Sustav mu potom prikazuje formu za registraciju u koju će korisnik unositi podatke. Nakon što su podaci uneseni sustav ih šalje bazi na provjeru ispravnosti. Baza odlučuje jesu li podaci ispravno popunjeni ili ne i o tome ovisi sljedeći korak. Ukoliko podaci nisu bili ispravni sustav će ponovo prikazati formu i korisnik će ispraviti, tj. ponovo unijeti svoje podatke. Kod ispravnih podataka u bazu će se spremiti novi korisnik i sustav će korisniku poslati mail potvrde uspješne registracije. Po primitku potvrde od strane korisnika proces registracije je završen.
+
+			\eject 
+		
 			%\textbf{\textit{dio 2. revizije}}\\
 			
 			 %\textit{Potrebno je priložiti dijagram aktivnosti s pripadajućim opisom. Dijagram aktivnosti treba prikazivati značajan dio sustava.}
 			
 			%\eject
-		%\section{Dijagram komponenti}
-		
+		\section{Dijagram komponenti}
+
+		U dijagramu komponenti možemo vidjeti međuovisnosti između implementacijskih komponenti i zaviriti u internu strukturu te odnos programske potpore prema okolini. Slika 4.19 nam prikazuje organizaciju komponenti strukture cijele aplikacije. \\
+			
+			\begin{figure}[H]
+               		 	\includegraphics[width=\textwidth,height=0.5\textheight]{dijagrami/Dijagram_komponenti.png}%
+				\centering
+				\caption{Dijagram komponenti - struktura aplikacije}
+				\label{fig:ComponentDiagram}
+			\end{figure}		
+
+		Na prezentacijskom sloju (frontendu) smještena je komponenta Web preglednik koja uz pomoć komponente React dohvaća i šalje stvari prema sustavu. Komponenta React koristi sučelje Firebase koje kreira linkove za slike koje možemo vidjeti u oglasima. Sustav također komunicira s Bazom podataka na kojoj su pohranjeni svi korisnički računi i oglasi. Na sloju poslovne logike nalaze se komponente koje vrše kompliciranije izračune, dohvat i izmjenu podataka iz baze i odgovaranje na zahtjeve pristigle s prezentacijskog sloja. Komunikacija izmedu prezentacijskog i sloja poslovne logike odvija se prema REST načelima. Za dohvaćanje podataka služi komponenta Sloj pristupa podacima preko koje se komunicira s Bazom podataka koja koristi JPA za prevodenje zahtjeva backenda u sintaksno ispravne SQL upite. Upiti se potom usmjeravaju prema bazi. Podaci zatim "putuju" natrag do frontenda i prikazujju se u pregledniku. 
+
+			\eject
+
 			%\textbf{\textit{dio 2. revizije}}\\
 		
 			% \textit{Potrebno je priložiti dijagram komponenti s pripadajućim opisom. Dijagram komponenti treba prikazivati strukturu cijele aplikacije.}
