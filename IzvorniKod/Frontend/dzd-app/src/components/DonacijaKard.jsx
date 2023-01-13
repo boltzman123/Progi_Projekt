@@ -441,7 +441,7 @@ const DonacijaKard = (props) => {
                   </DropdownCategory>
                 </Box>
 
-                {((canDonateL=="true") && (emailPrim == emailL)) ?
+                {((canDonateL==true) && (emailPrim == emailL)) ?
                 <Box className={DonacijaKardCSS.FormControl}>
                   <Button
                     type="submit"
@@ -450,22 +450,28 @@ const DonacijaKard = (props) => {
                     color="info">
                     Ponovno doniraj
                   </Button>
-                </Box>:
-                <>
-                <hr/>
-                <Box className={DonacijaKardCSS.FormControl}>
-                  <TextField
-                    name="zatraziDonaciju"
-                    id="zatraziDonaciju"
-                    value={"Ako želite donirati ovaj predmet nekome drugome, zatražite dozvolu od admina."}
-                    disabled={true}
-                    multiline
-                    sx={{ border: "2px solid gold"}}
-                    >
-                  </TextField>
-                </Box>
-                </>
-                }
+                  </Box>:
+                  <>
+                  </>
+                }  
+                {((canDonateL==false) && (emailPrim == emailL)) ?
+                    <>
+                    <hr/>
+                    <Box className={DonacijaKardCSS.FormControl}>
+                      <TextField
+                        name="zatraziDonaciju"
+                        id="zatraziDonaciju"
+                        value={"Ako želite donirati ovaj predmet nekome drugome, zatražite dozvolu od admina."}
+                        disabled={true}
+                        multiline
+                        sx={{ border: "2px solid gold"}}
+                        >
+                      </TextField>
+                    </Box>
+                    </>:
+                    <>
+                    </>
+                } 
 
                 <div>
                   <input
