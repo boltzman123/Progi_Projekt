@@ -201,6 +201,7 @@ public class DonationController {
         } else {
             donation.setActive(true);
         }
+        itemService.updateItem(donation.getItem());
         return service.updateDonation(donation);
     }
 
