@@ -465,7 +465,7 @@ const DonationForm = () => {
                 onClick={handleUpload}
                 type="button"
                 className="gumbic tamniji slike donacijaSlika"
-                style={{ height: 30 }}>
+                style={{ height: 30, marginBottom:"10px" }}>
                 Upload slike
               </button>
               <span

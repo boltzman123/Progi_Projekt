@@ -1,6 +1,26 @@
 
 @media only screen and (min-width: 449px) {
- 
+  .gumbic {
+    height: 65px;
+    width: 161px;
+    color: white;
+    font-weight: 600;
+    font-size: 23px;
+    border: none;
+    border-radius: 30px;
+    box-shadow: 3px 3px gray;
+    margin-right: 15px;
+    margin-left: 20px;
+    background-color: grey;
+    margin: 20px 20px;
+    text-align: center;
+    align-items: center;
+    margin-top: -5px;
+    background-color: rgba(229, 93, 17, 1);
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+}
   .description{
     padding-top: 5px;
     padding-bottom: 5px;
@@ -43,7 +63,6 @@
   }
 
   .dDio {
-    margin-left: 70px;
     padding-bottom: 10px;
     margin-bottom: 0px;
   }
@@ -75,10 +94,11 @@
   .donacijaNaslov {
     font-size: 35px;
     font-weight: 700;
-    padding-top: 1%;
     font-size: 30px;
     margin-top: 20px;
     margin-left: 120px;
+    justify-content: center;
+    align-items: center;
   }
   .pravokutnici {
     width: 200px;
@@ -95,7 +115,7 @@
 }
 
 /*mobitel*/
-@media only screen and (max-width: 449px) {
+@media only screen and (max-width: 800px) {
   .description{
     padding-top: 5px;
     padding-bottom: 5px;
@@ -103,7 +123,8 @@
   }
   .dForm {
     display: flex;
-    align-items: flex-start;
+    justify-content: center;
+    align-items:center;
     flex-direction: column-reverse;
   }
   .dropdown {
@@ -153,8 +174,8 @@
     align-content: stretch;
     height: 35px;
     flex-direction: column;
-    justify-content: flex-end;
-    align-items: flex-start;
+    justify-content: center;
+    align-items:center;
   }
 
   .donjiDio {
@@ -169,8 +190,8 @@
     border: 1px solid black;
     display: flex;
     align-items: center;
-    margin-left: 50px;
     justify-content: center;
+    margin-top: 50px;
   }
 
   #picture {
@@ -201,8 +222,7 @@
   .donacijaNaslov {
     font-size: 35px;
     font-weight: 700;
-    margin-left: 7%;
-    margin-bottom: 8%;
-    margin-top: 5%;
+    justify-content: center;
+    align-items: center;
   }
 }
