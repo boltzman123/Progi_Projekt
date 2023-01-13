@@ -62,7 +62,7 @@ function Kartica() {
         </div>
 
         <div className={KarticaCSS.okvir}  style={{display:preporucen.length==0 ?"none":""}}>
-        <h2>Preporucene donacije</h2>
+        <h2>Preporučene donacije</h2>
         <hr />
           <div className={KarticaCSS.karticaList}>
               {preporucen.map((donacija) => {
