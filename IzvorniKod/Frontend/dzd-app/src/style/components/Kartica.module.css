@@ -1,0 +1,104 @@
+.okvir{
+    padding: 10px 10px;
+    margin: 40px 40px;
+    background-color: rgba(244, 177, 131, 255);
+    border-radius: 10px;   
+}
+
+.okvirPlavi{
+    padding: 10px 10px;
+    margin: 40px 40px;
+    background-color: lightblue;
+    border-radius: 10px;   
+}
+
+.karticaList {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content:center;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    padding: 20px 20px;
+    margin: 40px 40px;
+    background-color: rgba(244, 177, 131, 255);
+    border-radius: 10px;
+}
+
+.karticaListPlava {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content:center;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    padding: 20px 20px;
+    margin: 40px 40px;
+    background-color: lightblue;
+    border-radius: 10px;
+}
+
+h2{
+    padding-left: 20px;
+    margin-left: 40px;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+}
+
+.blue{
+    background-color: lightblue;
+}
+
+.nevidljiv  {
+    height: 72.6%;
+    padding: 20px 20px;
+    margin: 40px 40px;
+    background-color: rgba(244, 177, 131, 255);
+    border-radius: 10px;
+}
+
+
+.okvirDD{
+    padding: 10px 10px;
+    margin: 40px 40px;
+    background-color: rgba(244, 177, 131, 255);
+    border-radius: 10px;   
+}
+.okvirMD{
+    padding: 10px 10px;
+    margin: 40px 40px;
+    background-color: rgba(244, 177, 131, 255);
+    border-radius: 10px;   
+}
+
+hr{
+    background-color:black;
+    height: 1px;
+    margin-left: 150px;
+}
+
+@media only screen and (max-width: 449px) {
+    .okvir{
+        padding: 10px 10px;
+        margin: 20px 20px;
+    }
+
+    .karticaList{
+        margin: 0px 0px;
+    }
+
+    h2{
+        margin-left: 0px;
+    }
+
+    hr{
+        margin-left: 0px;
+    }
+}
+
+@media only screen and (max-width: 899px) {
+    hr{
+        margin-left: 0px;
+    }
+}

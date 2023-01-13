@@ -12,7 +12,7 @@ public class Item {
     private Long productionYear;
     private String productBrand;
     private int forAge;
-    private String forSex;
+    private char forSex;
     @ManyToOne
     @JoinColumn(name = "category_name")
     private Category category;
@@ -20,6 +20,18 @@ public class Item {
     @ManyToOne
     @JoinColumn(name = "subcategory_name")
     private Subcategory subcategory;
+
+    public Item() {}
+    public Item(String productName, String itemState, Long productionYear, String productBrand, int forAge, char forSex, Category category, Subcategory subcategory) {
+        this.productName = productName;
+        this.itemState = itemState;
+        this.productionYear = productionYear;
+        this.productBrand = productBrand;
+        this.forAge = forAge;
+        this.forSex = forSex;
+        this.category = category;
+        this.subcategory = subcategory;
+    }
 
     public Subcategory getSubcategory() {
         return subcategory;
@@ -81,11 +93,12 @@ public class Item {
         this.forAge = forAge;
     }
 
-    public String getForSex() {
+    public char getForSex() {
         return forSex;
     }
 
-    public void setForSex(String forSex) {
+    public void setForSex(char forSex) {
         this.forSex = forSex;
     }
+
 }

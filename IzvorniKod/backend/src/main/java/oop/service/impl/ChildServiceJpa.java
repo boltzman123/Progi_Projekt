@@ -24,12 +24,18 @@ public class ChildServiceJpa implements ChildService {
     }
 
     @Override
+    public List<Child> listChildByUser(String email) {
+        return repository.findByUser(email);
+    }
+
+    @Override
     public Child createChild(Child child) {
         return repository.save(child);
     }
 
     @Override
     public Child updateChild(Child child) {
+
         return repository.save(child);
     }
 

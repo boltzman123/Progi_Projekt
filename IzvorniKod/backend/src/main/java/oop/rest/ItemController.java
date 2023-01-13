@@ -18,16 +18,21 @@ public class ItemController {
     @Autowired
     private ItemService service;
 
+    // Izlistaj sve iteme
     @GetMapping("")
-    @Secured("ROLE_ADMIN")
+    @Secured({"ROLE_ADMIN"})
     public List<Item> listItem(){
         return service.listAll();
     }
+
+    // Stvori novi item
     @PostMapping("")
     public ResponseEntity<Item> createItem(@RequestBody Item item){
         Item saved = service.createItem(item);
         return ResponseEntity.created(URI.create("/item/" + saved.getId())).body(saved);
     }
+
+    // Update-aj item
     @PutMapping("/{id}")
     public Item updateItem(@PathVariable("id") Long id, @RequestBody Item item){
         if(!item.getId().equals(id)){
@@ -35,4 +40,17 @@ public class ItemController {
         }
         return service.updateItem(item);
     }
+
+    // Obriši item-e na 2 načina
+    @DeleteMapping("/{id}")
+    public Item deleteItem(@PathVariable("id") Long id){
+        return service.deleteItemById(id);
+    }
+
+    @DeleteMapping
+    public Item delete(@RequestBody Item item){
+        service.delete(item);
+        return item;
+    }
+
 }

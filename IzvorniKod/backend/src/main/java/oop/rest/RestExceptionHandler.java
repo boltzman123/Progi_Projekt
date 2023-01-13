@@ -23,4 +23,13 @@ public class RestExceptionHandler {
 		props.put("error", "Bad Request");
 		return new ResponseEntity<>(props, HttpStatus.BAD_REQUEST);
 	}
+
+	@ExceptionHandler(Exception.class)
+	protected ResponseEntity<?> handleException(Exception e, WebRequest request) {
+		Map<String, String> props = new HashMap<>();
+		props.put("message", e.getMessage());
+		props.put("status", "406");
+		props.put("error", "Not acceptable");
+		return new ResponseEntity<>(props, HttpStatus.BAD_REQUEST);
+	}
 }

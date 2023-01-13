@@ -1,0 +1,27 @@
+@startuml
+interface oop.dao.CategoryRepository {
+}
+interface oop.dao.DonationRepository {
+~ Optional<Donation> findById(Long)
+~ List<Donation> findByUser(String)
+}
+interface oop.dao.ItemRepository {
+}
+interface oop.dao.UsersRepository {
+}
+interface oop.dao.SubcategoryRepository {
+~ Optional<Subcategory> findById(String)
+}
+interface oop.dao.ChildRepository {
+~ Optional<Child> findByUserAndChildId(String,Long)
+~ List<Child> findByUser(String)
+}
+
+
+org.springframework.data.jpa.repository.JpaRepository <|-- oop.dao.CategoryRepository
+org.springframework.data.jpa.repository.JpaRepository <|-- oop.dao.DonationRepository
+org.springframework.data.jpa.repository.JpaRepository <|-- oop.dao.ItemRepository
+org.springframework.data.jpa.repository.JpaRepository <|-- oop.dao.UsersRepository
+org.springframework.data.jpa.repository.JpaRepository <|-- oop.dao.SubcategoryRepository
+org.springframework.data.jpa.repository.JpaRepository <|-- oop.dao.ChildRepository
+@enduml

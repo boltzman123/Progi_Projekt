@@ -1,24 +1,17 @@
 import React from "react";
-import "../style/pages/Home.css";
 import Footer from "../components/Footer";
-import Image from "../style/images/pic2.png";
+import Header from "../components/Header";
+import Kartica from "../components/Kartica";
+import { ToastContainer } from "react-toastify";
+// import HomeCSS from "../style/pages/Home.module.css";
+
 
 function Base() {
   return (
     <React.Fragment>
-      <div className="content">
-        <div className="gallery">
-          <div className="d1">
-            <div className="title">
-              Dobrodošli na osnovnu stranicu<br />
-            </div>
-          </div>
-          <div className="d2">
-            <img src={Image} alt="slika" ></img>
-          </div>
-        </div>
-        <Footer />
-      </div>
+        <Header />
+        <Kartica />
+        <Footer name={"footerExpand"} />
     </React.Fragment>
   );
 }

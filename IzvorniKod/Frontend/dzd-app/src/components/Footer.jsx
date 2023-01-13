@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
-import "../style/components/Footer.css"
+import React, { Component } from "react";
+import "../style/components/Footer.css";
+import { useState, useEffect } from 'react';
 
-class Footer extends Component {
-    state = {  } 
-    render() { 
-        return (
-            <div className='footer'>
-                <span>Djeca za djecu</span>
-            </div>
-        );
-    }
-}
- 
+
+const Footer = (props) => {
+  const [ime, setIme] = useState(props.name)
+  return (
+    <div className={ime}>
+      <span>Djeca za djecu</span>
+    </div>
+  );
+};
+
 export default Footer;

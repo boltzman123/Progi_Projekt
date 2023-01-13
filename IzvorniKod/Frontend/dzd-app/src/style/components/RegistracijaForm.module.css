@@ -1,0 +1,62 @@
+
+.inputFrame{   
+    display: flex;
+    flex-direction: row; 
+    border:1px solid rgb(221, 215, 215);
+    border-radius: 30px;
+    box-shadow: 2px 2px rgb(185, 184, 184);
+    height: 65px;
+    width: 25rem;
+    background-color: rgb(242, 242, 242);
+    justify-content: center;
+    margin: 20px 20px;
+    text-align: center;
+    font-size: larger;
+}
+.inputFrameErr{
+    border:1.5px solid red;
+    margin-bottom: 0px;
+}
+.frame {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+form .form {
+    margin-top: 30px;
+}
+
+::placeholder{
+    color:white1
+}
+.iconReg {
+    width: 2em;
+    height: 2em;
+}
+.errorMessage {
+    color: red;
+    margin-left: 60px;
+    height: 15px;
+    margin-top: 4px;
+}
+
+/*mobitel*/
+@media only screen and (max-width: 449px) {
+    .inputFrame{
+        width: 15rem;  
+        height: 40px; 
+    }
+    .frame {
+        margin-left: 20px;
+    }
+    .buttonFrame {
+        margin-right: 20px;
+        justify-content: center;
+    }
+    .button{
+        font-size: medium;
+    }
+    .errorMessage {
+        margin-left: 80px;
+    }
+}

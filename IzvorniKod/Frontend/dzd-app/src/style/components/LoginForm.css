@@ -13,6 +13,12 @@
     text-align: center;
     font-size: larger;
 }
+
+.inputFrameErr{
+    border:1.5px solid red;
+    margin-bottom: 0px;
+}
+
 .frame {
     display: flex;
     align-items: center;
@@ -28,6 +34,12 @@ form {
     width: 2em;
     height: 2em;
 }
+.errorMessage {
+    color: red;
+    margin-left: 60px;
+    height: 15px;
+    margin-top: 4px;
+}
 /*mobitel*/
 @media only screen and (max-width: 449px) {
     .inputFrame{
@@ -36,5 +48,9 @@ form {
     }
     .frame {
         margin-left: 20px;
+    }
+
+    .errorMessage {
+        margin-left: 80px;
     }
 }

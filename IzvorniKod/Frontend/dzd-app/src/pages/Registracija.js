@@ -19,7 +19,7 @@ function Registracija(){
                         <RegistracijaForm/>
                     </div>
                 </div>
-                <Footer></Footer>
+                <Footer name={"footerNormal"}></Footer>
             </div>
             <ToastContainer
                 position="top-center"

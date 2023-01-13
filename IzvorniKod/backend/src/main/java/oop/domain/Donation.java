@@ -13,28 +13,58 @@ public class Donation {
     private String donationName;
     private Date dateOfPublication;
     private Date dateOfClosing;
-    private boolean isValid;
-    private boolean isActive;
+    private boolean isValid = false;
+    private boolean isActive = true;
+    private boolean edit = false;
+    private String message="";
     private String pictureURL;
     private String handoverLocation;
+    private String description="";
     @ManyToOne
-    @JoinColumn(name = "user_email")
+    @JoinColumn(name = "user_email", referencedColumnName = "email")
     private Users user;
     @OneToOne
     @JoinColumn(name = "item_id")
     private Item item;
-    @ManyToMany
-    @JoinTable(name = "DONATED_TO_USER",
-            joinColumns = {
+    @ManyToOne
+    private Users donatedToUser;
 
-                    @JoinColumn(name = "donation_id", referencedColumnName = "idDonation")
-            },
-            inverseJoinColumns = @JoinColumn(name = "user_email", referencedColumnName = "email")
-    )
-    private Set<Users> donatedToUser = new HashSet<>();
+    public Donation(){}
+
+    public Donation(String donationName, Date dateOfPublication, String message, String pictureURL, String handoverLocation, String description, Users user, Item item) {
+        this.donationName = donationName;
+        this.dateOfPublication = dateOfPublication;
+        this.message = message;
+        this.pictureURL = pictureURL;
+        this.handoverLocation = handoverLocation;
+        this.description = description;
+        this.user = user;
+        this.item = item;
+
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     public Item getItem() {
         return item;
+    }
+
+    public void setIdDonation(Long idDonation) {
+        this.idDonation = idDonation;
+    }
+
+    public boolean isEdit() {
+        return edit;
+    }
+
+    public void setEdit(boolean edit) {
+        this.edit = edit;
     }
 
     public void setItem(Item item) {
@@ -97,6 +127,14 @@ public class Donation {
         return pictureURL;
     }
 
+    public Users getDonatedToUser() {
+        return donatedToUser;
+    }
+
+    public void setDonatedToUser(Users donatedToUser) {
+        this.donatedToUser = donatedToUser;
+    }
+
     public void setPictureURL(String pictureURL) {
         this.pictureURL = pictureURL;
     }
@@ -108,4 +146,12 @@ public class Donation {
     public void setHandoverLocation(String handoverLocation) {
         this.handoverLocation = handoverLocation;
     }
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
 }

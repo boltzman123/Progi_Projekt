@@ -19,7 +19,7 @@ public class WebSecurityBasic extends WebSecurityConfigurerAdapter {
         http.httpBasic();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.authorizeRequests().antMatchers("/").permitAll();
-        http.headers().frameOptions().sameOrigin(); // fixes h2-console problem
+        http.headers().frameOptions().sameOrigin();
         http.csrf().disable();
     }
 }

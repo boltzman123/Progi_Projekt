@@ -35,4 +35,7 @@ public class Category {
         return children;
     }
 
+    public void setChildren(Set<Child> children) {
+        this.children = children;
+    }
 }

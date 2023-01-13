@@ -1,0 +1,492 @@
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { useFetcher, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import Dropdown from "react-dropdown";
+import storage from "../firebaseConfig.js";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { v4 } from "uuid";
+import DonationFormCSS from "../style/components/DonationForm.module.css";
+import HomeCSS from "../style/pages/Home.module.css";
+import "../style/components/Buttons.css";
+
+import {
+  TextField,
+  Select,
+  Button,
+  FormControl,
+  FormLabel,
+  Typography,
+} from "@mui/material";
+import {
+  RadioGroup,
+  FormControlLabel,
+  Radio,
+  Grid,
+  InputLabel,
+  MenuItem,
+  Box,
+  Container,
+} from "@mui/material";
+
+var mapCat = new Map();
+var aryCat = [];
+var privremeniAry = [];
+
+function setOptions(chosenCategory, arraySub, setArySub) {
+  axios({
+    method: "get",
+    url: "/api/subcategory",
+  }).then((response) => {
+    var pod = Object.values(response.data);
+    privremeniAry = response.data;
+    // console.log(response.data[0]);
+
+    for (let i = 0; i < pod.length; ++i) {
+      let data = pod[i].category.categoryName;
+
+      if (!mapCat.has(data)) {
+        let ary = [pod[i].subcategoryName];
+        aryCat.push(data);
+        mapCat.set(pod[i].category.categoryName, ary);
+      } else if (data != undefined && mapCat.has(data)) {
+        let key = pod[i].category.categoryName;
+        let ary = [].concat(mapCat.get(pod[i].category.categoryName));
+
+        if (!ary.includes(pod[i].subcategoryName)) {
+          ary.push(pod[i].subcategoryName);
+          mapCat.set(key, ary);
+        }
+      }
+    }
+  });
+}
+
+const DonationForm = () => {
+  const [donationName, setDonatioName] = useState("");
+  const [handoverLocation, setHandoverLocation] = useState("");
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [forAge, setforAge] = useState("");
+  const [forSex, setSex] = useState(["M", "F"]);
+  const [chosenSex, setChosenSex] = useState("");
+  const [productionYear, setProductionYear] = useState("");
+  const [itemState, setState] = useState("");
+  const [productionBrand, setProductionBrand] = useState("");
+  const [categoryName, setCategoryName] = useState("");
+  const [subcategoryName, setSubcategoryName] = useState("");
+  const [productName, setProductName] = useState("");
+  const [chosenCategory, setChosenCategory] = useState("");
+  const [chosenSubcategory, setChosenSubCategory] = useState("");
+  const [description, setDescription] = useState("");
+  let [arraySub, setArySub] = useState([]);
+  let [value, setValue] = useState("");
+
+  const [pictureURL, setPictureURL] = useState();
+  const [file, setFile] = useState("");
+  const [percent, setPercent] = useState(0);
+
+  const ageRange = [...Array(16).keys()];
+  const now = new Date().getUTCFullYear();
+  const yearRange = Array(now - (now - 50))
+    .fill("")
+    .map((v, idx) => now - idx);
+
+  setOptions();
+
+  useEffect(() => {
+    setOptions(chosenCategory, arraySub, setArySub);
+    setCategoryName(aryCat);
+
+    // console.log("ovdje");
+  }, []);
+
+  // Event handler for when the user selects an image
+  const handleChange = (event) => {
+    setFile(event.target.files[0]);
+  };
+  // console.log(pictureURL);
+
+  function handleUpload() {
+    if (!file) {
+      alert("Molimo Vas da prvo odaberete sliku i zatim upload");
+    }
+    const storageRef = ref(storage, `/files/${file.name + v4()}`);
+    const uploadTask = uploadBytesResumable(storageRef, file);
+
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        setPercent(
+          Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100)
+        );
+      },
+      (err) => console.log(err),
+      () => {
+        // download url
+        getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+          console.log(url);
+          setPictureURL(url);
+        });
+      }
+    );
+  }
+
+  const navigate = useNavigate();
+
+  const onSubmitForm = (e) => {
+    e.preventDefault();
+    if (chosenCategory == "" || chosenSex == "" || chosenSubcategory == "") {
+      window.alert("Odaberite spol, kategoriju i podkategoriju");
+    } else if (pictureURL == null) {
+      window.alert("Odaberite sliku za donaciju");
+    } else {
+      console.log(subcategoryName);
+      axios({
+        method: "post",
+        url: `/api/item`,
+        headers: {
+          "Content-Type": "application/json; charset=utf-8",
+        },
+        data: {
+          productName: productName,
+          itemState: itemState,
+          productionYear: productionYear,
+          productBrand: productionBrand,
+          forAge: forAge,
+          forSex: chosenSex,
+          category: chosenCategory,
+          subcategory: subcategoryName,
+        },
+      })
+        .then((response) => {
+          console.log(response.data);
+          let user = JSON.parse(localStorage.getItem("user"));
+          let item = response.data;
+          axios({
+            method: "post",
+            url: `/api/donation/createDonation`,
+            headers: {
+              "Content-Type": "application/json; charset=utf-8",
+            },
+            data: {
+              donationName,
+              pictureURL,
+              handoverLocation,
+              user,
+              item,
+              description: description,
+            },
+          })
+            .then((response) => {
+              console.log(response.data);
+              navigate("/mojeDonacije");
+              toast.success("Donacija poslana na odobravanje");
+            })
+            .catch((err) => {
+              console.log(err);
+              toast.error("Došlo je do greške");
+            });
+        })
+        .catch((err) => {
+          console.log(err);
+          toast.error("Došlo je do greške");
+        });
+    }
+  };
+  const checkSubInCat = (cat) => {
+    let subs = mapCat.get(cat);
+    if (!subs.includes(chosenSubcategory.subcategoryName)) {
+      for (let i = 0; i < privremeniAry.length; ++i) {
+        if (privremeniAry[i].subcategoryName == subs[0]) {
+          setChosenSubCategory(privremeniAry[i]);
+          setSubcategoryName(privremeniAry[i]);
+        }
+      }
+    }
+  };
+
+  return (
+    <React.Fragment>
+      <div className={DonationFormCSS.donacijaNaslov}>
+        Kreiraj svoju donaciju
+      </div>
+      <form className={DonationFormCSS.dForm} onSubmit={onSubmitForm}>
+        <div className={DonationFormCSS.lDio}>
+          <div className={DonationFormCSS.tekstDio}>
+            <Typography>Naziv donacije</Typography>
+            <div className="frame">
+              <input
+                value={donationName}
+                onChange={(e) => setDonatioName(e.target.value)}
+                type="text"
+                name="donationName"
+                id="donationName"
+                placeholder="Kao novi Hot Wheels Ferari F40"
+                className="inputFrame"
+                required={true}></input>
+            </div>
+            <Typography>Naziv predmeta</Typography>
+            <div className="frame">
+              <input
+                value={productName}
+                onChange={(e) => setProductName(e.target.value)}
+                type="text"
+                name="productName"
+                id="productName"
+                placeholder="Ferrari F40"
+                className="inputFrame"
+                required={true}></input>
+            </div>
+            <Typography>Lokacija preuzimanja</Typography>
+            <div className="frame">
+              <input
+                value={handoverLocation}
+                onChange={(e) => setHandoverLocation(e.target.value)}
+                type="text"
+                name="handoverLocation"
+                id="handoverLocation"
+                placeholder="Zagreb"
+                className="inputFrame"
+                required={true}></input>
+            </div>
+            <Typography>Stanje predmeta</Typography>
+            <div className="frame">
+              <input
+                value={itemState}
+                onChange={(e) => setState(e.target.value)}
+                type="text"
+                name="itemState"
+                id="itemState"
+                placeholder="Dobro, manji znakovi korištenja"
+                className="inputFrame"
+                required={true}></input>
+            </div>
+            <Typography>Marka predmeta</Typography>
+            <div className="frame">
+              <input
+                value={productionBrand}
+                onChange={(e) => setProductionBrand(e.target.value)}
+                type="text"
+                name="productionBrand"
+                id="productionBrand"
+                placeholder="Hot Wheels"
+                className="inputFrame"
+                required={true}></input>
+            </div>
+          </div>
+
+          <div className={DonationFormCSS.donjiDio}>
+            <Typography>Predviđeni spol</Typography>
+            <div className="frame">
+              <FormControl fullWidth>
+                <RadioGroup
+                  name="spol-radio-buttons-group"
+                  value={chosenSex}
+                  required
+                  onChange={(e) => setChosenSex(e.target.value)}>
+                  <div style={{ display: "flex" }}>
+                    <FormControlLabel
+                      value="z"
+                      control={<Radio />}
+                      label="Žensko"
+                    />
+                    <FormControlLabel
+                      value="m"
+                      control={<Radio />}
+                      label="Muško"
+                    />
+                  </div>
+                </RadioGroup>
+              </FormControl>
+            </div>
+
+            <div className={DonationFormCSS.odabiri}>
+              <div className={DonationFormCSS.r}>
+                <div className={DonationFormCSS.pravokutnici}>
+                  <Typography>Predviđena dob</Typography>
+                  <FormControl fullWidth>
+                    <Select
+                      labelId="dob-select-label"
+                      id="dob-select"
+                      value={forAge}
+                      label="dob"
+                      required
+                      MenuProps={{
+                        PaperProps: { sx: { maxHeight: 175 } },
+                      }}
+                      onChange={(e) => setforAge(e.target.value)}>
+                      {ageRange.map((ageSelect) => {
+                        return (
+                          <MenuItem key={ageSelect} value={ageSelect}>
+                            {ageSelect}
+                          </MenuItem>
+                        );
+                      })}
+                    </Select>
+                  </FormControl>
+                </div>
+
+                <div className={DonationFormCSS.pravokutnici}>
+                  <Typography>Godina proizvodnje</Typography>
+                  <FormControl fullWidth>
+                    <Select
+                      labelId="year-select-label"
+                      id="year-select"
+                      value={productionYear}
+                      label="productionYear"
+                      required
+                      MenuProps={{
+                        PaperProps: { sx: { maxHeight: 175 } },
+                      }}
+                      onChange={(e) => setProductionYear(e.target.value)}>
+                      {yearRange.map((yearSelect) => {
+                        return (
+                          <MenuItem key={yearSelect} value={yearSelect}>
+                            {yearSelect}
+                          </MenuItem>
+                        );
+                      })}
+                    </Select>
+                  </FormControl>
+                </div>
+              </div>
+
+              <div className={DonationFormCSS.r}>
+                <div className={DonationFormCSS.pravokutnici}>
+                  <Typography>Odaberi kategoriju</Typography>
+                  <FormControl fullWidth>
+                    <Select
+                      labelId="category-select-label"
+                      id="category-select"
+                      value={chosenCategory.categoryName || ""}
+                      label="category"
+                      required
+                      MenuProps={{
+                        PaperProps: { sx: { maxHeight: 175 } },
+                      }}
+                      onChange={(e) => {
+                        let obj = { categoryName: e.target.value };
+                        setChosenCategory(obj);
+                        setCategoryName(e.target.value);
+                        let values = mapCat.get(e.target.value);
+                        setArySub([].concat(values));
+                        checkSubInCat(e.target.value);
+                      }}>
+                      {aryCat.map((categorySelect) => {
+                        return (
+                          <MenuItem key={categorySelect} value={categorySelect}>
+                            {categorySelect}
+                          </MenuItem>
+                        );
+                      })}
+                    </Select>
+                  </FormControl>
+                </div>
+
+                <div className={DonationFormCSS.pravokutnici}>
+                  <Typography>Odaberi potkategoriju</Typography>
+                  <FormControl fullWidth>
+                    <Select
+                      labelId="subcategory-select-label"
+                      id="subcategory-select"
+                      value={chosenSubcategory.subcategoryName || ""}
+                      label="subcategory"
+                      required
+                      MenuProps={{
+                        PaperProps: { sx: { maxHeight: 175 } },
+                      }}
+                      onChange={(e) => {
+                        for (let i = 0; i < privremeniAry.length; ++i) {
+                          if (
+                            e.target.value == privremeniAry[i].subcategoryName
+                          ) {
+                            let obj = privremeniAry[i];
+                            setChosenSubCategory(obj);
+                            setSubcategoryName(obj);
+                          }
+                        }
+                      }}>
+                      {arraySub.map((subcategorySelect) => {
+                        return (
+                          <MenuItem
+                            key={subcategorySelect}
+                            value={subcategorySelect}>
+                            {subcategorySelect}
+                          </MenuItem>
+                        );
+                      })}
+                    </Select>
+                  </FormControl>
+                </div>
+              </div>
+
+              <Box>
+                <Typography>Opis oglasa</Typography>
+                <TextField
+                  name="descriptionField"
+                  id="descriptionField"
+                  placeholder="Doniram ovaj proizdvod zato što..."
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                  required={true}
+                  multiline
+                  className={DonationFormCSS.description}></TextField>
+              </Box>
+
+              <div className="donacija">
+                <button className="gumbic tamniji" type="submit">
+                  Spremi donaciju
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className={DonationFormCSS.dDio}>
+          <div className={DonationFormCSS.donacijaGumbi}>
+            <div className={DonationFormCSS.odabir1}>
+              <div
+                className="gumbic slike donacijaSlika"
+                style={{ height: 30 }}>
+                <label htmlFor="files">Odaberi sliku</label>
+              </div>
+              <span>{file.name}</span>
+              <input
+                id="files"
+                type="file"
+                accept="image/*"
+                style={{ display: "none", width: 100 }}
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className={DonationFormCSS.odabir2}>
+              <button
+                onClick={handleUpload}
+                type="button"
+                className="gumbic tamniji slike donacijaSlika"
+                style={{ height: 30, marginBottom:"10px" }}>
+                Upload slike
+              </button>
+              <span
+                style={{
+                  display: percent == "100" || percent == "0" ? "none" : "",
+                }}>
+                {percent} "% gotovo"
+              </span>
+            </div>
+          </div>
+          <div id={DonationFormCSS["picture-frame"]}>
+            {percent == "100" ? (
+              <img src={pictureURL} id={DonationFormCSS["picture"]} />
+            ) : (
+              ""
+            )}
+            {/* <img src={pictureURL} /> */}
+          </div>
+        </div>
+      </form>
+    </React.Fragment>
+  );
+};
+export default DonationForm;
