@@ -180,7 +180,7 @@ const DonationForm = () => {
           })
             .then((response) => {
               console.log(response.data);
-              navigate("/mojeDonacije");
+              navigate("/base");
               toast.success("Donacija poslana na odobravanje");
             })
             .catch((err) => {
@@ -215,7 +215,7 @@ const DonationForm = () => {
       </div>
       <form className={DonationFormCSS.dForm} onSubmit={onSubmitForm}>
         <div className={DonationFormCSS.lDio}>
-          <div className={DonationFormCSS.tekstDio}>
+          <div>
             <Typography>Naziv donacije</ Typography>
             <div className="frame">
               <input
@@ -354,73 +354,50 @@ const DonationForm = () => {
                 </div>
               </div>
 
-             
-
               <div className={DonationFormCSS.r}>
-              <div className={DonationFormCSS.pravokutnici} >
-                  <Typography>Odaberi kategoriju</Typography>
-                  <FormControl fullWidth>
-                    <Select
-                      labelId="category-select-label"
-                      id="category-select"
-                      value={chosenCategory.categoryName || ""}
-                      label="category"
-                      required
-                      MenuProps={{
-                        PaperProps: { sx: { maxHeight: 175 } },
-                      }}
+                <div className={DonationFormCSS.pravokutnici}>
+                <Typography>Odaberi kategoriju</Typography>
+                  <div style={{ width: 200 }} >
+                    <Dropdown
+                      menuClassName={DonationFormCSS.dropdown}
+                      className={DonationFormCSS.box}
+                      options={aryCat}
+                      value={chosenCategory.categoryName}
                       onChange={(e) => {
-                        let obj = { categoryName: e.target.value };
+                        let obj = { categoryName: e.value };
                         setChosenCategory(obj);
-                        setCategoryName(e.target.value);
-                        let values = mapCat.get(e.target.value);
+                        setCategoryName(e.value);
+                        let values = mapCat.get(e.value);
                         setArySub([].concat(values));
-                        checkSubInCat(e.target.value);
-                      }}>
-                      {aryCat.map((categorySelect) => {
-                        return (
-                          <MenuItem key={categorySelect} value={categorySelect}>
-                            {categorySelect}
-                          </MenuItem>
-                        );
-                      })}
-                    </Select>
-                  </FormControl>
+                        checkSubInCat(e.value);
+                      }}
+                      placeholder="Kategorije"
+                      required={true}
+                    />
+                  </div>
                 </div>
 
-                <div className={DonationFormCSS.pravokutnici} >
+                <div className={DonationFormCSS.pravokutnici}>
                   <Typography>Odaberi potkategoriju</Typography>
-                  <FormControl fullWidth>
-                    <Select
-                      labelId="subcategory-select-label"
-                      id="subcategory-select"
-                      value={chosenSubcategory.subcategoryName || ""}
-                      label="subcategory"
-                      required
-                      MenuProps={{
-                        PaperProps: { sx: { maxHeight: 175 } },
-                      }}
+                  <div id={DonationFormCSS.godine}>
+                    <Dropdown
+                      menuClassName={DonationFormCSS.dropdown}
+                      options={arraySub}
+                      value={chosenSubcategory.subcategoryName}
                       onChange={(e) => {
                         for (let i = 0; i < privremeniAry.length; ++i) {
-                          if (e.target.value == privremeniAry[i].subcategoryName) {
+                          if (e.value == privremeniAry[i].subcategoryName) {
                             let obj = privremeniAry[i];
                             setChosenSubCategory(obj);
                             setSubcategoryName(obj);
                           }
                         }
-                      }}>
-                      {arraySub.map((subcategorySelect) => {
-                        return (
-                          <MenuItem key={subcategorySelect} value={subcategorySelect}>
-                            {subcategorySelect}
-                          </MenuItem>
-                        );
-                      })}
-                    </Select>
-                  </FormControl>
+                      }}
+                      placeholder="Potkategorije"
+                      required={true}
+                    />
+                  </div>
                 </div>
-
-              
               </div>
 
               <Box>
@@ -451,7 +428,7 @@ const DonationForm = () => {
           <div className={DonationFormCSS.donacijaGumbi}>
             <div className={DonationFormCSS.odabir1}>
               <div className="gumbic slike donacijaSlika" style={{ height: 30}}>
-              <label htmlFor="files">
+              <label for="files">
               Odaberi sliku
             </label>
               </div>

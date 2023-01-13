@@ -337,13 +337,13 @@ const MojeDonacijaKard = (props) => {
                       onChange={(e) => setSpol(e.target.value)}>
                       <div>
                         <FormControlLabel
-                          value="F"
+                          value="z"
                           disabled={checkedUser}
                           control={<Radio />}
                           label="Žensko"
                         />
                         <FormControlLabel
-                          value="M"
+                          value="m"
                           disabled={checkedUser}
                           control={<Radio />}
                           label="Muško"

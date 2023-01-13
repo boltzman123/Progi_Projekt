@@ -426,7 +426,7 @@ const MojeDonacijaKard = (props) => {
                       onChange={(e) => setSpol(e.target.value)}>
                       <div>
                         <FormControlLabel
-                          value="f"
+                          value="z"
                           disabled={smijeMijenjati}
                           control={<Radio />}
                           label="Žensko"

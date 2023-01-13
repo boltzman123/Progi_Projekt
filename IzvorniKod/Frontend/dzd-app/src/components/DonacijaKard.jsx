@@ -47,7 +47,6 @@ const DonacijaKard = (props) => {
   let { id } = props.donacija.item;
   let userL = JSON.parse(localStorage.getItem("user"));
   let emailL = userL.email;
-  let canDonate=userL.canDonate;
 
   if (props.donacija.donatedToUser!=null){
     var emailPrim=props.donacija.donatedToUser.email;
@@ -66,7 +65,6 @@ const DonacijaKard = (props) => {
   const [checkedUser, setCheckedUser] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
   const [pictureURL, setPictureURL] = useState(props.donacija.pictureURL);
-  console.log(spol)
 
   let datum=String(dateOfPublication.substring(8,10)+ "." +dateOfPublication.substring(5,7)+ "." +dateOfPublication.substring(0,4)+".")
 
@@ -197,7 +195,6 @@ const DonacijaKard = (props) => {
         toast.error("Došlo je do greške");
       });
   };
-
 
   const ponovnoDoniraj = () => {
     
@@ -365,6 +362,7 @@ const DonacijaKard = (props) => {
                     </Select>
                   </FormControl>
                 </Box>
+
                 <Box className={DonacijaKardCSS.FormControl}>
                   <FormControl fullWidth>
                     <FormLabel id="spol">Namijenjeni spol</FormLabel>
@@ -375,13 +373,13 @@ const DonacijaKard = (props) => {
                       onChange={(e) => setSpol(e.target.value)}>
                       <div>
                         <FormControlLabel
-                          value="F"
+                          value="z"
                           disabled={checkedUser}
                           control={<Radio />}
                           label="Žensko"
                         />
                         <FormControlLabel
-                          value="M"
+                          value="m"
                           disabled={checkedUser}
                           control={<Radio />}
                           label="Muško"
@@ -442,16 +440,14 @@ const DonacijaKard = (props) => {
                   </DropdownCategory>
                 </Box>
 
-                <Box className={DonacijaKardCSS.FormControl}>
-                  <Button
-                    type="submit"
-                    style={(canDonate && (emailPrim == emailL)) ? {} : {display:"none"}}
-                    onClick={ponovnoDoniraj}
-                    variant="outlined"
-                    color="info">
-                    Ponovno doniraj
+                <Button
+                  type="submit"
+                  style={emailPrim != emailL ? { display: `none` } : {}}
+                  onClick={ponovnoDoniraj}
+                  variant="outlined"
+                  color="info">
+                  Ponovno doniraj
                   </Button>
-                </Box>
 
                 <div>
                   <input

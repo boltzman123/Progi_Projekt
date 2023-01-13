@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import HeaderCSS from "../style/components/Header.module.css";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
@@ -6,12 +6,7 @@ import Navbar from "react-bootstrap/Navbar";
 import { NavLink } from "react-router-dom";
 
 function Header() {
-  const [url, setUrl] = useState(window.location.href);
-
-  useEffect(() => {
-    setUrl(url.substring(url.lastIndexOf("/") + 1))
-  }, []);
-
+  const [url, defUrl] = useState(window.location.href);
   let user = JSON.parse(localStorage.getItem("user"));
   if (user.email == "admin") {
     return (
@@ -97,7 +92,7 @@ function Header() {
               </NavLink>
               <NavLink
                 style={({ isActive }) =>
-                  (isActive || url == "djeca")
+                  isActive
                     ? { textDecoration: "underline" }
                     : { textDecoration: "none" }
                 }

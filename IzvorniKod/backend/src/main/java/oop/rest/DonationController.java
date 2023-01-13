@@ -101,11 +101,12 @@ public class DonationController {
                     d.getDateOfPublication().toInstant().compareTo(compareDate)>=0 &&
                     childAges.contains(d.getItem().getForAge()) &&
                     childSex.contains(d.getItem().getForSex())){
-                donationsFiltered.add(d);
-            } else {
-                if(!d.getUser().getEmail().equals(email)) {
-                    donationsFilteredActive.add(d);
+                if(!d.getUser().getEmail().equals(email)){
+                    donationsFiltered.add(d);
                 }
+            } else {
+                donationsFilteredActive.add(d);
+
             }
         }
 
@@ -200,6 +201,7 @@ public class DonationController {
         } else {
             donation.setActive(true);
         }
+        itemService.updateItem(donation.getItem());
         return service.updateDonation(donation);
     }
 
