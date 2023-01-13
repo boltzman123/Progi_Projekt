@@ -103,10 +103,9 @@ public class DonationController {
                     childSex.contains(d.getItem().getForSex())){
                 donationsFiltered.add(d);
             } else {
-                if(!d.getUser().getEmail().equals(email)){
+                if(!d.getUser().getEmail().equals(email)) {
                     donationsFilteredActive.add(d);
                 }
-                
             }
         }
 
